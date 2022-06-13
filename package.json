@@ -1,0 +1,45 @@
+{
+  "name": "d2r-igt",
+  "version": "1.0.0",
+  "main": "dist/igt.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@types/chroma-js": "^2.1.3",
+    "@types/ref-struct-di": "^1.1.6",
+    "chroma-js": "^2.4.2",
+    "ffi-napi": "^4.0.3",
+    "image-encode": "^1.3.1",
+    "install": "^0.13.0",
+    "npm": "^8.12.1",
+    "parcel": "^2.6.0",
+    "ref-napi": "^3.0.3",
+    "ref-struct-di": "^1.1.1",
+    "ref-union-di": "^1.0.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3",
+    "win32-def": "^9.4.0",
+    "windows-ffi": "^0.0.4",
+    "zedd-win32-api": "https://github.com/zeddicus-pl/zedd-win32-api.git"
+  },
+  "scripts": {
+    "build": "parcel build igt.ts",
+    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm ./cli.ts"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "util": "^0.12.4"
+  },
+  "targets": {
+    "main": {
+      "engines": {
+        "node": ">= 16"
+      },
+      "includeNodeModules": true
+    }
+  }
+}
