@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "parcel build igt.ts",
+    "build": "parcel build --target=main igt.ts && parcel build --target=worker worker.ts && parcel build --target=cli cli.ts",
     "start": "node --experimental-specifier-resolution=node --loader ts-node/esm ./cli.ts"
   },
   "devDependencies": {
@@ -37,7 +37,22 @@
       "engines": {
         "node": ">= 16"
       },
-      "includeNodeModules": true
+      "includeNodeModules": true,
+      "optimize": false
+    },
+    "worker": {
+      "engines": {
+        "node": ">= 16"
+      },
+      "includeNodeModules": true,
+      "optimize": false
+    },
+    "cli": {
+      "engines": {
+        "node": ">= 16"
+      },
+      "includeNodeModules": true,
+      "optimize": false
     }
   }
 }
