@@ -41,27 +41,21 @@
       "engines": {
         "node": ">= 16"
       },
-      "includeNodeModules": {
-        "ffi-napi": false
-      },
+      "includeNodeModules": true,
       "optimize": false
     },
     "worker": {
       "engines": {
         "node": ">= 16"
       },
-      "includeNodeModules": {
-        "ffi-napi": false
-      },
+      "includeNodeModules": true,
       "optimize": false
     },
     "cli": {
       "engines": {
         "node": ">= 16"
       },
-      "includeNodeModules": {
-        "ffi-napi": false
-      },
+      "includeNodeModules": true,
       "optimize": false
     }
   }

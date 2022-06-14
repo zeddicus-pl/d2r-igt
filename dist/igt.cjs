@@ -1,12 +1,11 @@
-var $j2o4Y$buffer = require("buffer");
-var $j2o4Y$assert = require("assert");
-var $j2o4Y$util = require("util");
-var $j2o4Y$os = require("os");
-var $j2o4Y$path = require("path");
-var $j2o4Y$process = require("process");
-var $j2o4Y$fs = require("fs");
-var $j2o4Y$ffinapi = require("ffi-napi");
-var $j2o4Y$module = require("module");
+var $3EevV$buffer = require("buffer");
+var $3EevV$assert = require("assert");
+var $3EevV$util = require("util");
+var $3EevV$os = require("os");
+var $3EevV$path = require("path");
+var $3EevV$process = require("process");
+var $3EevV$fs = require("fs");
+var $3EevV$module = require("module");
 
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
@@ -68,21 +67,21 @@ if (parcelRequire == null) {
 
   $parcel$global["parcelRequire97c3"] = parcelRequire;
 }
-parcelRequire.register("lbL5x", function(module, exports) {
-var __dirname = "node_modules/ref-napi/lib";
+parcelRequire.register("1a7VL", function(module, exports) {
 
-var Buffer = $j2o4Y$buffer.Buffer;
+var Buffer = $3EevV$buffer.Buffer;
+var __dirname = "node_modules/ref-napi/lib";
 "use strict";
 
 
-var $f6cf26d6c2282fde$require$inspect = $j2o4Y$util.inspect;
+var $0d8ce0813746dfa3$require$inspect = $3EevV$util.inspect;
 
-const debug = (parcelRequire("3NRtP"))("ref");
+const debug = (parcelRequire("apXKC"))("ref");
 
 
 
-exports = module.exports = (parcelRequire("gO6d8"))($j2o4Y$path.join(__dirname, ".."));
-exports.endianness = $j2o4Y$os.endianness();
+exports = module.exports = (parcelRequire("5XWss"))($3EevV$path.join(__dirname, ".."));
+exports.endianness = $3EevV$os.endianness();
 /**
  * A `Buffer` that references the C NULL pointer. That is, its memory address
  * points to 0. Its `length` is 0 because accessing any data from this buffer
@@ -418,12 +417,12 @@ exports.endianness = $j2o4Y$os.endianness();
             // allow string names to be passed in
             rtn = exports.types[rtn];
             if (refCount > 0) {
-                if (!(rtn && "size" in rtn && "indirection" in rtn)) throw new TypeError('could not determine a proper "type" from: ' + $f6cf26d6c2282fde$require$inspect(type));
+                if (!(rtn && "size" in rtn && "indirection" in rtn)) throw new TypeError('could not determine a proper "type" from: ' + $0d8ce0813746dfa3$require$inspect(type));
                 for(let i = 0; i < refCount; i++)rtn = exports.refType(rtn);
             }
         }
     }
-    if (!(rtn && "size" in rtn && "indirection" in rtn)) throw new TypeError('could not determine a proper "type" from: ' + $f6cf26d6c2282fde$require$inspect(type));
+    if (!(rtn && "size" in rtn && "indirection" in rtn)) throw new TypeError('could not determine a proper "type" from: ' + $0d8ce0813746dfa3$require$inspect(type));
     return rtn;
 };
 /**
@@ -463,7 +462,7 @@ exports.endianness = $j2o4Y$os.endianness();
     if (type) type = exports.coerceType(type);
     else type = exports.getType(buffer);
     debug("get(): (offset: %d)", offset, buffer);
-    $j2o4Y$assert(type.indirection > 0, `"indirection" level must be at least 1, saw ${type.indirection}`);
+    $3EevV$assert(type.indirection > 0, `"indirection" level must be at least 1, saw ${type.indirection}`);
     if (type.indirection === 1) // need to check "type"
     return type.get(buffer, offset);
     else {
@@ -490,7 +489,7 @@ exports.endianness = $j2o4Y$os.endianness();
     if (type) type = exports.coerceType(type);
     else type = exports.getType(buffer);
     debug("set(): (offset: %d)", offset, buffer, value);
-    $j2o4Y$assert(type.indirection >= 1, '"indirection" level must be at least 1');
+    $3EevV$assert(type.indirection >= 1, '"indirection" level must be at least 1');
     if (type.indirection === 1) type.set(buffer, offset, value);
     else exports.writePointer(buffer, offset, value);
 };
@@ -555,8 +554,8 @@ exports.endianness = $j2o4Y$os.endianness();
  * @param {String} string The JavaScript String to write that will be written to the buffer.
  * @param {String} encoding (optional) The encoding to read the C string as. Defaults to __'utf8'__.
  */ exports.writeCString = function writeCString(buffer, offset, string, encoding) {
-    $j2o4Y$assert(Buffer.isBuffer(buffer), "expected a Buffer as the first argument");
-    $j2o4Y$assert.strictEqual("string", typeof string, 'expected a "string" as the third argument');
+    $3EevV$assert(Buffer.isBuffer(buffer), "expected a Buffer as the first argument");
+    $3EevV$assert.strictEqual("string", typeof string, 'expected a "string" as the third argument');
     if (!offset) offset = 0;
     if (!encoding) encoding = "utf8";
     const size = buffer.length - offset - 1;
@@ -1029,18 +1028,18 @@ Object.defineProperty(types, "Utf8String", {
 ].forEach((name)=>{
     const unsigned = name === "bool" || name === "byte" || name === "size_t" || name[0] === "u";
     const size = exports.sizeof[name];
-    $j2o4Y$assert(size >= 1 && size <= 8);
+    $3EevV$assert(size >= 1 && size <= 8);
     let typeName = "int" + size * 8;
     if (unsigned) typeName = "u" + typeName;
     const type = exports.types[typeName];
-    $j2o4Y$assert(type);
+    $3EevV$assert(type);
     exports.types[name] = Object.create(type);
 });
 // set the "alignment" property on the built-in types
 Object.keys(exports.alignof).forEach((name)=>{
     if (name === "pointer") return;
     exports.types[name].alignment = exports.alignof[name];
-    $j2o4Y$assert(exports.types[name].alignment > 0);
+    $3EevV$assert(exports.types[name].alignment > 0);
 });
 // make the `bool` type work with JS true/false values
 exports.types.bool.get = function(_get) {
@@ -1202,7 +1201,7 @@ exports.types.bool.set = function(_set) {
  * console.log(new Buffer('ref'));
  * <Buffer@0x103015490 72 65 66>
  * ```
- */ var inspectSym = $f6cf26d6c2282fde$require$inspect.custom || "inspect";
+ */ var inspectSym = $0d8ce0813746dfa3$require$inspect.custom || "inspect";
 /**
  * in node 6.91, inspect.custom does not give a correct value; so in this case, don't torch the whole process.
  * fixed in >6.9.2
@@ -1213,7 +1212,7 @@ if (!(exports.NULL instanceof Buffer)) {
     debug("extending SlowBuffer's prototype since it doesn't inherit from Buffer.prototype");
     /*!
    * SlowBuffer convenience methods.
-   */ var SlowBuffer = $j2o4Y$buffer.SlowBuffer;
+   */ var SlowBuffer = $3EevV$buffer.SlowBuffer;
     SlowBuffer.prototype.address = Buffer.prototype.address;
     SlowBuffer.prototype.hexAddress = Buffer.prototype.hexAddress;
     SlowBuffer.prototype.isNull = Buffer.prototype.isNull;
@@ -1249,15 +1248,15 @@ function overwriteInspect(inspect) {
 }
 
 });
-parcelRequire.register("3NRtP", function(module, exports) {
+parcelRequire.register("apXKC", function(module, exports) {
 
 /* eslint-env browser */ /**
  * This is the web browser implementation of `debug()`.
- */ module.exports.formatArgs = $2c4f6ec06b19c9d3$var$formatArgs;
-module.exports.save = $2c4f6ec06b19c9d3$var$save;
-module.exports.load = $2c4f6ec06b19c9d3$var$load;
-module.exports.useColors = $2c4f6ec06b19c9d3$var$useColors;
-module.exports.storage = $2c4f6ec06b19c9d3$var$localstorage();
+ */ module.exports.formatArgs = $795a96763165e45f$var$formatArgs;
+module.exports.save = $795a96763165e45f$var$save;
+module.exports.load = $795a96763165e45f$var$load;
+module.exports.useColors = $795a96763165e45f$var$useColors;
+module.exports.storage = $795a96763165e45f$var$localstorage();
 module.exports.destroy = (()=>{
     let warned = false;
     return ()=>{
@@ -1354,7 +1353,7 @@ module.exports.destroy = (()=>{
  *
  * TODO: add a `localStorage` variable to explicitly enable/disable colors
  */ // eslint-disable-next-line complexity
-function $2c4f6ec06b19c9d3$var$useColors() {
+function $795a96763165e45f$var$useColors() {
     // NB: In an Electron preload script, document will be defined but not fully
     // initialized. Since we know we're in Chrome, we'll just detect this case
     // explicitly
@@ -1369,7 +1368,7 @@ function $2c4f6ec06b19c9d3$var$useColors() {
  * Colorize log arguments if enabled.
  *
  * @api public
- */ function $2c4f6ec06b19c9d3$var$formatArgs(args) {
+ */ function $795a96763165e45f$var$formatArgs(args) {
     args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module.exports.humanize(this.diff);
     if (!this.useColors) return;
     const c = "color: " + this.color;
@@ -1401,7 +1400,7 @@ function $2c4f6ec06b19c9d3$var$useColors() {
  *
  * @param {String} namespaces
  * @api private
- */ function $2c4f6ec06b19c9d3$var$save(namespaces) {
+ */ function $795a96763165e45f$var$save(namespaces) {
     try {
         if (namespaces) module.exports.storage.setItem("debug", namespaces);
         else module.exports.storage.removeItem("debug");
@@ -1415,7 +1414,7 @@ function $2c4f6ec06b19c9d3$var$useColors() {
  *
  * @return {String} returns the previously persisted debug modes
  * @api private
- */ function $2c4f6ec06b19c9d3$var$load() {
+ */ function $795a96763165e45f$var$load() {
     let r;
     try {
         r = module.exports.storage.getItem("debug");
@@ -1424,7 +1423,7 @@ function $2c4f6ec06b19c9d3$var$useColors() {
     // XXX (@Qix-) should we be logging these?
     }
     // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-    if (!r && typeof $j2o4Y$process !== "undefined" && "env" in $j2o4Y$process) r = undefined;
+    if (!r && typeof $3EevV$process !== "undefined" && "env" in $3EevV$process) r = undefined;
     return r;
 }
 /**
@@ -1436,7 +1435,7 @@ function $2c4f6ec06b19c9d3$var$useColors() {
  *
  * @return {LocalStorage}
  * @api private
- */ function $2c4f6ec06b19c9d3$var$localstorage() {
+ */ function $795a96763165e45f$var$localstorage() {
     try {
         // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
         // The Browser also has localStorage in the global context.
@@ -1447,11 +1446,11 @@ function $2c4f6ec06b19c9d3$var$useColors() {
     }
 }
 
-module.exports = (parcelRequire("9vIsF"))(module.exports);
-const { formatters: $2c4f6ec06b19c9d3$var$formatters  } = module.exports;
+module.exports = (parcelRequire("fDOxo"))(module.exports);
+const { formatters: $795a96763165e45f$var$formatters  } = module.exports;
 /**
  * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */ $2c4f6ec06b19c9d3$var$formatters.j = function(v) {
+ */ $795a96763165e45f$var$formatters.j = function(v) {
     try {
         return JSON.stringify(v);
     } catch (error) {
@@ -1460,19 +1459,19 @@ const { formatters: $2c4f6ec06b19c9d3$var$formatters  } = module.exports;
 };
 
 });
-parcelRequire.register("9vIsF", function(module, exports) {
+parcelRequire.register("fDOxo", function(module, exports) {
 
 /**
  * This is the common logic for both the Node.js and web browser
  * implementations of `debug()`.
- */ function $6ec97f660a7855ba$var$setup(env) {
+ */ function $b631b33a73115d64$var$setup(env) {
     createDebug.debug = createDebug;
     createDebug.default = createDebug;
     createDebug.coerce = coerce;
     createDebug.disable = disable;
     createDebug.enable = enable;
     createDebug.enabled = enabled;
-    createDebug.humanize = (parcelRequire("jLPtY"));
+    createDebug.humanize = (parcelRequire("30JnR"));
     createDebug.destroy = destroy;
     Object.keys(env).forEach((key)=>{
         createDebug[key] = env[key];
@@ -1655,18 +1654,18 @@ parcelRequire.register("9vIsF", function(module, exports) {
     createDebug.enable(createDebug.load());
     return createDebug;
 }
-module.exports = $6ec97f660a7855ba$var$setup;
+module.exports = $b631b33a73115d64$var$setup;
 
 });
-parcelRequire.register("jLPtY", function(module, exports) {
+parcelRequire.register("30JnR", function(module, exports) {
 /**
  * Helpers.
- */ var $e64a5771414de163$var$s = 1000;
-var $e64a5771414de163$var$m = $e64a5771414de163$var$s * 60;
-var $e64a5771414de163$var$h = $e64a5771414de163$var$m * 60;
-var $e64a5771414de163$var$d = $e64a5771414de163$var$h * 24;
-var $e64a5771414de163$var$w = $e64a5771414de163$var$d * 7;
-var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
+ */ var $2314937ae48f83e2$var$s = 1000;
+var $2314937ae48f83e2$var$m = $2314937ae48f83e2$var$s * 60;
+var $2314937ae48f83e2$var$h = $2314937ae48f83e2$var$m * 60;
+var $2314937ae48f83e2$var$d = $2314937ae48f83e2$var$h * 24;
+var $2314937ae48f83e2$var$w = $2314937ae48f83e2$var$d * 7;
+var $2314937ae48f83e2$var$y = $2314937ae48f83e2$var$d * 365.25;
 /**
  * Parse or format the given `val`.
  *
@@ -1682,8 +1681,8 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
  */ module.exports = function(val, options) {
     options = options || {};
     var type = typeof val;
-    if (type === "string" && val.length > 0) return $e64a5771414de163$var$parse(val);
-    else if (type === "number" && isFinite(val)) return options.long ? $e64a5771414de163$var$fmtLong(val) : $e64a5771414de163$var$fmtShort(val);
+    if (type === "string" && val.length > 0) return $2314937ae48f83e2$var$parse(val);
+    else if (type === "number" && isFinite(val)) return options.long ? $2314937ae48f83e2$var$fmtLong(val) : $2314937ae48f83e2$var$fmtShort(val);
     throw new Error("val is not a non-empty string or a valid number. val=" + JSON.stringify(val));
 };
 /**
@@ -1692,7 +1691,7 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
  * @param {String} str
  * @return {Number}
  * @api private
- */ function $e64a5771414de163$var$parse(str) {
+ */ function $2314937ae48f83e2$var$parse(str) {
     str = String(str);
     if (str.length > 100) return;
     var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
@@ -1705,33 +1704,33 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
         case "yrs":
         case "yr":
         case "y":
-            return n * $e64a5771414de163$var$y;
+            return n * $2314937ae48f83e2$var$y;
         case "weeks":
         case "week":
         case "w":
-            return n * $e64a5771414de163$var$w;
+            return n * $2314937ae48f83e2$var$w;
         case "days":
         case "day":
         case "d":
-            return n * $e64a5771414de163$var$d;
+            return n * $2314937ae48f83e2$var$d;
         case "hours":
         case "hour":
         case "hrs":
         case "hr":
         case "h":
-            return n * $e64a5771414de163$var$h;
+            return n * $2314937ae48f83e2$var$h;
         case "minutes":
         case "minute":
         case "mins":
         case "min":
         case "m":
-            return n * $e64a5771414de163$var$m;
+            return n * $2314937ae48f83e2$var$m;
         case "seconds":
         case "second":
         case "secs":
         case "sec":
         case "s":
-            return n * $e64a5771414de163$var$s;
+            return n * $2314937ae48f83e2$var$s;
         case "milliseconds":
         case "millisecond":
         case "msecs":
@@ -1748,12 +1747,12 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
  * @param {Number} ms
  * @return {String}
  * @api private
- */ function $e64a5771414de163$var$fmtShort(ms) {
+ */ function $2314937ae48f83e2$var$fmtShort(ms) {
     var msAbs = Math.abs(ms);
-    if (msAbs >= $e64a5771414de163$var$d) return Math.round(ms / $e64a5771414de163$var$d) + "d";
-    if (msAbs >= $e64a5771414de163$var$h) return Math.round(ms / $e64a5771414de163$var$h) + "h";
-    if (msAbs >= $e64a5771414de163$var$m) return Math.round(ms / $e64a5771414de163$var$m) + "m";
-    if (msAbs >= $e64a5771414de163$var$s) return Math.round(ms / $e64a5771414de163$var$s) + "s";
+    if (msAbs >= $2314937ae48f83e2$var$d) return Math.round(ms / $2314937ae48f83e2$var$d) + "d";
+    if (msAbs >= $2314937ae48f83e2$var$h) return Math.round(ms / $2314937ae48f83e2$var$h) + "h";
+    if (msAbs >= $2314937ae48f83e2$var$m) return Math.round(ms / $2314937ae48f83e2$var$m) + "m";
+    if (msAbs >= $2314937ae48f83e2$var$s) return Math.round(ms / $2314937ae48f83e2$var$s) + "s";
     return ms + "ms";
 }
 /**
@@ -1762,17 +1761,17 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
  * @param {Number} ms
  * @return {String}
  * @api private
- */ function $e64a5771414de163$var$fmtLong(ms) {
+ */ function $2314937ae48f83e2$var$fmtLong(ms) {
     var msAbs = Math.abs(ms);
-    if (msAbs >= $e64a5771414de163$var$d) return $e64a5771414de163$var$plural(ms, msAbs, $e64a5771414de163$var$d, "day");
-    if (msAbs >= $e64a5771414de163$var$h) return $e64a5771414de163$var$plural(ms, msAbs, $e64a5771414de163$var$h, "hour");
-    if (msAbs >= $e64a5771414de163$var$m) return $e64a5771414de163$var$plural(ms, msAbs, $e64a5771414de163$var$m, "minute");
-    if (msAbs >= $e64a5771414de163$var$s) return $e64a5771414de163$var$plural(ms, msAbs, $e64a5771414de163$var$s, "second");
+    if (msAbs >= $2314937ae48f83e2$var$d) return $2314937ae48f83e2$var$plural(ms, msAbs, $2314937ae48f83e2$var$d, "day");
+    if (msAbs >= $2314937ae48f83e2$var$h) return $2314937ae48f83e2$var$plural(ms, msAbs, $2314937ae48f83e2$var$h, "hour");
+    if (msAbs >= $2314937ae48f83e2$var$m) return $2314937ae48f83e2$var$plural(ms, msAbs, $2314937ae48f83e2$var$m, "minute");
+    if (msAbs >= $2314937ae48f83e2$var$s) return $2314937ae48f83e2$var$plural(ms, msAbs, $2314937ae48f83e2$var$s, "second");
     return ms + " ms";
 }
 /**
  * Pluralization helper.
- */ function $e64a5771414de163$var$plural(ms, msAbs, n, name) {
+ */ function $2314937ae48f83e2$var$plural(ms, msAbs, n, name) {
     var isPlural = msAbs >= n * 1.5;
     return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
 }
@@ -1781,85 +1780,85 @@ var $e64a5771414de163$var$y = $e64a5771414de163$var$d * 365.25;
 
 
 
-parcelRequire.register("gO6d8", function(module, exports) {
+parcelRequire.register("5XWss", function(module, exports) {
 
 
 
 
 // Workaround to fix webpack's build warnings: 'the request of a dependency is an expression'
-var $c3c6222e77c233af$var$runtimeRequire = typeof __webpack_require__ === "function" ? __non_webpack_require__ : undefined // eslint-disable-line
+var $457fcef9f146e192$var$runtimeRequire = typeof __webpack_require__ === "function" ? __non_webpack_require__ : undefined // eslint-disable-line
 ;
-var $c3c6222e77c233af$var$vars = $j2o4Y$process.config && $j2o4Y$process.config.variables || {};
-var $c3c6222e77c233af$var$prebuildsOnly = !!undefined;
-var $c3c6222e77c233af$var$abi = $j2o4Y$process.versions.modules // TODO: support old node where this is undef
+var $457fcef9f146e192$var$vars = $3EevV$process.config && $3EevV$process.config.variables || {};
+var $457fcef9f146e192$var$prebuildsOnly = !!undefined;
+var $457fcef9f146e192$var$abi = $3EevV$process.versions.modules // TODO: support old node where this is undef
 ;
-var $c3c6222e77c233af$var$runtime = $c3c6222e77c233af$var$isElectron() ? "electron" : $c3c6222e77c233af$var$isNwjs() ? "node-webkit" : "node";
-var $c3c6222e77c233af$var$arch = $j2o4Y$os.arch();
-var $c3c6222e77c233af$var$platform = $j2o4Y$os.platform();
-var $c3c6222e77c233af$var$libc = undefined || ($c3c6222e77c233af$var$isAlpine($c3c6222e77c233af$var$platform) ? "musl" : "glibc");
-var $c3c6222e77c233af$var$armv = undefined || ($c3c6222e77c233af$var$arch === "arm64" ? "8" : $c3c6222e77c233af$var$vars.arm_version) || "";
-var $c3c6222e77c233af$var$uv = ($j2o4Y$process.versions.uv || "").split(".")[0];
-module.exports = $c3c6222e77c233af$var$load;
-function $c3c6222e77c233af$var$load(dir) {
-    return $c3c6222e77c233af$var$runtimeRequire($c3c6222e77c233af$var$load.path(dir));
+var $457fcef9f146e192$var$runtime = $457fcef9f146e192$var$isElectron() ? "electron" : $457fcef9f146e192$var$isNwjs() ? "node-webkit" : "node";
+var $457fcef9f146e192$var$arch = $3EevV$os.arch();
+var $457fcef9f146e192$var$platform = $3EevV$os.platform();
+var $457fcef9f146e192$var$libc = undefined || ($457fcef9f146e192$var$isAlpine($457fcef9f146e192$var$platform) ? "musl" : "glibc");
+var $457fcef9f146e192$var$armv = undefined || ($457fcef9f146e192$var$arch === "arm64" ? "8" : $457fcef9f146e192$var$vars.arm_version) || "";
+var $457fcef9f146e192$var$uv = ($3EevV$process.versions.uv || "").split(".")[0];
+module.exports = $457fcef9f146e192$var$load;
+function $457fcef9f146e192$var$load(dir) {
+    return $457fcef9f146e192$var$runtimeRequire($457fcef9f146e192$var$load.path(dir));
 }
-$c3c6222e77c233af$var$load.path = function(dir1) {
-    dir1 = $j2o4Y$path.resolve(dir1 || ".");
+$457fcef9f146e192$var$load.path = function(dir1) {
+    dir1 = $3EevV$path.resolve(dir1 || ".");
     try {
-        var name = $c3c6222e77c233af$var$runtimeRequire($j2o4Y$path.join(dir1, "package.json")).name.toUpperCase().replace(/-/g, "_");
-        if ($j2o4Y$process.env[name + "_PREBUILD"]) dir1 = $j2o4Y$process.env[name + "_PREBUILD"];
+        var name = $457fcef9f146e192$var$runtimeRequire($3EevV$path.join(dir1, "package.json")).name.toUpperCase().replace(/-/g, "_");
+        if ($3EevV$process.env[name + "_PREBUILD"]) dir1 = $3EevV$process.env[name + "_PREBUILD"];
     } catch (err) {}
-    if (!$c3c6222e77c233af$var$prebuildsOnly) {
-        var release = $c3c6222e77c233af$var$getFirst($j2o4Y$path.join(dir1, "build/Release"), $c3c6222e77c233af$var$matchBuild);
+    if (!$457fcef9f146e192$var$prebuildsOnly) {
+        var release = $457fcef9f146e192$var$getFirst($3EevV$path.join(dir1, "build/Release"), $457fcef9f146e192$var$matchBuild);
         if (release) return release;
-        var debug = $c3c6222e77c233af$var$getFirst($j2o4Y$path.join(dir1, "build/Debug"), $c3c6222e77c233af$var$matchBuild);
+        var debug = $457fcef9f146e192$var$getFirst($3EevV$path.join(dir1, "build/Debug"), $457fcef9f146e192$var$matchBuild);
         if (debug) return debug;
     }
     var prebuild = resolve(dir1);
     if (prebuild) return prebuild;
-    var nearby = resolve($j2o4Y$path.dirname($j2o4Y$process.execPath));
+    var nearby = resolve($3EevV$path.dirname($3EevV$process.execPath));
     if (nearby) return nearby;
     var target = [
-        "platform=" + $c3c6222e77c233af$var$platform,
-        "arch=" + $c3c6222e77c233af$var$arch,
-        "runtime=" + $c3c6222e77c233af$var$runtime,
-        "abi=" + $c3c6222e77c233af$var$abi,
-        "uv=" + $c3c6222e77c233af$var$uv,
-        $c3c6222e77c233af$var$armv ? "armv=" + $c3c6222e77c233af$var$armv : "",
-        "libc=" + $c3c6222e77c233af$var$libc,
-        "node=" + $j2o4Y$process.versions.node,
-        $j2o4Y$process.versions.electron ? "electron=" + $j2o4Y$process.versions.electron : "",
+        "platform=" + $457fcef9f146e192$var$platform,
+        "arch=" + $457fcef9f146e192$var$arch,
+        "runtime=" + $457fcef9f146e192$var$runtime,
+        "abi=" + $457fcef9f146e192$var$abi,
+        "uv=" + $457fcef9f146e192$var$uv,
+        $457fcef9f146e192$var$armv ? "armv=" + $457fcef9f146e192$var$armv : "",
+        "libc=" + $457fcef9f146e192$var$libc,
+        "node=" + $3EevV$process.versions.node,
+        $3EevV$process.versions.electron ? "electron=" + $3EevV$process.versions.electron : "",
         typeof __webpack_require__ === "function" ? "webpack=true" : "" // eslint-disable-line
     ].filter(Boolean).join(" ");
     throw new Error("No native build was found for " + target + "\n    loaded from: " + dir1 + "\n");
     function resolve(dir) {
         // Find matching "prebuilds/<platform>-<arch>" directory
-        var tuples = $c3c6222e77c233af$var$readdirSync($j2o4Y$path.join(dir, "prebuilds")).map($c3c6222e77c233af$var$parseTuple);
-        var tuple = tuples.filter($c3c6222e77c233af$var$matchTuple($c3c6222e77c233af$var$platform, $c3c6222e77c233af$var$arch)).sort($c3c6222e77c233af$var$compareTuples)[0];
+        var tuples = $457fcef9f146e192$var$readdirSync($3EevV$path.join(dir, "prebuilds")).map($457fcef9f146e192$var$parseTuple);
+        var tuple = tuples.filter($457fcef9f146e192$var$matchTuple($457fcef9f146e192$var$platform, $457fcef9f146e192$var$arch)).sort($457fcef9f146e192$var$compareTuples)[0];
         if (!tuple) return;
         // Find most specific flavor first
-        var prebuilds = $j2o4Y$path.join(dir, "prebuilds", tuple.name);
-        var parsed = $c3c6222e77c233af$var$readdirSync(prebuilds).map($c3c6222e77c233af$var$parseTags);
-        var candidates = parsed.filter($c3c6222e77c233af$var$matchTags($c3c6222e77c233af$var$runtime, $c3c6222e77c233af$var$abi));
-        var winner = candidates.sort($c3c6222e77c233af$var$compareTags($c3c6222e77c233af$var$runtime))[0];
-        if (winner) return $j2o4Y$path.join(prebuilds, winner.file);
+        var prebuilds = $3EevV$path.join(dir, "prebuilds", tuple.name);
+        var parsed = $457fcef9f146e192$var$readdirSync(prebuilds).map($457fcef9f146e192$var$parseTags);
+        var candidates = parsed.filter($457fcef9f146e192$var$matchTags($457fcef9f146e192$var$runtime, $457fcef9f146e192$var$abi));
+        var winner = candidates.sort($457fcef9f146e192$var$compareTags($457fcef9f146e192$var$runtime))[0];
+        if (winner) return $3EevV$path.join(prebuilds, winner.file);
     }
 };
-function $c3c6222e77c233af$var$readdirSync(dir) {
+function $457fcef9f146e192$var$readdirSync(dir) {
     try {
-        return $j2o4Y$fs.readdirSync(dir);
+        return $3EevV$fs.readdirSync(dir);
     } catch (err) {
         return [];
     }
 }
-function $c3c6222e77c233af$var$getFirst(dir, filter) {
-    var files = $c3c6222e77c233af$var$readdirSync(dir).filter(filter);
-    return files[0] && $j2o4Y$path.join(dir, files[0]);
+function $457fcef9f146e192$var$getFirst(dir, filter) {
+    var files = $457fcef9f146e192$var$readdirSync(dir).filter(filter);
+    return files[0] && $3EevV$path.join(dir, files[0]);
 }
-function $c3c6222e77c233af$var$matchBuild(name) {
+function $457fcef9f146e192$var$matchBuild(name) {
     return /\.node$/.test(name);
 }
-function $c3c6222e77c233af$var$parseTuple(name) {
+function $457fcef9f146e192$var$parseTuple(name) {
     // Example: darwin-x64+arm64
     var arr = name.split("-");
     if (arr.length !== 2) return;
@@ -1874,18 +1873,18 @@ function $c3c6222e77c233af$var$parseTuple(name) {
         architectures: architectures
     };
 }
-function $c3c6222e77c233af$var$matchTuple(platform, arch) {
+function $457fcef9f146e192$var$matchTuple(platform, arch) {
     return function(tuple) {
         if (tuple == null) return false;
         if (tuple.platform !== platform) return false;
         return tuple.architectures.includes(arch);
     };
 }
-function $c3c6222e77c233af$var$compareTuples(a, b) {
+function $457fcef9f146e192$var$compareTuples(a, b) {
     // Prefer single-arch prebuilds over multi-arch
     return a.architectures.length - b.architectures.length;
 }
-function $c3c6222e77c233af$var$parseTags(file) {
+function $457fcef9f146e192$var$parseTags(file) {
     var arr = file.split(".");
     var extension = arr.pop();
     var tags = {
@@ -1906,21 +1905,21 @@ function $c3c6222e77c233af$var$parseTags(file) {
     }
     return tags;
 }
-function $c3c6222e77c233af$var$matchTags(runtime, abi) {
+function $457fcef9f146e192$var$matchTags(runtime, abi) {
     return function(tags) {
         if (tags == null) return false;
-        if (tags.runtime !== runtime && !$c3c6222e77c233af$var$runtimeAgnostic(tags)) return false;
+        if (tags.runtime !== runtime && !$457fcef9f146e192$var$runtimeAgnostic(tags)) return false;
         if (tags.abi !== abi && !tags.napi) return false;
-        if (tags.uv && tags.uv !== $c3c6222e77c233af$var$uv) return false;
-        if (tags.armv && tags.armv !== $c3c6222e77c233af$var$armv) return false;
-        if (tags.libc && tags.libc !== $c3c6222e77c233af$var$libc) return false;
+        if (tags.uv && tags.uv !== $457fcef9f146e192$var$uv) return false;
+        if (tags.armv && tags.armv !== $457fcef9f146e192$var$armv) return false;
+        if (tags.libc && tags.libc !== $457fcef9f146e192$var$libc) return false;
         return true;
     };
 }
-function $c3c6222e77c233af$var$runtimeAgnostic(tags) {
+function $457fcef9f146e192$var$runtimeAgnostic(tags) {
     return tags.runtime === "node" && tags.napi;
 }
-function $c3c6222e77c233af$var$compareTags(runtime) {
+function $457fcef9f146e192$var$compareTags(runtime) {
     // Precedence: non-agnostic runtime, abi over napi, then by specificity.
     return function(a, b) {
         if (a.runtime !== b.runtime) return a.runtime === runtime ? -1 : 1;
@@ -1929,49 +1928,49 @@ function $c3c6222e77c233af$var$compareTags(runtime) {
         else return 0;
     };
 }
-function $c3c6222e77c233af$var$isNwjs() {
-    return !!($j2o4Y$process.versions && $j2o4Y$process.versions.nw);
+function $457fcef9f146e192$var$isNwjs() {
+    return !!($3EevV$process.versions && $3EevV$process.versions.nw);
 }
-function $c3c6222e77c233af$var$isElectron() {
-    if ($j2o4Y$process.versions && $j2o4Y$process.versions.electron) return true;
+function $457fcef9f146e192$var$isElectron() {
+    if ($3EevV$process.versions && $3EevV$process.versions.electron) return true;
     if (undefined) return true;
     return typeof window !== "undefined" && window.process && window.process.type === "renderer";
 }
-function $c3c6222e77c233af$var$isAlpine(platform) {
-    return platform === "linux" && $j2o4Y$fs.existsSync("/etc/alpine-release");
+function $457fcef9f146e192$var$isAlpine(platform) {
+    return platform === "linux" && $3EevV$fs.existsSync("/etc/alpine-release");
 }
 // Exposed for unit tests
 // TODO: move to lib
-$c3c6222e77c233af$var$load.parseTags = $c3c6222e77c233af$var$parseTags;
-$c3c6222e77c233af$var$load.matchTags = $c3c6222e77c233af$var$matchTags;
-$c3c6222e77c233af$var$load.compareTags = $c3c6222e77c233af$var$compareTags;
-$c3c6222e77c233af$var$load.parseTuple = $c3c6222e77c233af$var$parseTuple;
-$c3c6222e77c233af$var$load.matchTuple = $c3c6222e77c233af$var$matchTuple;
-$c3c6222e77c233af$var$load.compareTuples = $c3c6222e77c233af$var$compareTuples;
+$457fcef9f146e192$var$load.parseTags = $457fcef9f146e192$var$parseTags;
+$457fcef9f146e192$var$load.matchTags = $457fcef9f146e192$var$matchTags;
+$457fcef9f146e192$var$load.compareTags = $457fcef9f146e192$var$compareTags;
+$457fcef9f146e192$var$load.parseTuple = $457fcef9f146e192$var$parseTuple;
+$457fcef9f146e192$var$load.matchTuple = $457fcef9f146e192$var$matchTuple;
+$457fcef9f146e192$var$load.compareTuples = $457fcef9f146e192$var$compareTuples;
 
 });
 
 
-parcelRequire.register("3SSQh", function(module, exports) {
+parcelRequire.register("ilarF", function(module, exports) {
 
 "use strict";
-function $2d40f4c512ac6e9c$var$_typeof(obj1) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") $2d40f4c512ac6e9c$var$_typeof = function _typeof(obj) {
+function $d5a24a5b952aad24$var$_typeof(obj1) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") $d5a24a5b952aad24$var$_typeof = function _typeof(obj) {
         return typeof obj;
     };
-    else $2d40f4c512ac6e9c$var$_typeof = function _typeof(obj) {
+    else $d5a24a5b952aad24$var$_typeof = function _typeof(obj) {
         return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
-    return $2d40f4c512ac6e9c$var$_typeof(obj1);
+    return $d5a24a5b952aad24$var$_typeof(obj1);
 }
 /* eslint-env browser */ /**
  * This is the web browser implementation of `debug()`.
- */ module.exports.log = $2d40f4c512ac6e9c$var$log;
-module.exports.formatArgs = $2d40f4c512ac6e9c$var$formatArgs;
-module.exports.save = $2d40f4c512ac6e9c$var$save;
-module.exports.load = $2d40f4c512ac6e9c$var$load;
-module.exports.useColors = $2d40f4c512ac6e9c$var$useColors;
-module.exports.storage = $2d40f4c512ac6e9c$var$localstorage();
+ */ module.exports.log = $d5a24a5b952aad24$var$log;
+module.exports.formatArgs = $d5a24a5b952aad24$var$formatArgs;
+module.exports.save = $d5a24a5b952aad24$var$save;
+module.exports.load = $d5a24a5b952aad24$var$load;
+module.exports.useColors = $d5a24a5b952aad24$var$useColors;
+module.exports.storage = $d5a24a5b952aad24$var$localstorage();
 /**
  * Colors.
  */ module.exports.colors = [
@@ -2059,7 +2058,7 @@ module.exports.storage = $2d40f4c512ac6e9c$var$localstorage();
  *
  * TODO: add a `localStorage` variable to explicitly enable/disable colors
  */ // eslint-disable-next-line complexity
-function $2d40f4c512ac6e9c$var$useColors() {
+function $d5a24a5b952aad24$var$useColors() {
     // NB: In an Electron preload script, document will be defined but not fully
     // initialized. Since we know we're in Chrome, we'll just detect this case
     // explicitly
@@ -2075,7 +2074,7 @@ function $2d40f4c512ac6e9c$var$useColors() {
  * Colorize log arguments if enabled.
  *
  * @api public
- */ function $2d40f4c512ac6e9c$var$formatArgs(args) {
+ */ function $d5a24a5b952aad24$var$formatArgs(args) {
     args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module.exports.humanize(this.diff);
     if (!this.useColors) return;
     var c = "color: " + this.color;
@@ -2098,18 +2097,18 @@ function $2d40f4c512ac6e9c$var$useColors() {
  * No-op when `console.log` is not a "function".
  *
  * @api public
- */ function $2d40f4c512ac6e9c$var$log() {
+ */ function $d5a24a5b952aad24$var$log() {
     var _console;
     // This hackery is required for IE8/9, where
     // the `console.log` function doesn't have 'apply'
-    return (typeof console === "undefined" ? "undefined" : $2d40f4c512ac6e9c$var$_typeof(console)) === "object" && console.log && (_console = console).log.apply(_console, arguments);
+    return (typeof console === "undefined" ? "undefined" : $d5a24a5b952aad24$var$_typeof(console)) === "object" && console.log && (_console = console).log.apply(_console, arguments);
 }
 /**
  * Save `namespaces`.
  *
  * @param {String} namespaces
  * @api private
- */ function $2d40f4c512ac6e9c$var$save(namespaces) {
+ */ function $d5a24a5b952aad24$var$save(namespaces) {
     try {
         if (namespaces) module.exports.storage.setItem("debug", namespaces);
         else module.exports.storage.removeItem("debug");
@@ -2122,14 +2121,14 @@ function $2d40f4c512ac6e9c$var$useColors() {
  *
  * @return {String} returns the previously persisted debug modes
  * @api private
- */ function $2d40f4c512ac6e9c$var$load() {
+ */ function $d5a24a5b952aad24$var$load() {
     var r;
     try {
         r = module.exports.storage.getItem("debug");
     } catch (error) {} // Swallow
     // XXX (@Qix-) should we be logging these?
     // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-    if (!r && typeof $j2o4Y$process !== "undefined" && "env" in $j2o4Y$process) r = undefined;
+    if (!r && typeof $3EevV$process !== "undefined" && "env" in $3EevV$process) r = undefined;
     return r;
 }
 /**
@@ -2141,7 +2140,7 @@ function $2d40f4c512ac6e9c$var$useColors() {
  *
  * @return {LocalStorage}
  * @api private
- */ function $2d40f4c512ac6e9c$var$localstorage() {
+ */ function $d5a24a5b952aad24$var$localstorage() {
     try {
         // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
         // The Browser also has localStorage in the global context.
@@ -2151,11 +2150,11 @@ function $2d40f4c512ac6e9c$var$useColors() {
     }
 }
 
-module.exports = (parcelRequire("6PChk"))(module.exports);
-var $2d40f4c512ac6e9c$var$formatters = module.exports.formatters;
+module.exports = (parcelRequire("ggzkh"))(module.exports);
+var $d5a24a5b952aad24$var$formatters = module.exports.formatters;
 /**
  * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */ $2d40f4c512ac6e9c$var$formatters.j = function(v) {
+ */ $d5a24a5b952aad24$var$formatters.j = function(v) {
     try {
         return JSON.stringify(v);
     } catch (error) {
@@ -2164,20 +2163,20 @@ var $2d40f4c512ac6e9c$var$formatters = module.exports.formatters;
 };
 
 });
-parcelRequire.register("6PChk", function(module, exports) {
+parcelRequire.register("ggzkh", function(module, exports) {
 "use strict";
 
 /**
  * This is the common logic for both the Node.js and web browser
  * implementations of `debug()`.
- */ function $4f9532d4efa094af$var$setup(env) {
+ */ function $bd798afb64b93cea$var$setup(env) {
     createDebug.debug = createDebug;
     createDebug.default = createDebug;
     createDebug.coerce = coerce;
     createDebug.disable = disable;
     createDebug.enable = enable;
     createDebug.enabled = enabled;
-    createDebug.humanize = (parcelRequire("giF3J"));
+    createDebug.humanize = (parcelRequire("67D7x"));
     Object.keys(env).forEach(function(key) {
         createDebug[key] = env[key];
     });
@@ -2333,18 +2332,18 @@ parcelRequire.register("6PChk", function(module, exports) {
     createDebug.enable(createDebug.load());
     return createDebug;
 }
-module.exports = $4f9532d4efa094af$var$setup;
+module.exports = $bd798afb64b93cea$var$setup;
 
 });
-parcelRequire.register("giF3J", function(module, exports) {
+parcelRequire.register("67D7x", function(module, exports) {
 /**
  * Helpers.
- */ var $bdde2d49998f24ad$var$s = 1000;
-var $bdde2d49998f24ad$var$m = $bdde2d49998f24ad$var$s * 60;
-var $bdde2d49998f24ad$var$h = $bdde2d49998f24ad$var$m * 60;
-var $bdde2d49998f24ad$var$d = $bdde2d49998f24ad$var$h * 24;
-var $bdde2d49998f24ad$var$w = $bdde2d49998f24ad$var$d * 7;
-var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
+ */ var $4751be13a035b6e6$var$s = 1000;
+var $4751be13a035b6e6$var$m = $4751be13a035b6e6$var$s * 60;
+var $4751be13a035b6e6$var$h = $4751be13a035b6e6$var$m * 60;
+var $4751be13a035b6e6$var$d = $4751be13a035b6e6$var$h * 24;
+var $4751be13a035b6e6$var$w = $4751be13a035b6e6$var$d * 7;
+var $4751be13a035b6e6$var$y = $4751be13a035b6e6$var$d * 365.25;
 /**
  * Parse or format the given `val`.
  *
@@ -2360,8 +2359,8 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
  */ module.exports = function(val, options) {
     options = options || {};
     var type = typeof val;
-    if (type === "string" && val.length > 0) return $bdde2d49998f24ad$var$parse(val);
-    else if (type === "number" && isFinite(val)) return options.long ? $bdde2d49998f24ad$var$fmtLong(val) : $bdde2d49998f24ad$var$fmtShort(val);
+    if (type === "string" && val.length > 0) return $4751be13a035b6e6$var$parse(val);
+    else if (type === "number" && isFinite(val)) return options.long ? $4751be13a035b6e6$var$fmtLong(val) : $4751be13a035b6e6$var$fmtShort(val);
     throw new Error("val is not a non-empty string or a valid number. val=" + JSON.stringify(val));
 };
 /**
@@ -2370,7 +2369,7 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
  * @param {String} str
  * @return {Number}
  * @api private
- */ function $bdde2d49998f24ad$var$parse(str) {
+ */ function $4751be13a035b6e6$var$parse(str) {
     str = String(str);
     if (str.length > 100) return;
     var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
@@ -2383,33 +2382,33 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
         case "yrs":
         case "yr":
         case "y":
-            return n * $bdde2d49998f24ad$var$y;
+            return n * $4751be13a035b6e6$var$y;
         case "weeks":
         case "week":
         case "w":
-            return n * $bdde2d49998f24ad$var$w;
+            return n * $4751be13a035b6e6$var$w;
         case "days":
         case "day":
         case "d":
-            return n * $bdde2d49998f24ad$var$d;
+            return n * $4751be13a035b6e6$var$d;
         case "hours":
         case "hour":
         case "hrs":
         case "hr":
         case "h":
-            return n * $bdde2d49998f24ad$var$h;
+            return n * $4751be13a035b6e6$var$h;
         case "minutes":
         case "minute":
         case "mins":
         case "min":
         case "m":
-            return n * $bdde2d49998f24ad$var$m;
+            return n * $4751be13a035b6e6$var$m;
         case "seconds":
         case "second":
         case "secs":
         case "sec":
         case "s":
-            return n * $bdde2d49998f24ad$var$s;
+            return n * $4751be13a035b6e6$var$s;
         case "milliseconds":
         case "millisecond":
         case "msecs":
@@ -2426,12 +2425,12 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
  * @param {Number} ms
  * @return {String}
  * @api private
- */ function $bdde2d49998f24ad$var$fmtShort(ms) {
+ */ function $4751be13a035b6e6$var$fmtShort(ms) {
     var msAbs = Math.abs(ms);
-    if (msAbs >= $bdde2d49998f24ad$var$d) return Math.round(ms / $bdde2d49998f24ad$var$d) + "d";
-    if (msAbs >= $bdde2d49998f24ad$var$h) return Math.round(ms / $bdde2d49998f24ad$var$h) + "h";
-    if (msAbs >= $bdde2d49998f24ad$var$m) return Math.round(ms / $bdde2d49998f24ad$var$m) + "m";
-    if (msAbs >= $bdde2d49998f24ad$var$s) return Math.round(ms / $bdde2d49998f24ad$var$s) + "s";
+    if (msAbs >= $4751be13a035b6e6$var$d) return Math.round(ms / $4751be13a035b6e6$var$d) + "d";
+    if (msAbs >= $4751be13a035b6e6$var$h) return Math.round(ms / $4751be13a035b6e6$var$h) + "h";
+    if (msAbs >= $4751be13a035b6e6$var$m) return Math.round(ms / $4751be13a035b6e6$var$m) + "m";
+    if (msAbs >= $4751be13a035b6e6$var$s) return Math.round(ms / $4751be13a035b6e6$var$s) + "s";
     return ms + "ms";
 }
 /**
@@ -2440,17 +2439,17 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
  * @param {Number} ms
  * @return {String}
  * @api private
- */ function $bdde2d49998f24ad$var$fmtLong(ms) {
+ */ function $4751be13a035b6e6$var$fmtLong(ms) {
     var msAbs = Math.abs(ms);
-    if (msAbs >= $bdde2d49998f24ad$var$d) return $bdde2d49998f24ad$var$plural(ms, msAbs, $bdde2d49998f24ad$var$d, "day");
-    if (msAbs >= $bdde2d49998f24ad$var$h) return $bdde2d49998f24ad$var$plural(ms, msAbs, $bdde2d49998f24ad$var$h, "hour");
-    if (msAbs >= $bdde2d49998f24ad$var$m) return $bdde2d49998f24ad$var$plural(ms, msAbs, $bdde2d49998f24ad$var$m, "minute");
-    if (msAbs >= $bdde2d49998f24ad$var$s) return $bdde2d49998f24ad$var$plural(ms, msAbs, $bdde2d49998f24ad$var$s, "second");
+    if (msAbs >= $4751be13a035b6e6$var$d) return $4751be13a035b6e6$var$plural(ms, msAbs, $4751be13a035b6e6$var$d, "day");
+    if (msAbs >= $4751be13a035b6e6$var$h) return $4751be13a035b6e6$var$plural(ms, msAbs, $4751be13a035b6e6$var$h, "hour");
+    if (msAbs >= $4751be13a035b6e6$var$m) return $4751be13a035b6e6$var$plural(ms, msAbs, $4751be13a035b6e6$var$m, "minute");
+    if (msAbs >= $4751be13a035b6e6$var$s) return $4751be13a035b6e6$var$plural(ms, msAbs, $4751be13a035b6e6$var$s, "second");
     return ms + " ms";
 }
 /**
  * Pluralization helper.
- */ function $bdde2d49998f24ad$var$plural(ms, msAbs, n, name) {
+ */ function $4751be13a035b6e6$var$plural(ms, msAbs, n, name) {
     var isPlural = msAbs >= n * 1.5;
     return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
 }
@@ -2459,1902 +2458,553 @@ var $bdde2d49998f24ad$var$y = $bdde2d49998f24ad$var$d * 365.25;
 
 
 
+parcelRequire.register("4LET2", function(module, exports) {
 
-$parcel$export(module.exports, "IgtState", () => $0c2037986a980ef8$export$1fbf6ae150f5289f);
-$parcel$export(module.exports, "setIgtCallback", () => $0c2037986a980ef8$export$5801d716674e6bb6);
-$parcel$export(module.exports, "startIgt", () => $0c2037986a980ef8$export$a679630bf91eb455);
-$parcel$export(module.exports, "stopIgt", () => $0c2037986a980ef8$export$cb0b9fb431e2932b);
-var $9b6d127d161d1782$exports = {};
-
-$parcel$export($9b6d127d161d1782$exports, "_WIN64_HOLDER", () => $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-$parcel$export($9b6d127d161d1782$exports, "_UNICODE_HOLDER", () => $9b6d127d161d1782$export$609085a058d4a4d0);
-$parcel$export($9b6d127d161d1782$exports, "windefSkipKeys", () => $9b6d127d161d1782$export$527cfc1519820a40);
-$parcel$export($9b6d127d161d1782$exports, "_WIN64", () => $9b6d127d161d1782$export$def1b823ebd5706b);
-$parcel$export($9b6d127d161d1782$exports, "_UNICODE", () => $9b6d127d161d1782$export$cba91b4ce33b8ea);
-$parcel$export($9b6d127d161d1782$exports, "settingsDefault", () => $9b6d127d161d1782$export$f6b5b44fcd8003ee);
-$parcel$export($9b6d127d161d1782$exports, "windefSet", () => $9b6d127d161d1782$export$65a4230322ab1784);
-
-const $9b6d127d161d1782$export$4bbcbb9e6d314d55 = "_WIN64_HOLDER_";
-const $9b6d127d161d1782$export$609085a058d4a4d0 = "_UNICODE_HOLDER_";
-const $9b6d127d161d1782$export$527cfc1519820a40 = new Set([
-    "macroMap"
-]);
-const $9b6d127d161d1782$export$def1b823ebd5706b = $j2o4Y$process.arch === "x64";
-const $9b6d127d161d1782$export$cba91b4ce33b8ea = true;
-const $9b6d127d161d1782$export$f6b5b44fcd8003ee = {
-    singleton: true,
-    _UNICODE: $9b6d127d161d1782$export$cba91b4ce33b8ea,
-    _WIN64: $9b6d127d161d1782$export$def1b823ebd5706b
-};
-const $9b6d127d161d1782$export$65a4230322ab1784 = new Set([
-    "bool",
-    "bool*",
-    "byte",
-    "byte*",
-    "char",
-    "uchar",
-    "char*",
-    "float",
-    "float*",
-    "int",
-    "int8",
-    "int16",
-    "int32",
-    "int64",
-    "int*",
-    "int8*",
-    "int16*",
-    "int32*",
-    "int64*",
-    "uint",
-    "uint8",
-    "uint16",
-    "uint32",
-    "uint64",
-    "uint*",
-    "uint8*",
-    "uint16*",
-    "uint32*",
-    "uint64*",
-    "int**",
-    "uint**",
-    "uint32**",
-    "uint64**",
-    "long",
-    "longlong",
-    "long*",
-    "longlong*",
-    "pointer",
-    "ushort",
-    "void",
-    "void*", 
-]);
-
-
-var $c3a656112b314b00$exports = {};
-
-$parcel$export($c3a656112b314b00$exports, "ALTTABINFO", () => $c3a656112b314b00$export$ad48b1b2cfc75809);
-$parcel$export($c3a656112b314b00$exports, "COPYDATASTRUCT", () => $c3a656112b314b00$export$235a24185e6c03f3);
-$parcel$export($c3a656112b314b00$exports, "HARDWAREINPUT", () => $c3a656112b314b00$export$c747a8b76ce2fc55);
-$parcel$export($c3a656112b314b00$exports, "INITCOMMONCONTROLSEX", () => $c3a656112b314b00$export$6eb78d635a3ee587);
-$parcel$export($c3a656112b314b00$exports, "KEYBDINPUT", () => $c3a656112b314b00$export$9d77698e6144d105);
-$parcel$export($c3a656112b314b00$exports, "MOUSEINPUT", () => $c3a656112b314b00$export$b25d5f19497424fa);
-$parcel$export($c3a656112b314b00$exports, "MSG", () => $c3a656112b314b00$export$f99154f7a7b0135d);
-$parcel$export($c3a656112b314b00$exports, "POINT", () => $c3a656112b314b00$export$a80a24d37f0f1279);
-$parcel$export($c3a656112b314b00$exports, "PROCESS_BASIC_INFORMATION", () => $c3a656112b314b00$export$ca65a5b05e68b7ff);
-$parcel$export($c3a656112b314b00$exports, "UNICODE_STRING", () => $c3a656112b314b00$export$5dcce0e722389cdb);
-$parcel$export($c3a656112b314b00$exports, "RAWHID", () => $c3a656112b314b00$export$109b0986e0806ee);
-$parcel$export($c3a656112b314b00$exports, "RAWINPUTDEVICELIST", () => $c3a656112b314b00$export$cf7f2abb0ac9e892);
-$parcel$export($c3a656112b314b00$exports, "RAWINPUTHEADER", () => $c3a656112b314b00$export$614c933f340ce1c1);
-$parcel$export($c3a656112b314b00$exports, "RAWKEYBOARD", () => $c3a656112b314b00$export$7f9753d8aef93f40);
-$parcel$export($c3a656112b314b00$exports, "WINDOWINFO", () => $c3a656112b314b00$export$5119761222d7d0f6);
-$parcel$export($c3a656112b314b00$exports, "WNDCLASSEX", () => $c3a656112b314b00$export$81ef613fbd3a628d);
-$parcel$export($c3a656112b314b00$exports, "RECT", () => $c3a656112b314b00$export$1e530543ba1d4b12);
-$parcel$export($c3a656112b314b00$exports, "_RECT", () => $c3a656112b314b00$export$1e530543ba1d4b12);
-$parcel$export($c3a656112b314b00$exports, "FILETIME", () => $c3a656112b314b00$export$258339e884eb70b7);
-
-function $33cc204cd270787c$export$828a2cfb74eb348c(windefObj, macroMap, settings) {
-    const ww = $33cc204cd270787c$var$clone_filter_windef(windefObj); // output without macroMap
-    const macroSrc = $33cc204cd270787c$var$prepare_macro(macroMap, settings);
-    const ret = $33cc204cd270787c$var$prepare_windef_ref(ww, macroSrc);
-    $33cc204cd270787c$export$6b50c41cc4aa2277(ret, (0, $9b6d127d161d1782$export$65a4230322ab1784));
-    return ret;
-}
-/**
- * convert typeof array of param to string
- * such like ['_WIN64_HOLDER_', 'int64', 'int32'], no changed returning when string
- */ function $33cc204cd270787c$var$parse_param_placeholder(param, settings) {
-    if (typeof param === "string") return param;
-    else if (!param) throw new Error("parse_param_placeholder(ps, settings) value of ps invalid");
-    else if (!Array.isArray(param) || param.length !== 3) throw new Error("parse_param_placeholder(ps, settings) value of ps must Array and has THREE elements");
-    const st = $33cc204cd270787c$var$parse_settings(settings);
-    let ps = "";
-    switch(param[0]){
-        case 0, $9b6d127d161d1782$export$4bbcbb9e6d314d55:
-            ps = $33cc204cd270787c$var$parse_placeholder_arch(param, st._WIN64);
-            break;
-        case 0, $9b6d127d161d1782$export$609085a058d4a4d0:
-            ps = $33cc204cd270787c$var$parse_placeholder_unicode(param, st._UNICODE);
-            break;
-        default:
-            throw new Error("the value of param placeholder invlaid:" + param[0]);
-    }
-    return ps;
-}
-// convert param like ['_WIN64_HOLDER_', 'int64', 'int32] to 'int64' or 'int32'
-function $33cc204cd270787c$var$parse_placeholder_arch(param, _WIN64) {
-    if (typeof param === "string") return param;
-    else if (!param || param.length !== 3) throw new Error("_WIN64 macro should be Array and has 3 items");
-    return _WIN64 ? param[1] : param[2];
-}
-// convert param like ['_UNICODE_HOLDER_', 'uint16*', 'uint8*'] to 'uint16*' or 'uint8*'
-function $33cc204cd270787c$var$parse_placeholder_unicode(param, _UNICODE) {
-    if (typeof param === "string") return param;
-    else if (!param || param.length !== 3) throw new Error("_UNICODE macro should be Array and has 3 items");
-    return _UNICODE ? param[1] : param[2];
-}
-/**
- * parse ['_WIN64_HOLDER', 'int64*', 'int32*'] to 'int64*' or 'int32'
- * or ['_UNICODE_HOLDER_', 'uint16*', 'uint8*'] to 'uint16*' or 'uint8*'
- */ function $33cc204cd270787c$var$prepare_macro(macroMap, settings) {
-    const ret = new Map();
-    // v string|array
-    for (const [k, v] of macroMap.entries())ret.set(k, $33cc204cd270787c$var$parse_param_placeholder(v, settings));
-    return ret;
-}
-/**
- * parse const HANDLE = 'PVOID' to the realy FFIParam (like 'uint32*')
- * macroMap <['PVOID', 'uint32*'], ...>
- */ function $33cc204cd270787c$var$prepare_windef_ref(ww, macroSrc) {
-    const ret = {};
-    const map = new Map();
-    // first loop paser keys which exists in macroSrc
-    for (const x of Object.keys(ww)){
-        /* istanbul ignore next */ if (map.has(x)) continue;
-        if (macroSrc.has(x)) {
-            const vv = macroSrc.get(x);
-            if (vv) map.set(x, vv);
-            else throw new Error(`Value of macroSrc item "${x}" blank`);
-        } else continue; // not throw error
-    }
-    // 2nd loop paser key , maybe value refer other key
-    for (const [k1, v1] of Object.entries(ww)){
-        /* istanbul ignore next */ if (map.has(k1)) continue;
-        if (typeof v1 === "string") {
-            if ((0, $9b6d127d161d1782$export$65a4230322ab1784).has(v1)) map.set(k1, v1);
-            else {
-                const value = $33cc204cd270787c$export$653d6aa060f2e229(v1, ww, macroSrc);
-                // tslint:disable-next-line
-                if (typeof value === "string" && value) map.set(k1, value);
-                else map.set(k1, v1); // maybe invalid for windefSet, will validateWinData() later
-            }
-        } else throw new Error(`prepare_windef_ref() missing entry for k/v: ${k1}/"N/A"`);
-    }
-    map.forEach((v, k)=>{
-        ret[k] = v;
-    });
-    return ret;
-}
-function $33cc204cd270787c$var$clone_filter_windef(windef) {
-    const ret = {};
-    for (const x of Object.keys(windef)){
-        if (typeof windef[x] === "string") Object.defineProperty(ret, x, {
-            value: windef[x],
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
-        else throw new Error(`typeof value of ${x} NOT string`);
-    }
-    return ret;
-}
-function $33cc204cd270787c$var$parse_settings(settings) {
-    const st = {
-        ...(0, $9b6d127d161d1782$export$f6b5b44fcd8003ee)
+/* eslint-env browser */ /**
+ * This is the web browser implementation of `debug()`.
+ */ module.exports.formatArgs = $378b44785cd32d0f$var$formatArgs;
+module.exports.save = $378b44785cd32d0f$var$save;
+module.exports.load = $378b44785cd32d0f$var$load;
+module.exports.useColors = $378b44785cd32d0f$var$useColors;
+module.exports.storage = $378b44785cd32d0f$var$localstorage();
+module.exports.destroy = (()=>{
+    let warned = false;
+    return ()=>{
+        if (!warned) {
+            warned = true;
+            console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+        }
     };
-    if (typeof settings !== "undefined" && Object.keys(settings).length) Object.assign(st, settings);
-    return st;
-}
-function $33cc204cd270787c$export$653d6aa060f2e229(key, ww, macroSrc) {
-    let ret = $33cc204cd270787c$var$_lookupRef(key, ww, macroSrc);
-    if (!ret) return "";
-    for(let i = 0, len = 3; i < len; i += 1){
-        const tmp = $33cc204cd270787c$var$_lookupRef(ret, ww, macroSrc);
-        if (tmp) ret = tmp;
-        else break;
-    }
-    return ret;
-}
-function $33cc204cd270787c$var$_lookupRef(key, ww, macroSrc) {
-    if (macroSrc.has(key)) return macroSrc.get(key);
-    // key is not valid FFIParam such 'int/uint...', like HMODULE: 'HANDLE'
-    if (typeof ww[key] === "string") {
-        // parse HANDLE: 'PVOID' , PVOID already parsed
-        const ret = ww[key];
-        if (ret && macroSrc.has(ret)) return macroSrc.get(ret);
-        return ret;
-    }
-    return "";
-}
-function $33cc204cd270787c$export$f6e45c3615c9e25a(key, srcSet) {
-    return !!srcSet.has(key);
-}
-function $33cc204cd270787c$export$6b50c41cc4aa2277(windef, srcSet) {
-    for (const [k, v] of Object.entries(windef)){
-        if (!k || !v) throw new Error(`validateWinData() k or v empty: "${k}"/"${v}"`);
-        if (typeof v !== "string") throw new Error(`validateWinData() v not typeof string: "${k}"/"N/A"`);
-        if (!$33cc204cd270787c$export$f6e45c3615c9e25a(v, srcSet)) throw new Error(`validateWinData() value is invalid ffi param value: "${k}"/"${v}", may extra space`);
-    }
-}
-
-
-
-var $9d810a88d35126f2$exports = {};
-
-$parcel$export($9d810a88d35126f2$exports, "ATOM", () => $9d810a88d35126f2$export$a78dc2c4cbd70341);
-$parcel$export($9d810a88d35126f2$exports, "DWORD", () => $9d810a88d35126f2$export$181c9ad1752440f7);
-$parcel$export($9d810a88d35126f2$exports, "PVOID", () => $9d810a88d35126f2$export$9cb553b951e1e0d8);
-$parcel$export($9d810a88d35126f2$exports, "HANDLE", () => $9d810a88d35126f2$export$1f4a129e1195d18a);
-$parcel$export($9d810a88d35126f2$exports, "HANDLE_PVOID", () => $9d810a88d35126f2$export$bd8b6af04676495);
-$parcel$export($9d810a88d35126f2$exports, "LONG_PTR", () => $9d810a88d35126f2$export$f60fc96aa99c605e);
-$parcel$export($9d810a88d35126f2$exports, "ULONG_PTR", () => $9d810a88d35126f2$export$2e482cd8c991e558);
-$parcel$export($9d810a88d35126f2$exports, "VOID", () => $9d810a88d35126f2$export$1cd1943b3a73bbe8);
-$parcel$export($9d810a88d35126f2$exports, "WCHAR", () => $9d810a88d35126f2$export$d71e2b267f5b711b);
-$parcel$export($9d810a88d35126f2$exports, "WORD", () => $9d810a88d35126f2$export$f3a79cf462faa1e3);
-$parcel$export($9d810a88d35126f2$exports, "BOOL", () => $9d810a88d35126f2$export$c35dd5647862f990);
-$parcel$export($9d810a88d35126f2$exports, "BOOLEAN", () => $9d810a88d35126f2$export$428cfe48a69a3b4f);
-$parcel$export($9d810a88d35126f2$exports, "BYTE", () => $9d810a88d35126f2$export$8f4bf8f7eb581284);
-$parcel$export($9d810a88d35126f2$exports, "CALLBACK", () => $9d810a88d35126f2$export$578a4c3d73a6d794);
-$parcel$export($9d810a88d35126f2$exports, "CCHAR", () => $9d810a88d35126f2$export$934996f637259e88);
-$parcel$export($9d810a88d35126f2$exports, "CHAR", () => $9d810a88d35126f2$export$9e88d7b6f62f62d8);
-$parcel$export($9d810a88d35126f2$exports, "COLORREF", () => $9d810a88d35126f2$export$52da70d84f582c04);
-$parcel$export($9d810a88d35126f2$exports, "DWORDLONG", () => $9d810a88d35126f2$export$6b766bfdcf67e2ec);
-$parcel$export($9d810a88d35126f2$exports, "DWORD_PTR", () => $9d810a88d35126f2$export$8f7b8c11edcb3e34);
-$parcel$export($9d810a88d35126f2$exports, "DWORD32", () => $9d810a88d35126f2$export$a8ea5b58ae88fc11);
-$parcel$export($9d810a88d35126f2$exports, "DWORD64", () => $9d810a88d35126f2$export$8db31e1b1c7e0db0);
-$parcel$export($9d810a88d35126f2$exports, "FLOAT", () => $9d810a88d35126f2$export$d2b086fd1e01e03a);
-$parcel$export($9d810a88d35126f2$exports, "HACCEL", () => $9d810a88d35126f2$export$1505c2c04cc3bbef);
-$parcel$export($9d810a88d35126f2$exports, "HALF_PTR", () => $9d810a88d35126f2$export$2d081f52dd94061a);
-$parcel$export($9d810a88d35126f2$exports, "HBITMAP", () => $9d810a88d35126f2$export$49cd303f01f67350);
-$parcel$export($9d810a88d35126f2$exports, "HBRUSH", () => $9d810a88d35126f2$export$d17b38c787d37ab8);
-$parcel$export($9d810a88d35126f2$exports, "HCOLORSPACE", () => $9d810a88d35126f2$export$56c7641f121a2c5c);
-$parcel$export($9d810a88d35126f2$exports, "HCONV", () => $9d810a88d35126f2$export$762b8b6ee0ff4c44);
-$parcel$export($9d810a88d35126f2$exports, "HCONVLIST", () => $9d810a88d35126f2$export$750eee7b2f0ee030);
-$parcel$export($9d810a88d35126f2$exports, "HCURSOR", () => $9d810a88d35126f2$export$a02796fdca6d354a);
-$parcel$export($9d810a88d35126f2$exports, "HDC", () => $9d810a88d35126f2$export$1a62f6d54b236e36);
-$parcel$export($9d810a88d35126f2$exports, "HDDEDATA", () => $9d810a88d35126f2$export$4ddde23cd7155d44);
-$parcel$export($9d810a88d35126f2$exports, "HDESK", () => $9d810a88d35126f2$export$1d0ad5eb60ffc518);
-$parcel$export($9d810a88d35126f2$exports, "HDROP", () => $9d810a88d35126f2$export$726c5c347609dae3);
-$parcel$export($9d810a88d35126f2$exports, "HDWP", () => $9d810a88d35126f2$export$323f06abdd2a59da);
-$parcel$export($9d810a88d35126f2$exports, "HENHMETAFILE", () => $9d810a88d35126f2$export$a43730eb8bf8b76e);
-$parcel$export($9d810a88d35126f2$exports, "HFILE", () => $9d810a88d35126f2$export$91f6f659ef3d1edd);
-$parcel$export($9d810a88d35126f2$exports, "HFONT", () => $9d810a88d35126f2$export$229672d8f6dd9e1a);
-$parcel$export($9d810a88d35126f2$exports, "HGDIOBJ", () => $9d810a88d35126f2$export$ef0ae13fba225584);
-$parcel$export($9d810a88d35126f2$exports, "HGLOBAL", () => $9d810a88d35126f2$export$6b52c27577dfb85e);
-$parcel$export($9d810a88d35126f2$exports, "HHOOK", () => $9d810a88d35126f2$export$a681c4a7983815bf);
-$parcel$export($9d810a88d35126f2$exports, "HICON", () => $9d810a88d35126f2$export$105fd39584a4c170);
-$parcel$export($9d810a88d35126f2$exports, "HINSTANCE", () => $9d810a88d35126f2$export$1a50b4f53ac33a);
-$parcel$export($9d810a88d35126f2$exports, "HKEY", () => $9d810a88d35126f2$export$80d8783aa08e677d);
-$parcel$export($9d810a88d35126f2$exports, "HKL", () => $9d810a88d35126f2$export$9252a4926414af53);
-$parcel$export($9d810a88d35126f2$exports, "HLOCAL", () => $9d810a88d35126f2$export$941fbb37db50e0ee);
-$parcel$export($9d810a88d35126f2$exports, "HMENU", () => $9d810a88d35126f2$export$5570ee796bf8668a);
-$parcel$export($9d810a88d35126f2$exports, "HMETAFILE", () => $9d810a88d35126f2$export$32e1d6dd1d786a08);
-$parcel$export($9d810a88d35126f2$exports, "HMODULE", () => $9d810a88d35126f2$export$82cb6941373786ac);
-$parcel$export($9d810a88d35126f2$exports, "HMONITOR", () => $9d810a88d35126f2$export$d76bcd896c4c1f0b);
-$parcel$export($9d810a88d35126f2$exports, "HPALETTE", () => $9d810a88d35126f2$export$c984542fbcd9e311);
-$parcel$export($9d810a88d35126f2$exports, "HPEN", () => $9d810a88d35126f2$export$e8c398641ae921a0);
-$parcel$export($9d810a88d35126f2$exports, "HRESULT", () => $9d810a88d35126f2$export$2109f3ca8e001dc3);
-$parcel$export($9d810a88d35126f2$exports, "HRGN", () => $9d810a88d35126f2$export$64129906a6b15c89);
-$parcel$export($9d810a88d35126f2$exports, "HRSRC", () => $9d810a88d35126f2$export$d0b96b23ab9f5338);
-$parcel$export($9d810a88d35126f2$exports, "HSZ", () => $9d810a88d35126f2$export$c50eccdd15c9fd55);
-$parcel$export($9d810a88d35126f2$exports, "HWINEVENTHOOK", () => $9d810a88d35126f2$export$60bcb2927641b3f4);
-$parcel$export($9d810a88d35126f2$exports, "HWINSTA", () => $9d810a88d35126f2$export$893fa35bdef36b);
-$parcel$export($9d810a88d35126f2$exports, "HWND", () => $9d810a88d35126f2$export$6525812590d9a476);
-$parcel$export($9d810a88d35126f2$exports, "INT", () => $9d810a88d35126f2$export$160e8bdd97bfce3a);
-$parcel$export($9d810a88d35126f2$exports, "INT_PTR", () => $9d810a88d35126f2$export$f051d14373139dee);
-$parcel$export($9d810a88d35126f2$exports, "INT8", () => $9d810a88d35126f2$export$9922471c07c2891d);
-$parcel$export($9d810a88d35126f2$exports, "INT16", () => $9d810a88d35126f2$export$bd9b91838fde002e);
-$parcel$export($9d810a88d35126f2$exports, "INT32", () => $9d810a88d35126f2$export$34412edc7b36f85);
-$parcel$export($9d810a88d35126f2$exports, "INT64", () => $9d810a88d35126f2$export$a2c63c68aeee9e2d);
-$parcel$export($9d810a88d35126f2$exports, "LANGID", () => $9d810a88d35126f2$export$6190ebba87077b9d);
-$parcel$export($9d810a88d35126f2$exports, "LCID", () => $9d810a88d35126f2$export$b36cf4a83245c2f9);
-$parcel$export($9d810a88d35126f2$exports, "LCTYPE", () => $9d810a88d35126f2$export$244c0463aedba74c);
-$parcel$export($9d810a88d35126f2$exports, "LGRPID", () => $9d810a88d35126f2$export$202821be4d3b65c7);
-$parcel$export($9d810a88d35126f2$exports, "LONG", () => $9d810a88d35126f2$export$686cfa64f218be7a);
-$parcel$export($9d810a88d35126f2$exports, "LONGLONG", () => $9d810a88d35126f2$export$2d2033f38dde21c);
-$parcel$export($9d810a88d35126f2$exports, "LONG32", () => $9d810a88d35126f2$export$4c9cb8eafd43015e);
-$parcel$export($9d810a88d35126f2$exports, "LONG64", () => $9d810a88d35126f2$export$552dea698acd6cd2);
-$parcel$export($9d810a88d35126f2$exports, "LPARAM", () => $9d810a88d35126f2$export$13371aace3d44948);
-$parcel$export($9d810a88d35126f2$exports, "LPBOOL", () => $9d810a88d35126f2$export$5df7e4acce683059);
-$parcel$export($9d810a88d35126f2$exports, "LPBYTE", () => $9d810a88d35126f2$export$1061811df8b0c9be);
-$parcel$export($9d810a88d35126f2$exports, "LPCOLORREF", () => $9d810a88d35126f2$export$f1d7ba3e4d51498c);
-$parcel$export($9d810a88d35126f2$exports, "LPCSTR", () => $9d810a88d35126f2$export$18e7280707df82f3);
-$parcel$export($9d810a88d35126f2$exports, "LPCWSTR", () => $9d810a88d35126f2$export$dfa283df2530598f);
-$parcel$export($9d810a88d35126f2$exports, "LPCTSTR", () => $9d810a88d35126f2$export$3e6b4f6079ce51b);
-$parcel$export($9d810a88d35126f2$exports, "LPVOID", () => $9d810a88d35126f2$export$3de86eb3806b712d);
-$parcel$export($9d810a88d35126f2$exports, "LPCVOID", () => $9d810a88d35126f2$export$acb32c160acad508);
-$parcel$export($9d810a88d35126f2$exports, "LPDWORD", () => $9d810a88d35126f2$export$33eafb5d436e1362);
-$parcel$export($9d810a88d35126f2$exports, "LPHANDLE", () => $9d810a88d35126f2$export$e8ea75f05566dd3c);
-$parcel$export($9d810a88d35126f2$exports, "LPINT", () => $9d810a88d35126f2$export$b4d77e4f53c21e3a);
-$parcel$export($9d810a88d35126f2$exports, "LPLONG", () => $9d810a88d35126f2$export$ca6bd9f017df4953);
-$parcel$export($9d810a88d35126f2$exports, "LPMSG", () => $9d810a88d35126f2$export$aba1f5f1221c9fb3);
-$parcel$export($9d810a88d35126f2$exports, "LPPOINT", () => $9d810a88d35126f2$export$3a00c33c250e7d86);
-$parcel$export($9d810a88d35126f2$exports, "LPSTR", () => $9d810a88d35126f2$export$e5fae31862228632);
-$parcel$export($9d810a88d35126f2$exports, "LPWSTR", () => $9d810a88d35126f2$export$dec24c174f0eaee1);
-$parcel$export($9d810a88d35126f2$exports, "LPTSTR", () => $9d810a88d35126f2$export$477e24a98da955e6);
-$parcel$export($9d810a88d35126f2$exports, "LPWORD", () => $9d810a88d35126f2$export$a362e06a8759641a);
-$parcel$export($9d810a88d35126f2$exports, "LRESULT", () => $9d810a88d35126f2$export$307c691072d7eef0);
-$parcel$export($9d810a88d35126f2$exports, "NTSTATUS", () => $9d810a88d35126f2$export$a50474266f14be1b);
-$parcel$export($9d810a88d35126f2$exports, "PBOOL", () => $9d810a88d35126f2$export$a1d44ba3d847cfd0);
-$parcel$export($9d810a88d35126f2$exports, "PBOOLEAN", () => $9d810a88d35126f2$export$4f984d513e291397);
-$parcel$export($9d810a88d35126f2$exports, "PBYTE", () => $9d810a88d35126f2$export$306fa084066e20a7);
-$parcel$export($9d810a88d35126f2$exports, "PCHAR", () => $9d810a88d35126f2$export$72c3772b516a65cf);
-$parcel$export($9d810a88d35126f2$exports, "PCSTR", () => $9d810a88d35126f2$export$cf99bbd665f301f9);
-$parcel$export($9d810a88d35126f2$exports, "PCTSTR", () => $9d810a88d35126f2$export$d63ff7816142b2f4);
-$parcel$export($9d810a88d35126f2$exports, "PCWSTR", () => $9d810a88d35126f2$export$8aeea065f4882b0c);
-$parcel$export($9d810a88d35126f2$exports, "PDWORD", () => $9d810a88d35126f2$export$c06eff3fc862da47);
-$parcel$export($9d810a88d35126f2$exports, "PDWORDLONG", () => $9d810a88d35126f2$export$e09b44cec70f0704);
-$parcel$export($9d810a88d35126f2$exports, "PDWORD_PTR", () => $9d810a88d35126f2$export$a2bbf1fe69b0026d);
-$parcel$export($9d810a88d35126f2$exports, "PDWORD32", () => $9d810a88d35126f2$export$60e2c917bf0cf558);
-$parcel$export($9d810a88d35126f2$exports, "PDWORD64", () => $9d810a88d35126f2$export$d8d54319b3c23a57);
-$parcel$export($9d810a88d35126f2$exports, "PFLOAT", () => $9d810a88d35126f2$export$22fafc5c9d071cf4);
-$parcel$export($9d810a88d35126f2$exports, "PHALF_PTR", () => $9d810a88d35126f2$export$729dee532709226e);
-$parcel$export($9d810a88d35126f2$exports, "PHANDLE", () => $9d810a88d35126f2$export$30d4c74fa93d3438);
-$parcel$export($9d810a88d35126f2$exports, "PHKEY", () => $9d810a88d35126f2$export$64ced35c53da7357);
-$parcel$export($9d810a88d35126f2$exports, "PINT", () => $9d810a88d35126f2$export$905308e3ac5456b0);
-$parcel$export($9d810a88d35126f2$exports, "PINT_PTR", () => $9d810a88d35126f2$export$7fbf02121a44af3);
-$parcel$export($9d810a88d35126f2$exports, "PINT8", () => $9d810a88d35126f2$export$16ddf13bb85917f4);
-$parcel$export($9d810a88d35126f2$exports, "PINT16", () => $9d810a88d35126f2$export$2863cf8b15c466bd);
-$parcel$export($9d810a88d35126f2$exports, "PINT32", () => $9d810a88d35126f2$export$3888f865e2f3fc9e);
-$parcel$export($9d810a88d35126f2$exports, "PINT64", () => $9d810a88d35126f2$export$d81a713d6f75c904);
-$parcel$export($9d810a88d35126f2$exports, "PLCID", () => $9d810a88d35126f2$export$d0f483e3dea49716);
-$parcel$export($9d810a88d35126f2$exports, "PLONG", () => $9d810a88d35126f2$export$884b50f6e7d23183);
-$parcel$export($9d810a88d35126f2$exports, "PLONGLONG", () => $9d810a88d35126f2$export$f4311b64ba2f3fe7);
-$parcel$export($9d810a88d35126f2$exports, "PLONG_PTR", () => $9d810a88d35126f2$export$6cfa0302bb348fb4);
-$parcel$export($9d810a88d35126f2$exports, "PLONG32", () => $9d810a88d35126f2$export$b415878f19491157);
-$parcel$export($9d810a88d35126f2$exports, "PLONG64", () => $9d810a88d35126f2$export$9b97fd1af0726c08);
-$parcel$export($9d810a88d35126f2$exports, "POINTER_32", () => $9d810a88d35126f2$export$f27a748240b723f3);
-$parcel$export($9d810a88d35126f2$exports, "POINTER_64", () => $9d810a88d35126f2$export$5d25222f3b2425ae);
-$parcel$export($9d810a88d35126f2$exports, "POINTER_SIGNED", () => $9d810a88d35126f2$export$729c2fdddcf979dc);
-$parcel$export($9d810a88d35126f2$exports, "POINTER_UNSIGNED", () => $9d810a88d35126f2$export$d595eac61e43ee1f);
-$parcel$export($9d810a88d35126f2$exports, "PSHORT", () => $9d810a88d35126f2$export$8c90681ffa492177);
-$parcel$export($9d810a88d35126f2$exports, "PSIZE_T", () => $9d810a88d35126f2$export$42c4483327accaad);
-$parcel$export($9d810a88d35126f2$exports, "PSSIZE_T", () => $9d810a88d35126f2$export$159e35dadcec50ed);
-$parcel$export($9d810a88d35126f2$exports, "PSTR", () => $9d810a88d35126f2$export$fd996999f34a55b1);
-$parcel$export($9d810a88d35126f2$exports, "PTBYTE", () => $9d810a88d35126f2$export$99f79cd79a3279be);
-$parcel$export($9d810a88d35126f2$exports, "PTCHAR", () => $9d810a88d35126f2$export$a80266c3bbf78408);
-$parcel$export($9d810a88d35126f2$exports, "PTSTR", () => $9d810a88d35126f2$export$90396e0dac1d7bf4);
-$parcel$export($9d810a88d35126f2$exports, "PUCHAR", () => $9d810a88d35126f2$export$dac29ac7c1a6a593);
-$parcel$export($9d810a88d35126f2$exports, "PUHALF_PTR", () => $9d810a88d35126f2$export$3b9eae56db5c9a5c);
-$parcel$export($9d810a88d35126f2$exports, "PUINT", () => $9d810a88d35126f2$export$335fb31719a5cd92);
-$parcel$export($9d810a88d35126f2$exports, "PUINT_PTR", () => $9d810a88d35126f2$export$f6cfbcf283b0732e);
-$parcel$export($9d810a88d35126f2$exports, "PUINT8", () => $9d810a88d35126f2$export$29db969f4284195f);
-$parcel$export($9d810a88d35126f2$exports, "PUINT16", () => $9d810a88d35126f2$export$1fc9516454e9e0c2);
-$parcel$export($9d810a88d35126f2$exports, "PUINT32", () => $9d810a88d35126f2$export$b91b1f2b5d4b2f56);
-$parcel$export($9d810a88d35126f2$exports, "PUINT64", () => $9d810a88d35126f2$export$a598fa2150118df1);
-$parcel$export($9d810a88d35126f2$exports, "PULONG", () => $9d810a88d35126f2$export$bbdf20879558fef0);
-$parcel$export($9d810a88d35126f2$exports, "PULONGLONG", () => $9d810a88d35126f2$export$b1eafd00c14966b1);
-$parcel$export($9d810a88d35126f2$exports, "PULONG_PTR", () => $9d810a88d35126f2$export$77c87f189e52029c);
-$parcel$export($9d810a88d35126f2$exports, "PULONG32", () => $9d810a88d35126f2$export$c3860bffe982b77);
-$parcel$export($9d810a88d35126f2$exports, "PULONG64", () => $9d810a88d35126f2$export$ed3d7c18eaa4706a);
-$parcel$export($9d810a88d35126f2$exports, "PUSHORT", () => $9d810a88d35126f2$export$c33f795d3055c8e8);
-$parcel$export($9d810a88d35126f2$exports, "PWCHAR", () => $9d810a88d35126f2$export$53e197f0568d60e7);
-$parcel$export($9d810a88d35126f2$exports, "PWORD", () => $9d810a88d35126f2$export$44a81616d2266597);
-$parcel$export($9d810a88d35126f2$exports, "PWSTR", () => $9d810a88d35126f2$export$34fcf56876cedf67);
-$parcel$export($9d810a88d35126f2$exports, "QWORD", () => $9d810a88d35126f2$export$ee325f3aca1cefe);
-$parcel$export($9d810a88d35126f2$exports, "SC_HANDLE", () => $9d810a88d35126f2$export$ef4c74ea1198ce76);
-$parcel$export($9d810a88d35126f2$exports, "SC_LOCK", () => $9d810a88d35126f2$export$dc1bca63e2d62447);
-$parcel$export($9d810a88d35126f2$exports, "SERVICE_STATUS_HANDLE", () => $9d810a88d35126f2$export$1bbbfd60fd9e87f3);
-$parcel$export($9d810a88d35126f2$exports, "SHORT", () => $9d810a88d35126f2$export$1de1ffada6286910);
-$parcel$export($9d810a88d35126f2$exports, "SIZE_T", () => $9d810a88d35126f2$export$f089f2422e95b42b);
-$parcel$export($9d810a88d35126f2$exports, "SSIZE_T", () => $9d810a88d35126f2$export$a185e644c63be28f);
-$parcel$export($9d810a88d35126f2$exports, "TBYTE", () => $9d810a88d35126f2$export$d894ec5fb3ed01a4);
-$parcel$export($9d810a88d35126f2$exports, "TCHAR", () => $9d810a88d35126f2$export$20f081206609d5f7);
-$parcel$export($9d810a88d35126f2$exports, "UCHAR", () => $9d810a88d35126f2$export$226908722445f5d7);
-$parcel$export($9d810a88d35126f2$exports, "UHALF_PTR", () => $9d810a88d35126f2$export$f229c93d3486a070);
-$parcel$export($9d810a88d35126f2$exports, "UINT", () => $9d810a88d35126f2$export$54c0d11872b7e6d4);
-$parcel$export($9d810a88d35126f2$exports, "UINT_PTR", () => $9d810a88d35126f2$export$d642901a6a404ec0);
-$parcel$export($9d810a88d35126f2$exports, "UINT8", () => $9d810a88d35126f2$export$212e71dfd61c79fa);
-$parcel$export($9d810a88d35126f2$exports, "UINT16", () => $9d810a88d35126f2$export$e81cbc576f121d7);
-$parcel$export($9d810a88d35126f2$exports, "UINT32", () => $9d810a88d35126f2$export$55e9b618f09601c9);
-$parcel$export($9d810a88d35126f2$exports, "UINT64", () => $9d810a88d35126f2$export$eb2099ed807a836e);
-$parcel$export($9d810a88d35126f2$exports, "ULONG", () => $9d810a88d35126f2$export$c76dabb36bddc74f);
-$parcel$export($9d810a88d35126f2$exports, "ULONGLONG", () => $9d810a88d35126f2$export$4c4b72fe7d344560);
-$parcel$export($9d810a88d35126f2$exports, "ULONG32", () => $9d810a88d35126f2$export$1f6ffa45e1d0ba10);
-$parcel$export($9d810a88d35126f2$exports, "ULONG64", () => $9d810a88d35126f2$export$35ffdfef7dc81db);
-$parcel$export($9d810a88d35126f2$exports, "UNICODE_STRING", () => $9d810a88d35126f2$export$5dcce0e722389cdb);
-$parcel$export($9d810a88d35126f2$exports, "USHORT", () => $9d810a88d35126f2$export$da53d5ec51ae7634);
-$parcel$export($9d810a88d35126f2$exports, "USN", () => $9d810a88d35126f2$export$79215014ef451883);
-$parcel$export($9d810a88d35126f2$exports, "WINEVENTPROC", () => $9d810a88d35126f2$export$3410187f8fd3ffe0);
-$parcel$export($9d810a88d35126f2$exports, "WNDENUMPROC", () => $9d810a88d35126f2$export$db60719a96ea9349);
-$parcel$export($9d810a88d35126f2$exports, "WNDPROC", () => $9d810a88d35126f2$export$9b17b5eb695fe8eb);
-$parcel$export($9d810a88d35126f2$exports, "WPARAM", () => $9d810a88d35126f2$export$9ea0e07848f6a21c);
-$parcel$export($9d810a88d35126f2$exports, "LPINITCOMMONCONTROLSEX", () => $9d810a88d35126f2$export$1a7b006743d0f934);
-$parcel$export($9d810a88d35126f2$exports, "LPWNDCLASSEX", () => $9d810a88d35126f2$export$1f0a9d32094b3282);
-$parcel$export($9d810a88d35126f2$exports, "PWINDOWINFO", () => $9d810a88d35126f2$export$7eee65a87be8fed2);
-$parcel$export($9d810a88d35126f2$exports, "PFILETIME", () => $9d810a88d35126f2$export$1b5ecb15ced895a7);
-$parcel$export($9d810a88d35126f2$exports, "LPFILETIME", () => $9d810a88d35126f2$export$e929ded8e6b3e173);
-$parcel$export($9d810a88d35126f2$exports, "va_list", () => $9d810a88d35126f2$export$b1fc40da7cd7c95c);
-$parcel$export($9d810a88d35126f2$exports, "INITCOMMONCONTROLSEX", () => $9d810a88d35126f2$export$6eb78d635a3ee587);
-$parcel$export($9d810a88d35126f2$exports, "MSG", () => $9d810a88d35126f2$export$f99154f7a7b0135d);
-$parcel$export($9d810a88d35126f2$exports, "POINT", () => $9d810a88d35126f2$export$a80a24d37f0f1279);
-$parcel$export($9d810a88d35126f2$exports, "WNDCLASSEX", () => $9d810a88d35126f2$export$81ef613fbd3a628d);
-$parcel$export($9d810a88d35126f2$exports, "WINDOWINFO", () => $9d810a88d35126f2$export$5119761222d7d0f6);
-$parcel$export($9d810a88d35126f2$exports, "PRAWINPUTDEVICELIST", () => $9d810a88d35126f2$export$ceb1f86d9f461eb);
-$parcel$export($9d810a88d35126f2$exports, "RECT", () => $9d810a88d35126f2$export$1e530543ba1d4b12);
-
-const $9d810a88d35126f2$export$a78dc2c4cbd70341 = "uint16";
-const $9d810a88d35126f2$export$181c9ad1752440f7 = "uint32";
-const $9d810a88d35126f2$export$9cb553b951e1e0d8 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$1f4a129e1195d18a = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$bd8b6af04676495 = "PVOID";
-const $9d810a88d35126f2$export$f60fc96aa99c605e = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$2e482cd8c991e558 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$1cd1943b3a73bbe8 = "void";
-const $9d810a88d35126f2$export$d71e2b267f5b711b = "uint16";
-const $9d810a88d35126f2$export$f3a79cf462faa1e3 = "int16";
-const $9d810a88d35126f2$export$c35dd5647862f990 = "int";
-const $9d810a88d35126f2$export$428cfe48a69a3b4f = "bool";
-const $9d810a88d35126f2$export$8f4bf8f7eb581284 = "byte";
-const $9d810a88d35126f2$export$578a4c3d73a6d794 = "pointer"; // https://msdn.microsoft.com/en-us/library/windows/desktop/ms633573(v=vs.85).aspx
-const $9d810a88d35126f2$export$934996f637259e88 = "uint8";
-const $9d810a88d35126f2$export$9e88d7b6f62f62d8 = "uint8";
-const $9d810a88d35126f2$export$52da70d84f582c04 = "DWORD";
-const $9d810a88d35126f2$export$6b766bfdcf67e2ec = "uint64";
-const $9d810a88d35126f2$export$8f7b8c11edcb3e34 = "ULONG_PTR";
-const $9d810a88d35126f2$export$a8ea5b58ae88fc11 = "uint32";
-const $9d810a88d35126f2$export$8db31e1b1c7e0db0 = "uint64";
-const $9d810a88d35126f2$export$d2b086fd1e01e03a = "float";
-const $9d810a88d35126f2$export$1505c2c04cc3bbef = "HANDLE";
-const $9d810a88d35126f2$export$2d081f52dd94061a = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$49cd303f01f67350 = "HANDLE";
-const $9d810a88d35126f2$export$d17b38c787d37ab8 = "HANDLE";
-const $9d810a88d35126f2$export$56c7641f121a2c5c = "HANDLE";
-const $9d810a88d35126f2$export$762b8b6ee0ff4c44 = "HANDLE";
-const $9d810a88d35126f2$export$750eee7b2f0ee030 = "HANDLE";
-const $9d810a88d35126f2$export$a02796fdca6d354a = "HANDLE";
-const $9d810a88d35126f2$export$1a62f6d54b236e36 = "HANDLE";
-const $9d810a88d35126f2$export$4ddde23cd7155d44 = "HANDLE";
-const $9d810a88d35126f2$export$1d0ad5eb60ffc518 = "HANDLE";
-const $9d810a88d35126f2$export$726c5c347609dae3 = "HANDLE";
-const $9d810a88d35126f2$export$323f06abdd2a59da = "HANDLE";
-const $9d810a88d35126f2$export$a43730eb8bf8b76e = "HANDLE";
-const $9d810a88d35126f2$export$91f6f659ef3d1edd = "HANDLE"; // typedef int HFILE;
-const $9d810a88d35126f2$export$229672d8f6dd9e1a = "HANDLE";
-const $9d810a88d35126f2$export$ef0ae13fba225584 = "HANDLE";
-const $9d810a88d35126f2$export$6b52c27577dfb85e = "HANDLE";
-const $9d810a88d35126f2$export$a681c4a7983815bf = "HANDLE";
-const $9d810a88d35126f2$export$105fd39584a4c170 = "HANDLE";
-const $9d810a88d35126f2$export$1a50b4f53ac33a = "HANDLE";
-const $9d810a88d35126f2$export$80d8783aa08e677d = "HANDLE";
-const $9d810a88d35126f2$export$9252a4926414af53 = "HANDLE";
-const $9d810a88d35126f2$export$941fbb37db50e0ee = "HANDLE";
-const $9d810a88d35126f2$export$5570ee796bf8668a = "HANDLE";
-const $9d810a88d35126f2$export$32e1d6dd1d786a08 = "HANDLE";
-const $9d810a88d35126f2$export$82cb6941373786ac = $9d810a88d35126f2$export$1a50b4f53ac33a;
-const $9d810a88d35126f2$export$d76bcd896c4c1f0b = "HANDLE";
-const $9d810a88d35126f2$export$c984542fbcd9e311 = "HANDLE";
-const $9d810a88d35126f2$export$e8c398641ae921a0 = "HANDLE";
-const $9d810a88d35126f2$export$2109f3ca8e001dc3 = "long";
-const $9d810a88d35126f2$export$64129906a6b15c89 = "HANDLE";
-const $9d810a88d35126f2$export$d0b96b23ab9f5338 = "HANDLE";
-const $9d810a88d35126f2$export$c50eccdd15c9fd55 = "HANDLE";
-const $9d810a88d35126f2$export$60bcb2927641b3f4 = "HANDLE";
-const $9d810a88d35126f2$export$893fa35bdef36b = "HANDLE";
-const $9d810a88d35126f2$export$6525812590d9a476 = "HANDLE";
-const $9d810a88d35126f2$export$160e8bdd97bfce3a = "int";
-const $9d810a88d35126f2$export$f051d14373139dee = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$9922471c07c2891d = "int8";
-const $9d810a88d35126f2$export$bd9b91838fde002e = "int16";
-const $9d810a88d35126f2$export$34412edc7b36f85 = "int32";
-const $9d810a88d35126f2$export$a2c63c68aeee9e2d = "int64";
-const $9d810a88d35126f2$export$6190ebba87077b9d = "WORD";
-const $9d810a88d35126f2$export$b36cf4a83245c2f9 = "DWORD";
-const $9d810a88d35126f2$export$244c0463aedba74c = "DWORD";
-const $9d810a88d35126f2$export$202821be4d3b65c7 = "DWORD";
-const $9d810a88d35126f2$export$686cfa64f218be7a = "long";
-const $9d810a88d35126f2$export$2d2033f38dde21c = "longlong";
-const $9d810a88d35126f2$export$4c9cb8eafd43015e = "int32";
-const $9d810a88d35126f2$export$552dea698acd6cd2 = "int64";
-const $9d810a88d35126f2$export$13371aace3d44948 = "LONG_PTR";
-const $9d810a88d35126f2$export$5df7e4acce683059 = "BOOL";
-const $9d810a88d35126f2$export$1061811df8b0c9be = "byte*";
-const $9d810a88d35126f2$export$f1d7ba3e4d51498c = "DWORD";
-const $9d810a88d35126f2$export$18e7280707df82f3 = "uint8*";
-const $9d810a88d35126f2$export$dfa283df2530598f = "uint16*";
-const $9d810a88d35126f2$export$3e6b4f6079ce51b = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$3de86eb3806b712d = "void*";
-const $9d810a88d35126f2$export$acb32c160acad508 = "LPVOID";
-const $9d810a88d35126f2$export$33eafb5d436e1362 = "uint16*";
-const $9d810a88d35126f2$export$e8ea75f05566dd3c = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55); // A pointer to a HANDLE.
-const $9d810a88d35126f2$export$b4d77e4f53c21e3a = "int*";
-const $9d810a88d35126f2$export$ca6bd9f017df4953 = "int32*";
-const $9d810a88d35126f2$export$aba1f5f1221c9fb3 = "pointer"; // A pointer to a MSG
-const $9d810a88d35126f2$export$3a00c33c250e7d86 = "pointer";
-const $9d810a88d35126f2$export$e5fae31862228632 = "char*";
-const $9d810a88d35126f2$export$dec24c174f0eaee1 = "uint16*";
-const $9d810a88d35126f2$export$477e24a98da955e6 = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$a362e06a8759641a = "uint16*";
-const $9d810a88d35126f2$export$307c691072d7eef0 = "LONG_PTR";
-const $9d810a88d35126f2$export$a50474266f14be1b = "uint32";
-const $9d810a88d35126f2$export$a1d44ba3d847cfd0 = "int*"; // ? 'bool*'
-const $9d810a88d35126f2$export$4f984d513e291397 = "bool*";
-const $9d810a88d35126f2$export$306fa084066e20a7 = "byte*";
-const $9d810a88d35126f2$export$72c3772b516a65cf = "char*";
-const $9d810a88d35126f2$export$cf99bbd665f301f9 = "uint8*";
-const $9d810a88d35126f2$export$d63ff7816142b2f4 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$8aeea065f4882b0c = "uint16*";
-const $9d810a88d35126f2$export$c06eff3fc862da47 = "uint32*";
-const $9d810a88d35126f2$export$e09b44cec70f0704 = "uint64*";
-const $9d810a88d35126f2$export$a2bbf1fe69b0026d = "DWORD_PTR";
-const $9d810a88d35126f2$export$60e2c917bf0cf558 = "uint32*";
-const $9d810a88d35126f2$export$d8d54319b3c23a57 = "uint64*";
-const $9d810a88d35126f2$export$22fafc5c9d071cf4 = "float*";
-const $9d810a88d35126f2$export$729dee532709226e = "pointer"; // ? A pointer to a HALF_PTR.
-const $9d810a88d35126f2$export$30d4c74fa93d3438 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$64ced35c53da7357 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$905308e3ac5456b0 = "int*";
-const $9d810a88d35126f2$export$7fbf02121a44af3 = "int**";
-const $9d810a88d35126f2$export$16ddf13bb85917f4 = "int8*";
-const $9d810a88d35126f2$export$2863cf8b15c466bd = "int16*";
-const $9d810a88d35126f2$export$3888f865e2f3fc9e = "int32*";
-const $9d810a88d35126f2$export$d81a713d6f75c904 = "int64*";
-const $9d810a88d35126f2$export$d0f483e3dea49716 = "uint32*";
-const $9d810a88d35126f2$export$884b50f6e7d23183 = "long*";
-const $9d810a88d35126f2$export$f4311b64ba2f3fe7 = "int64*";
-const $9d810a88d35126f2$export$6cfa0302bb348fb4 = "pointer";
-const $9d810a88d35126f2$export$b415878f19491157 = "int32*";
-const $9d810a88d35126f2$export$9b97fd1af0726c08 = "int64*";
-const $9d810a88d35126f2$export$f27a748240b723f3 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$5d25222f3b2425ae = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$729c2fdddcf979dc = "pointer"; // ? A signed pointer.
-const $9d810a88d35126f2$export$d595eac61e43ee1f = "pointer"; // An unsigned pointer.
-const $9d810a88d35126f2$export$8c90681ffa492177 = "int16*";
-const $9d810a88d35126f2$export$42c4483327accaad = "ULONG_PTR"; // ?
-const $9d810a88d35126f2$export$159e35dadcec50ed = "pointer";
-const $9d810a88d35126f2$export$fd996999f34a55b1 = "char*";
-const $9d810a88d35126f2$export$99f79cd79a3279be = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$a80266c3bbf78408 = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$90396e0dac1d7bf4 = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$dac29ac7c1a6a593 = "pointer";
-const $9d810a88d35126f2$export$3b9eae56db5c9a5c = "pointer";
-const $9d810a88d35126f2$export$335fb31719a5cd92 = "uint*";
-const $9d810a88d35126f2$export$f6cfbcf283b0732e = "uint**";
-const $9d810a88d35126f2$export$29db969f4284195f = "uint8*";
-const $9d810a88d35126f2$export$1fc9516454e9e0c2 = "uint16*";
-const $9d810a88d35126f2$export$b91b1f2b5d4b2f56 = "uint32*";
-const $9d810a88d35126f2$export$a598fa2150118df1 = "uint64*";
-const $9d810a88d35126f2$export$bbdf20879558fef0 = "uint*";
-const $9d810a88d35126f2$export$b1eafd00c14966b1 = "uint64*";
-const $9d810a88d35126f2$export$77c87f189e52029c = "uint64**";
-const $9d810a88d35126f2$export$c3860bffe982b77 = "uint*";
-const $9d810a88d35126f2$export$ed3d7c18eaa4706a = "uint64*";
-const $9d810a88d35126f2$export$c33f795d3055c8e8 = "uint16*";
-const $9d810a88d35126f2$export$53e197f0568d60e7 = "uint16*";
-const $9d810a88d35126f2$export$44a81616d2266597 = "uint16*";
-const $9d810a88d35126f2$export$34fcf56876cedf67 = "uint16*";
-const $9d810a88d35126f2$export$ee325f3aca1cefe = "uint64";
-const $9d810a88d35126f2$export$ef4c74ea1198ce76 = "HANDLE";
-const $9d810a88d35126f2$export$dc1bca63e2d62447 = "LPVOID";
-const $9d810a88d35126f2$export$1bbbfd60fd9e87f3 = "HANDLE";
-const $9d810a88d35126f2$export$1de1ffada6286910 = "int16";
-const $9d810a88d35126f2$export$f089f2422e95b42b = "ULONG_PTR";
-const $9d810a88d35126f2$export$a185e644c63be28f = "LONG_PTR";
-const $9d810a88d35126f2$export$d894ec5fb3ed01a4 = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$20f081206609d5f7 = (0, $9b6d127d161d1782$export$609085a058d4a4d0);
-const $9d810a88d35126f2$export$226908722445f5d7 = "uchar";
-const $9d810a88d35126f2$export$f229c93d3486a070 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$54c0d11872b7e6d4 = "uint";
-const $9d810a88d35126f2$export$d642901a6a404ec0 = (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55);
-const $9d810a88d35126f2$export$212e71dfd61c79fa = "uint8";
-const $9d810a88d35126f2$export$e81cbc576f121d7 = "uint16";
-const $9d810a88d35126f2$export$55e9b618f09601c9 = "uint32";
-const $9d810a88d35126f2$export$eb2099ed807a836e = "uint64";
-const $9d810a88d35126f2$export$c76dabb36bddc74f = "uint";
-const $9d810a88d35126f2$export$4c4b72fe7d344560 = "uint64";
-const $9d810a88d35126f2$export$1f6ffa45e1d0ba10 = "uint32";
-const $9d810a88d35126f2$export$35ffdfef7dc81db = "uint64";
-const $9d810a88d35126f2$export$5dcce0e722389cdb = "pointer";
-const $9d810a88d35126f2$export$da53d5ec51ae7634 = "ushort";
-const $9d810a88d35126f2$export$79215014ef451883 = $9d810a88d35126f2$export$2d2033f38dde21c;
-const $9d810a88d35126f2$export$3410187f8fd3ffe0 = "pointer";
-const $9d810a88d35126f2$export$db60719a96ea9349 = "pointer";
-const $9d810a88d35126f2$export$9b17b5eb695fe8eb = "pointer";
-const $9d810a88d35126f2$export$9ea0e07848f6a21c = "UINT_PTR";
-const $9d810a88d35126f2$export$1a7b006743d0f934 = "pointer";
-const $9d810a88d35126f2$export$1f0a9d32094b3282 = "pointer"; // A pointer to a WNDCLASSEX
-const $9d810a88d35126f2$export$7eee65a87be8fed2 = "pointer"; // A pointer to a WINDOWINFO structure
-const $9d810a88d35126f2$export$1b5ecb15ced895a7 = "pointer"; // A pointer to a FILETIME
-const $9d810a88d35126f2$export$e929ded8e6b3e173 = "pointer"; // A pointer to a FILETIME
-const $9d810a88d35126f2$export$b1fc40da7cd7c95c = "char*";
-const $9d810a88d35126f2$export$6eb78d635a3ee587 = "pointer";
-const $9d810a88d35126f2$export$f99154f7a7b0135d = "pointer";
-const $9d810a88d35126f2$export$a80a24d37f0f1279 = "pointer";
-const $9d810a88d35126f2$export$81ef613fbd3a628d = "pointer";
-const $9d810a88d35126f2$export$5119761222d7d0f6 = "pointer";
-const $9d810a88d35126f2$export$ceb1f86d9f461eb = "pointer";
-const $9d810a88d35126f2$export$1e530543ba1d4b12 = "pointer"; // _RECT
-
-
-const $10dc7994b7b51438$export$65dedbc9f072ffcc = new Map([
-    [
-        "HANDLE",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64",
-            "uint32"
-        ]
-    ],
-    [
-        "PVOID",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64*",
-            "uint32*"
-        ]
-    ],
-    [
-        "HALF_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "int32",
-            "int16"
-        ]
-    ],
-    [
-        "INT_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "int64",
-            "int32"
-        ]
-    ],
-    [
-        "LONG_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "int64",
-            "int32"
-        ]
-    ],
-    [
-        "LPCTSTR",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            (0, $9d810a88d35126f2$export$dfa283df2530598f),
-            (0, $9d810a88d35126f2$export$18e7280707df82f3)
-        ]
-    ],
-    [
-        "LPHANDLE",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64*",
-            "uint32*"
-        ]
-    ],
-    [
-        "LPTSTR",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            (0, $9d810a88d35126f2$export$dec24c174f0eaee1),
-            "uint8*"
-        ]
-    ],
-    [
-        "PCTSTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            (0, $9d810a88d35126f2$export$dfa283df2530598f),
-            (0, $9d810a88d35126f2$export$18e7280707df82f3)
-        ]
-    ],
-    [
-        "PHANDLE",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64**",
-            "uint32**"
-        ]
-    ],
-    [
-        "PHKEY",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64*",
-            "uint32*"
-        ]
-    ],
-    [
-        "POINTER_32",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint32*",
-            "uint32*"
-        ]
-    ],
-    [
-        "POINTER_64",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64*",
-            "uint32*"
-        ]
-    ],
-    [
-        "PTBYTE",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            "int16*",
-            "int8*"
-        ]
-    ],
-    [
-        "PTCHAR",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            "uint16*",
-            "uint8*"
-        ]
-    ],
-    [
-        "PTSTR",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            (0, $9d810a88d35126f2$export$dec24c174f0eaee1),
-            (0, $9d810a88d35126f2$export$e5fae31862228632)
-        ]
-    ],
-    [
-        "TBYTE",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            "int16",
-            "int8"
-        ]
-    ],
-    [
-        "TCHAR",
-        [
-            (0, $9b6d127d161d1782$export$609085a058d4a4d0),
-            (0, $9d810a88d35126f2$export$d71e2b267f5b711b),
-            "uint8"
-        ]
-    ],
-    [
-        "UHALF_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint32",
-            "uint16"
-        ]
-    ],
-    [
-        "UINT_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64",
-            "uint32"
-        ]
-    ],
-    [
-        "ULONG_PTR",
-        [
-            (0, $9b6d127d161d1782$export$4bbcbb9e6d314d55),
-            "uint64",
-            "uint32"
-        ]
-    ], 
-]);
-
-
-
-const $c3a656112b314b00$var$W = (0, $33cc204cd270787c$export$828a2cfb74eb348c)($9d810a88d35126f2$exports, (0, $10dc7994b7b51438$export$65dedbc9f072ffcc));
-const $c3a656112b314b00$export$ad48b1b2cfc75809 = {
-    cbSize: $c3a656112b314b00$var$W.DWORD,
-    cItems: $c3a656112b314b00$var$W.INT,
-    cColumns: $c3a656112b314b00$var$W.INT,
-    cRows: $c3a656112b314b00$var$W.INT,
-    iColFocus: $c3a656112b314b00$var$W.INT,
-    iRowFocus: $c3a656112b314b00$var$W.INT,
-    cxItem: $c3a656112b314b00$var$W.INT,
-    cyItem: $c3a656112b314b00$var$W.INT,
-    ptStart: $c3a656112b314b00$var$W.POINT
-};
-const $c3a656112b314b00$export$235a24185e6c03f3 = {
-    dwData: $c3a656112b314b00$var$W.ULONG_PTR,
-    cbData: $c3a656112b314b00$var$W.DWORD,
-    lpData: $c3a656112b314b00$var$W.PVOID
-};
-const $c3a656112b314b00$export$c747a8b76ce2fc55 = {
-    uMsg: $c3a656112b314b00$var$W.DWORD,
-    wParamL: $c3a656112b314b00$var$W.WORD,
-    wParamH: $c3a656112b314b00$var$W.WORD
-};
-const $c3a656112b314b00$export$6eb78d635a3ee587 = {
-    dwSize: $c3a656112b314b00$var$W.DWORD,
-    dwICC: $c3a656112b314b00$var$W.DWORD
-};
-const $c3a656112b314b00$export$9d77698e6144d105 = {
-    wVk: $c3a656112b314b00$var$W.WORD,
-    wScan: $c3a656112b314b00$var$W.WORD,
-    dwFlags: $c3a656112b314b00$var$W.DWORD,
-    time: $c3a656112b314b00$var$W.DWORD,
-    dwExtraInfo: $c3a656112b314b00$var$W.ULONG_PTR
-};
-const $c3a656112b314b00$export$b25d5f19497424fa = {
-    dx: $c3a656112b314b00$var$W.LONG,
-    dy: $c3a656112b314b00$var$W.LONG,
-    mouseData: $c3a656112b314b00$var$W.DWORD,
-    dwFlags: $c3a656112b314b00$var$W.DWORD,
-    time: $c3a656112b314b00$var$W.DWORD,
-    dwExtraInfo: $c3a656112b314b00$var$W.ULONG_PTR
-};
-const $c3a656112b314b00$export$f99154f7a7b0135d = {
-    hwnd: $c3a656112b314b00$var$W.HWND,
-    message: $c3a656112b314b00$var$W.UINT,
-    wParam: $c3a656112b314b00$var$W.WPARAM,
-    lParam: $c3a656112b314b00$var$W.LPARAM,
-    time: $c3a656112b314b00$var$W.DWORD,
-    pt: $c3a656112b314b00$var$W.POINT,
-    lPrivate: $c3a656112b314b00$var$W.DWORD
-};
-const $c3a656112b314b00$export$a80a24d37f0f1279 = {
-    x: $c3a656112b314b00$var$W.LONG,
-    y: $c3a656112b314b00$var$W.LONG
-};
-const $c3a656112b314b00$export$ca65a5b05e68b7ff = {
-    Reserved1: $c3a656112b314b00$var$W.PVOID,
-    PebBaseAddress: $c3a656112b314b00$var$W.PVOID,
-    Reserved2: $c3a656112b314b00$var$W.PVOID,
-    UniqueProcessId: $c3a656112b314b00$var$W.ULONG_PTR,
-    InheritedFromUniqueProcessId: $c3a656112b314b00$var$W.PVOID
-};
-const $c3a656112b314b00$export$5dcce0e722389cdb = {
-    Length: $c3a656112b314b00$var$W.USHORT,
-    MaximumLength: $c3a656112b314b00$var$W.USHORT,
-    Buffer: $c3a656112b314b00$var$W.PWSTR
-};
-const $c3a656112b314b00$export$109b0986e0806ee = {
-    dwSizeHid: $c3a656112b314b00$var$W.DWORD,
-    dwCount: $c3a656112b314b00$var$W.DWORD,
-    /** bRawData[1] */ bRawData: $c3a656112b314b00$var$W.BYTE
-};
-const $c3a656112b314b00$export$cf7f2abb0ac9e892 = {
-    hDevice: $c3a656112b314b00$var$W.HANDLE,
-    dwType: $c3a656112b314b00$var$W.DWORD
-};
-const $c3a656112b314b00$export$614c933f340ce1c1 = {
-    dwType: $c3a656112b314b00$var$W.DWORD,
-    dwSize: $c3a656112b314b00$var$W.DWORD,
-    hDevice: $c3a656112b314b00$var$W.HANDLE,
-    wParam: $c3a656112b314b00$var$W.WPARAM
-};
-const $c3a656112b314b00$export$7f9753d8aef93f40 = {
-    MakeCode: $c3a656112b314b00$var$W.USHORT,
-    Flags: $c3a656112b314b00$var$W.USHORT,
-    Reserved: $c3a656112b314b00$var$W.USHORT,
-    VKey: $c3a656112b314b00$var$W.USHORT,
-    Message: $c3a656112b314b00$var$W.UINT,
-    ExtraInformation: $c3a656112b314b00$var$W.ULONG
-};
-const $c3a656112b314b00$export$5119761222d7d0f6 = {
-    cbSize: $c3a656112b314b00$var$W.DWORD,
-    rcWindow: $c3a656112b314b00$var$W.RECT,
-    rcClient: $c3a656112b314b00$var$W.RECT,
-    dwStyle: $c3a656112b314b00$var$W.DWORD,
-    dwExStyle: $c3a656112b314b00$var$W.DWORD,
-    dwWindowStatus: $c3a656112b314b00$var$W.DWORD,
-    cxWindowBorders: $c3a656112b314b00$var$W.UINT,
-    cyWindowBorders: $c3a656112b314b00$var$W.UINT,
-    atomWindowType: $c3a656112b314b00$var$W.ATOM,
-    wCreatorVersion: $c3a656112b314b00$var$W.WORD
-};
-const $c3a656112b314b00$export$81ef613fbd3a628d = {
-    cbSize: $c3a656112b314b00$var$W.UINT,
-    style: $c3a656112b314b00$var$W.UINT,
-    // 'lpfnWndProc': ffi.Function('int32', ['pointer', 'uint32', 'int32', 'uint32']) ,
-    lpfnWndProc: $c3a656112b314b00$var$W.WNDPROC,
-    cbClsExtra: $c3a656112b314b00$var$W.INT,
-    cbWndExtra: $c3a656112b314b00$var$W.INT,
-    hInstance: $c3a656112b314b00$var$W.HINSTANCE,
-    hIcon: $c3a656112b314b00$var$W.HICON,
-    hCursor: $c3a656112b314b00$var$W.HCURSOR,
-    hbrBackground: $c3a656112b314b00$var$W.HBRUSH,
-    lpszMenuName: $c3a656112b314b00$var$W.LPCTSTR,
-    lpszClassName: $c3a656112b314b00$var$W.LPCTSTR,
-    hIconSm: $c3a656112b314b00$var$W.HICON
-};
-const $c3a656112b314b00$export$1e530543ba1d4b12 = {
-    left: $c3a656112b314b00$var$W.LONG,
-    top: $c3a656112b314b00$var$W.LONG,
-    right: $c3a656112b314b00$var$W.LONG,
-    bottom: $c3a656112b314b00$var$W.LONG
-};
-const $c3a656112b314b00$export$258339e884eb70b7 = {
-    dwLowDateTime: $c3a656112b314b00$var$W.DWORD,
-    dwHighDateTime: $c3a656112b314b00$var$W.DWORD
-};
-
-
-var $88630f652444f11c$exports = {};
-
-$parcel$export($88630f652444f11c$exports, "RID_DEVICE_INFO_DUMMYUNIONNAME", () => $88630f652444f11c$export$ff2835eca4f38b4e);
-
-
-
-const $88630f652444f11c$var$W = (0, $33cc204cd270787c$export$828a2cfb74eb348c)($9d810a88d35126f2$exports, (0, $10dc7994b7b51438$export$65dedbc9f072ffcc));
-const $88630f652444f11c$export$ff2835eca4f38b4e = {
-    mouse: $88630f652444f11c$var$W.INT,
-    keyboard: $88630f652444f11c$var$W.INT,
-    hid: $88630f652444f11c$var$W.INT
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const $c6df17042468a6b3$export$be44eba04df286d7 = (0, $33cc204cd270787c$export$828a2cfb74eb348c)($9d810a88d35126f2$exports, (0, $10dc7994b7b51438$export$65dedbc9f072ffcc));
-
-
-
-var $lbL5x = parcelRequire("lbL5x");
-
-var $d8233742a254dab3$require$Buffer = $j2o4Y$buffer.Buffer;
-function $d8233742a254dab3$export$d4e6b3016315c3ba(length, encoding) {
-    const inst = Object.create($lbL5x.types.byte, {
-        constructor: {
-            configurable: true,
-            enumerable: false,
-            writable: true,
-            value: $d8233742a254dab3$export$d4e6b3016315c3ba
-        }
-    });
-    Object.defineProperty(inst, "size", {
-        configurable: true,
-        enumerable: true,
-        writable: false,
-        value: length
-    });
-    Object.defineProperty(inst, "encoding", {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: encoding
-    });
-    Object.defineProperty(inst, "get", {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: $d8233742a254dab3$var$getFn
-    });
-    Object.defineProperty(inst, "set", {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: $d8233742a254dab3$var$setFn
-    });
-    return inst;
-}
-function $d8233742a254dab3$var$getFn(buffer, offset) {
-    const buf = buffer.slice(offset, offset + this.size);
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (this.encoding) {
-        const str = buf.toString(this.encoding);
-        return str;
-    }
-    return buf;
-}
-function $d8233742a254dab3$var$setFn(buffer, offset, value) {
-    let target;
-    if (typeof value === "string") target = $d8233742a254dab3$require$Buffer.from(value, this.encoding);
-    else if (Array.isArray(value)) target = $d8233742a254dab3$require$Buffer.from(value);
-    else if ($d8233742a254dab3$require$Buffer.isBuffer(value)) target = value;
-    else throw new TypeError("Buffer instance expected");
-    if (target.length > this.size) throw new Error(`Buffer given is ${target.length} bytes, but only ${this.size} bytes available`);
-    target.copy(buffer, offset);
-}
-
-
-const $0b1ab78a7dc650e1$export$3fcec5a49954e26a = {
-    cb: (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-    DeviceName: (0, $d8233742a254dab3$export$d4e6b3016315c3ba)(32, "ucs2"),
-    DeviceString: (0, $d8233742a254dab3$export$d4e6b3016315c3ba)(128, "ucs2"),
-    StateFlags: (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-    DeviceID: (0, $d8233742a254dab3$export$d4e6b3016315c3ba)(128, "ucs2"),
-    DeviceKey: (0, $d8233742a254dab3$export$d4e6b3016315c3ba)(128, "ucs2")
-};
-
-
-
-
-var $lbL5x = parcelRequire("lbL5x");
-var $ccc1af6d633c75dc$exports = {};
-
-var $ccc1af6d633c75dc$require$Buffer = $j2o4Y$buffer.Buffer;
-"use strict";
-
-
-var $ccc1af6d633c75dc$var$debug = (parcelRequire("3SSQh"))("ref-union");
+})();
 /**
- * Module exports.
- */ $ccc1af6d633c75dc$exports = function(ref) {
-    /**
- * The "Union" type constructor.
- */ function Union() {
-        $ccc1af6d633c75dc$var$debug('defining new union "type"');
-        function UnionType(arg, data) {
-            if (!(this instanceof UnionType)) return new UnionType(arg, data);
-            $ccc1af6d633c75dc$var$debug("creating new union instance");
-            var store;
-            if ($ccc1af6d633c75dc$require$Buffer.isBuffer(arg)) {
-                $ccc1af6d633c75dc$var$debug("using passed-in Buffer instance to back the union", arg);
-                $j2o4Y$assert(arg.length >= UnionType.size, "Buffer instance must be at least " + UnionType.size + " bytes to back this untion type");
-                store = arg;
-                arg = data;
-            } else {
-                $ccc1af6d633c75dc$var$debug("creating new Buffer instance to back the union (size: %d)", UnionType.size);
-                store = new $ccc1af6d633c75dc$require$Buffer(UnionType.size);
-            }
-            // set the backing Buffer store
-            store.type = UnionType;
-            this["ref.buffer"] = store;
-            // initialise the union with values supplied
-            if (arg) //TODO: Sanity check - e.g. (Object.keys(arg).length == 1)
-            for(var key in arg)// hopefully hit the union setters
-            this[key] = arg[key];
-            UnionType._instanceCreated = true;
-        }
-        // make instances inherit from `proto`
-        UnionType.prototype = Object.create(proto, {
-            constructor: {
-                value: UnionType,
-                enumerable: false,
-                writable: true,
-                configurable: true
-            }
-        });
-        UnionType.defineProperty = defineProperty;
-        UnionType.toString = toString;
-        UnionType.fields = {};
-        // comply with ref's "type" interface
-        UnionType.size = 0;
-        UnionType.alignment = 0;
-        UnionType.indirection = 1;
-        UnionType.get = get1;
-        UnionType.set = set1;
-        // Read the fields list
-        var arg1 = arguments[0];
-        if (typeof arg1 === "object") Object.keys(arg1).forEach(function(name) {
-            var type = arg1[name];
-            UnionType.defineProperty(name, type);
-        });
-        return UnionType;
-    }
-    function get1(buffer, offset) {
-        $ccc1af6d633c75dc$var$debug('Union "type" getter for buffer at offset', buffer, offset);
-        if (offset > 0) buffer = buffer.slice(offset);
-        return new this(buffer);
-    }
-    function set1(buffer, offset, value) {
-        $ccc1af6d633c75dc$var$debug('Union "type" setter for buffer at offset', buffer, offset, value);
-        if (offset > 0) buffer = buffer.slice(offset);
-        var union = new this(buffer);
-        var isUnion = value instanceof this;
-        if (isUnion) // TODO: optimize - use Buffer#copy()
-        Object.keys(this.fields).forEach(function(name) {
-            // hopefully hit the setters
-            union[name] = value[name];
-        });
-        else for(var name1 in value)// hopefully hit the setters
-        union[name1] = value[name1];
-    }
-    function toString() {
-        return "[UnionType]";
-    }
-    /**
- * Adds a new field to the union instance with the given name and type.
- * Note that this function will throw an Error if any instances of the union
- * type have already been created, therefore this function must be called at the
- * beginning, before any instances are created.
- */ function defineProperty(name, type) {
-        $ccc1af6d633c75dc$var$debug("defining new union type field", name);
-        // allow string types for convenience
-        type = ref.coerceType(type);
-        $j2o4Y$assert(!this._instanceCreated, "an instance of this Union type has already been created, cannot add new data members anymore");
-        $j2o4Y$assert.equal("string", typeof name, 'expected a "string" field name');
-        $j2o4Y$assert(type && /object|function/i.test(typeof type) && "size" in type && "indirection" in type, 'expected a "type" object describing the field type: "' + type + '"');
-        $j2o4Y$assert(!(name in this.prototype), 'the field "' + name + '" already exists in this Union type');
-        // define the getter/setter property
-        Object.defineProperty(this.prototype, name, {
-            enumerable: true,
-            configurable: true,
-            get: get,
-            set: set
-        });
-        var field = {
-            type: type
-        };
-        this.fields[name] = field;
-        // calculate the new size and alignment
-        recalc(this);
-        function get() {
-            $ccc1af6d633c75dc$var$debug('getting "%s" union field (length: %d)', name, type.size);
-            return ref.get(this["ref.buffer"], 0, type);
-        }
-        function set(value) {
-            $ccc1af6d633c75dc$var$debug('setting "%s" union field (length: %d)', name, type.size, value);
-            return ref.set(this["ref.buffer"], 0, value, type);
-        }
-    }
-    function recalc(union) {
-        // reset size and alignment
-        union.size = 0;
-        union.alignment = 0;
-        var fieldNames = Object.keys(union.fields);
-        // loop through to set the size of the union of the largest member field
-        // and the alignment to the requirements of the largest member
-        fieldNames.forEach(function(name) {
-            var field = union.fields[name];
-            var type = field.type;
-            var size = type.indirection === 1 ? type.size : ref.sizeof.pointer;
-            var alignment = type.alignment || ref.alignof.pointer;
-            if (type.indirection > 1) alignment = ref.alignof.pointer;
-            union.alignment = Math.max(union.alignment, alignment);
-            union.size = Math.max(union.size, size);
-        });
-        // any padding
-        var left = union.size % union.alignment;
-        if (left > 0) {
-            $ccc1af6d633c75dc$var$debug("additional padding to the end of union:", union.alignment - left);
-            union.size += union.alignment - left;
-        }
-    }
-    /**
- * the base prototype that union type instances will inherit from.
- */ var proto = {};
-    proto["ref.buffer"] = ref.NULL;
-    /**
- * returns a Buffer pointing to this union data structure.
- */ proto.ref = function ref() {
-        return this["ref.buffer"];
-    };
-    return Union;
-};
-
-
-const $4f428e719f44ccb6$var$UnionDi = $ccc1af6d633c75dc$exports;
-const $4f428e719f44ccb6$export$6cbb4f8fa0c4c986 = $4f428e719f44ccb6$var$UnionDi($lbL5x);
-
-
-const $c7b02c2eb2870da2$export$6e367b0161ea043f = {
-    cbSize: (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-    dwType: (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-    DUMMYUNIONNAME: (0, $4f428e719f44ccb6$export$6cbb4f8fa0c4c986)((0, $88630f652444f11c$exports).RID_DEVICE_INFO_DUMMYUNIONNAME)
-};
-
-
-
-
-
-
-const $3d5d326f1a21cd82$var$dllInst = new Map(); // for DLL.load() with settings.singleton === true
-function $3d5d326f1a21cd82$export$11e63f7b0f3d9900(dllName, dllFuncs, fns, settings) {
-    const st = $3d5d326f1a21cd82$var$parse_settings(settings);
-    if (st.singleton) {
-        let inst = $3d5d326f1a21cd82$var$get_inst_by_name(dllName);
-        if (!inst) {
-            inst = $j2o4Y$ffinapi.Library(dllName, $3d5d326f1a21cd82$export$def475715f38575d(dllFuncs, fns));
-            $3d5d326f1a21cd82$var$set_inst_by_name(dllName, inst);
-        }
-        return inst;
-    } else // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return $j2o4Y$ffinapi.Library(dllName, $3d5d326f1a21cd82$export$def475715f38575d(dllFuncs, fns));
-}
-function $3d5d326f1a21cd82$export$def475715f38575d(dllFuncs, fns) {
-    const ret = {};
-    if (fns && Array.isArray(fns) && fns.length) for (const fn of fns){
-        const ps = dllFuncs[fn];
-        if (typeof ps !== "undefined") Object.defineProperty(ret, fn, {
-            value: ps,
-            writable: false,
-            enumerable: true,
-            configurable: false
-        });
-    }
-    else for (const fn1 of Object.keys(dllFuncs)){
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const ps = dllFuncs[fn1];
-        if (typeof ps !== "undefined") Object.defineProperty(ret, fn1, {
-            value: ps,
-            writable: false,
-            enumerable: true,
-            configurable: false
-        });
-    }
-    return ret;
-}
-function $3d5d326f1a21cd82$var$get_inst_by_name(dllName) {
-    return $3d5d326f1a21cd82$var$dllInst.get(dllName);
-}
-function $3d5d326f1a21cd82$var$set_inst_by_name(dllName, inst) {
-    $3d5d326f1a21cd82$var$dllInst.set(dllName, inst);
-}
-function $3d5d326f1a21cd82$var$parse_settings(settings) {
-    const st = {
-        ...(0, $9b6d127d161d1782$exports).settingsDefault
-    };
-    if (typeof settings !== "undefined" && Object.keys(settings).length) Object.assign(st, settings);
-    return st;
-}
-
-
-
-const $853ac7b830c8d8ff$export$b139dcabebd3c0ad = {
-    InitCommonControlsEx: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPINITCOMMONCONTROLSEX
-        ]
-    ]
-};
-
-
-const $667d308ded0ef214$export$901a8201111c7957 = "comctl32" /* comctl32 */ ;
-const $667d308ded0ef214$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $3d5d326f1a21cd82$export$11e63f7b0f3d9900)($667d308ded0ef214$export$901a8201111c7957, (0, $853ac7b830c8d8ff$export$b139dcabebd3c0ad), fns, settings);
-
-
-
-
-const $864ef34d64c4aa4b$export$b139dcabebd3c0ad = {
-    FormatMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCVOID,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).va_list
-        ], 
-    ],
-    FreeConsole: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        []
-    ],
-    GenerateConsoleCtrlEvent: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD
-        ]
-    ],
-    /** err code: https://msdn.microsoft.com/zh-cn/library/windows/desktop/ms681381(v=vs.85).aspx */ GetLastError: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-        []
-    ],
-    /** retrive value from buf by ret.ref().readUInt32() */ GetModuleHandleW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HMODULE,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR
-        ]
-    ],
-    /** flags, optional LPCTSTR name, ref hModule */ GetModuleHandleExW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HMODULE
-        ]
-    ],
-    GetProcessHeaps: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PHANDLE
-        ]
-    ],
-    GetSystemTimes: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PFILETIME,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PFILETIME,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PFILETIME
-        ]
-    ],
-    HeapFree: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HANDLE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPVOID
-        ]
-    ],
-    OpenProcess: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HANDLE,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD
-        ]
-    ],
-    OutputDebugStringW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).VOID,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR
-        ]
-    ],
-    SetLastError: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).VOID,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD
-        ]
-    ],
-    SetThreadExecutionState: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-        ]
-    ]
-};
-
-
-const $53e08ca7a1203fbc$export$901a8201111c7957 = "kernel32" /* kernel32 */ ;
-const $53e08ca7a1203fbc$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $3d5d326f1a21cd82$export$11e63f7b0f3d9900)($53e08ca7a1203fbc$export$901a8201111c7957, (0, $864ef34d64c4aa4b$export$b139dcabebd3c0ad), fns, settings);
-
-
-
-
-const $7f376838deadf1f7$export$b139dcabebd3c0ad = {
-    NtQueryInformationProcess: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).NTSTATUS,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HANDLE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD32,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PVOID,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).ULONG,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PULONG
-        ]
-    ]
-};
-
-
-const $8810243709baa7ad$export$901a8201111c7957 = "ntdll" /* ntdll */ ;
-const $8810243709baa7ad$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $3d5d326f1a21cd82$export$11e63f7b0f3d9900)($8810243709baa7ad$export$901a8201111c7957, (0, $7f376838deadf1f7$export$b139dcabebd3c0ad), fns, settings);
-
-
-var $9d2ef8b96d59cae4$exports = {};
-
-$parcel$export($9d2ef8b96d59cae4$exports, "dllName", () => $9d2ef8b96d59cae4$export$901a8201111c7957);
-$parcel$export($9d2ef8b96d59cae4$exports, "load", () => $9d2ef8b96d59cae4$export$11e63f7b0f3d9900);
-$parcel$export($9d2ef8b96d59cae4$exports, "apiDef", () => $daccce2b92d486d0$export$b139dcabebd3c0ad);
-$parcel$export($9d2ef8b96d59cae4$exports, "constants", () => $b39b0dc1c65c8902$exports);
-
-
-
-const $daccce2b92d486d0$export$b139dcabebd3c0ad = {
-    BringWindowToTop: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    /** url: https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-clienttoscreen */ ClientToScreen: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPPOINT
-        ]
-    ],
-    CloseWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    CreateWindowExW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HMENU,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HINSTANCE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPVOID, 
-        ], 
-    ],
-    DefWindowProcW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).LRESULT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WPARAM,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
-        ]
-    ],
-    DestroyWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    DispatchMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).LRESULT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPMSG
-        ]
-    ],
-    /** https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw */ EnumDisplayDevicesW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCWSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).POINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD
-        ]
-    ],
-    EnumThreadWindows: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WNDENUMPROC,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
-        ]
-    ],
-    EnumWindows: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WNDENUMPROC,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
-        ]
-    ],
-    FindWindowExW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR
-        ]
-    ],
-    GetAncestor: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    GetAltTabInfoW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPWSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-        ]
-    ],
-    GetClassInfoExW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HINSTANCE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPWNDCLASSEX
-        ]
-    ],
-    GetForegroundWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        []
-    ],
-    GetMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPMSG,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    GetParent: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    GetRawInputDeviceInfoW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HANDLE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPVOID,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PUINT
-        ]
-    ],
-    GetRawInputDeviceList: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PRAWINPUTDEVICELIST,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PUINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    GetTopWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    GetWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    GetWindowInfo: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).PWINDOWINFO
-        ]
-    ],
-    GetWindowLongW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).LONG,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-        ]
-    ],
-    GetWindowRect: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).RECT
-        ]
-    ],
-    GetWindowTextW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).INT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPTSTR,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-        ]
-    ],
-    GetWindowThreadProcessId: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPDWORD
-        ]
-    ],
-    IsWindowVisible: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    PeekMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPMSG,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    PostMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WPARAM,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
-        ]
-    ],
-    PrintWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HDC,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    RegisterClassExW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).ATOM,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WNDCLASSEX
-        ]
-    ],
-    SendMessageW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).LRESULT,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WPARAM,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
-        ]
-    ],
-    SetForegroundWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ],
-    SetWindowTextW: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPCTSTR
-        ]
-    ],
-    SetWinEventHook: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWINEVENTHOOK,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HMODULE,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).WINEVENTPROC,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).DWORD,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).UINT
-        ]
-    ],
-    ShowWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-        ]
-    ],
-    TranslateMessage: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPMSG
-        ]
-    ],
-    TranslateMessageEx: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).LPMSG
-        ]
-    ],
-    UnhookWinEvent: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWINEVENTHOOK
-        ]
-    ],
-    UpdateWindow: [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
-        [
-            (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND
-        ]
-    ]
-};
-/* istanbul ignore next */ if ($j2o4Y$process.arch === "x64") $daccce2b92d486d0$export$b139dcabebd3c0ad.GetWindowLongPtrW = [
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).LONG_PTR,
-    [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).INT
-    ]
+ * Colors.
+ */ module.exports.colors = [
+    "#0000CC",
+    "#0000FF",
+    "#0033CC",
+    "#0033FF",
+    "#0066CC",
+    "#0066FF",
+    "#0099CC",
+    "#0099FF",
+    "#00CC00",
+    "#00CC33",
+    "#00CC66",
+    "#00CC99",
+    "#00CCCC",
+    "#00CCFF",
+    "#3300CC",
+    "#3300FF",
+    "#3333CC",
+    "#3333FF",
+    "#3366CC",
+    "#3366FF",
+    "#3399CC",
+    "#3399FF",
+    "#33CC00",
+    "#33CC33",
+    "#33CC66",
+    "#33CC99",
+    "#33CCCC",
+    "#33CCFF",
+    "#6600CC",
+    "#6600FF",
+    "#6633CC",
+    "#6633FF",
+    "#66CC00",
+    "#66CC33",
+    "#9900CC",
+    "#9900FF",
+    "#9933CC",
+    "#9933FF",
+    "#99CC00",
+    "#99CC33",
+    "#CC0000",
+    "#CC0033",
+    "#CC0066",
+    "#CC0099",
+    "#CC00CC",
+    "#CC00FF",
+    "#CC3300",
+    "#CC3333",
+    "#CC3366",
+    "#CC3399",
+    "#CC33CC",
+    "#CC33FF",
+    "#CC6600",
+    "#CC6633",
+    "#CC9900",
+    "#CC9933",
+    "#CCCC00",
+    "#CCCC33",
+    "#FF0000",
+    "#FF0033",
+    "#FF0066",
+    "#FF0099",
+    "#FF00CC",
+    "#FF00FF",
+    "#FF3300",
+    "#FF3333",
+    "#FF3366",
+    "#FF3399",
+    "#FF33CC",
+    "#FF33FF",
+    "#FF6600",
+    "#FF6633",
+    "#FF9900",
+    "#FF9933",
+    "#FFCC00",
+    "#FFCC33"
 ];
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */ // eslint-disable-next-line complexity
+function $378b44785cd32d0f$var$useColors() {
+    // NB: In an Electron preload script, document will be defined but not fully
+    // initialized. Since we know we're in Chrome, we'll just detect this case
+    // explicitly
+    if (typeof window !== "undefined" && window.process && (window.process.type === "renderer" || window.process.__nwjs)) return true;
+    // Internet Explorer and Edge do not support colors.
+    if (typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) return false;
+    // Is webkit? http://stackoverflow.com/a/16459606/376773
+    // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+    return typeof document !== "undefined" && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== "undefined" && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+}
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */ function $378b44785cd32d0f$var$formatArgs(args) {
+    args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module.exports.humanize(this.diff);
+    if (!this.useColors) return;
+    const c = "color: " + this.color;
+    args.splice(1, 0, c, "color: inherit");
+    // The final "%c" is somewhat tricky, because there could be other
+    // arguments passed either before or after the %c, so we need to
+    // figure out the correct index to insert the CSS into
+    let index = 0;
+    let lastC = 0;
+    args[0].replace(/%[a-zA-Z%]/g, (match)=>{
+        if (match === "%%") return;
+        index++;
+        if (match === "%c") // We only are interested in the *last* %c
+        // (the user may have provided their own)
+        lastC = index;
+    });
+    args.splice(lastC, 0, c);
+}
+/**
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
+ *
+ * @api public
+ */ module.exports.log = console.debug || console.log || (()=>{});
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */ function $378b44785cd32d0f$var$save(namespaces) {
+    try {
+        if (namespaces) module.exports.storage.setItem("debug", namespaces);
+        else module.exports.storage.removeItem("debug");
+    } catch (error) {
+    // Swallow
+    // XXX (@Qix-) should we be logging these?
+    }
+}
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */ function $378b44785cd32d0f$var$load() {
+    let r;
+    try {
+        r = module.exports.storage.getItem("debug");
+    } catch (error) {
+    // Swallow
+    // XXX (@Qix-) should we be logging these?
+    }
+    // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+    if (!r && typeof $3EevV$process !== "undefined" && "env" in $3EevV$process) r = undefined;
+    return r;
+}
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */ function $378b44785cd32d0f$var$localstorage() {
+    try {
+        // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+        // The Browser also has localStorage in the global context.
+        return localStorage;
+    } catch (error) {
+    // Swallow
+    // XXX (@Qix-) should we be logging these?
+    }
+}
+
+module.exports = (parcelRequire("b7RmA"))(module.exports);
+const { formatters: $378b44785cd32d0f$var$formatters  } = module.exports;
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */ $378b44785cd32d0f$var$formatters.j = function(v) {
+    try {
+        return JSON.stringify(v);
+    } catch (error) {
+        return "[UnexpectedJSONParseError]: " + error.message;
+    }
+};
+
+});
+parcelRequire.register("b7RmA", function(module, exports) {
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ */ function $8199bdfac6b37106$var$setup(env) {
+    createDebug.debug = createDebug;
+    createDebug.default = createDebug;
+    createDebug.coerce = coerce;
+    createDebug.disable = disable;
+    createDebug.enable = enable;
+    createDebug.enabled = enabled;
+    createDebug.humanize = (parcelRequire("7idH8"));
+    createDebug.destroy = destroy;
+    Object.keys(env).forEach((key)=>{
+        createDebug[key] = env[key];
+    });
+    /**
+	* The currently active debug mode names, and names to skip.
+	*/ createDebug.names = [];
+    createDebug.skips = [];
+    /**
+	* Map of special "%n" handling functions, for the debug "format" argument.
+	*
+	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+	*/ createDebug.formatters = {};
+    /**
+	* Selects a color for a debug namespace
+	* @param {String} namespace The namespace string for the debug instance to be colored
+	* @return {Number|String} An ANSI color code for the given namespace
+	* @api private
+	*/ function selectColor(namespace) {
+        let hash = 0;
+        for(let i = 0; i < namespace.length; i++){
+            hash = (hash << 5) - hash + namespace.charCodeAt(i);
+            hash |= 0; // Convert to 32bit integer
+        }
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+    }
+    createDebug.selectColor = selectColor;
+    /**
+	* Create a debugger with the given `namespace`.
+	*
+	* @param {String} namespace
+	* @return {Function}
+	* @api public
+	*/ function createDebug(namespace) {
+        let prevTime;
+        let enableOverride = null;
+        let namespacesCache;
+        let enabledCache;
+        function debug(...args) {
+            // Disabled?
+            if (!debug.enabled) return;
+            const self = debug;
+            // Set `diff` timestamp
+            const curr = Number(new Date());
+            const ms = curr - (prevTime || curr);
+            self.diff = ms;
+            self.prev = prevTime;
+            self.curr = curr;
+            prevTime = curr;
+            args[0] = createDebug.coerce(args[0]);
+            if (typeof args[0] !== "string") // Anything else let's inspect with %O
+            args.unshift("%O");
+            // Apply any `formatters` transformations
+            let index = 0;
+            args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format)=>{
+                // If we encounter an escaped % then don't increase the array index
+                if (match === "%%") return "%";
+                index++;
+                const formatter = createDebug.formatters[format];
+                if (typeof formatter === "function") {
+                    const val = args[index];
+                    match = formatter.call(self, val);
+                    // Now we need to remove `args[index]` since it's inlined in the `format`
+                    args.splice(index, 1);
+                    index--;
+                }
+                return match;
+            });
+            // Apply env-specific formatting (colors, etc.)
+            createDebug.formatArgs.call(self, args);
+            const logFn = self.log || createDebug.log;
+            logFn.apply(self, args);
+        }
+        debug.namespace = namespace;
+        debug.useColors = createDebug.useColors();
+        debug.color = createDebug.selectColor(namespace);
+        debug.extend = extend;
+        debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+        Object.defineProperty(debug, "enabled", {
+            enumerable: true,
+            configurable: false,
+            get: ()=>{
+                if (enableOverride !== null) return enableOverride;
+                if (namespacesCache !== createDebug.namespaces) {
+                    namespacesCache = createDebug.namespaces;
+                    enabledCache = createDebug.enabled(namespace);
+                }
+                return enabledCache;
+            },
+            set: (v)=>{
+                enableOverride = v;
+            }
+        });
+        // Env-specific initialization logic for debug instances
+        if (typeof createDebug.init === "function") createDebug.init(debug);
+        return debug;
+    }
+    function extend(namespace, delimiter) {
+        const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
+        newDebug.log = this.log;
+        return newDebug;
+    }
+    /**
+	* Enables a debug mode by namespaces. This can include modes
+	* separated by a colon and wildcards.
+	*
+	* @param {String} namespaces
+	* @api public
+	*/ function enable(namespaces) {
+        createDebug.save(namespaces);
+        createDebug.namespaces = namespaces;
+        createDebug.names = [];
+        createDebug.skips = [];
+        let i;
+        const split = (typeof namespaces === "string" ? namespaces : "").split(/[\s,]+/);
+        const len = split.length;
+        for(i = 0; i < len; i++){
+            if (!split[i]) continue;
+            namespaces = split[i].replace(/\*/g, ".*?");
+            if (namespaces[0] === "-") createDebug.skips.push(new RegExp("^" + namespaces.slice(1) + "$"));
+            else createDebug.names.push(new RegExp("^" + namespaces + "$"));
+        }
+    }
+    /**
+	* Disable debug output.
+	*
+	* @return {String} namespaces
+	* @api public
+	*/ function disable() {
+        const namespaces = [
+            ...createDebug.names.map(toNamespace),
+            ...createDebug.skips.map(toNamespace).map((namespace)=>"-" + namespace)
+        ].join(",");
+        createDebug.enable("");
+        return namespaces;
+    }
+    /**
+	* Returns true if the given mode name is enabled, false otherwise.
+	*
+	* @param {String} name
+	* @return {Boolean}
+	* @api public
+	*/ function enabled(name) {
+        if (name[name.length - 1] === "*") return true;
+        let i;
+        let len;
+        for(i = 0, len = createDebug.skips.length; i < len; i++){
+            if (createDebug.skips[i].test(name)) return false;
+        }
+        for(i = 0, len = createDebug.names.length; i < len; i++){
+            if (createDebug.names[i].test(name)) return true;
+        }
+        return false;
+    }
+    /**
+	* Convert regexp to namespace
+	*
+	* @param {RegExp} regxep
+	* @return {String} namespace
+	* @api private
+	*/ function toNamespace(regexp) {
+        return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
+    }
+    /**
+	* Coerce `val`.
+	*
+	* @param {Mixed} val
+	* @return {Mixed}
+	* @api private
+	*/ function coerce(val) {
+        if (val instanceof Error) return val.stack || val.message;
+        return val;
+    }
+    /**
+	* XXX DO NOT USE. This is a temporary stub function.
+	* XXX It WILL be removed in the next major release.
+	*/ function destroy() {
+        console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+    }
+    createDebug.enable(createDebug.load());
+    return createDebug;
+}
+module.exports = $8199bdfac6b37106$var$setup;
+
+});
+parcelRequire.register("7idH8", function(module, exports) {
+/**
+ * Helpers.
+ */ var $54f4d6506d1d5cae$var$s = 1000;
+var $54f4d6506d1d5cae$var$m = $54f4d6506d1d5cae$var$s * 60;
+var $54f4d6506d1d5cae$var$h = $54f4d6506d1d5cae$var$m * 60;
+var $54f4d6506d1d5cae$var$d = $54f4d6506d1d5cae$var$h * 24;
+var $54f4d6506d1d5cae$var$w = $54f4d6506d1d5cae$var$d * 7;
+var $54f4d6506d1d5cae$var$y = $54f4d6506d1d5cae$var$d * 365.25;
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */ module.exports = function(val, options) {
+    options = options || {};
+    var type = typeof val;
+    if (type === "string" && val.length > 0) return $54f4d6506d1d5cae$var$parse(val);
+    else if (type === "number" && isFinite(val)) return options.long ? $54f4d6506d1d5cae$var$fmtLong(val) : $54f4d6506d1d5cae$var$fmtShort(val);
+    throw new Error("val is not a non-empty string or a valid number. val=" + JSON.stringify(val));
+};
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */ function $54f4d6506d1d5cae$var$parse(str) {
+    str = String(str);
+    if (str.length > 100) return;
+    var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
+    if (!match) return;
+    var n = parseFloat(match[1]);
+    var type = (match[2] || "ms").toLowerCase();
+    switch(type){
+        case "years":
+        case "year":
+        case "yrs":
+        case "yr":
+        case "y":
+            return n * $54f4d6506d1d5cae$var$y;
+        case "weeks":
+        case "week":
+        case "w":
+            return n * $54f4d6506d1d5cae$var$w;
+        case "days":
+        case "day":
+        case "d":
+            return n * $54f4d6506d1d5cae$var$d;
+        case "hours":
+        case "hour":
+        case "hrs":
+        case "hr":
+        case "h":
+            return n * $54f4d6506d1d5cae$var$h;
+        case "minutes":
+        case "minute":
+        case "mins":
+        case "min":
+        case "m":
+            return n * $54f4d6506d1d5cae$var$m;
+        case "seconds":
+        case "second":
+        case "secs":
+        case "sec":
+        case "s":
+            return n * $54f4d6506d1d5cae$var$s;
+        case "milliseconds":
+        case "millisecond":
+        case "msecs":
+        case "msec":
+        case "ms":
+            return n;
+        default:
+            return undefined;
+    }
+}
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */ function $54f4d6506d1d5cae$var$fmtShort(ms) {
+    var msAbs = Math.abs(ms);
+    if (msAbs >= $54f4d6506d1d5cae$var$d) return Math.round(ms / $54f4d6506d1d5cae$var$d) + "d";
+    if (msAbs >= $54f4d6506d1d5cae$var$h) return Math.round(ms / $54f4d6506d1d5cae$var$h) + "h";
+    if (msAbs >= $54f4d6506d1d5cae$var$m) return Math.round(ms / $54f4d6506d1d5cae$var$m) + "m";
+    if (msAbs >= $54f4d6506d1d5cae$var$s) return Math.round(ms / $54f4d6506d1d5cae$var$s) + "s";
+    return ms + "ms";
+}
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */ function $54f4d6506d1d5cae$var$fmtLong(ms) {
+    var msAbs = Math.abs(ms);
+    if (msAbs >= $54f4d6506d1d5cae$var$d) return $54f4d6506d1d5cae$var$plural(ms, msAbs, $54f4d6506d1d5cae$var$d, "day");
+    if (msAbs >= $54f4d6506d1d5cae$var$h) return $54f4d6506d1d5cae$var$plural(ms, msAbs, $54f4d6506d1d5cae$var$h, "hour");
+    if (msAbs >= $54f4d6506d1d5cae$var$m) return $54f4d6506d1d5cae$var$plural(ms, msAbs, $54f4d6506d1d5cae$var$m, "minute");
+    if (msAbs >= $54f4d6506d1d5cae$var$s) return $54f4d6506d1d5cae$var$plural(ms, msAbs, $54f4d6506d1d5cae$var$s, "second");
+    return ms + " ms";
+}
+/**
+ * Pluralization helper.
+ */ function $54f4d6506d1d5cae$var$plural(ms, msAbs, n, name) {
+    var isPlural = msAbs >= n * 1.5;
+    return Math.round(ms / n) + " " + name + (isPlural ? "s" : "");
+}
+
+});
 
 
-var $b39b0dc1c65c8902$exports = {};
 
-$parcel$export($b39b0dc1c65c8902$exports, "WS_BORDER", () => $b39b0dc1c65c8902$export$606a835aa674cdb3);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_CAPTION", () => $b39b0dc1c65c8902$export$48eb2f3b6cc3c4ab);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_CHILD", () => $b39b0dc1c65c8902$export$4c112980a139215d);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_CLIPCHILDREN", () => $b39b0dc1c65c8902$export$90b2f252d51b6a52);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_CLIPSIBLINGS", () => $b39b0dc1c65c8902$export$5859e29fe7a8b839);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_DISABLED", () => $b39b0dc1c65c8902$export$ea7e473ff3254424);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_DLGFRAME", () => $b39b0dc1c65c8902$export$7882bfae04973a26);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_GROUP", () => $b39b0dc1c65c8902$export$602f6ce66ce44069);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_HSCROLL", () => $b39b0dc1c65c8902$export$48315059b9ef7495);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_ICONIC", () => $b39b0dc1c65c8902$export$ded3cd280fb3e5fe);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_MAXIMIZE", () => $b39b0dc1c65c8902$export$cb67cd8938c7da8d);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_MAXIMIZEBOX", () => $b39b0dc1c65c8902$export$a6fe78de55428aeb);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_MINIMIZE", () => $b39b0dc1c65c8902$export$7e3c94cdd9b0ff82);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_MINIMIZEBOX", () => $b39b0dc1c65c8902$export$23b24f1629122f49);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_OVERLAPPED", () => $b39b0dc1c65c8902$export$e54245776ad9d7fa);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_POPUP", () => $b39b0dc1c65c8902$export$5d8c47859934839f);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_SIZEBOX", () => $b39b0dc1c65c8902$export$47c2f5f37fdcd568);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_SYSMENU", () => $b39b0dc1c65c8902$export$73e498efb7725a4c);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_TABSTOP", () => $b39b0dc1c65c8902$export$850ce5441c8d76d3);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_THICKFRAME", () => $b39b0dc1c65c8902$export$734122ec1d097c70);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_TILED", () => $b39b0dc1c65c8902$export$adb10497ba59a062);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_VISIBLE", () => $b39b0dc1c65c8902$export$f97d49e0f973a11b);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_VSCROLL", () => $b39b0dc1c65c8902$export$46bf8a39b3410e27);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_OVERLAPPEDWINDOW", () => $b39b0dc1c65c8902$export$e41e76d33b2ee815);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_POPUPWINDOW", () => $b39b0dc1c65c8902$export$158420e94832e095);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_TILEDWINDOW", () => $b39b0dc1c65c8902$export$630b11ccf7464717);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_ACCEPTFILES", () => $b39b0dc1c65c8902$export$b4974fc5ec881eb2);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_APPWINDOW", () => $b39b0dc1c65c8902$export$7c9488afb90066eb);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_CLIENTEDGE", () => $b39b0dc1c65c8902$export$e17ef95cc3937744);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_COMPOSITED", () => $b39b0dc1c65c8902$export$9bee6cf39ebfa14f);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_CONTEXTHELP", () => $b39b0dc1c65c8902$export$2bbddc32e25aff08);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_CONTROLPARENT", () => $b39b0dc1c65c8902$export$550a968b8f335560);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_DLGMODALFRAME", () => $b39b0dc1c65c8902$export$66454f5316761e6d);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_LAYERED", () => $b39b0dc1c65c8902$export$37e2ee22bedc259b);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_LAYOUTRTL", () => $b39b0dc1c65c8902$export$4de06b73361773aa);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_LEFT", () => $b39b0dc1c65c8902$export$6d6281491c3c345b);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_LEFTSCROLLBAR", () => $b39b0dc1c65c8902$export$992aaeca1d900884);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_LTRREADING", () => $b39b0dc1c65c8902$export$223645391ca50517);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_MDICHILD", () => $b39b0dc1c65c8902$export$ec70e607715a0dd8);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_NOACTIVATE", () => $b39b0dc1c65c8902$export$3bde6e836089a4c4);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_NOINHERITLAYOUT", () => $b39b0dc1c65c8902$export$8e4caed601fc6859);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_NOPARENTNOTIFY", () => $b39b0dc1c65c8902$export$405abfaa3d30b735);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_NOREDIRECTIONBITMAP", () => $b39b0dc1c65c8902$export$abd6e08734fc0be5);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_RIGHT", () => $b39b0dc1c65c8902$export$5ffc168bdc33e81a);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_RIGHTSCROLLBAR", () => $b39b0dc1c65c8902$export$7e05a5e1e0f3630f);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_RTLREADING", () => $b39b0dc1c65c8902$export$f2eef988e187a8fe);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_STATICEDGE", () => $b39b0dc1c65c8902$export$d497db29e2467861);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_TOOLWINDOW", () => $b39b0dc1c65c8902$export$ce69c1415f4c9e9);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_TOPMOST", () => $b39b0dc1c65c8902$export$fc7bd9e6c250670a);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_TRANSPARENT", () => $b39b0dc1c65c8902$export$5655aef644f812f9);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_WINDOWEDGE", () => $b39b0dc1c65c8902$export$c0529b550722ec16);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_OVERLAPPEDWINDOW", () => $b39b0dc1c65c8902$export$8e8eb584a9d8e6a0);
-$parcel$export($b39b0dc1c65c8902$exports, "WS_EX_PALETTEWINDOW", () => $b39b0dc1c65c8902$export$9c34c2c2258a5ed0);
-$parcel$export($b39b0dc1c65c8902$exports, "PM_NOREMOVE", () => $b39b0dc1c65c8902$export$b833dd3cd68611e5);
-$parcel$export($b39b0dc1c65c8902$exports, "PM_REMOVE", () => $b39b0dc1c65c8902$export$c52d6ca467ce0472);
-$parcel$export($b39b0dc1c65c8902$exports, "PM_NOYIELD", () => $b39b0dc1c65c8902$export$684da755af3f7a1f);
-$parcel$export($b39b0dc1c65c8902$exports, "CW_USEDEFAULT", () => $b39b0dc1c65c8902$export$e3066a4bd9a3474a);
-const $b39b0dc1c65c8902$export$606a835aa674cdb3 = 0x00800000;
-const $b39b0dc1c65c8902$export$48eb2f3b6cc3c4ab = 0x00C00000;
-const $b39b0dc1c65c8902$export$4c112980a139215d = 0x40000000;
-const $b39b0dc1c65c8902$export$90b2f252d51b6a52 = 0x02000000;
-const $b39b0dc1c65c8902$export$5859e29fe7a8b839 = 0x04000000;
-const $b39b0dc1c65c8902$export$ea7e473ff3254424 = 0x08000000;
-const $b39b0dc1c65c8902$export$7882bfae04973a26 = 0x00400000;
-const $b39b0dc1c65c8902$export$602f6ce66ce44069 = 0x00020000;
-const $b39b0dc1c65c8902$export$48315059b9ef7495 = 0x00100000;
-const $b39b0dc1c65c8902$export$ded3cd280fb3e5fe = 0x20000000;
-const $b39b0dc1c65c8902$export$cb67cd8938c7da8d = 0x01000000;
-const $b39b0dc1c65c8902$export$a6fe78de55428aeb = 0x00010000;
-const $b39b0dc1c65c8902$export$7e3c94cdd9b0ff82 = 0x20000000;
-const $b39b0dc1c65c8902$export$23b24f1629122f49 = 0x00020000;
-const $b39b0dc1c65c8902$export$e54245776ad9d7fa = 0x00000000;
-const $b39b0dc1c65c8902$export$5d8c47859934839f = 0x80000000; // The windows is a pop-up window
-const $b39b0dc1c65c8902$export$47c2f5f37fdcd568 = 0x00040000;
-const $b39b0dc1c65c8902$export$73e498efb7725a4c = 0x00080000; // The window has a window menu on its title bar.
-const $b39b0dc1c65c8902$export$850ce5441c8d76d3 = 0x00010000;
-const $b39b0dc1c65c8902$export$734122ec1d097c70 = 0x00040000;
-const $b39b0dc1c65c8902$export$adb10497ba59a062 = 0x00000000;
-const $b39b0dc1c65c8902$export$f97d49e0f973a11b = 0x10000000;
-const $b39b0dc1c65c8902$export$46bf8a39b3410e27 = 0x00200000;
-const $b39b0dc1c65c8902$export$e41e76d33b2ee815 = $b39b0dc1c65c8902$export$e54245776ad9d7fa | $b39b0dc1c65c8902$export$48eb2f3b6cc3c4ab | $b39b0dc1c65c8902$export$73e498efb7725a4c | $b39b0dc1c65c8902$export$734122ec1d097c70 | $b39b0dc1c65c8902$export$23b24f1629122f49 | $b39b0dc1c65c8902$export$a6fe78de55428aeb;
-const $b39b0dc1c65c8902$export$158420e94832e095 = $b39b0dc1c65c8902$export$5d8c47859934839f | $b39b0dc1c65c8902$export$606a835aa674cdb3 | $b39b0dc1c65c8902$export$73e498efb7725a4c;
-const $b39b0dc1c65c8902$export$630b11ccf7464717 = $b39b0dc1c65c8902$export$e54245776ad9d7fa | $b39b0dc1c65c8902$export$48eb2f3b6cc3c4ab | $b39b0dc1c65c8902$export$73e498efb7725a4c | $b39b0dc1c65c8902$export$734122ec1d097c70 | $b39b0dc1c65c8902$export$23b24f1629122f49 | $b39b0dc1c65c8902$export$a6fe78de55428aeb;
-const $b39b0dc1c65c8902$export$b4974fc5ec881eb2 = 0x00000010;
-const $b39b0dc1c65c8902$export$7c9488afb90066eb = 0x00040000;
-const $b39b0dc1c65c8902$export$e17ef95cc3937744 = 0x00000200;
-const $b39b0dc1c65c8902$export$9bee6cf39ebfa14f = 0x02000000;
-const $b39b0dc1c65c8902$export$2bbddc32e25aff08 = 0x00000400;
-const $b39b0dc1c65c8902$export$550a968b8f335560 = 0x00010000;
-const $b39b0dc1c65c8902$export$66454f5316761e6d = 0x00000001;
-const $b39b0dc1c65c8902$export$37e2ee22bedc259b = 0x00080000;
-const $b39b0dc1c65c8902$export$4de06b73361773aa = 0x00400000;
-const $b39b0dc1c65c8902$export$6d6281491c3c345b = 0x00000000;
-const $b39b0dc1c65c8902$export$992aaeca1d900884 = 0x00004000;
-const $b39b0dc1c65c8902$export$223645391ca50517 = 0x00000000;
-const $b39b0dc1c65c8902$export$ec70e607715a0dd8 = 0x00000040;
-const $b39b0dc1c65c8902$export$3bde6e836089a4c4 = 0x08000000;
-const $b39b0dc1c65c8902$export$8e4caed601fc6859 = 0x00100000;
-const $b39b0dc1c65c8902$export$405abfaa3d30b735 = 0x00000004;
-const $b39b0dc1c65c8902$export$abd6e08734fc0be5 = 0x00200000;
-const $b39b0dc1c65c8902$export$5ffc168bdc33e81a = 0x00001000;
-const $b39b0dc1c65c8902$export$7e05a5e1e0f3630f = 0x00000000;
-const $b39b0dc1c65c8902$export$f2eef988e187a8fe = 0x00002000;
-const $b39b0dc1c65c8902$export$d497db29e2467861 = 0x00020000;
-const $b39b0dc1c65c8902$export$ce69c1415f4c9e9 = 0x00000080;
-const $b39b0dc1c65c8902$export$fc7bd9e6c250670a = 0x00000008;
-const $b39b0dc1c65c8902$export$5655aef644f812f9 = 0x00000020;
-const $b39b0dc1c65c8902$export$c0529b550722ec16 = 0x00000100;
-const $b39b0dc1c65c8902$export$8e8eb584a9d8e6a0 = $b39b0dc1c65c8902$export$c0529b550722ec16 | $b39b0dc1c65c8902$export$e17ef95cc3937744;
-const $b39b0dc1c65c8902$export$9c34c2c2258a5ed0 = $b39b0dc1c65c8902$export$c0529b550722ec16 | $b39b0dc1c65c8902$export$ce69c1415f4c9e9 | $b39b0dc1c65c8902$export$fc7bd9e6c250670a;
-const $b39b0dc1c65c8902$export$b833dd3cd68611e5 = 0x0000;
-const $b39b0dc1c65c8902$export$c52d6ca467ce0472 = 0x0001;
-const $b39b0dc1c65c8902$export$684da755af3f7a1f = 0x0002;
-const $b39b0dc1c65c8902$export$e3066a4bd9a3474a = -2147483648;
+parcelRequire.register("kZbZk", function(module, exports) {
 
-
-const $9d2ef8b96d59cae4$export$901a8201111c7957 = "user32" /* user32 */ ;
-const $9d2ef8b96d59cae4$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $3d5d326f1a21cd82$export$11e63f7b0f3d9900)($9d2ef8b96d59cae4$export$901a8201111c7957, (0, $daccce2b92d486d0$export$b139dcabebd3c0ad), fns, settings);
-
-
-const $15dfd08c41c8db69$export$19a6ec7fd41142b0 = 0x01E1;
-const $15dfd08c41c8db69$export$1711f4719d90dd54 = 0x0014;
-const $15dfd08c41c8db69$export$ae5ced2ad50bea4d = 0x0031;
-const $15dfd08c41c8db69$export$b4a4b19b39d0e03d = 0x000D;
-const $15dfd08c41c8db69$export$7f36dc16c7eef4af = 0x000E;
-const $15dfd08c41c8db69$export$e04e254ca59ee39c = 0x0030;
-const $15dfd08c41c8db69$export$6dc777026572fa9e = 0x0080;
-const $15dfd08c41c8db69$export$75f41a0aed4da0f4 = 0x000C;
-const $15dfd08c41c8db69$export$230d25d29746b5fb = 0x001C;
-const $15dfd08c41c8db69$export$c2252265fe8812a6 = 0x001F;
-const $15dfd08c41c8db69$export$c7032b1dd28fb749 = 0x0022;
-const $15dfd08c41c8db69$export$611df49badc03681 = 0x0010;
-const $15dfd08c41c8db69$export$a77d4afa4af1b4af = 0x0001;
-const $15dfd08c41c8db69$export$3f9253d34e38d9ad = 0x0002;
-const $15dfd08c41c8db69$export$5dbb3c8731057d58 = 0x000A;
-const $15dfd08c41c8db69$export$ac6438855d7103ad = 0x0231;
-const $15dfd08c41c8db69$export$d847a774b2670f9e = 0x0232;
-const $15dfd08c41c8db69$export$655c35b13ae053cc = 0x007F;
-const $15dfd08c41c8db69$export$511eebb7edc32326 = 0x0024;
-const $15dfd08c41c8db69$export$84cf65970abba9fc = 0x0051;
-const $15dfd08c41c8db69$export$70ec0f1178420e36 = 0x0050;
-const $15dfd08c41c8db69$export$896999da2d79d94c = 0x0003;
-const $15dfd08c41c8db69$export$756b94317d7ae37e = 0x0216;
-const $15dfd08c41c8db69$export$68592c08fc3654dc = 0x0086;
-const $15dfd08c41c8db69$export$f433a545ca588d4 = 0x0083;
-const $15dfd08c41c8db69$export$93f700c154a8ef31 = 0x0081;
-const $15dfd08c41c8db69$export$7e6ae754655a83ac = 0x0082;
-const $15dfd08c41c8db69$export$8993f8ad8a35161a = 0x0000;
-const $15dfd08c41c8db69$export$36043964122f25fb = 0x0037;
-const $15dfd08c41c8db69$export$4a709bca827ba034 = 0x0013;
-const $15dfd08c41c8db69$export$37eb37610775733 = 0x0012;
-const $15dfd08c41c8db69$export$c146a401ece9a71f = 0x0018;
-const $15dfd08c41c8db69$export$716ed736c365c5f = 0x0005;
-const $15dfd08c41c8db69$export$4c9c95cba171bb6 = 0x0214;
-const $15dfd08c41c8db69$export$216a428970a70cf0 = 0x007D;
-const $15dfd08c41c8db69$export$c31907b319189679 = 0x007C;
-const $15dfd08c41c8db69$export$c315d9c4d0de5b29 = 0x031A;
-const $15dfd08c41c8db69$export$48c8b073b611c1d6 = 0x0054;
-const $15dfd08c41c8db69$export$f8d3ed8c0a212c5a = 0x0047;
-const $15dfd08c41c8db69$export$9b05f3b8d920a20d = 0x0046;
-const $15dfd08c41c8db69$export$a49def560f5750b7 = 0x004A;
-const $15dfd08c41c8db69$export$18db53ad3fad49f4 = 0x0111;
-const $15dfd08c41c8db69$export$8859e65815fdef55 = 0x007B;
-const $15dfd08c41c8db69$export$9d05462016b2860e = 0x0211;
-const $15dfd08c41c8db69$export$f130ce90d71e3f9e = 0x0212;
-const $15dfd08c41c8db69$export$a4734366f393e003 = 0x033F;
-const $15dfd08c41c8db69$export$77c47651c71648bc = 0x0126;
-const $15dfd08c41c8db69$export$7d209ffae6d958ef = 0x0123;
-const $15dfd08c41c8db69$export$f7e968c32310d604 = 0x0124;
-const $15dfd08c41c8db69$export$5a0a85b946206cbe = 0x0122;
-const $15dfd08c41c8db69$export$5ed53755b4101a78 = 0x0213;
-const $15dfd08c41c8db69$export$b526be0e425ebfc9 = 0x0125;
-
-
-
-
-
-
-
-
-var $36c954ea1c6f71fe$exports = {};
-
-var $36c954ea1c6f71fe$require$Buffer = $j2o4Y$buffer.Buffer;
+var $f472cdc387d89a75$require$Buffer = $3EevV$buffer.Buffer;
 "use strict";
 
 
 
-var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
+var $f472cdc387d89a75$var$debug = (parcelRequire("ilarF"))("ref:struct");
 /**
  * Module exports.
- */ $36c954ea1c6f71fe$exports = function(ref) {
+ */ module.exports = function(ref) {
     /**
  * The Struct "type" meta-constructor.
  */ function Struct() {
-        $36c954ea1c6f71fe$var$debug('defining new struct "type"');
+        $f472cdc387d89a75$var$debug('defining new struct "type"');
         /**
    * This is the "constructor" of the Struct type that gets returned.
    *
@@ -4364,16 +3014,16 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
    * struct with the data.
    */ function StructType(arg, data) {
             if (!(this instanceof StructType)) return new StructType(arg, data);
-            $36c954ea1c6f71fe$var$debug("creating new struct instance");
+            $f472cdc387d89a75$var$debug("creating new struct instance");
             var store;
-            if ($36c954ea1c6f71fe$require$Buffer.isBuffer(arg)) {
-                $36c954ea1c6f71fe$var$debug("using passed-in Buffer instance to back the struct", arg);
-                $j2o4Y$assert(arg.length >= StructType.size, "Buffer instance must be at least " + StructType.size + " bytes to back this struct type");
+            if ($f472cdc387d89a75$require$Buffer.isBuffer(arg)) {
+                $f472cdc387d89a75$var$debug("using passed-in Buffer instance to back the struct", arg);
+                $3EevV$assert(arg.length >= StructType.size, "Buffer instance must be at least " + StructType.size + " bytes to back this struct type");
                 store = arg;
                 arg = data;
             } else {
-                $36c954ea1c6f71fe$var$debug("creating new Buffer instance to back the struct (size: %d)", StructType.size);
-                store = $36c954ea1c6f71fe$require$Buffer.alloc(StructType.size);
+                $f472cdc387d89a75$var$debug("creating new Buffer instance to back the struct (size: %d)", StructType.size);
+                store = $f472cdc387d89a75$require$Buffer.alloc(StructType.size);
             }
             // set the backing Buffer store
             store.type = StructType;
@@ -4420,14 +3070,14 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
     /**
  * The "get" function of the Struct "type" interface
  */ function get(buffer, offset) {
-        $36c954ea1c6f71fe$var$debug('Struct "type" getter for buffer at offset', buffer, offset);
+        $f472cdc387d89a75$var$debug('Struct "type" getter for buffer at offset', buffer, offset);
         if (offset > 0) buffer = buffer.slice(offset);
         return new this(buffer);
     }
     /**
  * The "set" function of the Struct "type" interface
  */ function set(buffer, offset, value) {
-        $36c954ea1c6f71fe$var$debug('Struct "type" setter for buffer at offset', buffer, offset, value);
+        $f472cdc387d89a75$var$debug('Struct "type" setter for buffer at offset', buffer, offset, value);
         var isStruct = value instanceof this;
         if (isStruct) // optimization: copy the buffer contents directly rather
         // than going through the ref-struct constructor
@@ -4448,14 +3098,14 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
  * type have already been created, therefore this function must be called at the
  * beginning, before any instances are created.
  */ function defineProperty(name, type) {
-        $36c954ea1c6f71fe$var$debug("defining new struct type field", name);
+        $f472cdc387d89a75$var$debug("defining new struct type field", name);
         // allow string types for convenience
         type = ref.coerceType(type);
-        $j2o4Y$assert(!this._instanceCreated, 'an instance of this Struct type has already been created, cannot add new "fields" anymore');
-        $j2o4Y$assert.equal("string", typeof name, 'expected a "string" field name');
-        $j2o4Y$assert(type && /object|function/i.test(typeof type) && "size" in type && "indirection" in type, 'expected a "type" object describing the field type: "' + type + '"');
-        $j2o4Y$assert(type.indirection > 1 || type.size > 0, '"type" object must have a size greater than 0');
-        $j2o4Y$assert(!(name in this.prototype), 'the field "' + name + '" already exists in this Struct type');
+        $3EevV$assert(!this._instanceCreated, 'an instance of this Struct type has already been created, cannot add new "fields" anymore');
+        $3EevV$assert.equal("string", typeof name, 'expected a "string" field name');
+        $3EevV$assert(type && /object|function/i.test(typeof type) && "size" in type && "indirection" in type, 'expected a "type" object describing the field type: "' + type + '"');
+        $3EevV$assert(type.indirection > 1 || type.size > 0, '"type" object must have a size greater than 0');
+        $3EevV$assert(!(name in this.prototype), 'the field "' + name + '" already exists in this Struct type');
         var field = {
             type: type
         };
@@ -4466,11 +3116,11 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
             configurable: true
         };
         desc.get = function() {
-            $36c954ea1c6f71fe$var$debug('getting "%s" struct field (offset: %d)', name, field.offset);
+            $f472cdc387d89a75$var$debug('getting "%s" struct field (offset: %d)', name, field.offset);
             return ref.get(this["ref.buffer"], field.offset, type);
         };
         desc.set = function(value) {
-            $36c954ea1c6f71fe$var$debug('setting "%s" struct field (offset: %d)', name, field.offset, value);
+            $f472cdc387d89a75$var$debug('setting "%s" struct field (offset: %d)', name, field.offset, value);
             return ref.set(this["ref.buffer"], field.offset, value, type);
         };
         // calculate the new size and field offsets
@@ -4510,7 +3160,7 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
             var padding = struct.isPacked ? 0 : (align - offset % align) % align;
             var size = type.indirection === 1 ? type.size : ref.sizeof.pointer;
             offset += padding;
-            if (!struct.isPacked) $j2o4Y$assert.equal(offset % align, 0, "offset should align");
+            if (!struct.isPacked) $3EevV$assert.equal(offset % align, 0, "offset should align");
             // adjust the "size" of the struct type
             struct.size = offset + size;
             // return the calulated offset
@@ -4519,7 +3169,7 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
         // any final padding?
         var left = struct.size % struct.alignment;
         if (left > 0) {
-            $36c954ea1c6f71fe$var$debug("additional padding to the end of struct:", struct.alignment - left);
+            $f472cdc387d89a75$var$debug("additional padding to the end of struct:", struct.alignment - left);
             struct.size += struct.alignment - left;
         }
     }
@@ -4557,7 +3207,7 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
         Object.keys(this).forEach(function(k) {
             obj[k] = this[k];
         }, this);
-        return $j2o4Y$util.inspect(obj);
+        return $3EevV$util.inspect(obj);
     };
     /**
  * returns a Buffer pointing to this struct data structure.
@@ -4567,93 +3217,2926 @@ var $36c954ea1c6f71fe$var$debug = (parcelRequire("3SSQh"))("ref:struct");
     return Struct;
 };
 
+});
+
+parcelRequire.register("lNAMA", function(module, exports) {
+
+var $fdeab4dadbed169b$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $B37ul = parcelRequire("B37ul");
 
 
+const $fdeab4dadbed169b$var$debug = (parcelRequire("4LET2"))("ffi:cif");
 
-var $lbL5x = parcelRequire("lbL5x");
+var $1a7VL = parcelRequire("1a7VL");
 
-var $eece88aeb15c56b2$exports = {};
-$parcel$export($eece88aeb15c56b2$exports, "ElementCE", () => $fa865378bc12e6a1$export$ea432ebb9d598fdf);
-$parcel$export($eece88aeb15c56b2$exports, "NumberCE", () => $2c2a98921dc2b609$export$caa4dfc7169288b7);
-$parcel$export($eece88aeb15c56b2$exports, "ObjectCE", () => $c957b93c4c90c7ee$export$982d7f197acc6f94);
-$parcel$export($eece88aeb15c56b2$exports, "StringCE", () => $a18bb0fe6a04f70b$export$29246bb2b9c16932);
-$parcel$export($eece88aeb15c56b2$exports, "Assert", () => $64e096969242e10d$export$14647bdf767968d3);
-$parcel$export($eece88aeb15c56b2$exports, "E", () => $03640216a2ed2e09$export$a9c23c6ac3fc3eca);
-$parcel$export($eece88aeb15c56b2$exports, "IsString", () => $1090eee99c835ae1$export$fae01d74d6648c3f);
-$parcel$export($eece88aeb15c56b2$exports, "IsObject", () => $1090eee99c835ae1$export$e64f6626d4e96cfb);
-$parcel$export($eece88aeb15c56b2$exports, "IsFunction", () => $1090eee99c835ae1$export$426ce8831f60741b);
-$parcel$export($eece88aeb15c56b2$exports, "IsNaN", () => $1090eee99c835ae1$export$f375b07b95af9a54);
-$parcel$export($eece88aeb15c56b2$exports, "IsNumber", () => $1090eee99c835ae1$export$bdf29e0acfffe6ef);
-var $db86bae2e67ee359$exports = {};
-
-$parcel$export($db86bae2e67ee359$exports, "ArrayCE", () => $db86bae2e67ee359$export$f35d492e63fcc0d6, (v) => $db86bae2e67ee359$export$f35d492e63fcc0d6 = v);
-
-var $1090eee99c835ae1$export$87b259aa03e3d267 = ()=>"bool";
-var $1090eee99c835ae1$export$7d260a2a5f8bc19e = ()=>"int";
-var $1090eee99c835ae1$export$7b3cbda67be88f5f = ()=>"double";
-var $1090eee99c835ae1$export$22b082955e083ec3 = ()=>"string";
-function $1090eee99c835ae1$export$1d10e1e94bc8dbf2(obj) {
-    return $1090eee99c835ae1$export$5c6c9f1eec02dba8(obj) || $1090eee99c835ae1$export$bdf29e0acfffe6ef(obj) || $1090eee99c835ae1$export$fae01d74d6648c3f(obj);
+var $ixfDa = parcelRequire("ixfDa");
+const $fdeab4dadbed169b$var$POINTER_SIZE = $1a7VL.sizeof.pointer;
+const $fdeab4dadbed169b$var$ffi_prep_cif = $ixfDa.ffi_prep_cif;
+const $fdeab4dadbed169b$var$FFI_CIF_SIZE = $ixfDa.FFI_CIF_SIZE;
+const $fdeab4dadbed169b$var$FFI_DEFAULT_ABI = $ixfDa.FFI_DEFAULT_ABI;
+// status codes
+const $fdeab4dadbed169b$var$FFI_OK = $ixfDa.FFI_OK;
+const $fdeab4dadbed169b$var$FFI_BAD_TYPEDEF = $ixfDa.FFI_BAD_TYPEDEF;
+const $fdeab4dadbed169b$var$FFI_BAD_ABI = $ixfDa.FFI_BAD_ABI;
+/**
+ * JS wrapper for the `ffi_prep_cif` function.
+ * Returns a Buffer instance representing a `ffi_cif *` instance.
+ */ const $fdeab4dadbed169b$var$cifs = [];
+function $fdeab4dadbed169b$var$CIF(rtype, types, abi) {
+    $fdeab4dadbed169b$var$debug("creating `ffi_cif *` instance");
+    // the return and arg types are expected to be coerced at this point...
+    $3EevV$assert(!!rtype, 'expected a return "type" object as the first argument');
+    $3EevV$assert(Array.isArray(types), 'expected an Array of arg "type" objects as the second argument');
+    // the buffer that will contain the return `ffi_cif *` instance
+    const cif = $fdeab4dadbed169b$require$Buffer.alloc($fdeab4dadbed169b$var$FFI_CIF_SIZE);
+    const numArgs = types.length;
+    const _argtypesptr = $fdeab4dadbed169b$require$Buffer.alloc(numArgs * $fdeab4dadbed169b$var$POINTER_SIZE);
+    const _rtypeptr = $B37ul(rtype);
+    for(var i = 0; i < numArgs; i++){
+        const type = types[i];
+        const ffiType = $B37ul(type);
+        _argtypesptr.writePointer(ffiType, i * $fdeab4dadbed169b$var$POINTER_SIZE);
+    }
+    // prevent GC of the arg type and rtn type buffers (not sure if this is required)
+    cif.rtnTypePtr = _rtypeptr;
+    cif.argTypesPtr = _argtypesptr;
+    if (typeof abi === "undefined") {
+        $fdeab4dadbed169b$var$debug("no ABI specified (this is OK), using FFI_DEFAULT_ABI");
+        abi = $fdeab4dadbed169b$var$FFI_DEFAULT_ABI;
+    }
+    const status = $fdeab4dadbed169b$var$ffi_prep_cif(cif, numArgs, _rtypeptr, _argtypesptr, abi);
+    if (status !== $fdeab4dadbed169b$var$FFI_OK) switch(status){
+        case $fdeab4dadbed169b$var$FFI_BAD_TYPEDEF:
+            {
+                const err = new Error("ffi_prep_cif() returned an FFI_BAD_TYPEDEF error");
+                err.code = "FFI_BAD_TYPEDEF";
+                err.errno = status;
+                throw err;
+            }
+        case $fdeab4dadbed169b$var$FFI_BAD_ABI:
+            {
+                const err = new Error("ffi_prep_cif() returned an FFI_BAD_ABI error");
+                err.code = "FFI_BAD_ABI";
+                err.errno = status;
+                throw err;
+            }
+        default:
+            throw new Error("ffi_prep_cif() returned an error: " + status);
+    }
+    if ($fdeab4dadbed169b$var$debug.enabled || `${undefined}`.match(/\bffi\b/)) $fdeab4dadbed169b$var$cifs.push(cif);
+    return cif;
 }
-function $1090eee99c835ae1$export$5c6c9f1eec02dba8(obj) {
+module.exports = $fdeab4dadbed169b$var$CIF;
+
+});
+parcelRequire.register("B37ul", function(module, exports) {
+
+var $06f5e056e9faa4dc$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $1a7VL = parcelRequire("1a7VL");
+
+
+const $06f5e056e9faa4dc$var$debug = (parcelRequire("4LET2"))("ffi:types");
+
+const $06f5e056e9faa4dc$var$Struct = (parcelRequire("kZbZk"))($1a7VL);
+
+var $ixfDa = parcelRequire("ixfDa");
+/**
+ * Define the `ffi_type` struct (see deps/libffi/include/ffi.h) for use in JS.
+ * This struct type is used internally to define custom struct ret/arg types.
+ */ const $06f5e056e9faa4dc$var$FFI_TYPE = $06f5e056e9faa4dc$var$Type.FFI_TYPE = $06f5e056e9faa4dc$var$Struct();
+$06f5e056e9faa4dc$var$FFI_TYPE.defineProperty("size", $1a7VL.types.size_t);
+$06f5e056e9faa4dc$var$FFI_TYPE.defineProperty("alignment", $1a7VL.types.ushort);
+$06f5e056e9faa4dc$var$FFI_TYPE.defineProperty("type", $1a7VL.types.ushort);
+// this last prop is a C Array of `ffi_type *` elements, so this is `ffi_type **`
+const $06f5e056e9faa4dc$var$ffi_type_ptr_array = $1a7VL.refType($1a7VL.refType($06f5e056e9faa4dc$var$FFI_TYPE));
+$06f5e056e9faa4dc$var$FFI_TYPE.defineProperty("elements", $06f5e056e9faa4dc$var$ffi_type_ptr_array);
+$3EevV$assert.strictEqual($ixfDa.FFI_TYPE_SIZE, $06f5e056e9faa4dc$var$FFI_TYPE.size);
+/**
+ * Returns a `ffi_type *` Buffer appropriate for the given "type".
+ *
+ * @param {Type|String} type A "ref" type (or string) to get the `ffi_type` for
+ * @return {Buffer} A buffer pointing to a `ffi_type` instance for "type"
+ * @api private
+ */ function $06f5e056e9faa4dc$var$Type(type) {
+    type = $1a7VL.coerceType(type);
+    $06f5e056e9faa4dc$var$debug("Type()", type.name || type);
+    $3EevV$assert(type.indirection >= 1, 'invalid "type" given: ' + (type.name || type));
+    let ret;
+    // first we assume it's a regular "type". if the "indirection" is greater than
+    // 1, then we can just use "pointer" ffi_type, otherwise we hope "ffi_type" is
+    // set
+    if (type.indirection === 1) ret = type.ffi_type;
+    else ret = $ixfDa.FFI_TYPES.pointer;
+    // if "ret" isn't set (ffi_type was not set) then we check for "ref-array" type
+    if (!ret && type.type) // got a "ref-array" type
+    // passing arrays to C functions are always by reference, so we use "pointer"
+    ret = $ixfDa.FFI_TYPES.pointer;
+    if (!ret && type.fields) {
+        // got a "ref-struct" type
+        // need to create the `ffi_type` instance manually
+        $06f5e056e9faa4dc$var$debug('creating an `ffi_type` for given "ref-struct" type');
+        const fields = type.fields;
+        const fieldNames = Object.keys(fields);
+        const numFields = fieldNames.length;
+        let numElements = 0;
+        const ffi_type = new $06f5e056e9faa4dc$var$FFI_TYPE;
+        let field;
+        let ffi_type_ptr;
+        // these are the "ffi_type" values expected for a struct
+        ffi_type.size = 0;
+        ffi_type.alignment = 0;
+        ffi_type.type = 13; // FFI_TYPE_STRUCT
+        // first we have to figure out the number of "elements" that will go in the
+        // array. this would normally just be "numFields" but we also have to account
+        // for arrays, which each act as their own element
+        for(let i = 0; i < numFields; i++){
+            field = fields[fieldNames[i]];
+            if (field.type.fixedLength > 0) // a fixed-length "ref-array" type
+            numElements += field.type.fixedLength;
+            else numElements += 1;
+        }
+        // hand-crafting a null-terminated array here.
+        // XXX: use "ref-array"?
+        const size = $1a7VL.sizeof.pointer * (numElements + 1); // +1 because of the NULL terminator
+        const elements = ffi_type.elements = $06f5e056e9faa4dc$require$Buffer.alloc(size);
+        let index = 0;
+        for(let i1 = 0; i1 < numFields; i1++){
+            field = fields[fieldNames[i1]];
+            if (field.type.fixedLength > 0) {
+                // a fixed-length "ref-array" type
+                ffi_type_ptr = $06f5e056e9faa4dc$var$Type(field.type.type);
+                for(var j = 0; j < field.type.fixedLength; j++)elements.writePointer(ffi_type_ptr, (index++) * $1a7VL.sizeof.pointer);
+            } else {
+                ffi_type_ptr = $06f5e056e9faa4dc$var$Type(field.type);
+                elements.writePointer(ffi_type_ptr, (index++) * $1a7VL.sizeof.pointer);
+            }
+        }
+        // final NULL pointer to terminate the Array
+        elements.writePointer($1a7VL.NULL, index * $1a7VL.sizeof.pointer);
+        // also set the `ffi_type` property to that it's cached for next time
+        ret = type.ffi_type = ffi_type.ref();
+    }
+    if (!ret && type.name) {
+        // handle "ref" types other than the set that node-ffi is using (i.e.
+        // a separate copy)
+        if ("CString" == type.name) ret = type.ffi_type = $ixfDa.FFI_TYPES.pointer;
+        else {
+            let cur = type;
+            while(!ret && cur){
+                ret = cur.ffi_type = $ixfDa.FFI_TYPES[cur.name];
+                cur = Object.getPrototypeOf(cur);
+            }
+        }
+    }
+    $3EevV$assert(ret, "Could not determine the `ffi_type` instance for type: " + (type.name || type));
+    $06f5e056e9faa4dc$var$debug("returning `ffi_type`", ret.name);
+    return ret;
+}
+module.exports = $06f5e056e9faa4dc$var$Type;
+
+});
+parcelRequire.register("ixfDa", function(module, exports) {
+var $d7e76efae722569f$var$__dirname = "node_modules/ffi-napi/lib";
+"use strict";
+
+
+var $1a7VL = parcelRequire("1a7VL");
+
+$3EevV$assert($1a7VL.instance);
+
+const $d7e76efae722569f$var$bindings = (parcelRequire("5XWss"))($3EevV$path.join($d7e76efae722569f$var$__dirname, ".."));
+module.exports = $d7e76efae722569f$var$bindings.initializeBindings($1a7VL.instance);
+
+});
+
+
+
+parcelRequire.register("aqPHE", function(module, exports) {
+
+var $798470370bfc2bfc$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $B37ul = parcelRequire("B37ul");
+
+
+const $798470370bfc2bfc$var$debug = (parcelRequire("4LET2"))("ffi:cif_var");
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $ixfDa = parcelRequire("ixfDa");
+const $798470370bfc2bfc$var$POINTER_SIZE = $1a7VL.sizeof.pointer;
+const $798470370bfc2bfc$var$ffi_prep_cif_var = $ixfDa.ffi_prep_cif_var;
+const $798470370bfc2bfc$var$FFI_CIF_SIZE = $ixfDa.FFI_CIF_SIZE;
+const $798470370bfc2bfc$var$FFI_DEFAULT_ABI = $ixfDa.FFI_DEFAULT_ABI;
+// status codes
+const $798470370bfc2bfc$var$FFI_OK = $ixfDa.FFI_OK;
+const $798470370bfc2bfc$var$FFI_BAD_TYPEDEF = $ixfDa.FFI_BAD_TYPEDEF;
+const $798470370bfc2bfc$var$FFI_BAD_ABI = $ixfDa.FFI_BAD_ABI;
+/**
+ * JS wrapper for the `ffi_prep_cif_var` function.
+ * Returns a Buffer instance representing a variadic `ffi_cif *` instance.
+ */ function $798470370bfc2bfc$var$CIF_var(rtype, types, numFixedArgs, abi) {
+    $798470370bfc2bfc$var$debug("creating `ffi_cif *` instance with `ffi_prep_cif_var()`");
+    // the return and arg types are expected to be coerced at this point...
+    $3EevV$assert(!!rtype, 'expected a return "type" object as the first argument');
+    $3EevV$assert(Array.isArray(types), 'expected an Array of arg "type" objects as the second argument');
+    $3EevV$assert(numFixedArgs >= 1, "expected the number of fixed arguments to be at least 1");
+    // the buffer that will contain the return `ffi_cif *` instance
+    const cif = $798470370bfc2bfc$require$Buffer.alloc($798470370bfc2bfc$var$FFI_CIF_SIZE);
+    const numTotalArgs = types.length;
+    const _argtypesptr = $798470370bfc2bfc$require$Buffer.alloc(numTotalArgs * $798470370bfc2bfc$var$POINTER_SIZE);
+    const _rtypeptr = $B37ul(rtype);
+    for(let i = 0; i < numTotalArgs; i++){
+        const ffiType = $B37ul(types[i]);
+        _argtypesptr.writePointer(ffiType, i * $798470370bfc2bfc$var$POINTER_SIZE);
+    }
+    // prevent GC of the arg type and rtn type buffers (not sure if this is required)
+    cif.rtnTypePtr = _rtypeptr;
+    cif.argTypesPtr = _argtypesptr;
+    if (typeof abi === "undefined") {
+        $798470370bfc2bfc$var$debug("no ABI specified (this is OK), using FFI_DEFAULT_ABI");
+        abi = $798470370bfc2bfc$var$FFI_DEFAULT_ABI;
+    }
+    const status = $798470370bfc2bfc$var$ffi_prep_cif_var(cif, numFixedArgs, numTotalArgs, _rtypeptr, _argtypesptr, abi);
+    if (status !== $798470370bfc2bfc$var$FFI_OK) switch(status){
+        case $798470370bfc2bfc$var$FFI_BAD_TYPEDEF:
+            {
+                const err = new Error("ffi_prep_cif_var() returned an FFI_BAD_TYPEDEF error");
+                err.code = "FFI_BAD_TYPEDEF";
+                err.errno = status;
+                throw err;
+            }
+        case $798470370bfc2bfc$var$FFI_BAD_ABI:
+            {
+                const err = new Error("ffi_prep_cif_var() returned an FFI_BAD_ABI error");
+                err.code = "FFI_BAD_ABI";
+                err.errno = status;
+                throw err;
+            }
+        default:
+            {
+                const err = new Error("ffi_prep_cif_var() returned an error: " + status);
+                err.errno = status;
+                throw err;
+            }
+    }
+    return cif;
+}
+module.exports = $798470370bfc2bfc$var$CIF_var;
+
+});
+
+parcelRequire.register("k9PMD", function(module, exports) {
+
+var $eaccd1005131a923$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $1a7VL = parcelRequire("1a7VL");
+
+
+var $ixfDa = parcelRequire("ixfDa");
+
+var $iGTuK = parcelRequire("iGTuK");
+
+var $c4Oxe = parcelRequire("c4Oxe");
+
+const $eaccd1005131a923$var$debug = (parcelRequire("4LET2"))("ffi:FunctionType");
+/**
+ * Module exports.
+ */ module.exports = $eaccd1005131a923$var$Function;
+/**
+ * Creates and returns a "type" object for a C "function pointer".
+ *
+ * @api public
+ */ function $eaccd1005131a923$var$Function(retType, argTypes, abi) {
+    if (!(this instanceof $eaccd1005131a923$var$Function)) return new $eaccd1005131a923$var$Function(retType, argTypes, abi);
+    $eaccd1005131a923$var$debug("creating new FunctionType");
+    // check args
+    $3EevV$assert(!!retType, 'expected a return "type" object as the first argument');
+    $3EevV$assert(Array.isArray(argTypes), 'expected Array of arg "type" objects as the second argument');
+    // normalize the "types" (they could be strings, so turn into real type
+    // instances)
+    this.retType = $1a7VL.coerceType(retType);
+    this.argTypes = argTypes.map($1a7VL.coerceType);
+    this.abi = null == abi ? $ixfDa.FFI_DEFAULT_ABI : abi;
+}
+/**
+ * The "ffi_type" is set for node-ffi functions.
+ */ $eaccd1005131a923$var$Function.prototype.ffi_type = $ixfDa.FFI_TYPES.pointer;
+/**
+ * The "size" is always pointer-sized.
+ */ $eaccd1005131a923$var$Function.prototype.size = $1a7VL.sizeof.pointer;
+/**
+ * The "alignment" is always pointer-aligned.
+ */ $eaccd1005131a923$var$Function.prototype.alignment = $1a7VL.alignof.pointer;
+/**
+ * The "indirection" is always 1 to ensure that our get()/set() get called.
+ */ $eaccd1005131a923$var$Function.prototype.indirection = 1;
+/**
+ * Returns a ffi.Callback pointer (Buffer) of this function type for the
+ * given `fn` Function.
+ */ $eaccd1005131a923$var$Function.prototype.toPointer = function toPointer(fn) {
+    return $iGTuK(this.retType, this.argTypes, this.abi, fn);
+};
+/**
+ * Returns a ffi.ForeignFunction (Function) of this function type for the
+ * given `buf` Buffer.
+ */ $eaccd1005131a923$var$Function.prototype.toFunction = function toFunction(buf) {
+    return $c4Oxe(buf, this.retType, this.argTypes, this.abi);
+};
+/**
+ * get function; return a ForeignFunction instance.
+ */ $eaccd1005131a923$var$Function.prototype.get = function get(buffer, offset) {
+    $eaccd1005131a923$var$debug('ffi FunctionType "get" function');
+    const ptr = buffer.readPointer(offset);
+    return this.toFunction(ptr);
+};
+/**
+ * set function; return a Callback buffer.
+ */ $eaccd1005131a923$var$Function.prototype.set = function set(buffer, offset, value) {
+    $eaccd1005131a923$var$debug('ffi FunctionType "set" function');
+    let ptr;
+    if ("function" == typeof value) ptr = this.toPointer(value);
+    else if ($eaccd1005131a923$require$Buffer.isBuffer(value)) ptr = value;
+    else throw new Error("don't know how to set callback function for: " + value);
+    buffer.writePointer(ptr, offset);
+};
+
+});
+parcelRequire.register("iGTuK", function(module, exports) {
+
+"use strict";
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $lNAMA = parcelRequire("lNAMA");
+
+
+const $d9b7326144ffb1cb$var$debug = (parcelRequire("4LET2"))("ffi:Callback");
+
+var $ixfDa = parcelRequire("ixfDa");
+var $d9b7326144ffb1cb$require$_Callback = $ixfDa.Callback;
+// Function used to report errors to the current process event loop,
+// When user callback function gets gced.
+function $d9b7326144ffb1cb$var$errorReportCallback(err) {
+    if (err) $3EevV$process.nextTick(function() {
+        if (typeof err === "string") throw new Error(err);
+        else throw err;
+    });
+}
+/**
+ * Turns a JavaScript function into a C function pointer.
+ * The function pointer may be used in other C functions that
+ * accept C callback functions.
+ */ function $d9b7326144ffb1cb$var$Callback(retType, argTypes, abi, func) {
+    $d9b7326144ffb1cb$var$debug("creating new Callback");
+    if (typeof abi === "function") {
+        func = abi;
+        abi = undefined;
+    }
+    // check args
+    $3EevV$assert(!!retType, 'expected a return "type" object as the first argument');
+    $3EevV$assert(Array.isArray(argTypes), 'expected Array of arg "type" objects as the second argument');
+    $3EevV$assert.equal(typeof func, "function", "expected a function as the third argument");
+    // normalize the "types" (they could be strings, so turn into real type
+    // instances)
+    retType = $1a7VL.coerceType(retType);
+    argTypes = argTypes.map($1a7VL.coerceType);
+    // create the `ffi_cif *` instance
+    const cif = $lNAMA(retType, argTypes, abi);
+    const argc = argTypes.length;
+    const callback = $d9b7326144ffb1cb$require$_Callback(cif, retType.size, argc, $d9b7326144ffb1cb$var$errorReportCallback, (retval, params)=>{
+        $d9b7326144ffb1cb$var$debug("Callback function being invoked");
+        try {
+            const args = [];
+            for(var i = 0; i < argc; i++){
+                const type = argTypes[i];
+                const argPtr = params.readPointer(i * $1a7VL.sizeof.pointer, type.size);
+                argPtr.type = type;
+                args.push(argPtr.deref());
+            }
+            // Invoke the user-given function
+            const result = func.apply(null, args);
+            try {
+                $1a7VL.set(retval, 0, result, retType);
+            } catch (e) {
+                e.message = "error setting return value - " + e.message;
+                throw e;
+            }
+        } catch (e) {
+            return e;
+        }
+    });
+    // store reference to the CIF Buffer so that it doesn't get
+    // garbage collected before the callback Buffer does
+    callback._cif = cif;
+    return callback;
+}
+module.exports = $d9b7326144ffb1cb$var$Callback;
+
+});
+
+parcelRequire.register("c4Oxe", function(module, exports) {
+
+var $8cad0ef6e1f2d499$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $lNAMA = parcelRequire("lNAMA");
+
+var $jQvZe = parcelRequire("jQvZe");
+
+const $8cad0ef6e1f2d499$var$debug = (parcelRequire("4LET2"))("ffi:ForeignFunction");
+
+
+var $1a7VL = parcelRequire("1a7VL");
+/**
+ * Represents a foreign function in another library. Manages all of the aspects
+ * of function execution, including marshalling the data parameters for the
+ * function into native types and also unmarshalling the return from function
+ * execution.
+ */ function $8cad0ef6e1f2d499$var$ForeignFunction(funcPtr, returnType, argTypes, abi) {
+    $8cad0ef6e1f2d499$var$debug("creating new ForeignFunction", funcPtr);
+    // check args
+    $3EevV$assert($8cad0ef6e1f2d499$require$Buffer.isBuffer(funcPtr), "expected Buffer as first argument");
+    $3EevV$assert(!!returnType, 'expected a return "type" object as the second argument');
+    $3EevV$assert(Array.isArray(argTypes), 'expected Array of arg "type" objects as the third argument');
+    // normalize the "types" (they could be strings,
+    // so turn into real type instances)
+    returnType = $1a7VL.coerceType(returnType);
+    argTypes = argTypes.map($1a7VL.coerceType);
+    // create the `ffi_cif *` instance
+    const cif = $lNAMA(returnType, argTypes, abi);
+    // create and return the JS proxy function
+    return $jQvZe(cif, funcPtr, returnType, argTypes);
+}
+module.exports = $8cad0ef6e1f2d499$var$ForeignFunction;
+
+});
+parcelRequire.register("jQvZe", function(module, exports) {
+
+var $e72baf840aabb55b$require$Buffer = $3EevV$buffer.Buffer;
+
+"use strict";
+
+
+const $e72baf840aabb55b$var$debug = (parcelRequire("4LET2"))("ffi:_ForeignFunction");
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $ixfDa = parcelRequire("ixfDa");
+const $e72baf840aabb55b$var$POINTER_SIZE = $1a7VL.sizeof.pointer;
+const $e72baf840aabb55b$var$FFI_ARG_SIZE = $ixfDa.FFI_ARG_SIZE;
+function $e72baf840aabb55b$var$ForeignFunction(cif, funcPtr, returnType, argTypes) {
+    $e72baf840aabb55b$var$debug("creating new ForeignFunction", funcPtr);
+    const numArgs = argTypes.length;
+    const argsArraySize = numArgs * $e72baf840aabb55b$var$POINTER_SIZE;
+    // "result" must point to storage that is sizeof(long) or larger. For smaller
+    // return value sizes, the ffi_arg or ffi_sarg integral type must be used to
+    // hold the return value
+    const resultSize = returnType.size >= $1a7VL.sizeof.long ? returnType.size : $e72baf840aabb55b$var$FFI_ARG_SIZE;
+    $3EevV$assert(resultSize > 0);
+    /**
+   * This is the actual JS function that gets returned.
+   * It handles marshalling input arguments into C values,
+   * and unmarshalling the return value back into a JS value
+   */ const proxy = function() {
+        $e72baf840aabb55b$var$debug("invoking proxy function");
+        if (arguments.length !== numArgs) throw new TypeError("Expected " + numArgs + " arguments, got " + arguments.length);
+        // storage buffers for input arguments and the return value
+        const result = $e72baf840aabb55b$require$Buffer.alloc(resultSize);
+        const argsList = $e72baf840aabb55b$require$Buffer.alloc(argsArraySize);
+        // write arguments to storage areas
+        let i;
+        try {
+            for(i = 0; i < numArgs; i++){
+                const argType = argTypes[i];
+                const val = arguments[i];
+                const valPtr = $1a7VL.alloc(argType, val);
+                argsList.writePointer(valPtr, i * $e72baf840aabb55b$var$POINTER_SIZE);
+            }
+        } catch (e) {
+            // counting arguments from 1 is more human readable
+            i++;
+            e.message = "error setting argument " + i + " - " + e.message;
+            throw e;
+        }
+        // invoke the `ffi_call()` function
+        $ixfDa.ffi_call(cif, funcPtr, result, argsList);
+        result.type = returnType;
+        return result.deref();
+    };
+    /**
+   * The asynchronous version of the proxy function.
+   */ proxy.async = function() {
+        $e72baf840aabb55b$var$debug("invoking async proxy function");
+        const argc = arguments.length;
+        if (argc !== numArgs + 1) throw new TypeError("Expected " + (numArgs + 1) + " arguments, got " + argc);
+        const callback = arguments[argc - 1];
+        if (typeof callback !== "function") throw new TypeError("Expected a callback function as argument number: " + (argc - 1));
+        // storage buffers for input arguments and the return value
+        const result = $e72baf840aabb55b$require$Buffer.alloc(resultSize);
+        const argsList = $e72baf840aabb55b$require$Buffer.alloc(argsArraySize);
+        // write arguments to storage areas
+        let i;
+        try {
+            for(i = 0; i < numArgs; i++){
+                const argType = argTypes[i];
+                const val = arguments[i];
+                const valPtr = $1a7VL.alloc(argType, val);
+                argsList.writePointer(valPtr, i * $e72baf840aabb55b$var$POINTER_SIZE);
+            }
+        } catch (e) {
+            e.message = "error setting argument " + i + " - " + e.message;
+            return $3EevV$process.nextTick(callback.bind(null, e));
+        }
+        // invoke the `ffi_call()` function asynchronously
+        $ixfDa.ffi_call_async(cif, funcPtr, result, argsList, function(err) {
+            // make sure that the 4 Buffers passed in above don't get GC'd while we're
+            // doing work on the thread pool...
+            [
+                cif,
+                funcPtr,
+                argsList
+            ].map(()=>{});
+            // now invoke the user-provided callback function
+            if (err) callback(err);
+            else {
+                result.type = returnType;
+                callback(null, result.deref());
+            }
+        });
+    };
+    return proxy;
+}
+module.exports = $e72baf840aabb55b$var$ForeignFunction;
+
+});
+
+
+
+parcelRequire.register("aCeOm", function(module, exports) {
+
+var $7ba8f1358f3ff13a$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $aqPHE = parcelRequire("aqPHE");
+
+var $B37ul = parcelRequire("B37ul");
+
+var $jQvZe = parcelRequire("jQvZe");
+
+
+const $7ba8f1358f3ff13a$var$debug = (parcelRequire("4LET2"))("ffi:VariadicForeignFunction");
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $ixfDa = parcelRequire("ixfDa");
+const $7ba8f1358f3ff13a$var$POINTER_SIZE = $1a7VL.sizeof.pointer;
+const $7ba8f1358f3ff13a$var$FFI_ARG_SIZE = $ixfDa.FFI_ARG_SIZE;
+/**
+ * For when you want to call to a C function with variable amount of arguments.
+ * i.e. `printf()`.
+ *
+ * This function takes care of caching and reusing ForeignFunction instances that
+ * contain the same ffi_type argument signature.
+ */ function $7ba8f1358f3ff13a$var$VariadicForeignFunction(funcPtr, returnType, fixedArgTypes, abi) {
+    $7ba8f1358f3ff13a$var$debug("creating new VariadicForeignFunction", funcPtr);
+    // the cache of ForeignFunction instances that this
+    // VariadicForeignFunction has created so far
+    const cache = {};
+    // check args
+    $3EevV$assert($7ba8f1358f3ff13a$require$Buffer.isBuffer(funcPtr), "expected Buffer as first argument");
+    $3EevV$assert(!!returnType, 'expected a return "type" object as the second argument');
+    $3EevV$assert(Array.isArray(fixedArgTypes), 'expected Array of arg "type" objects as the third argument');
+    const numFixedArgs = fixedArgTypes.length;
+    // normalize the "types" (they could be strings,
+    // so turn into real type instances)
+    fixedArgTypes = fixedArgTypes.map($1a7VL.coerceType);
+    // get the names of the fixed arg types
+    const fixedKey = fixedArgTypes.map(function(type) {
+        return $7ba8f1358f3ff13a$var$getId(type);
+    });
+    // what gets returned is another function that needs to be invoked with the rest
+    // of the variadic types that are being invoked from the function.
+    function variadic_function_generator() {
+        $7ba8f1358f3ff13a$var$debug("variadic_function_generator invoked");
+        // first get the types of variadic args we are working with
+        const argTypes = fixedArgTypes.slice();
+        let key = fixedKey.slice();
+        for(let i = 0; i < arguments.length; i++){
+            const type = $1a7VL.coerceType(arguments[i]);
+            argTypes.push(type);
+            const ffi_type = $B37ul(type);
+            $3EevV$assert(ffi_type.name);
+            key.push($7ba8f1358f3ff13a$var$getId(type));
+        }
+        // now figure out the return type
+        const rtnType = $1a7VL.coerceType(variadic_function_generator.returnType);
+        const rtnName = $7ba8f1358f3ff13a$var$getId(rtnType);
+        $3EevV$assert(rtnName);
+        // first let's generate the key and see if we got a cache-hit
+        key = rtnName + key.join("");
+        let func = cache[key];
+        if (func) $7ba8f1358f3ff13a$var$debug("cache hit for key:", key);
+        else {
+            // create the `ffi_cif *` instance
+            $7ba8f1358f3ff13a$var$debug("creating the variadic ffi_cif instance for key:", key);
+            const cif = $aqPHE(returnType, argTypes, numFixedArgs, abi);
+            func = cache[key] = $jQvZe(cif, funcPtr, rtnType, argTypes);
+        }
+        return func;
+    }
+    // set the return type. we set it as a property of the function generator to
+    // allow for monkey patching the return value in the very rare case where the
+    // return type is variadic as well
+    variadic_function_generator.returnType = returnType;
+    return variadic_function_generator;
+}
+module.exports = $7ba8f1358f3ff13a$var$VariadicForeignFunction;
+const $7ba8f1358f3ff13a$var$idKey = "_ffiId";
+let $7ba8f1358f3ff13a$var$counter = 0;
+function $7ba8f1358f3ff13a$var$getId(type) {
+    if (!type.hasOwnProperty($7ba8f1358f3ff13a$var$idKey)) type[$7ba8f1358f3ff13a$var$idKey] = (($7ba8f1358f3ff13a$var$counter++) * 0x10000 | 0).toString(16);
+    return type[$7ba8f1358f3ff13a$var$idKey];
+}
+
+});
+
+parcelRequire.register("bnjjc", function(module, exports) {
+
+var $8480d1fc7395ffce$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+var $c4Oxe = parcelRequire("c4Oxe");
+
+
+const $8480d1fc7395ffce$var$debug = (parcelRequire("4LET2"))("ffi:DynamicLibrary");
+
+var $ixfDa = parcelRequire("ixfDa");
+const $8480d1fc7395ffce$var$funcs = $ixfDa.StaticFunctions;
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $8480d1fc7395ffce$require$read = $3EevV$fs.readFileSync;
+// typedefs
+const $8480d1fc7395ffce$var$int = $1a7VL.types.int;
+const $8480d1fc7395ffce$var$voidPtr = $1a7VL.refType($1a7VL.types.void);
+const $8480d1fc7395ffce$var$dlopen = $c4Oxe($8480d1fc7395ffce$var$funcs.dlopen, $8480d1fc7395ffce$var$voidPtr, [
+    "string",
+    $8480d1fc7395ffce$var$int
+]);
+const $8480d1fc7395ffce$var$dlclose = $c4Oxe($8480d1fc7395ffce$var$funcs.dlclose, $8480d1fc7395ffce$var$int, [
+    $8480d1fc7395ffce$var$voidPtr
+]);
+const $8480d1fc7395ffce$var$dlsym = $c4Oxe($8480d1fc7395ffce$var$funcs.dlsym, $8480d1fc7395ffce$var$voidPtr, [
+    $8480d1fc7395ffce$var$voidPtr,
+    "string"
+]);
+const $8480d1fc7395ffce$var$dlerror = $c4Oxe($8480d1fc7395ffce$var$funcs.dlerror, "string", []);
+/**
+ * `DynamicLibrary` loads and fetches function pointers for dynamic libraries
+ * (.so, .dylib, etc). After the libray's function pointer is acquired, then you
+ * call `get(symbol)` to retreive a pointer to an exported symbol. You need to
+ * call `get___()` on the pointer to dereference it into its actual value, or
+ * turn the pointer into a callable function with `ForeignFunction`.
+ */ function $8480d1fc7395ffce$var$DynamicLibrary(path, mode) {
+    if (!(this instanceof $8480d1fc7395ffce$var$DynamicLibrary)) return new $8480d1fc7395ffce$var$DynamicLibrary(path, mode);
+    $8480d1fc7395ffce$var$debug("new DynamicLibrary()", path, mode);
+    if (null == mode) mode = $8480d1fc7395ffce$var$DynamicLibrary.FLAGS.RTLD_LAZY;
+    this._path = path;
+    this._handle = $8480d1fc7395ffce$var$dlopen(path, mode);
+    $3EevV$assert($8480d1fc7395ffce$require$Buffer.isBuffer(this._handle), "expected a Buffer instance to be returned from `dlopen()`");
+    if (this._handle.isNull()) {
+        var err = this.error();
+        // THIS CODE IS BASED ON GHC Trac ticket #2615
+        // http://hackage.haskell.org/trac/ghc/attachment/ticket/2615
+        // On some systems (e.g., Gentoo Linux) dynamic files (e.g. libc.so)
+        // contain linker scripts rather than ELF-format object code. This
+        // code handles the situation by recognizing the real object code
+        // file name given in the linker script.
+        // If an "invalid ELF header" error occurs, it is assumed that the
+        // .so file contains a linker script instead of ELF object code.
+        // In this case, the code looks for the GROUP ( ... ) linker
+        // directive. If one is found, the first file name inside the
+        // parentheses is treated as the name of a dynamic library and the
+        // code attempts to dlopen that file. If this is also unsuccessful,
+        // an error message is returned.
+        // see if the error message is due to an invalid ELF header
+        let match;
+        if (match = err.match(/^(([^ \t()])+\.so([^ \t:()])*):([ \t])*/)) {
+            const content = $8480d1fc7395ffce$require$read(match[1], "ascii");
+            // try to find a GROUP ( ... ) command
+            if (match = content.match(/GROUP *\( *(([^ )])+)/)) return $8480d1fc7395ffce$var$DynamicLibrary.call(this, match[1], mode);
+        }
+        throw new Error("Dynamic Linking Error: " + err);
+    }
+}
+module.exports = $8480d1fc7395ffce$var$DynamicLibrary;
+/**
+ * Set the exported flags from "dlfcn.h"
+ */ $8480d1fc7395ffce$var$DynamicLibrary.FLAGS = {};
+Object.keys($ixfDa).forEach(function(k) {
+    if (!/^RTLD_/.test(k)) return;
+    const desc = Object.getOwnPropertyDescriptor($ixfDa, k);
+    Object.defineProperty($8480d1fc7395ffce$var$DynamicLibrary.FLAGS, k, desc);
+});
+/**
+ * Close this library, returns the result of the dlclose() system function.
+ */ $8480d1fc7395ffce$var$DynamicLibrary.prototype.close = function() {
+    $8480d1fc7395ffce$var$debug("dlclose()");
+    return $8480d1fc7395ffce$var$dlclose(this._handle);
+};
+/**
+ * Get a symbol from this library, returns a Pointer for (memory address of) the symbol
+ */ $8480d1fc7395ffce$var$DynamicLibrary.prototype.get = function(symbol) {
+    $8480d1fc7395ffce$var$debug("dlsym()", symbol);
+    $3EevV$assert.strictEqual("string", typeof symbol);
+    const ptr = $8480d1fc7395ffce$var$dlsym(this._handle, symbol);
+    $3EevV$assert($8480d1fc7395ffce$require$Buffer.isBuffer(ptr));
+    if (ptr.isNull()) throw new Error("Dynamic Symbol Retrieval Error: " + this.error());
+    ptr.name = symbol;
+    return ptr;
+};
+/**
+ * Returns the result of the dlerror() system function
+ */ $8480d1fc7395ffce$var$DynamicLibrary.prototype.error = function error() {
+    $8480d1fc7395ffce$var$debug("dlerror()");
+    return $8480d1fc7395ffce$var$dlerror();
+};
+/**
+ * Returns the path originally passed to the constructor
+ */ $8480d1fc7395ffce$var$DynamicLibrary.prototype.path = function error() {
+    return this._path;
+};
+
+});
+
+parcelRequire.register("lOMgj", function(module, exports) {
+
+"use strict";
+
+var $bnjjc = parcelRequire("bnjjc");
+
+var $c4Oxe = parcelRequire("c4Oxe");
+
+var $aCeOm = parcelRequire("aCeOm");
+
+const $fe23b45391011beb$var$debug = (parcelRequire("4LET2"))("ffi:Library");
+const $fe23b45391011beb$var$RTLD_NOW = $bnjjc.FLAGS.RTLD_NOW;
+/**
+ * The extension to use on libraries.
+ * i.e.  libm  ->  libm.so   on linux
+ */ const $fe23b45391011beb$var$EXT = $fe23b45391011beb$var$Library.EXT = ({
+    "linux": ".so",
+    "linux2": ".so",
+    "sunos": ".so",
+    "solaris": ".so",
+    "freebsd": ".so",
+    "openbsd": ".so",
+    "darwin": ".dylib",
+    "mac": ".dylib",
+    "win32": ".dll"
+})[$3EevV$process.platform];
+/**
+ * Provides a friendly abstraction/API on-top of DynamicLibrary and
+ * ForeignFunction.
+ */ function $fe23b45391011beb$var$Library(libfile, funcs, lib) {
+    $fe23b45391011beb$var$debug("creating Library object for", libfile);
+    if (libfile && typeof libfile === "string" && libfile.indexOf($fe23b45391011beb$var$EXT) === -1) {
+        $fe23b45391011beb$var$debug("appending library extension to library name", $fe23b45391011beb$var$EXT);
+        libfile += $fe23b45391011beb$var$EXT;
+    }
+    if (!lib) lib = {};
+    let dl;
+    if (typeof libfile === "string" || !libfile) dl = new $bnjjc(libfile || null, $fe23b45391011beb$var$RTLD_NOW);
+    else dl = libfile;
+    Object.keys(funcs || {}).forEach(function(func) {
+        $fe23b45391011beb$var$debug("defining function", func);
+        const fptr = dl.get(func);
+        const info = funcs[func];
+        if (fptr.isNull()) throw new Error('Library: "' + dl.path() + '" returned NULL function pointer for "' + func + '"');
+        const resultType = info[0];
+        const paramTypes = info[1];
+        const fopts = info[2];
+        const abi = fopts && fopts.abi;
+        const async = fopts && fopts.async;
+        const varargs = fopts && fopts.varargs;
+        if (varargs) lib[func] = $aCeOm(fptr, resultType, paramTypes, abi);
+        else {
+            const ff = $c4Oxe(fptr, resultType, paramTypes, abi);
+            lib[func] = async ? ff.async : ff;
+        }
+    });
+    return lib;
+}
+module.exports = $fe23b45391011beb$var$Library;
+
+});
+
+parcelRequire.register("i4T3Y", function(module, exports) {
+
+"use strict";
+
+var $bnjjc = parcelRequire("bnjjc");
+
+var $c4Oxe = parcelRequire("c4Oxe");
+
+var $ixfDa = parcelRequire("ixfDa");
+const $d293501ed7faa2ff$var$funcs = $ixfDa.StaticFunctions;
+
+var $1a7VL = parcelRequire("1a7VL");
+const $d293501ed7faa2ff$var$int = $1a7VL.types.int;
+const $d293501ed7faa2ff$var$intPtr = $1a7VL.refType($d293501ed7faa2ff$var$int);
+let $d293501ed7faa2ff$var$errno = null;
+if ($3EevV$process.platform == "win32") {
+    const _errno = $bnjjc("msvcrt.dll").get("_errno");
+    const errnoPtr = $c4Oxe(_errno, $d293501ed7faa2ff$var$intPtr, []);
+    $d293501ed7faa2ff$var$errno = function() {
+        return errnoPtr().deref();
+    };
+} else $d293501ed7faa2ff$var$errno = $c4Oxe($d293501ed7faa2ff$var$funcs._errno, "int", []);
+module.exports = $d293501ed7faa2ff$var$errno;
+
+});
+
+
+$parcel$export(module.exports, "IgtState", () => $63fad289b9cc9c40$export$1fbf6ae150f5289f);
+$parcel$export(module.exports, "setIgtCallback", () => $63fad289b9cc9c40$export$5801d716674e6bb6);
+$parcel$export(module.exports, "startIgt", () => $63fad289b9cc9c40$export$a679630bf91eb455);
+$parcel$export(module.exports, "stopIgt", () => $63fad289b9cc9c40$export$cb0b9fb431e2932b);
+var $11f5be3c47407e9d$exports = {};
+
+$parcel$export($11f5be3c47407e9d$exports, "_WIN64_HOLDER", () => $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+$parcel$export($11f5be3c47407e9d$exports, "_UNICODE_HOLDER", () => $11f5be3c47407e9d$export$609085a058d4a4d0);
+$parcel$export($11f5be3c47407e9d$exports, "windefSkipKeys", () => $11f5be3c47407e9d$export$527cfc1519820a40);
+$parcel$export($11f5be3c47407e9d$exports, "_WIN64", () => $11f5be3c47407e9d$export$def1b823ebd5706b);
+$parcel$export($11f5be3c47407e9d$exports, "_UNICODE", () => $11f5be3c47407e9d$export$cba91b4ce33b8ea);
+$parcel$export($11f5be3c47407e9d$exports, "settingsDefault", () => $11f5be3c47407e9d$export$f6b5b44fcd8003ee);
+$parcel$export($11f5be3c47407e9d$exports, "windefSet", () => $11f5be3c47407e9d$export$65a4230322ab1784);
+
+const $11f5be3c47407e9d$export$4bbcbb9e6d314d55 = "_WIN64_HOLDER_";
+const $11f5be3c47407e9d$export$609085a058d4a4d0 = "_UNICODE_HOLDER_";
+const $11f5be3c47407e9d$export$527cfc1519820a40 = new Set([
+    "macroMap"
+]);
+const $11f5be3c47407e9d$export$def1b823ebd5706b = $3EevV$process.arch === "x64";
+const $11f5be3c47407e9d$export$cba91b4ce33b8ea = true;
+const $11f5be3c47407e9d$export$f6b5b44fcd8003ee = {
+    singleton: true,
+    _UNICODE: $11f5be3c47407e9d$export$cba91b4ce33b8ea,
+    _WIN64: $11f5be3c47407e9d$export$def1b823ebd5706b
+};
+const $11f5be3c47407e9d$export$65a4230322ab1784 = new Set([
+    "bool",
+    "bool*",
+    "byte",
+    "byte*",
+    "char",
+    "uchar",
+    "char*",
+    "float",
+    "float*",
+    "int",
+    "int8",
+    "int16",
+    "int32",
+    "int64",
+    "int*",
+    "int8*",
+    "int16*",
+    "int32*",
+    "int64*",
+    "uint",
+    "uint8",
+    "uint16",
+    "uint32",
+    "uint64",
+    "uint*",
+    "uint8*",
+    "uint16*",
+    "uint32*",
+    "uint64*",
+    "int**",
+    "uint**",
+    "uint32**",
+    "uint64**",
+    "long",
+    "longlong",
+    "long*",
+    "longlong*",
+    "pointer",
+    "ushort",
+    "void",
+    "void*", 
+]);
+
+
+var $10095d0141f037de$exports = {};
+
+$parcel$export($10095d0141f037de$exports, "ALTTABINFO", () => $10095d0141f037de$export$ad48b1b2cfc75809);
+$parcel$export($10095d0141f037de$exports, "COPYDATASTRUCT", () => $10095d0141f037de$export$235a24185e6c03f3);
+$parcel$export($10095d0141f037de$exports, "HARDWAREINPUT", () => $10095d0141f037de$export$c747a8b76ce2fc55);
+$parcel$export($10095d0141f037de$exports, "INITCOMMONCONTROLSEX", () => $10095d0141f037de$export$6eb78d635a3ee587);
+$parcel$export($10095d0141f037de$exports, "KEYBDINPUT", () => $10095d0141f037de$export$9d77698e6144d105);
+$parcel$export($10095d0141f037de$exports, "MOUSEINPUT", () => $10095d0141f037de$export$b25d5f19497424fa);
+$parcel$export($10095d0141f037de$exports, "MSG", () => $10095d0141f037de$export$f99154f7a7b0135d);
+$parcel$export($10095d0141f037de$exports, "POINT", () => $10095d0141f037de$export$a80a24d37f0f1279);
+$parcel$export($10095d0141f037de$exports, "PROCESS_BASIC_INFORMATION", () => $10095d0141f037de$export$ca65a5b05e68b7ff);
+$parcel$export($10095d0141f037de$exports, "UNICODE_STRING", () => $10095d0141f037de$export$5dcce0e722389cdb);
+$parcel$export($10095d0141f037de$exports, "RAWHID", () => $10095d0141f037de$export$109b0986e0806ee);
+$parcel$export($10095d0141f037de$exports, "RAWINPUTDEVICELIST", () => $10095d0141f037de$export$cf7f2abb0ac9e892);
+$parcel$export($10095d0141f037de$exports, "RAWINPUTHEADER", () => $10095d0141f037de$export$614c933f340ce1c1);
+$parcel$export($10095d0141f037de$exports, "RAWKEYBOARD", () => $10095d0141f037de$export$7f9753d8aef93f40);
+$parcel$export($10095d0141f037de$exports, "WINDOWINFO", () => $10095d0141f037de$export$5119761222d7d0f6);
+$parcel$export($10095d0141f037de$exports, "WNDCLASSEX", () => $10095d0141f037de$export$81ef613fbd3a628d);
+$parcel$export($10095d0141f037de$exports, "RECT", () => $10095d0141f037de$export$1e530543ba1d4b12);
+$parcel$export($10095d0141f037de$exports, "_RECT", () => $10095d0141f037de$export$1e530543ba1d4b12);
+$parcel$export($10095d0141f037de$exports, "FILETIME", () => $10095d0141f037de$export$258339e884eb70b7);
+
+function $fe4f78b567d115e3$export$828a2cfb74eb348c(windefObj, macroMap, settings) {
+    const ww = $fe4f78b567d115e3$var$clone_filter_windef(windefObj); // output without macroMap
+    const macroSrc = $fe4f78b567d115e3$var$prepare_macro(macroMap, settings);
+    const ret = $fe4f78b567d115e3$var$prepare_windef_ref(ww, macroSrc);
+    $fe4f78b567d115e3$export$6b50c41cc4aa2277(ret, (0, $11f5be3c47407e9d$export$65a4230322ab1784));
+    return ret;
+}
+/**
+ * convert typeof array of param to string
+ * such like ['_WIN64_HOLDER_', 'int64', 'int32'], no changed returning when string
+ */ function $fe4f78b567d115e3$var$parse_param_placeholder(param, settings) {
+    if (typeof param === "string") return param;
+    else if (!param) throw new Error("parse_param_placeholder(ps, settings) value of ps invalid");
+    else if (!Array.isArray(param) || param.length !== 3) throw new Error("parse_param_placeholder(ps, settings) value of ps must Array and has THREE elements");
+    const st = $fe4f78b567d115e3$var$parse_settings(settings);
+    let ps = "";
+    switch(param[0]){
+        case 0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55:
+            ps = $fe4f78b567d115e3$var$parse_placeholder_arch(param, st._WIN64);
+            break;
+        case 0, $11f5be3c47407e9d$export$609085a058d4a4d0:
+            ps = $fe4f78b567d115e3$var$parse_placeholder_unicode(param, st._UNICODE);
+            break;
+        default:
+            throw new Error("the value of param placeholder invlaid:" + param[0]);
+    }
+    return ps;
+}
+// convert param like ['_WIN64_HOLDER_', 'int64', 'int32] to 'int64' or 'int32'
+function $fe4f78b567d115e3$var$parse_placeholder_arch(param, _WIN64) {
+    if (typeof param === "string") return param;
+    else if (!param || param.length !== 3) throw new Error("_WIN64 macro should be Array and has 3 items");
+    return _WIN64 ? param[1] : param[2];
+}
+// convert param like ['_UNICODE_HOLDER_', 'uint16*', 'uint8*'] to 'uint16*' or 'uint8*'
+function $fe4f78b567d115e3$var$parse_placeholder_unicode(param, _UNICODE) {
+    if (typeof param === "string") return param;
+    else if (!param || param.length !== 3) throw new Error("_UNICODE macro should be Array and has 3 items");
+    return _UNICODE ? param[1] : param[2];
+}
+/**
+ * parse ['_WIN64_HOLDER', 'int64*', 'int32*'] to 'int64*' or 'int32'
+ * or ['_UNICODE_HOLDER_', 'uint16*', 'uint8*'] to 'uint16*' or 'uint8*'
+ */ function $fe4f78b567d115e3$var$prepare_macro(macroMap, settings) {
+    const ret = new Map();
+    // v string|array
+    for (const [k, v] of macroMap.entries())ret.set(k, $fe4f78b567d115e3$var$parse_param_placeholder(v, settings));
+    return ret;
+}
+/**
+ * parse const HANDLE = 'PVOID' to the realy FFIParam (like 'uint32*')
+ * macroMap <['PVOID', 'uint32*'], ...>
+ */ function $fe4f78b567d115e3$var$prepare_windef_ref(ww, macroSrc) {
+    const ret = {};
+    const map = new Map();
+    // first loop paser keys which exists in macroSrc
+    for (const x of Object.keys(ww)){
+        /* istanbul ignore next */ if (map.has(x)) continue;
+        if (macroSrc.has(x)) {
+            const vv = macroSrc.get(x);
+            if (vv) map.set(x, vv);
+            else throw new Error(`Value of macroSrc item "${x}" blank`);
+        } else continue; // not throw error
+    }
+    // 2nd loop paser key , maybe value refer other key
+    for (const [k1, v1] of Object.entries(ww)){
+        /* istanbul ignore next */ if (map.has(k1)) continue;
+        if (typeof v1 === "string") {
+            if ((0, $11f5be3c47407e9d$export$65a4230322ab1784).has(v1)) map.set(k1, v1);
+            else {
+                const value = $fe4f78b567d115e3$export$653d6aa060f2e229(v1, ww, macroSrc);
+                // tslint:disable-next-line
+                if (typeof value === "string" && value) map.set(k1, value);
+                else map.set(k1, v1); // maybe invalid for windefSet, will validateWinData() later
+            }
+        } else throw new Error(`prepare_windef_ref() missing entry for k/v: ${k1}/"N/A"`);
+    }
+    map.forEach((v, k)=>{
+        ret[k] = v;
+    });
+    return ret;
+}
+function $fe4f78b567d115e3$var$clone_filter_windef(windef) {
+    const ret = {};
+    for (const x of Object.keys(windef)){
+        if (typeof windef[x] === "string") Object.defineProperty(ret, x, {
+            value: windef[x],
+            writable: true,
+            enumerable: true,
+            configurable: true
+        });
+        else throw new Error(`typeof value of ${x} NOT string`);
+    }
+    return ret;
+}
+function $fe4f78b567d115e3$var$parse_settings(settings) {
+    const st = {
+        ...(0, $11f5be3c47407e9d$export$f6b5b44fcd8003ee)
+    };
+    if (typeof settings !== "undefined" && Object.keys(settings).length) Object.assign(st, settings);
+    return st;
+}
+function $fe4f78b567d115e3$export$653d6aa060f2e229(key, ww, macroSrc) {
+    let ret = $fe4f78b567d115e3$var$_lookupRef(key, ww, macroSrc);
+    if (!ret) return "";
+    for(let i = 0, len = 3; i < len; i += 1){
+        const tmp = $fe4f78b567d115e3$var$_lookupRef(ret, ww, macroSrc);
+        if (tmp) ret = tmp;
+        else break;
+    }
+    return ret;
+}
+function $fe4f78b567d115e3$var$_lookupRef(key, ww, macroSrc) {
+    if (macroSrc.has(key)) return macroSrc.get(key);
+    // key is not valid FFIParam such 'int/uint...', like HMODULE: 'HANDLE'
+    if (typeof ww[key] === "string") {
+        // parse HANDLE: 'PVOID' , PVOID already parsed
+        const ret = ww[key];
+        if (ret && macroSrc.has(ret)) return macroSrc.get(ret);
+        return ret;
+    }
+    return "";
+}
+function $fe4f78b567d115e3$export$f6e45c3615c9e25a(key, srcSet) {
+    return !!srcSet.has(key);
+}
+function $fe4f78b567d115e3$export$6b50c41cc4aa2277(windef, srcSet) {
+    for (const [k, v] of Object.entries(windef)){
+        if (!k || !v) throw new Error(`validateWinData() k or v empty: "${k}"/"${v}"`);
+        if (typeof v !== "string") throw new Error(`validateWinData() v not typeof string: "${k}"/"N/A"`);
+        if (!$fe4f78b567d115e3$export$f6e45c3615c9e25a(v, srcSet)) throw new Error(`validateWinData() value is invalid ffi param value: "${k}"/"${v}", may extra space`);
+    }
+}
+
+
+
+var $ae6a0106bb4ff316$exports = {};
+
+$parcel$export($ae6a0106bb4ff316$exports, "ATOM", () => $ae6a0106bb4ff316$export$a78dc2c4cbd70341);
+$parcel$export($ae6a0106bb4ff316$exports, "DWORD", () => $ae6a0106bb4ff316$export$181c9ad1752440f7);
+$parcel$export($ae6a0106bb4ff316$exports, "PVOID", () => $ae6a0106bb4ff316$export$9cb553b951e1e0d8);
+$parcel$export($ae6a0106bb4ff316$exports, "HANDLE", () => $ae6a0106bb4ff316$export$1f4a129e1195d18a);
+$parcel$export($ae6a0106bb4ff316$exports, "HANDLE_PVOID", () => $ae6a0106bb4ff316$export$bd8b6af04676495);
+$parcel$export($ae6a0106bb4ff316$exports, "LONG_PTR", () => $ae6a0106bb4ff316$export$f60fc96aa99c605e);
+$parcel$export($ae6a0106bb4ff316$exports, "ULONG_PTR", () => $ae6a0106bb4ff316$export$2e482cd8c991e558);
+$parcel$export($ae6a0106bb4ff316$exports, "VOID", () => $ae6a0106bb4ff316$export$1cd1943b3a73bbe8);
+$parcel$export($ae6a0106bb4ff316$exports, "WCHAR", () => $ae6a0106bb4ff316$export$d71e2b267f5b711b);
+$parcel$export($ae6a0106bb4ff316$exports, "WORD", () => $ae6a0106bb4ff316$export$f3a79cf462faa1e3);
+$parcel$export($ae6a0106bb4ff316$exports, "BOOL", () => $ae6a0106bb4ff316$export$c35dd5647862f990);
+$parcel$export($ae6a0106bb4ff316$exports, "BOOLEAN", () => $ae6a0106bb4ff316$export$428cfe48a69a3b4f);
+$parcel$export($ae6a0106bb4ff316$exports, "BYTE", () => $ae6a0106bb4ff316$export$8f4bf8f7eb581284);
+$parcel$export($ae6a0106bb4ff316$exports, "CALLBACK", () => $ae6a0106bb4ff316$export$578a4c3d73a6d794);
+$parcel$export($ae6a0106bb4ff316$exports, "CCHAR", () => $ae6a0106bb4ff316$export$934996f637259e88);
+$parcel$export($ae6a0106bb4ff316$exports, "CHAR", () => $ae6a0106bb4ff316$export$9e88d7b6f62f62d8);
+$parcel$export($ae6a0106bb4ff316$exports, "COLORREF", () => $ae6a0106bb4ff316$export$52da70d84f582c04);
+$parcel$export($ae6a0106bb4ff316$exports, "DWORDLONG", () => $ae6a0106bb4ff316$export$6b766bfdcf67e2ec);
+$parcel$export($ae6a0106bb4ff316$exports, "DWORD_PTR", () => $ae6a0106bb4ff316$export$8f7b8c11edcb3e34);
+$parcel$export($ae6a0106bb4ff316$exports, "DWORD32", () => $ae6a0106bb4ff316$export$a8ea5b58ae88fc11);
+$parcel$export($ae6a0106bb4ff316$exports, "DWORD64", () => $ae6a0106bb4ff316$export$8db31e1b1c7e0db0);
+$parcel$export($ae6a0106bb4ff316$exports, "FLOAT", () => $ae6a0106bb4ff316$export$d2b086fd1e01e03a);
+$parcel$export($ae6a0106bb4ff316$exports, "HACCEL", () => $ae6a0106bb4ff316$export$1505c2c04cc3bbef);
+$parcel$export($ae6a0106bb4ff316$exports, "HALF_PTR", () => $ae6a0106bb4ff316$export$2d081f52dd94061a);
+$parcel$export($ae6a0106bb4ff316$exports, "HBITMAP", () => $ae6a0106bb4ff316$export$49cd303f01f67350);
+$parcel$export($ae6a0106bb4ff316$exports, "HBRUSH", () => $ae6a0106bb4ff316$export$d17b38c787d37ab8);
+$parcel$export($ae6a0106bb4ff316$exports, "HCOLORSPACE", () => $ae6a0106bb4ff316$export$56c7641f121a2c5c);
+$parcel$export($ae6a0106bb4ff316$exports, "HCONV", () => $ae6a0106bb4ff316$export$762b8b6ee0ff4c44);
+$parcel$export($ae6a0106bb4ff316$exports, "HCONVLIST", () => $ae6a0106bb4ff316$export$750eee7b2f0ee030);
+$parcel$export($ae6a0106bb4ff316$exports, "HCURSOR", () => $ae6a0106bb4ff316$export$a02796fdca6d354a);
+$parcel$export($ae6a0106bb4ff316$exports, "HDC", () => $ae6a0106bb4ff316$export$1a62f6d54b236e36);
+$parcel$export($ae6a0106bb4ff316$exports, "HDDEDATA", () => $ae6a0106bb4ff316$export$4ddde23cd7155d44);
+$parcel$export($ae6a0106bb4ff316$exports, "HDESK", () => $ae6a0106bb4ff316$export$1d0ad5eb60ffc518);
+$parcel$export($ae6a0106bb4ff316$exports, "HDROP", () => $ae6a0106bb4ff316$export$726c5c347609dae3);
+$parcel$export($ae6a0106bb4ff316$exports, "HDWP", () => $ae6a0106bb4ff316$export$323f06abdd2a59da);
+$parcel$export($ae6a0106bb4ff316$exports, "HENHMETAFILE", () => $ae6a0106bb4ff316$export$a43730eb8bf8b76e);
+$parcel$export($ae6a0106bb4ff316$exports, "HFILE", () => $ae6a0106bb4ff316$export$91f6f659ef3d1edd);
+$parcel$export($ae6a0106bb4ff316$exports, "HFONT", () => $ae6a0106bb4ff316$export$229672d8f6dd9e1a);
+$parcel$export($ae6a0106bb4ff316$exports, "HGDIOBJ", () => $ae6a0106bb4ff316$export$ef0ae13fba225584);
+$parcel$export($ae6a0106bb4ff316$exports, "HGLOBAL", () => $ae6a0106bb4ff316$export$6b52c27577dfb85e);
+$parcel$export($ae6a0106bb4ff316$exports, "HHOOK", () => $ae6a0106bb4ff316$export$a681c4a7983815bf);
+$parcel$export($ae6a0106bb4ff316$exports, "HICON", () => $ae6a0106bb4ff316$export$105fd39584a4c170);
+$parcel$export($ae6a0106bb4ff316$exports, "HINSTANCE", () => $ae6a0106bb4ff316$export$1a50b4f53ac33a);
+$parcel$export($ae6a0106bb4ff316$exports, "HKEY", () => $ae6a0106bb4ff316$export$80d8783aa08e677d);
+$parcel$export($ae6a0106bb4ff316$exports, "HKL", () => $ae6a0106bb4ff316$export$9252a4926414af53);
+$parcel$export($ae6a0106bb4ff316$exports, "HLOCAL", () => $ae6a0106bb4ff316$export$941fbb37db50e0ee);
+$parcel$export($ae6a0106bb4ff316$exports, "HMENU", () => $ae6a0106bb4ff316$export$5570ee796bf8668a);
+$parcel$export($ae6a0106bb4ff316$exports, "HMETAFILE", () => $ae6a0106bb4ff316$export$32e1d6dd1d786a08);
+$parcel$export($ae6a0106bb4ff316$exports, "HMODULE", () => $ae6a0106bb4ff316$export$82cb6941373786ac);
+$parcel$export($ae6a0106bb4ff316$exports, "HMONITOR", () => $ae6a0106bb4ff316$export$d76bcd896c4c1f0b);
+$parcel$export($ae6a0106bb4ff316$exports, "HPALETTE", () => $ae6a0106bb4ff316$export$c984542fbcd9e311);
+$parcel$export($ae6a0106bb4ff316$exports, "HPEN", () => $ae6a0106bb4ff316$export$e8c398641ae921a0);
+$parcel$export($ae6a0106bb4ff316$exports, "HRESULT", () => $ae6a0106bb4ff316$export$2109f3ca8e001dc3);
+$parcel$export($ae6a0106bb4ff316$exports, "HRGN", () => $ae6a0106bb4ff316$export$64129906a6b15c89);
+$parcel$export($ae6a0106bb4ff316$exports, "HRSRC", () => $ae6a0106bb4ff316$export$d0b96b23ab9f5338);
+$parcel$export($ae6a0106bb4ff316$exports, "HSZ", () => $ae6a0106bb4ff316$export$c50eccdd15c9fd55);
+$parcel$export($ae6a0106bb4ff316$exports, "HWINEVENTHOOK", () => $ae6a0106bb4ff316$export$60bcb2927641b3f4);
+$parcel$export($ae6a0106bb4ff316$exports, "HWINSTA", () => $ae6a0106bb4ff316$export$893fa35bdef36b);
+$parcel$export($ae6a0106bb4ff316$exports, "HWND", () => $ae6a0106bb4ff316$export$6525812590d9a476);
+$parcel$export($ae6a0106bb4ff316$exports, "INT", () => $ae6a0106bb4ff316$export$160e8bdd97bfce3a);
+$parcel$export($ae6a0106bb4ff316$exports, "INT_PTR", () => $ae6a0106bb4ff316$export$f051d14373139dee);
+$parcel$export($ae6a0106bb4ff316$exports, "INT8", () => $ae6a0106bb4ff316$export$9922471c07c2891d);
+$parcel$export($ae6a0106bb4ff316$exports, "INT16", () => $ae6a0106bb4ff316$export$bd9b91838fde002e);
+$parcel$export($ae6a0106bb4ff316$exports, "INT32", () => $ae6a0106bb4ff316$export$34412edc7b36f85);
+$parcel$export($ae6a0106bb4ff316$exports, "INT64", () => $ae6a0106bb4ff316$export$a2c63c68aeee9e2d);
+$parcel$export($ae6a0106bb4ff316$exports, "LANGID", () => $ae6a0106bb4ff316$export$6190ebba87077b9d);
+$parcel$export($ae6a0106bb4ff316$exports, "LCID", () => $ae6a0106bb4ff316$export$b36cf4a83245c2f9);
+$parcel$export($ae6a0106bb4ff316$exports, "LCTYPE", () => $ae6a0106bb4ff316$export$244c0463aedba74c);
+$parcel$export($ae6a0106bb4ff316$exports, "LGRPID", () => $ae6a0106bb4ff316$export$202821be4d3b65c7);
+$parcel$export($ae6a0106bb4ff316$exports, "LONG", () => $ae6a0106bb4ff316$export$686cfa64f218be7a);
+$parcel$export($ae6a0106bb4ff316$exports, "LONGLONG", () => $ae6a0106bb4ff316$export$2d2033f38dde21c);
+$parcel$export($ae6a0106bb4ff316$exports, "LONG32", () => $ae6a0106bb4ff316$export$4c9cb8eafd43015e);
+$parcel$export($ae6a0106bb4ff316$exports, "LONG64", () => $ae6a0106bb4ff316$export$552dea698acd6cd2);
+$parcel$export($ae6a0106bb4ff316$exports, "LPARAM", () => $ae6a0106bb4ff316$export$13371aace3d44948);
+$parcel$export($ae6a0106bb4ff316$exports, "LPBOOL", () => $ae6a0106bb4ff316$export$5df7e4acce683059);
+$parcel$export($ae6a0106bb4ff316$exports, "LPBYTE", () => $ae6a0106bb4ff316$export$1061811df8b0c9be);
+$parcel$export($ae6a0106bb4ff316$exports, "LPCOLORREF", () => $ae6a0106bb4ff316$export$f1d7ba3e4d51498c);
+$parcel$export($ae6a0106bb4ff316$exports, "LPCSTR", () => $ae6a0106bb4ff316$export$18e7280707df82f3);
+$parcel$export($ae6a0106bb4ff316$exports, "LPCWSTR", () => $ae6a0106bb4ff316$export$dfa283df2530598f);
+$parcel$export($ae6a0106bb4ff316$exports, "LPCTSTR", () => $ae6a0106bb4ff316$export$3e6b4f6079ce51b);
+$parcel$export($ae6a0106bb4ff316$exports, "LPVOID", () => $ae6a0106bb4ff316$export$3de86eb3806b712d);
+$parcel$export($ae6a0106bb4ff316$exports, "LPCVOID", () => $ae6a0106bb4ff316$export$acb32c160acad508);
+$parcel$export($ae6a0106bb4ff316$exports, "LPDWORD", () => $ae6a0106bb4ff316$export$33eafb5d436e1362);
+$parcel$export($ae6a0106bb4ff316$exports, "LPHANDLE", () => $ae6a0106bb4ff316$export$e8ea75f05566dd3c);
+$parcel$export($ae6a0106bb4ff316$exports, "LPINT", () => $ae6a0106bb4ff316$export$b4d77e4f53c21e3a);
+$parcel$export($ae6a0106bb4ff316$exports, "LPLONG", () => $ae6a0106bb4ff316$export$ca6bd9f017df4953);
+$parcel$export($ae6a0106bb4ff316$exports, "LPMSG", () => $ae6a0106bb4ff316$export$aba1f5f1221c9fb3);
+$parcel$export($ae6a0106bb4ff316$exports, "LPPOINT", () => $ae6a0106bb4ff316$export$3a00c33c250e7d86);
+$parcel$export($ae6a0106bb4ff316$exports, "LPSTR", () => $ae6a0106bb4ff316$export$e5fae31862228632);
+$parcel$export($ae6a0106bb4ff316$exports, "LPWSTR", () => $ae6a0106bb4ff316$export$dec24c174f0eaee1);
+$parcel$export($ae6a0106bb4ff316$exports, "LPTSTR", () => $ae6a0106bb4ff316$export$477e24a98da955e6);
+$parcel$export($ae6a0106bb4ff316$exports, "LPWORD", () => $ae6a0106bb4ff316$export$a362e06a8759641a);
+$parcel$export($ae6a0106bb4ff316$exports, "LRESULT", () => $ae6a0106bb4ff316$export$307c691072d7eef0);
+$parcel$export($ae6a0106bb4ff316$exports, "NTSTATUS", () => $ae6a0106bb4ff316$export$a50474266f14be1b);
+$parcel$export($ae6a0106bb4ff316$exports, "PBOOL", () => $ae6a0106bb4ff316$export$a1d44ba3d847cfd0);
+$parcel$export($ae6a0106bb4ff316$exports, "PBOOLEAN", () => $ae6a0106bb4ff316$export$4f984d513e291397);
+$parcel$export($ae6a0106bb4ff316$exports, "PBYTE", () => $ae6a0106bb4ff316$export$306fa084066e20a7);
+$parcel$export($ae6a0106bb4ff316$exports, "PCHAR", () => $ae6a0106bb4ff316$export$72c3772b516a65cf);
+$parcel$export($ae6a0106bb4ff316$exports, "PCSTR", () => $ae6a0106bb4ff316$export$cf99bbd665f301f9);
+$parcel$export($ae6a0106bb4ff316$exports, "PCTSTR", () => $ae6a0106bb4ff316$export$d63ff7816142b2f4);
+$parcel$export($ae6a0106bb4ff316$exports, "PCWSTR", () => $ae6a0106bb4ff316$export$8aeea065f4882b0c);
+$parcel$export($ae6a0106bb4ff316$exports, "PDWORD", () => $ae6a0106bb4ff316$export$c06eff3fc862da47);
+$parcel$export($ae6a0106bb4ff316$exports, "PDWORDLONG", () => $ae6a0106bb4ff316$export$e09b44cec70f0704);
+$parcel$export($ae6a0106bb4ff316$exports, "PDWORD_PTR", () => $ae6a0106bb4ff316$export$a2bbf1fe69b0026d);
+$parcel$export($ae6a0106bb4ff316$exports, "PDWORD32", () => $ae6a0106bb4ff316$export$60e2c917bf0cf558);
+$parcel$export($ae6a0106bb4ff316$exports, "PDWORD64", () => $ae6a0106bb4ff316$export$d8d54319b3c23a57);
+$parcel$export($ae6a0106bb4ff316$exports, "PFLOAT", () => $ae6a0106bb4ff316$export$22fafc5c9d071cf4);
+$parcel$export($ae6a0106bb4ff316$exports, "PHALF_PTR", () => $ae6a0106bb4ff316$export$729dee532709226e);
+$parcel$export($ae6a0106bb4ff316$exports, "PHANDLE", () => $ae6a0106bb4ff316$export$30d4c74fa93d3438);
+$parcel$export($ae6a0106bb4ff316$exports, "PHKEY", () => $ae6a0106bb4ff316$export$64ced35c53da7357);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT", () => $ae6a0106bb4ff316$export$905308e3ac5456b0);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT_PTR", () => $ae6a0106bb4ff316$export$7fbf02121a44af3);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT8", () => $ae6a0106bb4ff316$export$16ddf13bb85917f4);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT16", () => $ae6a0106bb4ff316$export$2863cf8b15c466bd);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT32", () => $ae6a0106bb4ff316$export$3888f865e2f3fc9e);
+$parcel$export($ae6a0106bb4ff316$exports, "PINT64", () => $ae6a0106bb4ff316$export$d81a713d6f75c904);
+$parcel$export($ae6a0106bb4ff316$exports, "PLCID", () => $ae6a0106bb4ff316$export$d0f483e3dea49716);
+$parcel$export($ae6a0106bb4ff316$exports, "PLONG", () => $ae6a0106bb4ff316$export$884b50f6e7d23183);
+$parcel$export($ae6a0106bb4ff316$exports, "PLONGLONG", () => $ae6a0106bb4ff316$export$f4311b64ba2f3fe7);
+$parcel$export($ae6a0106bb4ff316$exports, "PLONG_PTR", () => $ae6a0106bb4ff316$export$6cfa0302bb348fb4);
+$parcel$export($ae6a0106bb4ff316$exports, "PLONG32", () => $ae6a0106bb4ff316$export$b415878f19491157);
+$parcel$export($ae6a0106bb4ff316$exports, "PLONG64", () => $ae6a0106bb4ff316$export$9b97fd1af0726c08);
+$parcel$export($ae6a0106bb4ff316$exports, "POINTER_32", () => $ae6a0106bb4ff316$export$f27a748240b723f3);
+$parcel$export($ae6a0106bb4ff316$exports, "POINTER_64", () => $ae6a0106bb4ff316$export$5d25222f3b2425ae);
+$parcel$export($ae6a0106bb4ff316$exports, "POINTER_SIGNED", () => $ae6a0106bb4ff316$export$729c2fdddcf979dc);
+$parcel$export($ae6a0106bb4ff316$exports, "POINTER_UNSIGNED", () => $ae6a0106bb4ff316$export$d595eac61e43ee1f);
+$parcel$export($ae6a0106bb4ff316$exports, "PSHORT", () => $ae6a0106bb4ff316$export$8c90681ffa492177);
+$parcel$export($ae6a0106bb4ff316$exports, "PSIZE_T", () => $ae6a0106bb4ff316$export$42c4483327accaad);
+$parcel$export($ae6a0106bb4ff316$exports, "PSSIZE_T", () => $ae6a0106bb4ff316$export$159e35dadcec50ed);
+$parcel$export($ae6a0106bb4ff316$exports, "PSTR", () => $ae6a0106bb4ff316$export$fd996999f34a55b1);
+$parcel$export($ae6a0106bb4ff316$exports, "PTBYTE", () => $ae6a0106bb4ff316$export$99f79cd79a3279be);
+$parcel$export($ae6a0106bb4ff316$exports, "PTCHAR", () => $ae6a0106bb4ff316$export$a80266c3bbf78408);
+$parcel$export($ae6a0106bb4ff316$exports, "PTSTR", () => $ae6a0106bb4ff316$export$90396e0dac1d7bf4);
+$parcel$export($ae6a0106bb4ff316$exports, "PUCHAR", () => $ae6a0106bb4ff316$export$dac29ac7c1a6a593);
+$parcel$export($ae6a0106bb4ff316$exports, "PUHALF_PTR", () => $ae6a0106bb4ff316$export$3b9eae56db5c9a5c);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT", () => $ae6a0106bb4ff316$export$335fb31719a5cd92);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT_PTR", () => $ae6a0106bb4ff316$export$f6cfbcf283b0732e);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT8", () => $ae6a0106bb4ff316$export$29db969f4284195f);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT16", () => $ae6a0106bb4ff316$export$1fc9516454e9e0c2);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT32", () => $ae6a0106bb4ff316$export$b91b1f2b5d4b2f56);
+$parcel$export($ae6a0106bb4ff316$exports, "PUINT64", () => $ae6a0106bb4ff316$export$a598fa2150118df1);
+$parcel$export($ae6a0106bb4ff316$exports, "PULONG", () => $ae6a0106bb4ff316$export$bbdf20879558fef0);
+$parcel$export($ae6a0106bb4ff316$exports, "PULONGLONG", () => $ae6a0106bb4ff316$export$b1eafd00c14966b1);
+$parcel$export($ae6a0106bb4ff316$exports, "PULONG_PTR", () => $ae6a0106bb4ff316$export$77c87f189e52029c);
+$parcel$export($ae6a0106bb4ff316$exports, "PULONG32", () => $ae6a0106bb4ff316$export$c3860bffe982b77);
+$parcel$export($ae6a0106bb4ff316$exports, "PULONG64", () => $ae6a0106bb4ff316$export$ed3d7c18eaa4706a);
+$parcel$export($ae6a0106bb4ff316$exports, "PUSHORT", () => $ae6a0106bb4ff316$export$c33f795d3055c8e8);
+$parcel$export($ae6a0106bb4ff316$exports, "PWCHAR", () => $ae6a0106bb4ff316$export$53e197f0568d60e7);
+$parcel$export($ae6a0106bb4ff316$exports, "PWORD", () => $ae6a0106bb4ff316$export$44a81616d2266597);
+$parcel$export($ae6a0106bb4ff316$exports, "PWSTR", () => $ae6a0106bb4ff316$export$34fcf56876cedf67);
+$parcel$export($ae6a0106bb4ff316$exports, "QWORD", () => $ae6a0106bb4ff316$export$ee325f3aca1cefe);
+$parcel$export($ae6a0106bb4ff316$exports, "SC_HANDLE", () => $ae6a0106bb4ff316$export$ef4c74ea1198ce76);
+$parcel$export($ae6a0106bb4ff316$exports, "SC_LOCK", () => $ae6a0106bb4ff316$export$dc1bca63e2d62447);
+$parcel$export($ae6a0106bb4ff316$exports, "SERVICE_STATUS_HANDLE", () => $ae6a0106bb4ff316$export$1bbbfd60fd9e87f3);
+$parcel$export($ae6a0106bb4ff316$exports, "SHORT", () => $ae6a0106bb4ff316$export$1de1ffada6286910);
+$parcel$export($ae6a0106bb4ff316$exports, "SIZE_T", () => $ae6a0106bb4ff316$export$f089f2422e95b42b);
+$parcel$export($ae6a0106bb4ff316$exports, "SSIZE_T", () => $ae6a0106bb4ff316$export$a185e644c63be28f);
+$parcel$export($ae6a0106bb4ff316$exports, "TBYTE", () => $ae6a0106bb4ff316$export$d894ec5fb3ed01a4);
+$parcel$export($ae6a0106bb4ff316$exports, "TCHAR", () => $ae6a0106bb4ff316$export$20f081206609d5f7);
+$parcel$export($ae6a0106bb4ff316$exports, "UCHAR", () => $ae6a0106bb4ff316$export$226908722445f5d7);
+$parcel$export($ae6a0106bb4ff316$exports, "UHALF_PTR", () => $ae6a0106bb4ff316$export$f229c93d3486a070);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT", () => $ae6a0106bb4ff316$export$54c0d11872b7e6d4);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT_PTR", () => $ae6a0106bb4ff316$export$d642901a6a404ec0);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT8", () => $ae6a0106bb4ff316$export$212e71dfd61c79fa);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT16", () => $ae6a0106bb4ff316$export$e81cbc576f121d7);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT32", () => $ae6a0106bb4ff316$export$55e9b618f09601c9);
+$parcel$export($ae6a0106bb4ff316$exports, "UINT64", () => $ae6a0106bb4ff316$export$eb2099ed807a836e);
+$parcel$export($ae6a0106bb4ff316$exports, "ULONG", () => $ae6a0106bb4ff316$export$c76dabb36bddc74f);
+$parcel$export($ae6a0106bb4ff316$exports, "ULONGLONG", () => $ae6a0106bb4ff316$export$4c4b72fe7d344560);
+$parcel$export($ae6a0106bb4ff316$exports, "ULONG32", () => $ae6a0106bb4ff316$export$1f6ffa45e1d0ba10);
+$parcel$export($ae6a0106bb4ff316$exports, "ULONG64", () => $ae6a0106bb4ff316$export$35ffdfef7dc81db);
+$parcel$export($ae6a0106bb4ff316$exports, "UNICODE_STRING", () => $ae6a0106bb4ff316$export$5dcce0e722389cdb);
+$parcel$export($ae6a0106bb4ff316$exports, "USHORT", () => $ae6a0106bb4ff316$export$da53d5ec51ae7634);
+$parcel$export($ae6a0106bb4ff316$exports, "USN", () => $ae6a0106bb4ff316$export$79215014ef451883);
+$parcel$export($ae6a0106bb4ff316$exports, "WINEVENTPROC", () => $ae6a0106bb4ff316$export$3410187f8fd3ffe0);
+$parcel$export($ae6a0106bb4ff316$exports, "WNDENUMPROC", () => $ae6a0106bb4ff316$export$db60719a96ea9349);
+$parcel$export($ae6a0106bb4ff316$exports, "WNDPROC", () => $ae6a0106bb4ff316$export$9b17b5eb695fe8eb);
+$parcel$export($ae6a0106bb4ff316$exports, "WPARAM", () => $ae6a0106bb4ff316$export$9ea0e07848f6a21c);
+$parcel$export($ae6a0106bb4ff316$exports, "LPINITCOMMONCONTROLSEX", () => $ae6a0106bb4ff316$export$1a7b006743d0f934);
+$parcel$export($ae6a0106bb4ff316$exports, "LPWNDCLASSEX", () => $ae6a0106bb4ff316$export$1f0a9d32094b3282);
+$parcel$export($ae6a0106bb4ff316$exports, "PWINDOWINFO", () => $ae6a0106bb4ff316$export$7eee65a87be8fed2);
+$parcel$export($ae6a0106bb4ff316$exports, "PFILETIME", () => $ae6a0106bb4ff316$export$1b5ecb15ced895a7);
+$parcel$export($ae6a0106bb4ff316$exports, "LPFILETIME", () => $ae6a0106bb4ff316$export$e929ded8e6b3e173);
+$parcel$export($ae6a0106bb4ff316$exports, "va_list", () => $ae6a0106bb4ff316$export$b1fc40da7cd7c95c);
+$parcel$export($ae6a0106bb4ff316$exports, "INITCOMMONCONTROLSEX", () => $ae6a0106bb4ff316$export$6eb78d635a3ee587);
+$parcel$export($ae6a0106bb4ff316$exports, "MSG", () => $ae6a0106bb4ff316$export$f99154f7a7b0135d);
+$parcel$export($ae6a0106bb4ff316$exports, "POINT", () => $ae6a0106bb4ff316$export$a80a24d37f0f1279);
+$parcel$export($ae6a0106bb4ff316$exports, "WNDCLASSEX", () => $ae6a0106bb4ff316$export$81ef613fbd3a628d);
+$parcel$export($ae6a0106bb4ff316$exports, "WINDOWINFO", () => $ae6a0106bb4ff316$export$5119761222d7d0f6);
+$parcel$export($ae6a0106bb4ff316$exports, "PRAWINPUTDEVICELIST", () => $ae6a0106bb4ff316$export$ceb1f86d9f461eb);
+$parcel$export($ae6a0106bb4ff316$exports, "RECT", () => $ae6a0106bb4ff316$export$1e530543ba1d4b12);
+
+const $ae6a0106bb4ff316$export$a78dc2c4cbd70341 = "uint16";
+const $ae6a0106bb4ff316$export$181c9ad1752440f7 = "uint32";
+const $ae6a0106bb4ff316$export$9cb553b951e1e0d8 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$1f4a129e1195d18a = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$bd8b6af04676495 = "PVOID";
+const $ae6a0106bb4ff316$export$f60fc96aa99c605e = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$2e482cd8c991e558 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$1cd1943b3a73bbe8 = "void";
+const $ae6a0106bb4ff316$export$d71e2b267f5b711b = "uint16";
+const $ae6a0106bb4ff316$export$f3a79cf462faa1e3 = "int16";
+const $ae6a0106bb4ff316$export$c35dd5647862f990 = "int";
+const $ae6a0106bb4ff316$export$428cfe48a69a3b4f = "bool";
+const $ae6a0106bb4ff316$export$8f4bf8f7eb581284 = "byte";
+const $ae6a0106bb4ff316$export$578a4c3d73a6d794 = "pointer"; // https://msdn.microsoft.com/en-us/library/windows/desktop/ms633573(v=vs.85).aspx
+const $ae6a0106bb4ff316$export$934996f637259e88 = "uint8";
+const $ae6a0106bb4ff316$export$9e88d7b6f62f62d8 = "uint8";
+const $ae6a0106bb4ff316$export$52da70d84f582c04 = "DWORD";
+const $ae6a0106bb4ff316$export$6b766bfdcf67e2ec = "uint64";
+const $ae6a0106bb4ff316$export$8f7b8c11edcb3e34 = "ULONG_PTR";
+const $ae6a0106bb4ff316$export$a8ea5b58ae88fc11 = "uint32";
+const $ae6a0106bb4ff316$export$8db31e1b1c7e0db0 = "uint64";
+const $ae6a0106bb4ff316$export$d2b086fd1e01e03a = "float";
+const $ae6a0106bb4ff316$export$1505c2c04cc3bbef = "HANDLE";
+const $ae6a0106bb4ff316$export$2d081f52dd94061a = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$49cd303f01f67350 = "HANDLE";
+const $ae6a0106bb4ff316$export$d17b38c787d37ab8 = "HANDLE";
+const $ae6a0106bb4ff316$export$56c7641f121a2c5c = "HANDLE";
+const $ae6a0106bb4ff316$export$762b8b6ee0ff4c44 = "HANDLE";
+const $ae6a0106bb4ff316$export$750eee7b2f0ee030 = "HANDLE";
+const $ae6a0106bb4ff316$export$a02796fdca6d354a = "HANDLE";
+const $ae6a0106bb4ff316$export$1a62f6d54b236e36 = "HANDLE";
+const $ae6a0106bb4ff316$export$4ddde23cd7155d44 = "HANDLE";
+const $ae6a0106bb4ff316$export$1d0ad5eb60ffc518 = "HANDLE";
+const $ae6a0106bb4ff316$export$726c5c347609dae3 = "HANDLE";
+const $ae6a0106bb4ff316$export$323f06abdd2a59da = "HANDLE";
+const $ae6a0106bb4ff316$export$a43730eb8bf8b76e = "HANDLE";
+const $ae6a0106bb4ff316$export$91f6f659ef3d1edd = "HANDLE"; // typedef int HFILE;
+const $ae6a0106bb4ff316$export$229672d8f6dd9e1a = "HANDLE";
+const $ae6a0106bb4ff316$export$ef0ae13fba225584 = "HANDLE";
+const $ae6a0106bb4ff316$export$6b52c27577dfb85e = "HANDLE";
+const $ae6a0106bb4ff316$export$a681c4a7983815bf = "HANDLE";
+const $ae6a0106bb4ff316$export$105fd39584a4c170 = "HANDLE";
+const $ae6a0106bb4ff316$export$1a50b4f53ac33a = "HANDLE";
+const $ae6a0106bb4ff316$export$80d8783aa08e677d = "HANDLE";
+const $ae6a0106bb4ff316$export$9252a4926414af53 = "HANDLE";
+const $ae6a0106bb4ff316$export$941fbb37db50e0ee = "HANDLE";
+const $ae6a0106bb4ff316$export$5570ee796bf8668a = "HANDLE";
+const $ae6a0106bb4ff316$export$32e1d6dd1d786a08 = "HANDLE";
+const $ae6a0106bb4ff316$export$82cb6941373786ac = $ae6a0106bb4ff316$export$1a50b4f53ac33a;
+const $ae6a0106bb4ff316$export$d76bcd896c4c1f0b = "HANDLE";
+const $ae6a0106bb4ff316$export$c984542fbcd9e311 = "HANDLE";
+const $ae6a0106bb4ff316$export$e8c398641ae921a0 = "HANDLE";
+const $ae6a0106bb4ff316$export$2109f3ca8e001dc3 = "long";
+const $ae6a0106bb4ff316$export$64129906a6b15c89 = "HANDLE";
+const $ae6a0106bb4ff316$export$d0b96b23ab9f5338 = "HANDLE";
+const $ae6a0106bb4ff316$export$c50eccdd15c9fd55 = "HANDLE";
+const $ae6a0106bb4ff316$export$60bcb2927641b3f4 = "HANDLE";
+const $ae6a0106bb4ff316$export$893fa35bdef36b = "HANDLE";
+const $ae6a0106bb4ff316$export$6525812590d9a476 = "HANDLE";
+const $ae6a0106bb4ff316$export$160e8bdd97bfce3a = "int";
+const $ae6a0106bb4ff316$export$f051d14373139dee = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$9922471c07c2891d = "int8";
+const $ae6a0106bb4ff316$export$bd9b91838fde002e = "int16";
+const $ae6a0106bb4ff316$export$34412edc7b36f85 = "int32";
+const $ae6a0106bb4ff316$export$a2c63c68aeee9e2d = "int64";
+const $ae6a0106bb4ff316$export$6190ebba87077b9d = "WORD";
+const $ae6a0106bb4ff316$export$b36cf4a83245c2f9 = "DWORD";
+const $ae6a0106bb4ff316$export$244c0463aedba74c = "DWORD";
+const $ae6a0106bb4ff316$export$202821be4d3b65c7 = "DWORD";
+const $ae6a0106bb4ff316$export$686cfa64f218be7a = "long";
+const $ae6a0106bb4ff316$export$2d2033f38dde21c = "longlong";
+const $ae6a0106bb4ff316$export$4c9cb8eafd43015e = "int32";
+const $ae6a0106bb4ff316$export$552dea698acd6cd2 = "int64";
+const $ae6a0106bb4ff316$export$13371aace3d44948 = "LONG_PTR";
+const $ae6a0106bb4ff316$export$5df7e4acce683059 = "BOOL";
+const $ae6a0106bb4ff316$export$1061811df8b0c9be = "byte*";
+const $ae6a0106bb4ff316$export$f1d7ba3e4d51498c = "DWORD";
+const $ae6a0106bb4ff316$export$18e7280707df82f3 = "uint8*";
+const $ae6a0106bb4ff316$export$dfa283df2530598f = "uint16*";
+const $ae6a0106bb4ff316$export$3e6b4f6079ce51b = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$3de86eb3806b712d = "void*";
+const $ae6a0106bb4ff316$export$acb32c160acad508 = "LPVOID";
+const $ae6a0106bb4ff316$export$33eafb5d436e1362 = "uint16*";
+const $ae6a0106bb4ff316$export$e8ea75f05566dd3c = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55); // A pointer to a HANDLE.
+const $ae6a0106bb4ff316$export$b4d77e4f53c21e3a = "int*";
+const $ae6a0106bb4ff316$export$ca6bd9f017df4953 = "int32*";
+const $ae6a0106bb4ff316$export$aba1f5f1221c9fb3 = "pointer"; // A pointer to a MSG
+const $ae6a0106bb4ff316$export$3a00c33c250e7d86 = "pointer";
+const $ae6a0106bb4ff316$export$e5fae31862228632 = "char*";
+const $ae6a0106bb4ff316$export$dec24c174f0eaee1 = "uint16*";
+const $ae6a0106bb4ff316$export$477e24a98da955e6 = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$a362e06a8759641a = "uint16*";
+const $ae6a0106bb4ff316$export$307c691072d7eef0 = "LONG_PTR";
+const $ae6a0106bb4ff316$export$a50474266f14be1b = "uint32";
+const $ae6a0106bb4ff316$export$a1d44ba3d847cfd0 = "int*"; // ? 'bool*'
+const $ae6a0106bb4ff316$export$4f984d513e291397 = "bool*";
+const $ae6a0106bb4ff316$export$306fa084066e20a7 = "byte*";
+const $ae6a0106bb4ff316$export$72c3772b516a65cf = "char*";
+const $ae6a0106bb4ff316$export$cf99bbd665f301f9 = "uint8*";
+const $ae6a0106bb4ff316$export$d63ff7816142b2f4 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$8aeea065f4882b0c = "uint16*";
+const $ae6a0106bb4ff316$export$c06eff3fc862da47 = "uint32*";
+const $ae6a0106bb4ff316$export$e09b44cec70f0704 = "uint64*";
+const $ae6a0106bb4ff316$export$a2bbf1fe69b0026d = "DWORD_PTR";
+const $ae6a0106bb4ff316$export$60e2c917bf0cf558 = "uint32*";
+const $ae6a0106bb4ff316$export$d8d54319b3c23a57 = "uint64*";
+const $ae6a0106bb4ff316$export$22fafc5c9d071cf4 = "float*";
+const $ae6a0106bb4ff316$export$729dee532709226e = "pointer"; // ? A pointer to a HALF_PTR.
+const $ae6a0106bb4ff316$export$30d4c74fa93d3438 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$64ced35c53da7357 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$905308e3ac5456b0 = "int*";
+const $ae6a0106bb4ff316$export$7fbf02121a44af3 = "int**";
+const $ae6a0106bb4ff316$export$16ddf13bb85917f4 = "int8*";
+const $ae6a0106bb4ff316$export$2863cf8b15c466bd = "int16*";
+const $ae6a0106bb4ff316$export$3888f865e2f3fc9e = "int32*";
+const $ae6a0106bb4ff316$export$d81a713d6f75c904 = "int64*";
+const $ae6a0106bb4ff316$export$d0f483e3dea49716 = "uint32*";
+const $ae6a0106bb4ff316$export$884b50f6e7d23183 = "long*";
+const $ae6a0106bb4ff316$export$f4311b64ba2f3fe7 = "int64*";
+const $ae6a0106bb4ff316$export$6cfa0302bb348fb4 = "pointer";
+const $ae6a0106bb4ff316$export$b415878f19491157 = "int32*";
+const $ae6a0106bb4ff316$export$9b97fd1af0726c08 = "int64*";
+const $ae6a0106bb4ff316$export$f27a748240b723f3 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$5d25222f3b2425ae = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$729c2fdddcf979dc = "pointer"; // ? A signed pointer.
+const $ae6a0106bb4ff316$export$d595eac61e43ee1f = "pointer"; // An unsigned pointer.
+const $ae6a0106bb4ff316$export$8c90681ffa492177 = "int16*";
+const $ae6a0106bb4ff316$export$42c4483327accaad = "ULONG_PTR"; // ?
+const $ae6a0106bb4ff316$export$159e35dadcec50ed = "pointer";
+const $ae6a0106bb4ff316$export$fd996999f34a55b1 = "char*";
+const $ae6a0106bb4ff316$export$99f79cd79a3279be = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$a80266c3bbf78408 = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$90396e0dac1d7bf4 = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$dac29ac7c1a6a593 = "pointer";
+const $ae6a0106bb4ff316$export$3b9eae56db5c9a5c = "pointer";
+const $ae6a0106bb4ff316$export$335fb31719a5cd92 = "uint*";
+const $ae6a0106bb4ff316$export$f6cfbcf283b0732e = "uint**";
+const $ae6a0106bb4ff316$export$29db969f4284195f = "uint8*";
+const $ae6a0106bb4ff316$export$1fc9516454e9e0c2 = "uint16*";
+const $ae6a0106bb4ff316$export$b91b1f2b5d4b2f56 = "uint32*";
+const $ae6a0106bb4ff316$export$a598fa2150118df1 = "uint64*";
+const $ae6a0106bb4ff316$export$bbdf20879558fef0 = "uint*";
+const $ae6a0106bb4ff316$export$b1eafd00c14966b1 = "uint64*";
+const $ae6a0106bb4ff316$export$77c87f189e52029c = "uint64**";
+const $ae6a0106bb4ff316$export$c3860bffe982b77 = "uint*";
+const $ae6a0106bb4ff316$export$ed3d7c18eaa4706a = "uint64*";
+const $ae6a0106bb4ff316$export$c33f795d3055c8e8 = "uint16*";
+const $ae6a0106bb4ff316$export$53e197f0568d60e7 = "uint16*";
+const $ae6a0106bb4ff316$export$44a81616d2266597 = "uint16*";
+const $ae6a0106bb4ff316$export$34fcf56876cedf67 = "uint16*";
+const $ae6a0106bb4ff316$export$ee325f3aca1cefe = "uint64";
+const $ae6a0106bb4ff316$export$ef4c74ea1198ce76 = "HANDLE";
+const $ae6a0106bb4ff316$export$dc1bca63e2d62447 = "LPVOID";
+const $ae6a0106bb4ff316$export$1bbbfd60fd9e87f3 = "HANDLE";
+const $ae6a0106bb4ff316$export$1de1ffada6286910 = "int16";
+const $ae6a0106bb4ff316$export$f089f2422e95b42b = "ULONG_PTR";
+const $ae6a0106bb4ff316$export$a185e644c63be28f = "LONG_PTR";
+const $ae6a0106bb4ff316$export$d894ec5fb3ed01a4 = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$20f081206609d5f7 = (0, $11f5be3c47407e9d$export$609085a058d4a4d0);
+const $ae6a0106bb4ff316$export$226908722445f5d7 = "uchar";
+const $ae6a0106bb4ff316$export$f229c93d3486a070 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$54c0d11872b7e6d4 = "uint";
+const $ae6a0106bb4ff316$export$d642901a6a404ec0 = (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55);
+const $ae6a0106bb4ff316$export$212e71dfd61c79fa = "uint8";
+const $ae6a0106bb4ff316$export$e81cbc576f121d7 = "uint16";
+const $ae6a0106bb4ff316$export$55e9b618f09601c9 = "uint32";
+const $ae6a0106bb4ff316$export$eb2099ed807a836e = "uint64";
+const $ae6a0106bb4ff316$export$c76dabb36bddc74f = "uint";
+const $ae6a0106bb4ff316$export$4c4b72fe7d344560 = "uint64";
+const $ae6a0106bb4ff316$export$1f6ffa45e1d0ba10 = "uint32";
+const $ae6a0106bb4ff316$export$35ffdfef7dc81db = "uint64";
+const $ae6a0106bb4ff316$export$5dcce0e722389cdb = "pointer";
+const $ae6a0106bb4ff316$export$da53d5ec51ae7634 = "ushort";
+const $ae6a0106bb4ff316$export$79215014ef451883 = $ae6a0106bb4ff316$export$2d2033f38dde21c;
+const $ae6a0106bb4ff316$export$3410187f8fd3ffe0 = "pointer";
+const $ae6a0106bb4ff316$export$db60719a96ea9349 = "pointer";
+const $ae6a0106bb4ff316$export$9b17b5eb695fe8eb = "pointer";
+const $ae6a0106bb4ff316$export$9ea0e07848f6a21c = "UINT_PTR";
+const $ae6a0106bb4ff316$export$1a7b006743d0f934 = "pointer";
+const $ae6a0106bb4ff316$export$1f0a9d32094b3282 = "pointer"; // A pointer to a WNDCLASSEX
+const $ae6a0106bb4ff316$export$7eee65a87be8fed2 = "pointer"; // A pointer to a WINDOWINFO structure
+const $ae6a0106bb4ff316$export$1b5ecb15ced895a7 = "pointer"; // A pointer to a FILETIME
+const $ae6a0106bb4ff316$export$e929ded8e6b3e173 = "pointer"; // A pointer to a FILETIME
+const $ae6a0106bb4ff316$export$b1fc40da7cd7c95c = "char*";
+const $ae6a0106bb4ff316$export$6eb78d635a3ee587 = "pointer";
+const $ae6a0106bb4ff316$export$f99154f7a7b0135d = "pointer";
+const $ae6a0106bb4ff316$export$a80a24d37f0f1279 = "pointer";
+const $ae6a0106bb4ff316$export$81ef613fbd3a628d = "pointer";
+const $ae6a0106bb4ff316$export$5119761222d7d0f6 = "pointer";
+const $ae6a0106bb4ff316$export$ceb1f86d9f461eb = "pointer";
+const $ae6a0106bb4ff316$export$1e530543ba1d4b12 = "pointer"; // _RECT
+
+
+const $1a05fa38fbbcba0a$export$65dedbc9f072ffcc = new Map([
+    [
+        "HANDLE",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64",
+            "uint32"
+        ]
+    ],
+    [
+        "PVOID",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64*",
+            "uint32*"
+        ]
+    ],
+    [
+        "HALF_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "int32",
+            "int16"
+        ]
+    ],
+    [
+        "INT_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "int64",
+            "int32"
+        ]
+    ],
+    [
+        "LONG_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "int64",
+            "int32"
+        ]
+    ],
+    [
+        "LPCTSTR",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            (0, $ae6a0106bb4ff316$export$dfa283df2530598f),
+            (0, $ae6a0106bb4ff316$export$18e7280707df82f3)
+        ]
+    ],
+    [
+        "LPHANDLE",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64*",
+            "uint32*"
+        ]
+    ],
+    [
+        "LPTSTR",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            (0, $ae6a0106bb4ff316$export$dec24c174f0eaee1),
+            "uint8*"
+        ]
+    ],
+    [
+        "PCTSTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            (0, $ae6a0106bb4ff316$export$dfa283df2530598f),
+            (0, $ae6a0106bb4ff316$export$18e7280707df82f3)
+        ]
+    ],
+    [
+        "PHANDLE",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64**",
+            "uint32**"
+        ]
+    ],
+    [
+        "PHKEY",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64*",
+            "uint32*"
+        ]
+    ],
+    [
+        "POINTER_32",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint32*",
+            "uint32*"
+        ]
+    ],
+    [
+        "POINTER_64",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64*",
+            "uint32*"
+        ]
+    ],
+    [
+        "PTBYTE",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            "int16*",
+            "int8*"
+        ]
+    ],
+    [
+        "PTCHAR",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            "uint16*",
+            "uint8*"
+        ]
+    ],
+    [
+        "PTSTR",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            (0, $ae6a0106bb4ff316$export$dec24c174f0eaee1),
+            (0, $ae6a0106bb4ff316$export$e5fae31862228632)
+        ]
+    ],
+    [
+        "TBYTE",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            "int16",
+            "int8"
+        ]
+    ],
+    [
+        "TCHAR",
+        [
+            (0, $11f5be3c47407e9d$export$609085a058d4a4d0),
+            (0, $ae6a0106bb4ff316$export$d71e2b267f5b711b),
+            "uint8"
+        ]
+    ],
+    [
+        "UHALF_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint32",
+            "uint16"
+        ]
+    ],
+    [
+        "UINT_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64",
+            "uint32"
+        ]
+    ],
+    [
+        "ULONG_PTR",
+        [
+            (0, $11f5be3c47407e9d$export$4bbcbb9e6d314d55),
+            "uint64",
+            "uint32"
+        ]
+    ], 
+]);
+
+
+
+const $10095d0141f037de$var$W = (0, $fe4f78b567d115e3$export$828a2cfb74eb348c)($ae6a0106bb4ff316$exports, (0, $1a05fa38fbbcba0a$export$65dedbc9f072ffcc));
+const $10095d0141f037de$export$ad48b1b2cfc75809 = {
+    cbSize: $10095d0141f037de$var$W.DWORD,
+    cItems: $10095d0141f037de$var$W.INT,
+    cColumns: $10095d0141f037de$var$W.INT,
+    cRows: $10095d0141f037de$var$W.INT,
+    iColFocus: $10095d0141f037de$var$W.INT,
+    iRowFocus: $10095d0141f037de$var$W.INT,
+    cxItem: $10095d0141f037de$var$W.INT,
+    cyItem: $10095d0141f037de$var$W.INT,
+    ptStart: $10095d0141f037de$var$W.POINT
+};
+const $10095d0141f037de$export$235a24185e6c03f3 = {
+    dwData: $10095d0141f037de$var$W.ULONG_PTR,
+    cbData: $10095d0141f037de$var$W.DWORD,
+    lpData: $10095d0141f037de$var$W.PVOID
+};
+const $10095d0141f037de$export$c747a8b76ce2fc55 = {
+    uMsg: $10095d0141f037de$var$W.DWORD,
+    wParamL: $10095d0141f037de$var$W.WORD,
+    wParamH: $10095d0141f037de$var$W.WORD
+};
+const $10095d0141f037de$export$6eb78d635a3ee587 = {
+    dwSize: $10095d0141f037de$var$W.DWORD,
+    dwICC: $10095d0141f037de$var$W.DWORD
+};
+const $10095d0141f037de$export$9d77698e6144d105 = {
+    wVk: $10095d0141f037de$var$W.WORD,
+    wScan: $10095d0141f037de$var$W.WORD,
+    dwFlags: $10095d0141f037de$var$W.DWORD,
+    time: $10095d0141f037de$var$W.DWORD,
+    dwExtraInfo: $10095d0141f037de$var$W.ULONG_PTR
+};
+const $10095d0141f037de$export$b25d5f19497424fa = {
+    dx: $10095d0141f037de$var$W.LONG,
+    dy: $10095d0141f037de$var$W.LONG,
+    mouseData: $10095d0141f037de$var$W.DWORD,
+    dwFlags: $10095d0141f037de$var$W.DWORD,
+    time: $10095d0141f037de$var$W.DWORD,
+    dwExtraInfo: $10095d0141f037de$var$W.ULONG_PTR
+};
+const $10095d0141f037de$export$f99154f7a7b0135d = {
+    hwnd: $10095d0141f037de$var$W.HWND,
+    message: $10095d0141f037de$var$W.UINT,
+    wParam: $10095d0141f037de$var$W.WPARAM,
+    lParam: $10095d0141f037de$var$W.LPARAM,
+    time: $10095d0141f037de$var$W.DWORD,
+    pt: $10095d0141f037de$var$W.POINT,
+    lPrivate: $10095d0141f037de$var$W.DWORD
+};
+const $10095d0141f037de$export$a80a24d37f0f1279 = {
+    x: $10095d0141f037de$var$W.LONG,
+    y: $10095d0141f037de$var$W.LONG
+};
+const $10095d0141f037de$export$ca65a5b05e68b7ff = {
+    Reserved1: $10095d0141f037de$var$W.PVOID,
+    PebBaseAddress: $10095d0141f037de$var$W.PVOID,
+    Reserved2: $10095d0141f037de$var$W.PVOID,
+    UniqueProcessId: $10095d0141f037de$var$W.ULONG_PTR,
+    InheritedFromUniqueProcessId: $10095d0141f037de$var$W.PVOID
+};
+const $10095d0141f037de$export$5dcce0e722389cdb = {
+    Length: $10095d0141f037de$var$W.USHORT,
+    MaximumLength: $10095d0141f037de$var$W.USHORT,
+    Buffer: $10095d0141f037de$var$W.PWSTR
+};
+const $10095d0141f037de$export$109b0986e0806ee = {
+    dwSizeHid: $10095d0141f037de$var$W.DWORD,
+    dwCount: $10095d0141f037de$var$W.DWORD,
+    /** bRawData[1] */ bRawData: $10095d0141f037de$var$W.BYTE
+};
+const $10095d0141f037de$export$cf7f2abb0ac9e892 = {
+    hDevice: $10095d0141f037de$var$W.HANDLE,
+    dwType: $10095d0141f037de$var$W.DWORD
+};
+const $10095d0141f037de$export$614c933f340ce1c1 = {
+    dwType: $10095d0141f037de$var$W.DWORD,
+    dwSize: $10095d0141f037de$var$W.DWORD,
+    hDevice: $10095d0141f037de$var$W.HANDLE,
+    wParam: $10095d0141f037de$var$W.WPARAM
+};
+const $10095d0141f037de$export$7f9753d8aef93f40 = {
+    MakeCode: $10095d0141f037de$var$W.USHORT,
+    Flags: $10095d0141f037de$var$W.USHORT,
+    Reserved: $10095d0141f037de$var$W.USHORT,
+    VKey: $10095d0141f037de$var$W.USHORT,
+    Message: $10095d0141f037de$var$W.UINT,
+    ExtraInformation: $10095d0141f037de$var$W.ULONG
+};
+const $10095d0141f037de$export$5119761222d7d0f6 = {
+    cbSize: $10095d0141f037de$var$W.DWORD,
+    rcWindow: $10095d0141f037de$var$W.RECT,
+    rcClient: $10095d0141f037de$var$W.RECT,
+    dwStyle: $10095d0141f037de$var$W.DWORD,
+    dwExStyle: $10095d0141f037de$var$W.DWORD,
+    dwWindowStatus: $10095d0141f037de$var$W.DWORD,
+    cxWindowBorders: $10095d0141f037de$var$W.UINT,
+    cyWindowBorders: $10095d0141f037de$var$W.UINT,
+    atomWindowType: $10095d0141f037de$var$W.ATOM,
+    wCreatorVersion: $10095d0141f037de$var$W.WORD
+};
+const $10095d0141f037de$export$81ef613fbd3a628d = {
+    cbSize: $10095d0141f037de$var$W.UINT,
+    style: $10095d0141f037de$var$W.UINT,
+    // 'lpfnWndProc': ffi.Function('int32', ['pointer', 'uint32', 'int32', 'uint32']) ,
+    lpfnWndProc: $10095d0141f037de$var$W.WNDPROC,
+    cbClsExtra: $10095d0141f037de$var$W.INT,
+    cbWndExtra: $10095d0141f037de$var$W.INT,
+    hInstance: $10095d0141f037de$var$W.HINSTANCE,
+    hIcon: $10095d0141f037de$var$W.HICON,
+    hCursor: $10095d0141f037de$var$W.HCURSOR,
+    hbrBackground: $10095d0141f037de$var$W.HBRUSH,
+    lpszMenuName: $10095d0141f037de$var$W.LPCTSTR,
+    lpszClassName: $10095d0141f037de$var$W.LPCTSTR,
+    hIconSm: $10095d0141f037de$var$W.HICON
+};
+const $10095d0141f037de$export$1e530543ba1d4b12 = {
+    left: $10095d0141f037de$var$W.LONG,
+    top: $10095d0141f037de$var$W.LONG,
+    right: $10095d0141f037de$var$W.LONG,
+    bottom: $10095d0141f037de$var$W.LONG
+};
+const $10095d0141f037de$export$258339e884eb70b7 = {
+    dwLowDateTime: $10095d0141f037de$var$W.DWORD,
+    dwHighDateTime: $10095d0141f037de$var$W.DWORD
+};
+
+
+var $7afd84776c81a474$exports = {};
+
+$parcel$export($7afd84776c81a474$exports, "RID_DEVICE_INFO_DUMMYUNIONNAME", () => $7afd84776c81a474$export$ff2835eca4f38b4e);
+
+
+
+const $7afd84776c81a474$var$W = (0, $fe4f78b567d115e3$export$828a2cfb74eb348c)($ae6a0106bb4ff316$exports, (0, $1a05fa38fbbcba0a$export$65dedbc9f072ffcc));
+const $7afd84776c81a474$export$ff2835eca4f38b4e = {
+    mouse: $7afd84776c81a474$var$W.INT,
+    keyboard: $7afd84776c81a474$var$W.INT,
+    hid: $7afd84776c81a474$var$W.INT
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const $2721d3b199bacfe8$export$be44eba04df286d7 = (0, $fe4f78b567d115e3$export$828a2cfb74eb348c)($ae6a0106bb4ff316$exports, (0, $1a05fa38fbbcba0a$export$65dedbc9f072ffcc));
+
+
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $c2fea579953a5522$require$Buffer = $3EevV$buffer.Buffer;
+function $c2fea579953a5522$export$d4e6b3016315c3ba(length, encoding) {
+    const inst = Object.create($1a7VL.types.byte, {
+        constructor: {
+            configurable: true,
+            enumerable: false,
+            writable: true,
+            value: $c2fea579953a5522$export$d4e6b3016315c3ba
+        }
+    });
+    Object.defineProperty(inst, "size", {
+        configurable: true,
+        enumerable: true,
+        writable: false,
+        value: length
+    });
+    Object.defineProperty(inst, "encoding", {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: encoding
+    });
+    Object.defineProperty(inst, "get", {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: $c2fea579953a5522$var$getFn
+    });
+    Object.defineProperty(inst, "set", {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: $c2fea579953a5522$var$setFn
+    });
+    return inst;
+}
+function $c2fea579953a5522$var$getFn(buffer, offset) {
+    const buf = buffer.slice(offset, offset + this.size);
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (this.encoding) {
+        const str = buf.toString(this.encoding);
+        return str;
+    }
+    return buf;
+}
+function $c2fea579953a5522$var$setFn(buffer, offset, value) {
+    let target;
+    if (typeof value === "string") target = $c2fea579953a5522$require$Buffer.from(value, this.encoding);
+    else if (Array.isArray(value)) target = $c2fea579953a5522$require$Buffer.from(value);
+    else if ($c2fea579953a5522$require$Buffer.isBuffer(value)) target = value;
+    else throw new TypeError("Buffer instance expected");
+    if (target.length > this.size) throw new Error(`Buffer given is ${target.length} bytes, but only ${this.size} bytes available`);
+    target.copy(buffer, offset);
+}
+
+
+const $28f0c9f7dacf1566$export$3fcec5a49954e26a = {
+    cb: (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+    DeviceName: (0, $c2fea579953a5522$export$d4e6b3016315c3ba)(32, "ucs2"),
+    DeviceString: (0, $c2fea579953a5522$export$d4e6b3016315c3ba)(128, "ucs2"),
+    StateFlags: (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+    DeviceID: (0, $c2fea579953a5522$export$d4e6b3016315c3ba)(128, "ucs2"),
+    DeviceKey: (0, $c2fea579953a5522$export$d4e6b3016315c3ba)(128, "ucs2")
+};
+
+
+
+
+var $1a7VL = parcelRequire("1a7VL");
+var $3f0d1033760de938$exports = {};
+
+var $3f0d1033760de938$require$Buffer = $3EevV$buffer.Buffer;
+"use strict";
+
+
+var $3f0d1033760de938$var$debug = (parcelRequire("ilarF"))("ref-union");
+/**
+ * Module exports.
+ */ $3f0d1033760de938$exports = function(ref) {
+    /**
+ * The "Union" type constructor.
+ */ function Union() {
+        $3f0d1033760de938$var$debug('defining new union "type"');
+        function UnionType(arg, data) {
+            if (!(this instanceof UnionType)) return new UnionType(arg, data);
+            $3f0d1033760de938$var$debug("creating new union instance");
+            var store;
+            if ($3f0d1033760de938$require$Buffer.isBuffer(arg)) {
+                $3f0d1033760de938$var$debug("using passed-in Buffer instance to back the union", arg);
+                $3EevV$assert(arg.length >= UnionType.size, "Buffer instance must be at least " + UnionType.size + " bytes to back this untion type");
+                store = arg;
+                arg = data;
+            } else {
+                $3f0d1033760de938$var$debug("creating new Buffer instance to back the union (size: %d)", UnionType.size);
+                store = new $3f0d1033760de938$require$Buffer(UnionType.size);
+            }
+            // set the backing Buffer store
+            store.type = UnionType;
+            this["ref.buffer"] = store;
+            // initialise the union with values supplied
+            if (arg) //TODO: Sanity check - e.g. (Object.keys(arg).length == 1)
+            for(var key in arg)// hopefully hit the union setters
+            this[key] = arg[key];
+            UnionType._instanceCreated = true;
+        }
+        // make instances inherit from `proto`
+        UnionType.prototype = Object.create(proto, {
+            constructor: {
+                value: UnionType,
+                enumerable: false,
+                writable: true,
+                configurable: true
+            }
+        });
+        UnionType.defineProperty = defineProperty;
+        UnionType.toString = toString;
+        UnionType.fields = {};
+        // comply with ref's "type" interface
+        UnionType.size = 0;
+        UnionType.alignment = 0;
+        UnionType.indirection = 1;
+        UnionType.get = get1;
+        UnionType.set = set1;
+        // Read the fields list
+        var arg1 = arguments[0];
+        if (typeof arg1 === "object") Object.keys(arg1).forEach(function(name) {
+            var type = arg1[name];
+            UnionType.defineProperty(name, type);
+        });
+        return UnionType;
+    }
+    function get1(buffer, offset) {
+        $3f0d1033760de938$var$debug('Union "type" getter for buffer at offset', buffer, offset);
+        if (offset > 0) buffer = buffer.slice(offset);
+        return new this(buffer);
+    }
+    function set1(buffer, offset, value) {
+        $3f0d1033760de938$var$debug('Union "type" setter for buffer at offset', buffer, offset, value);
+        if (offset > 0) buffer = buffer.slice(offset);
+        var union = new this(buffer);
+        var isUnion = value instanceof this;
+        if (isUnion) // TODO: optimize - use Buffer#copy()
+        Object.keys(this.fields).forEach(function(name) {
+            // hopefully hit the setters
+            union[name] = value[name];
+        });
+        else for(var name1 in value)// hopefully hit the setters
+        union[name1] = value[name1];
+    }
+    function toString() {
+        return "[UnionType]";
+    }
+    /**
+ * Adds a new field to the union instance with the given name and type.
+ * Note that this function will throw an Error if any instances of the union
+ * type have already been created, therefore this function must be called at the
+ * beginning, before any instances are created.
+ */ function defineProperty(name, type) {
+        $3f0d1033760de938$var$debug("defining new union type field", name);
+        // allow string types for convenience
+        type = ref.coerceType(type);
+        $3EevV$assert(!this._instanceCreated, "an instance of this Union type has already been created, cannot add new data members anymore");
+        $3EevV$assert.equal("string", typeof name, 'expected a "string" field name');
+        $3EevV$assert(type && /object|function/i.test(typeof type) && "size" in type && "indirection" in type, 'expected a "type" object describing the field type: "' + type + '"');
+        $3EevV$assert(!(name in this.prototype), 'the field "' + name + '" already exists in this Union type');
+        // define the getter/setter property
+        Object.defineProperty(this.prototype, name, {
+            enumerable: true,
+            configurable: true,
+            get: get,
+            set: set
+        });
+        var field = {
+            type: type
+        };
+        this.fields[name] = field;
+        // calculate the new size and alignment
+        recalc(this);
+        function get() {
+            $3f0d1033760de938$var$debug('getting "%s" union field (length: %d)', name, type.size);
+            return ref.get(this["ref.buffer"], 0, type);
+        }
+        function set(value) {
+            $3f0d1033760de938$var$debug('setting "%s" union field (length: %d)', name, type.size, value);
+            return ref.set(this["ref.buffer"], 0, value, type);
+        }
+    }
+    function recalc(union) {
+        // reset size and alignment
+        union.size = 0;
+        union.alignment = 0;
+        var fieldNames = Object.keys(union.fields);
+        // loop through to set the size of the union of the largest member field
+        // and the alignment to the requirements of the largest member
+        fieldNames.forEach(function(name) {
+            var field = union.fields[name];
+            var type = field.type;
+            var size = type.indirection === 1 ? type.size : ref.sizeof.pointer;
+            var alignment = type.alignment || ref.alignof.pointer;
+            if (type.indirection > 1) alignment = ref.alignof.pointer;
+            union.alignment = Math.max(union.alignment, alignment);
+            union.size = Math.max(union.size, size);
+        });
+        // any padding
+        var left = union.size % union.alignment;
+        if (left > 0) {
+            $3f0d1033760de938$var$debug("additional padding to the end of union:", union.alignment - left);
+            union.size += union.alignment - left;
+        }
+    }
+    /**
+ * the base prototype that union type instances will inherit from.
+ */ var proto = {};
+    proto["ref.buffer"] = ref.NULL;
+    /**
+ * returns a Buffer pointing to this union data structure.
+ */ proto.ref = function ref() {
+        return this["ref.buffer"];
+    };
+    return Union;
+};
+
+
+const $ce065002c1f5953b$var$UnionDi = $3f0d1033760de938$exports;
+const $ce065002c1f5953b$export$6cbb4f8fa0c4c986 = $ce065002c1f5953b$var$UnionDi($1a7VL);
+
+
+const $d33bedd1c1a63a7f$export$6e367b0161ea043f = {
+    cbSize: (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+    dwType: (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+    DUMMYUNIONNAME: (0, $ce065002c1f5953b$export$6cbb4f8fa0c4c986)((0, $7afd84776c81a474$exports).RID_DEVICE_INFO_DUMMYUNIONNAME)
+};
+
+
+
+
+var $b57364a102eb7ad6$exports = {};
+"use strict";
+
+var $1a7VL = parcelRequire("1a7VL");
+
+
+const $b57364a102eb7ad6$var$debug = (parcelRequire("4LET2"))("ffi:ffi");
+
+const $b57364a102eb7ad6$var$Struct = (parcelRequire("kZbZk"))($1a7VL);
+
+var $ixfDa = parcelRequire("ixfDa");
+/**
+ * Export some of the properties from the "bindings" file.
+ */ [
+    "FFI_TYPES",
+    "FFI_OK",
+    "FFI_BAD_TYPEDEF",
+    "FFI_BAD_ABI",
+    "FFI_DEFAULT_ABI",
+    "FFI_FIRST_ABI",
+    "FFI_LAST_ABI",
+    "FFI_SYSV",
+    "FFI_UNIX64",
+    "FFI_WIN64",
+    "FFI_VFP",
+    "FFI_STDCALL",
+    "FFI_THISCALL",
+    "FFI_FASTCALL",
+    "RTLD_LAZY",
+    "RTLD_NOW",
+    "RTLD_LOCAL",
+    "RTLD_GLOBAL",
+    "RTLD_NOLOAD",
+    "RTLD_NODELETE",
+    "RTLD_FIRST",
+    "RTLD_NEXT",
+    "RTLD_DEFAULT",
+    "RTLD_SELF",
+    "RTLD_MAIN_ONLY",
+    "FFI_MS_CDECL"
+].forEach((prop)=>{
+    if (!$ixfDa.hasOwnProperty(prop)) return $b57364a102eb7ad6$var$debug("skipping exporting of non-existant property", prop);
+    const desc = Object.getOwnPropertyDescriptor($ixfDa, prop);
+    Object.defineProperty($b57364a102eb7ad6$exports, prop, desc);
+});
+/**
+ * Set the `ffi_type` property on the built-in types.
+ */ Object.keys($ixfDa.FFI_TYPES).forEach((name)=>{
+    const type = $ixfDa.FFI_TYPES[name];
+    type.name = name;
+    if (name === "pointer") return; // there is no "pointer" type...
+    $1a7VL.types[name].ffi_type = type;
+});
+// make `size_t` use the "ffi_type_pointer"
+$1a7VL.types.size_t.ffi_type = $ixfDa.FFI_TYPES.pointer;
+// make `Utf8String` use "ffi_type_pointer"
+const $b57364a102eb7ad6$var$CString = $1a7VL.types.CString || $1a7VL.types.Utf8String;
+$b57364a102eb7ad6$var$CString.ffi_type = $ixfDa.FFI_TYPES.pointer;
+// make `Object` use the "ffi_type_pointer"
+$1a7VL.types.Object.ffi_type = $ixfDa.FFI_TYPES.pointer;
+// libffi is weird when it comes to long data types (defaults to 64-bit),
+// so we emulate here, since some platforms have 32-bit longs and some
+// platforms have 64-bit longs.
+switch($1a7VL.sizeof.long){
+    case 4:
+        $1a7VL.types.ulong.ffi_type = $ixfDa.FFI_TYPES.uint32;
+        $1a7VL.types.long.ffi_type = $ixfDa.FFI_TYPES.int32;
+        break;
+    case 8:
+        $1a7VL.types.ulong.ffi_type = $ixfDa.FFI_TYPES.uint64;
+        $1a7VL.types.long.ffi_type = $ixfDa.FFI_TYPES.int64;
+        break;
+    default:
+        throw new Error('unsupported "long" size: ' + $1a7VL.sizeof.long);
+}
+/**
+ * Alias the "ref" types onto ffi's exports, for convenience...
+ */ $b57364a102eb7ad6$exports.types = $1a7VL.types;
+// Include our other modules
+$b57364a102eb7ad6$exports.version = $ixfDa.version;
+
+$b57364a102eb7ad6$exports.CIF = (parcelRequire("lNAMA"));
+
+$b57364a102eb7ad6$exports.CIF_var = (parcelRequire("aqPHE"));
+
+$b57364a102eb7ad6$exports.Function = (parcelRequire("k9PMD"));
+
+$b57364a102eb7ad6$exports.ForeignFunction = (parcelRequire("c4Oxe"));
+
+$b57364a102eb7ad6$exports.VariadicForeignFunction = (parcelRequire("aCeOm"));
+
+$b57364a102eb7ad6$exports.DynamicLibrary = (parcelRequire("bnjjc"));
+
+$b57364a102eb7ad6$exports.Library = (parcelRequire("lOMgj"));
+
+$b57364a102eb7ad6$exports.Callback = (parcelRequire("iGTuK"));
+
+$b57364a102eb7ad6$exports.errno = (parcelRequire("i4T3Y"));
+
+$b57364a102eb7ad6$exports.ffiType = (parcelRequire("B37ul"));
+// the shared library extension for this platform
+$b57364a102eb7ad6$exports.LIB_EXT = $b57364a102eb7ad6$exports.Library.EXT;
+// the FFI_TYPE struct definition
+$b57364a102eb7ad6$exports.FFI_TYPE = $b57364a102eb7ad6$exports.ffiType.FFI_TYPE;
+
+
+
+const $450d0791dbf93d92$var$dllInst = new Map(); // for DLL.load() with settings.singleton === true
+function $450d0791dbf93d92$export$11e63f7b0f3d9900(dllName, dllFuncs, fns, settings) {
+    const st = $450d0791dbf93d92$var$parse_settings(settings);
+    if (st.singleton) {
+        let inst = $450d0791dbf93d92$var$get_inst_by_name(dllName);
+        if (!inst) {
+            inst = $b57364a102eb7ad6$exports.Library(dllName, $450d0791dbf93d92$export$def475715f38575d(dllFuncs, fns));
+            $450d0791dbf93d92$var$set_inst_by_name(dllName, inst);
+        }
+        return inst;
+    } else // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return $b57364a102eb7ad6$exports.Library(dllName, $450d0791dbf93d92$export$def475715f38575d(dllFuncs, fns));
+}
+function $450d0791dbf93d92$export$def475715f38575d(dllFuncs, fns) {
+    const ret = {};
+    if (fns && Array.isArray(fns) && fns.length) for (const fn of fns){
+        const ps = dllFuncs[fn];
+        if (typeof ps !== "undefined") Object.defineProperty(ret, fn, {
+            value: ps,
+            writable: false,
+            enumerable: true,
+            configurable: false
+        });
+    }
+    else for (const fn1 of Object.keys(dllFuncs)){
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const ps = dllFuncs[fn1];
+        if (typeof ps !== "undefined") Object.defineProperty(ret, fn1, {
+            value: ps,
+            writable: false,
+            enumerable: true,
+            configurable: false
+        });
+    }
+    return ret;
+}
+function $450d0791dbf93d92$var$get_inst_by_name(dllName) {
+    return $450d0791dbf93d92$var$dllInst.get(dllName);
+}
+function $450d0791dbf93d92$var$set_inst_by_name(dllName, inst) {
+    $450d0791dbf93d92$var$dllInst.set(dllName, inst);
+}
+function $450d0791dbf93d92$var$parse_settings(settings) {
+    const st = {
+        ...(0, $11f5be3c47407e9d$exports).settingsDefault
+    };
+    if (typeof settings !== "undefined" && Object.keys(settings).length) Object.assign(st, settings);
+    return st;
+}
+
+
+
+const $f5ab54ac99ed506d$export$b139dcabebd3c0ad = {
+    InitCommonControlsEx: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPINITCOMMONCONTROLSEX
+        ]
+    ]
+};
+
+
+const $6439430f508b3c68$export$901a8201111c7957 = "comctl32" /* comctl32 */ ;
+const $6439430f508b3c68$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $450d0791dbf93d92$export$11e63f7b0f3d9900)($6439430f508b3c68$export$901a8201111c7957, (0, $f5ab54ac99ed506d$export$b139dcabebd3c0ad), fns, settings);
+
+
+
+
+const $515562907b8ae524$export$b139dcabebd3c0ad = {
+    FormatMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCVOID,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).va_list
+        ], 
+    ],
+    FreeConsole: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        []
+    ],
+    GenerateConsoleCtrlEvent: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD
+        ]
+    ],
+    /** err code: https://msdn.microsoft.com/zh-cn/library/windows/desktop/ms681381(v=vs.85).aspx */ GetLastError: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+        []
+    ],
+    /** retrive value from buf by ret.ref().readUInt32() */ GetModuleHandleW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HMODULE,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR
+        ]
+    ],
+    /** flags, optional LPCTSTR name, ref hModule */ GetModuleHandleExW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HMODULE
+        ]
+    ],
+    GetProcessHeaps: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PHANDLE
+        ]
+    ],
+    GetSystemTimes: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PFILETIME,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PFILETIME,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PFILETIME
+        ]
+    ],
+    HeapFree: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HANDLE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPVOID
+        ]
+    ],
+    OpenProcess: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HANDLE,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD
+        ]
+    ],
+    OutputDebugStringW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).VOID,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR
+        ]
+    ],
+    SetLastError: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).VOID,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD
+        ]
+    ],
+    SetThreadExecutionState: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+        ]
+    ]
+};
+
+
+const $ea2103ee9f60f66b$export$901a8201111c7957 = "kernel32" /* kernel32 */ ;
+const $ea2103ee9f60f66b$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $450d0791dbf93d92$export$11e63f7b0f3d9900)($ea2103ee9f60f66b$export$901a8201111c7957, (0, $515562907b8ae524$export$b139dcabebd3c0ad), fns, settings);
+
+
+
+
+const $5494ef4ec3335f5f$export$b139dcabebd3c0ad = {
+    NtQueryInformationProcess: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).NTSTATUS,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HANDLE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD32,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PVOID,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).ULONG,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PULONG
+        ]
+    ]
+};
+
+
+const $b938307cb26bd3cc$export$901a8201111c7957 = "ntdll" /* ntdll */ ;
+const $b938307cb26bd3cc$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $450d0791dbf93d92$export$11e63f7b0f3d9900)($b938307cb26bd3cc$export$901a8201111c7957, (0, $5494ef4ec3335f5f$export$b139dcabebd3c0ad), fns, settings);
+
+
+var $e15eb399ace1ba96$exports = {};
+
+$parcel$export($e15eb399ace1ba96$exports, "dllName", () => $e15eb399ace1ba96$export$901a8201111c7957);
+$parcel$export($e15eb399ace1ba96$exports, "load", () => $e15eb399ace1ba96$export$11e63f7b0f3d9900);
+$parcel$export($e15eb399ace1ba96$exports, "apiDef", () => $585d1be83f7e169d$export$b139dcabebd3c0ad);
+$parcel$export($e15eb399ace1ba96$exports, "constants", () => $226133600d9fa405$exports);
+
+
+
+const $585d1be83f7e169d$export$b139dcabebd3c0ad = {
+    BringWindowToTop: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    /** url: https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-clienttoscreen */ ClientToScreen: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPPOINT
+        ]
+    ],
+    CloseWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    CreateWindowExW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HMENU,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HINSTANCE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPVOID, 
+        ], 
+    ],
+    DefWindowProcW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).LRESULT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WPARAM,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
+        ]
+    ],
+    DestroyWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    DispatchMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).LRESULT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPMSG
+        ]
+    ],
+    /** https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw */ EnumDisplayDevicesW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCWSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).POINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD
+        ]
+    ],
+    EnumThreadWindows: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WNDENUMPROC,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
+        ]
+    ],
+    EnumWindows: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WNDENUMPROC,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
+        ]
+    ],
+    FindWindowExW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR
+        ]
+    ],
+    GetAncestor: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    GetAltTabInfoW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPWSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+        ]
+    ],
+    GetClassInfoExW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HINSTANCE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPWNDCLASSEX
+        ]
+    ],
+    GetForegroundWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        []
+    ],
+    GetMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPMSG,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    GetParent: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    GetRawInputDeviceInfoW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HANDLE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPVOID,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PUINT
+        ]
+    ],
+    GetRawInputDeviceList: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PRAWINPUTDEVICELIST,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PUINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    GetTopWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    GetWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    GetWindowInfo: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).PWINDOWINFO
+        ]
+    ],
+    GetWindowLongW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).LONG,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+        ]
+    ],
+    GetWindowRect: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).RECT
+        ]
+    ],
+    GetWindowTextW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPTSTR,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+        ]
+    ],
+    GetWindowThreadProcessId: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPDWORD
+        ]
+    ],
+    IsWindowVisible: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    PeekMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPMSG,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    PostMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WPARAM,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
+        ]
+    ],
+    PrintWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HDC,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    RegisterClassExW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).ATOM,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WNDCLASSEX
+        ]
+    ],
+    SendMessageW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).LRESULT,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WPARAM,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
+        ]
+    ],
+    SetForegroundWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ],
+    SetWindowTextW: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPCTSTR
+        ]
+    ],
+    SetWinEventHook: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWINEVENTHOOK,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HMODULE,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).WINEVENTPROC,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).DWORD,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).UINT
+        ]
+    ],
+    ShowWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+        ]
+    ],
+    TranslateMessage: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPMSG
+        ]
+    ],
+    TranslateMessageEx: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPMSG
+        ]
+    ],
+    UnhookWinEvent: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWINEVENTHOOK
+        ]
+    ],
+    UpdateWindow: [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
+        [
+            (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND
+        ]
+    ]
+};
+/* istanbul ignore next */ if ($3EevV$process.arch === "x64") $585d1be83f7e169d$export$b139dcabebd3c0ad.GetWindowLongPtrW = [
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).LONG_PTR,
+    [
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).INT
+    ]
+];
+
+
+var $226133600d9fa405$exports = {};
+
+$parcel$export($226133600d9fa405$exports, "WS_BORDER", () => $226133600d9fa405$export$606a835aa674cdb3);
+$parcel$export($226133600d9fa405$exports, "WS_CAPTION", () => $226133600d9fa405$export$48eb2f3b6cc3c4ab);
+$parcel$export($226133600d9fa405$exports, "WS_CHILD", () => $226133600d9fa405$export$4c112980a139215d);
+$parcel$export($226133600d9fa405$exports, "WS_CLIPCHILDREN", () => $226133600d9fa405$export$90b2f252d51b6a52);
+$parcel$export($226133600d9fa405$exports, "WS_CLIPSIBLINGS", () => $226133600d9fa405$export$5859e29fe7a8b839);
+$parcel$export($226133600d9fa405$exports, "WS_DISABLED", () => $226133600d9fa405$export$ea7e473ff3254424);
+$parcel$export($226133600d9fa405$exports, "WS_DLGFRAME", () => $226133600d9fa405$export$7882bfae04973a26);
+$parcel$export($226133600d9fa405$exports, "WS_GROUP", () => $226133600d9fa405$export$602f6ce66ce44069);
+$parcel$export($226133600d9fa405$exports, "WS_HSCROLL", () => $226133600d9fa405$export$48315059b9ef7495);
+$parcel$export($226133600d9fa405$exports, "WS_ICONIC", () => $226133600d9fa405$export$ded3cd280fb3e5fe);
+$parcel$export($226133600d9fa405$exports, "WS_MAXIMIZE", () => $226133600d9fa405$export$cb67cd8938c7da8d);
+$parcel$export($226133600d9fa405$exports, "WS_MAXIMIZEBOX", () => $226133600d9fa405$export$a6fe78de55428aeb);
+$parcel$export($226133600d9fa405$exports, "WS_MINIMIZE", () => $226133600d9fa405$export$7e3c94cdd9b0ff82);
+$parcel$export($226133600d9fa405$exports, "WS_MINIMIZEBOX", () => $226133600d9fa405$export$23b24f1629122f49);
+$parcel$export($226133600d9fa405$exports, "WS_OVERLAPPED", () => $226133600d9fa405$export$e54245776ad9d7fa);
+$parcel$export($226133600d9fa405$exports, "WS_POPUP", () => $226133600d9fa405$export$5d8c47859934839f);
+$parcel$export($226133600d9fa405$exports, "WS_SIZEBOX", () => $226133600d9fa405$export$47c2f5f37fdcd568);
+$parcel$export($226133600d9fa405$exports, "WS_SYSMENU", () => $226133600d9fa405$export$73e498efb7725a4c);
+$parcel$export($226133600d9fa405$exports, "WS_TABSTOP", () => $226133600d9fa405$export$850ce5441c8d76d3);
+$parcel$export($226133600d9fa405$exports, "WS_THICKFRAME", () => $226133600d9fa405$export$734122ec1d097c70);
+$parcel$export($226133600d9fa405$exports, "WS_TILED", () => $226133600d9fa405$export$adb10497ba59a062);
+$parcel$export($226133600d9fa405$exports, "WS_VISIBLE", () => $226133600d9fa405$export$f97d49e0f973a11b);
+$parcel$export($226133600d9fa405$exports, "WS_VSCROLL", () => $226133600d9fa405$export$46bf8a39b3410e27);
+$parcel$export($226133600d9fa405$exports, "WS_OVERLAPPEDWINDOW", () => $226133600d9fa405$export$e41e76d33b2ee815);
+$parcel$export($226133600d9fa405$exports, "WS_POPUPWINDOW", () => $226133600d9fa405$export$158420e94832e095);
+$parcel$export($226133600d9fa405$exports, "WS_TILEDWINDOW", () => $226133600d9fa405$export$630b11ccf7464717);
+$parcel$export($226133600d9fa405$exports, "WS_EX_ACCEPTFILES", () => $226133600d9fa405$export$b4974fc5ec881eb2);
+$parcel$export($226133600d9fa405$exports, "WS_EX_APPWINDOW", () => $226133600d9fa405$export$7c9488afb90066eb);
+$parcel$export($226133600d9fa405$exports, "WS_EX_CLIENTEDGE", () => $226133600d9fa405$export$e17ef95cc3937744);
+$parcel$export($226133600d9fa405$exports, "WS_EX_COMPOSITED", () => $226133600d9fa405$export$9bee6cf39ebfa14f);
+$parcel$export($226133600d9fa405$exports, "WS_EX_CONTEXTHELP", () => $226133600d9fa405$export$2bbddc32e25aff08);
+$parcel$export($226133600d9fa405$exports, "WS_EX_CONTROLPARENT", () => $226133600d9fa405$export$550a968b8f335560);
+$parcel$export($226133600d9fa405$exports, "WS_EX_DLGMODALFRAME", () => $226133600d9fa405$export$66454f5316761e6d);
+$parcel$export($226133600d9fa405$exports, "WS_EX_LAYERED", () => $226133600d9fa405$export$37e2ee22bedc259b);
+$parcel$export($226133600d9fa405$exports, "WS_EX_LAYOUTRTL", () => $226133600d9fa405$export$4de06b73361773aa);
+$parcel$export($226133600d9fa405$exports, "WS_EX_LEFT", () => $226133600d9fa405$export$6d6281491c3c345b);
+$parcel$export($226133600d9fa405$exports, "WS_EX_LEFTSCROLLBAR", () => $226133600d9fa405$export$992aaeca1d900884);
+$parcel$export($226133600d9fa405$exports, "WS_EX_LTRREADING", () => $226133600d9fa405$export$223645391ca50517);
+$parcel$export($226133600d9fa405$exports, "WS_EX_MDICHILD", () => $226133600d9fa405$export$ec70e607715a0dd8);
+$parcel$export($226133600d9fa405$exports, "WS_EX_NOACTIVATE", () => $226133600d9fa405$export$3bde6e836089a4c4);
+$parcel$export($226133600d9fa405$exports, "WS_EX_NOINHERITLAYOUT", () => $226133600d9fa405$export$8e4caed601fc6859);
+$parcel$export($226133600d9fa405$exports, "WS_EX_NOPARENTNOTIFY", () => $226133600d9fa405$export$405abfaa3d30b735);
+$parcel$export($226133600d9fa405$exports, "WS_EX_NOREDIRECTIONBITMAP", () => $226133600d9fa405$export$abd6e08734fc0be5);
+$parcel$export($226133600d9fa405$exports, "WS_EX_RIGHT", () => $226133600d9fa405$export$5ffc168bdc33e81a);
+$parcel$export($226133600d9fa405$exports, "WS_EX_RIGHTSCROLLBAR", () => $226133600d9fa405$export$7e05a5e1e0f3630f);
+$parcel$export($226133600d9fa405$exports, "WS_EX_RTLREADING", () => $226133600d9fa405$export$f2eef988e187a8fe);
+$parcel$export($226133600d9fa405$exports, "WS_EX_STATICEDGE", () => $226133600d9fa405$export$d497db29e2467861);
+$parcel$export($226133600d9fa405$exports, "WS_EX_TOOLWINDOW", () => $226133600d9fa405$export$ce69c1415f4c9e9);
+$parcel$export($226133600d9fa405$exports, "WS_EX_TOPMOST", () => $226133600d9fa405$export$fc7bd9e6c250670a);
+$parcel$export($226133600d9fa405$exports, "WS_EX_TRANSPARENT", () => $226133600d9fa405$export$5655aef644f812f9);
+$parcel$export($226133600d9fa405$exports, "WS_EX_WINDOWEDGE", () => $226133600d9fa405$export$c0529b550722ec16);
+$parcel$export($226133600d9fa405$exports, "WS_EX_OVERLAPPEDWINDOW", () => $226133600d9fa405$export$8e8eb584a9d8e6a0);
+$parcel$export($226133600d9fa405$exports, "WS_EX_PALETTEWINDOW", () => $226133600d9fa405$export$9c34c2c2258a5ed0);
+$parcel$export($226133600d9fa405$exports, "PM_NOREMOVE", () => $226133600d9fa405$export$b833dd3cd68611e5);
+$parcel$export($226133600d9fa405$exports, "PM_REMOVE", () => $226133600d9fa405$export$c52d6ca467ce0472);
+$parcel$export($226133600d9fa405$exports, "PM_NOYIELD", () => $226133600d9fa405$export$684da755af3f7a1f);
+$parcel$export($226133600d9fa405$exports, "CW_USEDEFAULT", () => $226133600d9fa405$export$e3066a4bd9a3474a);
+const $226133600d9fa405$export$606a835aa674cdb3 = 0x00800000;
+const $226133600d9fa405$export$48eb2f3b6cc3c4ab = 0x00C00000;
+const $226133600d9fa405$export$4c112980a139215d = 0x40000000;
+const $226133600d9fa405$export$90b2f252d51b6a52 = 0x02000000;
+const $226133600d9fa405$export$5859e29fe7a8b839 = 0x04000000;
+const $226133600d9fa405$export$ea7e473ff3254424 = 0x08000000;
+const $226133600d9fa405$export$7882bfae04973a26 = 0x00400000;
+const $226133600d9fa405$export$602f6ce66ce44069 = 0x00020000;
+const $226133600d9fa405$export$48315059b9ef7495 = 0x00100000;
+const $226133600d9fa405$export$ded3cd280fb3e5fe = 0x20000000;
+const $226133600d9fa405$export$cb67cd8938c7da8d = 0x01000000;
+const $226133600d9fa405$export$a6fe78de55428aeb = 0x00010000;
+const $226133600d9fa405$export$7e3c94cdd9b0ff82 = 0x20000000;
+const $226133600d9fa405$export$23b24f1629122f49 = 0x00020000;
+const $226133600d9fa405$export$e54245776ad9d7fa = 0x00000000;
+const $226133600d9fa405$export$5d8c47859934839f = 0x80000000; // The windows is a pop-up window
+const $226133600d9fa405$export$47c2f5f37fdcd568 = 0x00040000;
+const $226133600d9fa405$export$73e498efb7725a4c = 0x00080000; // The window has a window menu on its title bar.
+const $226133600d9fa405$export$850ce5441c8d76d3 = 0x00010000;
+const $226133600d9fa405$export$734122ec1d097c70 = 0x00040000;
+const $226133600d9fa405$export$adb10497ba59a062 = 0x00000000;
+const $226133600d9fa405$export$f97d49e0f973a11b = 0x10000000;
+const $226133600d9fa405$export$46bf8a39b3410e27 = 0x00200000;
+const $226133600d9fa405$export$e41e76d33b2ee815 = $226133600d9fa405$export$e54245776ad9d7fa | $226133600d9fa405$export$48eb2f3b6cc3c4ab | $226133600d9fa405$export$73e498efb7725a4c | $226133600d9fa405$export$734122ec1d097c70 | $226133600d9fa405$export$23b24f1629122f49 | $226133600d9fa405$export$a6fe78de55428aeb;
+const $226133600d9fa405$export$158420e94832e095 = $226133600d9fa405$export$5d8c47859934839f | $226133600d9fa405$export$606a835aa674cdb3 | $226133600d9fa405$export$73e498efb7725a4c;
+const $226133600d9fa405$export$630b11ccf7464717 = $226133600d9fa405$export$e54245776ad9d7fa | $226133600d9fa405$export$48eb2f3b6cc3c4ab | $226133600d9fa405$export$73e498efb7725a4c | $226133600d9fa405$export$734122ec1d097c70 | $226133600d9fa405$export$23b24f1629122f49 | $226133600d9fa405$export$a6fe78de55428aeb;
+const $226133600d9fa405$export$b4974fc5ec881eb2 = 0x00000010;
+const $226133600d9fa405$export$7c9488afb90066eb = 0x00040000;
+const $226133600d9fa405$export$e17ef95cc3937744 = 0x00000200;
+const $226133600d9fa405$export$9bee6cf39ebfa14f = 0x02000000;
+const $226133600d9fa405$export$2bbddc32e25aff08 = 0x00000400;
+const $226133600d9fa405$export$550a968b8f335560 = 0x00010000;
+const $226133600d9fa405$export$66454f5316761e6d = 0x00000001;
+const $226133600d9fa405$export$37e2ee22bedc259b = 0x00080000;
+const $226133600d9fa405$export$4de06b73361773aa = 0x00400000;
+const $226133600d9fa405$export$6d6281491c3c345b = 0x00000000;
+const $226133600d9fa405$export$992aaeca1d900884 = 0x00004000;
+const $226133600d9fa405$export$223645391ca50517 = 0x00000000;
+const $226133600d9fa405$export$ec70e607715a0dd8 = 0x00000040;
+const $226133600d9fa405$export$3bde6e836089a4c4 = 0x08000000;
+const $226133600d9fa405$export$8e4caed601fc6859 = 0x00100000;
+const $226133600d9fa405$export$405abfaa3d30b735 = 0x00000004;
+const $226133600d9fa405$export$abd6e08734fc0be5 = 0x00200000;
+const $226133600d9fa405$export$5ffc168bdc33e81a = 0x00001000;
+const $226133600d9fa405$export$7e05a5e1e0f3630f = 0x00000000;
+const $226133600d9fa405$export$f2eef988e187a8fe = 0x00002000;
+const $226133600d9fa405$export$d497db29e2467861 = 0x00020000;
+const $226133600d9fa405$export$ce69c1415f4c9e9 = 0x00000080;
+const $226133600d9fa405$export$fc7bd9e6c250670a = 0x00000008;
+const $226133600d9fa405$export$5655aef644f812f9 = 0x00000020;
+const $226133600d9fa405$export$c0529b550722ec16 = 0x00000100;
+const $226133600d9fa405$export$8e8eb584a9d8e6a0 = $226133600d9fa405$export$c0529b550722ec16 | $226133600d9fa405$export$e17ef95cc3937744;
+const $226133600d9fa405$export$9c34c2c2258a5ed0 = $226133600d9fa405$export$c0529b550722ec16 | $226133600d9fa405$export$ce69c1415f4c9e9 | $226133600d9fa405$export$fc7bd9e6c250670a;
+const $226133600d9fa405$export$b833dd3cd68611e5 = 0x0000;
+const $226133600d9fa405$export$c52d6ca467ce0472 = 0x0001;
+const $226133600d9fa405$export$684da755af3f7a1f = 0x0002;
+const $226133600d9fa405$export$e3066a4bd9a3474a = -2147483648;
+
+
+const $e15eb399ace1ba96$export$901a8201111c7957 = "user32" /* user32 */ ;
+const $e15eb399ace1ba96$export$11e63f7b0f3d9900 = (fns, settings)=>(0, $450d0791dbf93d92$export$11e63f7b0f3d9900)($e15eb399ace1ba96$export$901a8201111c7957, (0, $585d1be83f7e169d$export$b139dcabebd3c0ad), fns, settings);
+
+
+const $c0c75f42b778c281$export$19a6ec7fd41142b0 = 0x01E1;
+const $c0c75f42b778c281$export$1711f4719d90dd54 = 0x0014;
+const $c0c75f42b778c281$export$ae5ced2ad50bea4d = 0x0031;
+const $c0c75f42b778c281$export$b4a4b19b39d0e03d = 0x000D;
+const $c0c75f42b778c281$export$7f36dc16c7eef4af = 0x000E;
+const $c0c75f42b778c281$export$e04e254ca59ee39c = 0x0030;
+const $c0c75f42b778c281$export$6dc777026572fa9e = 0x0080;
+const $c0c75f42b778c281$export$75f41a0aed4da0f4 = 0x000C;
+const $c0c75f42b778c281$export$230d25d29746b5fb = 0x001C;
+const $c0c75f42b778c281$export$c2252265fe8812a6 = 0x001F;
+const $c0c75f42b778c281$export$c7032b1dd28fb749 = 0x0022;
+const $c0c75f42b778c281$export$611df49badc03681 = 0x0010;
+const $c0c75f42b778c281$export$a77d4afa4af1b4af = 0x0001;
+const $c0c75f42b778c281$export$3f9253d34e38d9ad = 0x0002;
+const $c0c75f42b778c281$export$5dbb3c8731057d58 = 0x000A;
+const $c0c75f42b778c281$export$ac6438855d7103ad = 0x0231;
+const $c0c75f42b778c281$export$d847a774b2670f9e = 0x0232;
+const $c0c75f42b778c281$export$655c35b13ae053cc = 0x007F;
+const $c0c75f42b778c281$export$511eebb7edc32326 = 0x0024;
+const $c0c75f42b778c281$export$84cf65970abba9fc = 0x0051;
+const $c0c75f42b778c281$export$70ec0f1178420e36 = 0x0050;
+const $c0c75f42b778c281$export$896999da2d79d94c = 0x0003;
+const $c0c75f42b778c281$export$756b94317d7ae37e = 0x0216;
+const $c0c75f42b778c281$export$68592c08fc3654dc = 0x0086;
+const $c0c75f42b778c281$export$f433a545ca588d4 = 0x0083;
+const $c0c75f42b778c281$export$93f700c154a8ef31 = 0x0081;
+const $c0c75f42b778c281$export$7e6ae754655a83ac = 0x0082;
+const $c0c75f42b778c281$export$8993f8ad8a35161a = 0x0000;
+const $c0c75f42b778c281$export$36043964122f25fb = 0x0037;
+const $c0c75f42b778c281$export$4a709bca827ba034 = 0x0013;
+const $c0c75f42b778c281$export$37eb37610775733 = 0x0012;
+const $c0c75f42b778c281$export$c146a401ece9a71f = 0x0018;
+const $c0c75f42b778c281$export$716ed736c365c5f = 0x0005;
+const $c0c75f42b778c281$export$4c9c95cba171bb6 = 0x0214;
+const $c0c75f42b778c281$export$216a428970a70cf0 = 0x007D;
+const $c0c75f42b778c281$export$c31907b319189679 = 0x007C;
+const $c0c75f42b778c281$export$c315d9c4d0de5b29 = 0x031A;
+const $c0c75f42b778c281$export$48c8b073b611c1d6 = 0x0054;
+const $c0c75f42b778c281$export$f8d3ed8c0a212c5a = 0x0047;
+const $c0c75f42b778c281$export$9b05f3b8d920a20d = 0x0046;
+const $c0c75f42b778c281$export$a49def560f5750b7 = 0x004A;
+const $c0c75f42b778c281$export$18db53ad3fad49f4 = 0x0111;
+const $c0c75f42b778c281$export$8859e65815fdef55 = 0x007B;
+const $c0c75f42b778c281$export$9d05462016b2860e = 0x0211;
+const $c0c75f42b778c281$export$f130ce90d71e3f9e = 0x0212;
+const $c0c75f42b778c281$export$a4734366f393e003 = 0x033F;
+const $c0c75f42b778c281$export$77c47651c71648bc = 0x0126;
+const $c0c75f42b778c281$export$7d209ffae6d958ef = 0x0123;
+const $c0c75f42b778c281$export$f7e968c32310d604 = 0x0124;
+const $c0c75f42b778c281$export$5a0a85b946206cbe = 0x0122;
+const $c0c75f42b778c281$export$5ed53755b4101a78 = 0x0213;
+const $c0c75f42b778c281$export$b526be0e425ebfc9 = 0x0125;
+
+
+
+
+
+
+
+
+
+var $kZbZk = parcelRequire("kZbZk");
+
+
+var $1a7VL = parcelRequire("1a7VL");
+
+var $7e1f2f4e79b15fd0$exports = {};
+$parcel$export($7e1f2f4e79b15fd0$exports, "ElementCE", () => $7199149bd5c58f58$export$ea432ebb9d598fdf);
+$parcel$export($7e1f2f4e79b15fd0$exports, "NumberCE", () => $905ba9565af7e357$export$caa4dfc7169288b7);
+$parcel$export($7e1f2f4e79b15fd0$exports, "ObjectCE", () => $b3412bfae9d21412$export$982d7f197acc6f94);
+$parcel$export($7e1f2f4e79b15fd0$exports, "StringCE", () => $d465502d07abe1c6$export$29246bb2b9c16932);
+$parcel$export($7e1f2f4e79b15fd0$exports, "Assert", () => $c538f9ab01794aaa$export$14647bdf767968d3);
+$parcel$export($7e1f2f4e79b15fd0$exports, "E", () => $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca);
+$parcel$export($7e1f2f4e79b15fd0$exports, "IsString", () => $834790ed5758562b$export$fae01d74d6648c3f);
+$parcel$export($7e1f2f4e79b15fd0$exports, "IsObject", () => $834790ed5758562b$export$e64f6626d4e96cfb);
+$parcel$export($7e1f2f4e79b15fd0$exports, "IsFunction", () => $834790ed5758562b$export$426ce8831f60741b);
+$parcel$export($7e1f2f4e79b15fd0$exports, "IsNumber", () => $834790ed5758562b$export$bdf29e0acfffe6ef);
+$parcel$export($7e1f2f4e79b15fd0$exports, "IsNaN", () => $834790ed5758562b$export$f375b07b95af9a54);
+var $2f6f692f1c2d9dfe$exports = {};
+
+$parcel$export($2f6f692f1c2d9dfe$exports, "ArrayCE", () => $2f6f692f1c2d9dfe$export$f35d492e63fcc0d6, (v) => $2f6f692f1c2d9dfe$export$f35d492e63fcc0d6 = v);
+
+var $834790ed5758562b$export$87b259aa03e3d267 = ()=>"bool";
+var $834790ed5758562b$export$7d260a2a5f8bc19e = ()=>"int";
+var $834790ed5758562b$export$7b3cbda67be88f5f = ()=>"double";
+var $834790ed5758562b$export$22b082955e083ec3 = ()=>"string";
+function $834790ed5758562b$export$1d10e1e94bc8dbf2(obj) {
+    return $834790ed5758562b$export$5c6c9f1eec02dba8(obj) || $834790ed5758562b$export$bdf29e0acfffe6ef(obj) || $834790ed5758562b$export$fae01d74d6648c3f(obj);
+}
+function $834790ed5758562b$export$5c6c9f1eec02dba8(obj) {
     return typeof obj == "boolean";
 } //|| obj instanceof Boolean
-function $1090eee99c835ae1$export$25e8ae17d770cbdb(boolStr) {
+function $834790ed5758562b$export$25e8ae17d770cbdb(boolStr) {
     return boolStr == "true";
 }
-function $1090eee99c835ae1$export$6486a15b46b6985c(obj, allowNaN = false) {
-    return $1090eee99c835ae1$export$fae01d74d6648c3f(obj) && obj.length && $1090eee99c835ae1$export$bdf29e0acfffe6ef(Number(obj), false, allowNaN);
+function $834790ed5758562b$export$6486a15b46b6985c(obj, allowNaN = false) {
+    return $834790ed5758562b$export$fae01d74d6648c3f(obj) && obj.length && $834790ed5758562b$export$bdf29e0acfffe6ef(Number(obj), false, allowNaN);
 }
-function $1090eee99c835ae1$export$bdf29e0acfffe6ef(obj, allowNumberObj = false, allowNaN = false) {
-    if (!allowNaN && $1090eee99c835ae1$export$f375b07b95af9a54(obj)) return false;
+function $834790ed5758562b$export$bdf29e0acfffe6ef(obj, allowNumberObj = false, allowNaN = false) {
+    if (!allowNaN && $834790ed5758562b$export$f375b07b95af9a54(obj)) return false;
     return typeof obj == "number" || allowNumberObj && obj instanceof Number;
 }
-function $1090eee99c835ae1$export$8084f86c2571bdd(stringOrFloatVal, valIfConversionFails = NaN, allowParseNaN = false) {
-    if (!$1090eee99c835ae1$export$fae01d74d6648c3f(stringOrFloatVal) && !$1090eee99c835ae1$export$bdf29e0acfffe6ef(stringOrFloatVal)) return valIfConversionFails;
-    if ($1090eee99c835ae1$export$fae01d74d6648c3f(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
+function $834790ed5758562b$export$8084f86c2571bdd(stringOrFloatVal, valIfConversionFails = NaN, allowParseNaN = false) {
+    if (!$834790ed5758562b$export$fae01d74d6648c3f(stringOrFloatVal) && !$834790ed5758562b$export$bdf29e0acfffe6ef(stringOrFloatVal)) return valIfConversionFails;
+    if ($834790ed5758562b$export$fae01d74d6648c3f(stringOrFloatVal) && stringOrFloatVal.length == 0) return valIfConversionFails;
     const result = Number(stringOrFloatVal);
-    if ($1090eee99c835ae1$export$f375b07b95af9a54(result) && !allowParseNaN) return valIfConversionFails;
+    if ($834790ed5758562b$export$f375b07b95af9a54(result) && !allowParseNaN) return valIfConversionFails;
     return result;
 }
-function $1090eee99c835ae1$export$a09985dba7548c1(obj) {
-    return $1090eee99c835ae1$export$bdf29e0acfffe6ef(obj) && parseInt(obj) == obj;
+function $834790ed5758562b$export$a09985dba7548c1(obj) {
+    return $834790ed5758562b$export$bdf29e0acfffe6ef(obj) && parseInt(obj) == obj;
 }
-function $1090eee99c835ae1$export$e45cc972ee8cb237(stringOrFloatVal, valIfConversionFails = NaN, allowParseNaN = false) {
-    const result = parseInt(`${$1090eee99c835ae1$export$8084f86c2571bdd(stringOrFloatVal, valIfConversionFails)}`);
-    if ($1090eee99c835ae1$export$f375b07b95af9a54(result) && !allowParseNaN) return valIfConversionFails;
+function $834790ed5758562b$export$e45cc972ee8cb237(stringOrFloatVal, valIfConversionFails = NaN, allowParseNaN = false) {
+    const result = parseInt(`${$834790ed5758562b$export$8084f86c2571bdd(stringOrFloatVal, valIfConversionFails)}`);
+    if ($834790ed5758562b$export$f375b07b95af9a54(result) && !allowParseNaN) return valIfConversionFails;
     return result;
 }
-function $1090eee99c835ae1$export$f375b07b95af9a54(obj) {
+function $834790ed5758562b$export$f375b07b95af9a54(obj) {
     return typeof obj == "number" && obj != obj;
 }
-function $1090eee99c835ae1$export$fae01d74d6648c3f(obj, allowStringObj = false) {
+function $834790ed5758562b$export$fae01d74d6648c3f(obj, allowStringObj = false) {
     return typeof obj == "string" || allowStringObj && obj instanceof String;
 }
-function $1090eee99c835ae1$export$5f245f9a686b5058(val) {
+function $834790ed5758562b$export$5f245f9a686b5058(val) {
     return `${val}`;
 }
-function $1090eee99c835ae1$export$9dc58581bb80d9a7(obj, allowSymbolObj = false) {
+function $834790ed5758562b$export$9dc58581bb80d9a7(obj, allowSymbolObj = false) {
     return typeof obj == "symbol" || allowSymbolObj && true && obj instanceof Symbol;
 }
-function $1090eee99c835ae1$export$426ce8831f60741b(obj) {
+function $834790ed5758562b$export$426ce8831f60741b(obj) {
     //return obj instanceof Function;
     return typeof obj == "function";
 }
-function $1090eee99c835ae1$export$e7d622d382907f22(obj) {
+function $834790ed5758562b$export$e7d622d382907f22(obj) {
     return Array.isArray(obj);
 } // for briefness and/or consistency
-function $1090eee99c835ae1$export$e64f6626d4e96cfb(obj) {
+function $834790ed5758562b$export$e64f6626d4e96cfb(obj) {
     return typeof obj == "object";
 }
-function $1090eee99c835ae1$export$f0b687c652821bb1(obj, typeConstructor) {
+function $834790ed5758562b$export$f0b687c652821bb1(obj, typeConstructor) {
     return obj instanceof typeConstructor;
 }
-function $1090eee99c835ae1$export$71c78ed5059e344e(obj) {
+function $834790ed5758562b$export$71c78ed5059e344e(obj) {
     //return obj instanceof Function && obj.name;
     return typeof obj == "function" && obj.name;
 }
-function $1090eee99c835ae1$export$3dbf4f28d024c824(enumType, nameModifierFunc) {
-    if (nameModifierFunc == "ui") nameModifierFunc = (name)=>(0, $03640216a2ed2e09$export$c35569273ccf4ab4)(name, (m)=>[
+function $834790ed5758562b$export$3dbf4f28d024c824(enumType, nameModifierFunc) {
+    if (nameModifierFunc == "ui") nameModifierFunc = (name)=>(0, $3b7e5e7e49d7a367$export$c35569273ccf4ab4)(name, (m)=>[
                 m.startLower_to_upper,
                 m.lowerUpper_to_lowerSpaceLower, 
             ]);
@@ -4661,21 +6144,21 @@ function $1090eee99c835ae1$export$3dbf4f28d024c824(enumType, nameModifierFunc) {
     // valid enum values are numbers and null, so any props other than those are the name->value props we want
     /*let nameValuePairs = enumType.Pairs().filter(pair=>!IsNumberString(pair.key) && pair.key != "null");
     return nameValuePairs.map(pair=>({name: nameModifierFunc ? nameModifierFunc(pair.key) : pair.key, value: pair.value as number}));*/ // valid enum values are numbers and null, so any keys other than those are the ones we want (they're the keys for the key->value pairs)
-    const entryNames = Object.keys(enumType).filter((key)=>!$1090eee99c835ae1$export$6486a15b46b6985c(key) && key != "null");
+    const entryNames = Object.keys(enumType).filter((key)=>!$834790ed5758562b$export$6486a15b46b6985c(key) && key != "null");
     return entryNames.map((name)=>({
             name: nameModifierFunc instanceof Function ? nameModifierFunc(name) : name,
             value: enumType[name]
         }));
 }
-function $1090eee99c835ae1$export$67fa69466aa121d3(enumType) {
-    return $1090eee99c835ae1$export$3dbf4f28d024c824(enumType).map((a)=>a.value);
+function $834790ed5758562b$export$67fa69466aa121d3(enumType) {
+    return $834790ed5758562b$export$3dbf4f28d024c824(enumType).map((a)=>a.value);
 }
-function $1090eee99c835ae1$export$15580752cea262d1(enumType) {
-    return $1090eee99c835ae1$export$67fa69466aa121d3(enumType).map((value)=>({
+function $834790ed5758562b$export$15580752cea262d1(enumType) {
+    return $834790ed5758562b$export$67fa69466aa121d3(enumType).map((value)=>({
             const: value
         }));
 }
-function $1090eee99c835ae1$export$e809526ac82276e0(keysObj) {
+function $834790ed5758562b$export$e809526ac82276e0(keysObj) {
     const optionsObj = {};
     const keys = Object.keys(keysObj);
     const values = keys; // could also check for string value-overrides on keysObj
@@ -4688,11 +6171,11 @@ function $1090eee99c835ae1$export$e809526ac82276e0(keysObj) {
 
 
 
-const $5294bdd3472c4d43$export$39b482c5e57630a8 = typeof window == "object" ? window : $parcel$global;
+const $34f7c9824214f6f8$export$39b482c5e57630a8 = typeof window == "object" ? window : $parcel$global;
 
 
 
-function $64e096969242e10d$export$14647bdf767968d3(condition, messageOrMessageFunc, triggerDebugger = true) {
+function $c538f9ab01794aaa$export$14647bdf767968d3(condition, messageOrMessageFunc, triggerDebugger = true) {
     if (condition) return undefined;
     var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
     //JSVE.logFunc(`Assert failed) ${message}\n\nStackTrace) ${GetStackTraceStr()}`);
@@ -4702,15 +6185,15 @@ function $64e096969242e10d$export$14647bdf767968d3(condition, messageOrMessageFu
     if (!skipError) throw new Error(`Assert failed) ${message}`);
     return undefined;
 }
-function $64e096969242e10d$export$954bda899ec90822(condition, messageOrMessageFunc, opts) {
+function $c538f9ab01794aaa$export$954bda899ec90822(condition, messageOrMessageFunc, opts) {
     if (condition) return;
     var message = messageOrMessageFunc instanceof Function ? messageOrMessageFunc() : messageOrMessageFunc;
     let message_final = `Assert-warn failed) ${message}`;
-    if (opts === null || opts === void 0 ? void 0 : opts.addStackTrace) message_final += `\n\nStackTrace) ${(0, $03640216a2ed2e09$export$30cc257513a4c1f9)()}`;
+    if (opts === null || opts === void 0 ? void 0 : opts.addStackTrace) message_final += `\n\nStackTrace) ${(0, $3b7e5e7e49d7a367$export$30cc257513a4c1f9)()}`;
     console.warn(message_final);
 }
-function $64e096969242e10d$export$48d32c8cf49fbfd8(condition) {}
-class $64e096969242e10d$export$ebd11618f299a286 {
+function $c538f9ab01794aaa$export$48d32c8cf49fbfd8(condition) {}
+class $c538f9ab01794aaa$export$ebd11618f299a286 {
     /*static get NN() {
         return function<T>(value: T): NonNullable<T> {
             Assert(value != null, ()=>`Value cannot be null. (provided value: ${value})`);
@@ -4718,89 +6201,89 @@ class $64e096969242e10d$export$ebd11618f299a286 {
         };
     }*/ static set NN(value) {
         //A.NN(value);
-        $64e096969242e10d$export$1f54b5c3e1312ee8(value);
+        $c538f9ab01794aaa$export$1f54b5c3e1312ee8(value);
     }
     static NotEqualTo(val1) {
-        return new $64e096969242e10d$export$750d2ef5fccaee6e(val1);
+        return new $c538f9ab01794aaa$export$750d2ef5fccaee6e(val1);
     }
 }
-class $64e096969242e10d$export$750d2ef5fccaee6e {
+class $c538f9ab01794aaa$export$750d2ef5fccaee6e {
     constructor(val1){
         this.val1 = val1;
     }
     set a(val2) {
-        $64e096969242e10d$export$14647bdf767968d3(val2 != this.val1);
+        $c538f9ab01794aaa$export$14647bdf767968d3(val2 != this.val1);
     }
 }
-class $64e096969242e10d$export$4b2146afb5b045e1 {
+class $c538f9ab01794aaa$export$4b2146afb5b045e1 {
     constructor(type){
         this.type = type;
     }
     set a(val) {
-        $64e096969242e10d$export$14647bdf767968d3(val != null && val.GetType().IsDerivedFrom(this.type));
+        $c538f9ab01794aaa$export$14647bdf767968d3(val != null && val.GetType().IsDerivedFrom(this.type));
     }
 }
-function $64e096969242e10d$export$1f54b5c3e1312ee8(val) {
-    $64e096969242e10d$export$14647bdf767968d3(val != null, ()=>`Value cannot be null. (provided value: ${val})`);
+function $c538f9ab01794aaa$export$1f54b5c3e1312ee8(val) {
+    $c538f9ab01794aaa$export$14647bdf767968d3(val != null, ()=>`Value cannot be null. (provided value: ${val})`);
     return val;
 }
 
 
-const $6204e4eb931a2a25$export$952e2b7e251b8b38 = {};
-const $6204e4eb931a2a25$export$d3ae4127996a91af = [];
-const $6204e4eb931a2a25$export$573c02fa5a6577a4 = []; // like emptyArray, except signifies that the cause of the emptiness is that data is still loading
-const $6204e4eb931a2a25$export$9e6f8948b1b2764c = $6204e4eb931a2a25$export$952e2b7e251b8b38;
-const $6204e4eb931a2a25$export$97c3b3b662cebb0f = ()=>$6204e4eb931a2a25$export$9e6f8948b1b2764c;
-const $6204e4eb931a2a25$export$f2e0ce65e7cf9b72 = $6204e4eb931a2a25$export$d3ae4127996a91af;
-const $6204e4eb931a2a25$export$cc476286d3e5ee91 = ()=>$6204e4eb931a2a25$export$f2e0ce65e7cf9b72;
-const $6204e4eb931a2a25$export$c68a876246bd9efd = $6204e4eb931a2a25$export$573c02fa5a6577a4;
-const $6204e4eb931a2a25$export$a13156c4d8291bfd = ()=>$6204e4eb931a2a25$export$c68a876246bd9efd;
-function $6204e4eb931a2a25$export$7d594895db920a63(val) {
-    return $6204e4eb931a2a25$export$71fbe7d802e0ea80(val) || $6204e4eb931a2a25$export$eaa6a5c6f740d8cc(val);
+const $794bddb3fba58bbb$export$952e2b7e251b8b38 = {};
+const $794bddb3fba58bbb$export$d3ae4127996a91af = [];
+const $794bddb3fba58bbb$export$573c02fa5a6577a4 = []; // like emptyArray, except signifies that the cause of the emptiness is that data is still loading
+const $794bddb3fba58bbb$export$9e6f8948b1b2764c = $794bddb3fba58bbb$export$952e2b7e251b8b38;
+const $794bddb3fba58bbb$export$97c3b3b662cebb0f = ()=>$794bddb3fba58bbb$export$9e6f8948b1b2764c;
+const $794bddb3fba58bbb$export$f2e0ce65e7cf9b72 = $794bddb3fba58bbb$export$d3ae4127996a91af;
+const $794bddb3fba58bbb$export$cc476286d3e5ee91 = ()=>$794bddb3fba58bbb$export$f2e0ce65e7cf9b72;
+const $794bddb3fba58bbb$export$c68a876246bd9efd = $794bddb3fba58bbb$export$573c02fa5a6577a4;
+const $794bddb3fba58bbb$export$a13156c4d8291bfd = ()=>$794bddb3fba58bbb$export$c68a876246bd9efd;
+function $794bddb3fba58bbb$export$7d594895db920a63(val) {
+    return $794bddb3fba58bbb$export$71fbe7d802e0ea80(val) || $794bddb3fba58bbb$export$eaa6a5c6f740d8cc(val);
 }
-function $6204e4eb931a2a25$export$71fbe7d802e0ea80(obj) {
-    return obj == $6204e4eb931a2a25$export$952e2b7e251b8b38;
+function $794bddb3fba58bbb$export$71fbe7d802e0ea80(obj) {
+    return obj == $794bddb3fba58bbb$export$952e2b7e251b8b38;
 }
-function $6204e4eb931a2a25$export$eaa6a5c6f740d8cc(array) {
-    return array == $6204e4eb931a2a25$export$d3ae4127996a91af || array == $6204e4eb931a2a25$export$573c02fa5a6577a4;
+function $794bddb3fba58bbb$export$eaa6a5c6f740d8cc(array) {
+    return array == $794bddb3fba58bbb$export$d3ae4127996a91af || array == $794bddb3fba58bbb$export$573c02fa5a6577a4;
 }
-function $6204e4eb931a2a25$export$49c09a00d6159b3d(base) {
-    if (base === undefined) return $6204e4eb931a2a25$export$573c02fa5a6577a4;
-    if (base === null) return $6204e4eb931a2a25$export$d3ae4127996a91af;
-    (0, $64e096969242e10d$export$14647bdf767968d3)("Cannot get empty-array for base that is not null or undefined.");
+function $794bddb3fba58bbb$export$49c09a00d6159b3d(base) {
+    if (base === undefined) return $794bddb3fba58bbb$export$573c02fa5a6577a4;
+    if (base === null) return $794bddb3fba58bbb$export$d3ae4127996a91af;
+    (0, $c538f9ab01794aaa$export$14647bdf767968d3)("Cannot get empty-array for base that is not null or undefined.");
 }
 
 
 if (Number.MIN_SAFE_INTEGER == null) Number.MIN_SAFE_INTEGER = -9007199254740991;
 if (Number.MAX_SAFE_INTEGER == null) Number.MAX_SAFE_INTEGER = 9007199254740991;
-(0, $5294bdd3472c4d43$export$39b482c5e57630a8)["G"] = $03640216a2ed2e09$var$G;
-function $03640216a2ed2e09$var$G(...globalHolders) {
-    for (const globalHolder of globalHolders)Object.assign((0, $5294bdd3472c4d43$export$39b482c5e57630a8), globalHolder);
+(0, $34f7c9824214f6f8$export$39b482c5e57630a8)["G"] = $3b7e5e7e49d7a367$var$G;
+function $3b7e5e7e49d7a367$var$G(...globalHolders) {
+    for (const globalHolder of globalHolders)Object.assign((0, $34f7c9824214f6f8$export$39b482c5e57630a8), globalHolder);
 }
-function $03640216a2ed2e09$export$cd173cc739e10ddb(...args) {}
-function $03640216a2ed2e09$export$1c42b73d40826583(...args) {}
-function $03640216a2ed2e09$export$ddcfa504b07c784c(name = "default") {
-    $03640216a2ed2e09$export$ddcfa504b07c784c["values"][name] = ($03640216a2ed2e09$export$ddcfa504b07c784c["values"][name] | 0) + 1; // eslint-disable-line
-    return $03640216a2ed2e09$export$ddcfa504b07c784c["values"][name];
+function $3b7e5e7e49d7a367$export$cd173cc739e10ddb(...args) {}
+function $3b7e5e7e49d7a367$export$1c42b73d40826583(...args) {}
+function $3b7e5e7e49d7a367$export$ddcfa504b07c784c(name = "default") {
+    $3b7e5e7e49d7a367$export$ddcfa504b07c784c["values"][name] = ($3b7e5e7e49d7a367$export$ddcfa504b07c784c["values"][name] | 0) + 1; // eslint-disable-line
+    return $3b7e5e7e49d7a367$export$ddcfa504b07c784c["values"][name];
 }
-$03640216a2ed2e09$export$ddcfa504b07c784c["values"] = [];
-function $03640216a2ed2e09$export$a9c23c6ac3fc3eca(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20) {
+$3b7e5e7e49d7a367$export$ddcfa504b07c784c["values"] = [];
+function $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20) {
     /* eslint-enable */ return Object.assign({}, ...arguments);
 }
-function $03640216a2ed2e09$export$46ebe952f56fe2f(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20) {
+function $3b7e5e7e49d7a367$export$46ebe952f56fe2f(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20) {
     /* eslint-enable */ var result = {};
     for (const extend of Array.from(arguments)){
-        if (!(0, $1090eee99c835ae1$export$e64f6626d4e96cfb)(extend)) continue;
+        if (!(0, $834790ed5758562b$export$e64f6626d4e96cfb)(extend)) continue;
         //Object.assign(result, extend);
         // use VSet, for its extra options (eg. using EF({someKey: false ? "someValue" : OMIT}) to omit "someKey" entirely)
-        (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(result).VSet(extend);
+        (0, $b3412bfae9d21412$export$982d7f197acc6f94)(result).VSet(extend);
     }
     // if result is empty, return the same empty-obj each time so it doesn't trigger react-js rerenders
-    if ((0, $6204e4eb931a2a25$export$952e2b7e251b8b38) && (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(result).VKeys().length == 0) return 0, $6204e4eb931a2a25$export$952e2b7e251b8b38;
+    if ((0, $794bddb3fba58bbb$export$952e2b7e251b8b38) && (0, $b3412bfae9d21412$export$982d7f197acc6f94)(result).VKeys().length == 0) return 0, $794bddb3fba58bbb$export$952e2b7e251b8b38;
     return result;
 //return StyleSheet.create(result);
 }
-function $03640216a2ed2e09$export$d5df1808c1f263c1(func) {
+function $3b7e5e7e49d7a367$export$d5df1808c1f263c1(func) {
     Object.defineProperty(func, "Go", {
         /*set: arg1=>{
             func(arg1);
@@ -4808,8 +6291,8 @@ function $03640216a2ed2e09$export$d5df1808c1f263c1(func) {
     });
     return func;
 }
-var $03640216a2ed2e09$var$hasOwnProperty = Object.prototype.hasOwnProperty;
-function $03640216a2ed2e09$export$ad886ff608f37420(objA, objB) {
+var $3b7e5e7e49d7a367$var$hasOwnProperty = Object.prototype.hasOwnProperty;
+function $3b7e5e7e49d7a367$export$ad886ff608f37420(objA, objB) {
     if (Object.is(objA, objB)) return true;
     if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) return false;
     var keysA = Object.keys(objA);
@@ -4817,14 +6300,14 @@ function $03640216a2ed2e09$export$ad886ff608f37420(objA, objB) {
     if (keysA.length !== keysB.length) return false;
     // test for A's keys different from B
     for(var i = 0; i < keysA.length; i++){
-        if (!$03640216a2ed2e09$var$hasOwnProperty.call(objB, keysA[i]) || !Object.is(objA[keysA[i]], objB[keysA[i]])) return false;
+        if (!$3b7e5e7e49d7a367$var$hasOwnProperty.call(objB, keysA[i]) || !Object.is(objA[keysA[i]], objB[keysA[i]])) return false;
     }
     return true;
 }
-function $03640216a2ed2e09$export$c30f1c873524680a(objA, objB) {
-    return !$03640216a2ed2e09$export$ad886ff608f37420(objA, objB);
+function $3b7e5e7e49d7a367$export$c30f1c873524680a(objA, objB) {
+    return !$3b7e5e7e49d7a367$export$ad886ff608f37420(objA, objB);
 }
-function $03640216a2ed2e09$export$1d8a493107fb4b3a(text) {
+function $3b7e5e7e49d7a367$export$1d8a493107fb4b3a(text) {
     /*
     //var note = $(`<input type="text">`).appendTo("body");
     var note = document.createElement("textarea");
@@ -4849,13 +6332,13 @@ function $03640216a2ed2e09$export$1d8a493107fb4b3a(text) {
     };
     document.execCommand("copy", false, null);
 }
-function $03640216a2ed2e09$export$98f03c5d19621d70(target) {
+function $3b7e5e7e49d7a367$export$98f03c5d19621d70(target) {
     //var name = (target as any).GetName();
     var name = target["name_fake"] || target.name || (target.toString().match(/^function\s*([^\s(]+)/) || [])[1];
     //console.log("Globalizing: " + name);
-    (0, $5294bdd3472c4d43$export$39b482c5e57630a8)[name] = target;
+    (0, $34f7c9824214f6f8$export$39b482c5e57630a8)[name] = target;
 }
-class $03640216a2ed2e09$export$bd07df51db876934 {
+class $3b7e5e7e49d7a367$export$bd07df51db876934 {
     constructor(){
         this.lastID = -1;
     }
@@ -4863,14 +6346,14 @@ class $03640216a2ed2e09$export$bd07df51db876934 {
         return ++this.lastID;
     }
 }
-const $03640216a2ed2e09$export$9c64ee4d84d79ce1 = "\n";
-function $03640216a2ed2e09$export$195eb69f342913d(args) {
-    return $03640216a2ed2e09$export$b3f2e2de3a8baa1e(args, 0);
+const $3b7e5e7e49d7a367$export$9c64ee4d84d79ce1 = "\n";
+function $3b7e5e7e49d7a367$export$195eb69f342913d(args) {
+    return $3b7e5e7e49d7a367$export$b3f2e2de3a8baa1e(args, 0);
 }
-function $03640216a2ed2e09$export$b3f2e2de3a8baa1e(args, start, end) {
+function $3b7e5e7e49d7a367$export$b3f2e2de3a8baa1e(args, start, end) {
     return Array.prototype.slice.call(args, start != null ? start : 0, end);
 }
-function $03640216a2ed2e09$export$a5433e0f3b1dce29(functionWithInCommentMultiline, useExtraPreprocessing) {
+function $3b7e5e7e49d7a367$export$a5433e0f3b1dce29(functionWithInCommentMultiline, useExtraPreprocessing) {
     useExtraPreprocessing = useExtraPreprocessing != null ? useExtraPreprocessing : true;
     var text = functionWithInCommentMultiline.toString().replace(/\r/g, "");
     // some extra preprocessing
@@ -4882,7 +6365,7 @@ function $03640216a2ed2e09$export$a5433e0f3b1dce29(functionWithInCommentMultilin
     var firstCharPos = text.indexOf("\n", text.indexOf("/*")) + 1;
     return text.substring(firstCharPos, text.lastIndexOf("\n"));
 }
-function $03640216a2ed2e09$export$56a454fe9d34f22a(functionWithCode) {
+function $3b7e5e7e49d7a367$export$56a454fe9d34f22a(functionWithCode) {
     var text = functionWithCode.toString().replace(/\r/g, "");
     var firstCharOfSecondLinePos = text.indexOf("\n") + 1;
     var enderOfSecondLastLine = text.lastIndexOf("\n");
@@ -4892,30 +6375,30 @@ function $03640216a2ed2e09$export$56a454fe9d34f22a(functionWithCode) {
     result = result.replace(/['"]@((?:.|\n)+)@['"];(\n(?=\n))?/g, (match, sub1)=>sub1.replace(/\\n/, "\n"));
     return result;
 }
-function $03640216a2ed2e09$export$76818b28a78bf127(array, compare) {
+function $3b7e5e7e49d7a367$export$76818b28a78bf127(array, compare) {
     var array2 = array.map((item, index)=>({
             index: index,
             item: item
         }));
     array2.sort((a, b)=>{
         var r = compare(a.item, b.item, a.index, b.index);
-        return r != 0 ? r : $03640216a2ed2e09$export$2c1d9c1fe3e6577a(a.index, b.index);
+        return r != 0 ? r : $3b7e5e7e49d7a367$export$2c1d9c1fe3e6577a(a.index, b.index);
     });
     return array2.map((pack)=>pack.item);
 }
-function $03640216a2ed2e09$export$2c1d9c1fe3e6577a(a, b, caseSensitive = true) {
+function $3b7e5e7e49d7a367$export$2c1d9c1fe3e6577a(a, b, caseSensitive = true) {
     if (!caseSensitive && typeof a == "string" && typeof b == "string") {
         a = a.toLowerCase();
         b = b.toLowerCase();
     }
     return a < b ? -1 : a > b ? 1 : 0;
 }
-function $03640216a2ed2e09$export$fe5c6e289677d1cc(obj, propMatchFunc, depth = 0) {
+function $3b7e5e7e49d7a367$export$fe5c6e289677d1cc(obj, propMatchFunc, depth = 0) {
     /*var Assert = require("../../Frame/General/Assert").Assert;
     Assert(depth < 100, "CloneObject cannot work past depth 100! (probably circular ref)");*/ if (obj == null) return null;
-    if ((0, $1090eee99c835ae1$export$1d10e1e94bc8dbf2)(obj)) return obj;
+    if ((0, $834790ed5758562b$export$1d10e1e94bc8dbf2)(obj)) return obj;
     //if (obj.GetType() == Array)
-    if (obj.constructor == Array) return $03640216a2ed2e09$export$eaa68adec498c98a(obj);
+    if (obj.constructor == Array) return $3b7e5e7e49d7a367$export$eaa68adec498c98a(obj);
     /*if (obj instanceof List)
         return List.apply(null, [obj.itemType].concat(V.CloneArray(obj)));
         if (obj instanceof Dictionary) {
@@ -4924,17 +6407,17 @@ function $03640216a2ed2e09$export$fe5c6e289677d1cc(obj, propMatchFunc, depth = 0
                 result.Add(pair.key, pair.value);
             return result;
         }*/ const result = {};
-    for (const pair of (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(obj).Pairs())if (!(pair.value instanceof Function) && (propMatchFunc == null || propMatchFunc.call(obj, pair.key, pair.value))) result[pair.key] = $03640216a2ed2e09$export$fe5c6e289677d1cc(pair.value, propMatchFunc, depth + 1);
+    for (const pair of (0, $b3412bfae9d21412$export$982d7f197acc6f94)(obj).Pairs())if (!(pair.value instanceof Function) && (propMatchFunc == null || propMatchFunc.call(obj, pair.key, pair.value))) result[pair.key] = $3b7e5e7e49d7a367$export$fe5c6e289677d1cc(pair.value, propMatchFunc, depth + 1);
     return result;
 }
-function $03640216a2ed2e09$export$eaa68adec498c98a(array) {
+function $3b7e5e7e49d7a367$export$eaa68adec498c98a(array) {
     //array.slice(0); //deep: JSON.parse(JSON.stringify(array));
     return Array.prototype.slice.call(array, 0);
 }
-function $03640216a2ed2e09$export$d590fdd6c43280f7(func, newThis) {
+function $3b7e5e7e49d7a367$export$d590fdd6c43280f7(func, newThis) {
     return func.bind(newThis);
 }
-class $03640216a2ed2e09$export$2eba8ec3a333fdbb {
+class $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb {
     constructor(ancestorNodes, obj, prop){
         this.ancestorNodes = ancestorNodes;
         this.obj = obj;
@@ -4942,7 +6425,7 @@ class $03640216a2ed2e09$export$2eba8ec3a333fdbb {
     }
     get PathNodes() {
         if (this.prop == "_root") return [];
-        return (0, $db86bae2e67ee359$exports.ArrayCE)(this.ancestorNodes).Select((a)=>a.prop).concat(this.prop);
+        return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(this.ancestorNodes).Select((a)=>a.prop).concat(this.prop);
     }
     get PathStr() {
         return this.PathNodes.join("/");
@@ -4959,52 +6442,52 @@ class $03640216a2ed2e09$export$2eba8ec3a333fdbb {
         this.obj[this.prop] = newVal;
     }
 }
-function $03640216a2ed2e09$export$af3391acba9fe505(obj, includeRootNode = false, _ancestorNodes = []) {
-    (0, $64e096969242e10d$export$14647bdf767968d3)(_ancestorNodes.length <= 300, "Cannot traverse more than 300 levels into object tree. (probably circular)");
+function $3b7e5e7e49d7a367$export$af3391acba9fe505(obj, includeRootNode = false, _ancestorNodes = []) {
+    (0, $c538f9ab01794aaa$export$14647bdf767968d3)(_ancestorNodes.length <= 300, "Cannot traverse more than 300 levels into object tree. (probably circular)");
     const result = [];
-    if (includeRootNode) result.push(new $03640216a2ed2e09$export$2eba8ec3a333fdbb([], {
+    if (includeRootNode) result.push(new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb([], {
         _root: obj
     }, "_root"));
     const objIsMapLike = obj instanceof Map || obj.constructor.name == "ObservableMap"; // ObservableMap from mobx
     for (const key of objIsMapLike ? obj["keys"]() : Object.keys(obj)){
         const value = objIsMapLike ? obj["get"](key) : obj[key];
-        const currentNode = new $03640216a2ed2e09$export$2eba8ec3a333fdbb(_ancestorNodes, obj, key);
+        const currentNode = new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb(_ancestorNodes, obj, key);
         result.push(currentNode);
-        if (value != null && (0, $1090eee99c835ae1$export$e64f6626d4e96cfb)(value)) (0, $db86bae2e67ee359$exports.ArrayCE)(result).AddRange($03640216a2ed2e09$export$af3391acba9fe505(value, false, _ancestorNodes.concat(currentNode)));
+        if (value != null && (0, $834790ed5758562b$export$e64f6626d4e96cfb)(value)) (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(result).AddRange($3b7e5e7e49d7a367$export$af3391acba9fe505(value, false, _ancestorNodes.concat(currentNode)));
     }
     return result;
 }
-function $03640216a2ed2e09$export$d5b89b2d7b2338ea(treeRoot, pathNodesOrStr, includeRootNode = false, _ancestorNodes = []) {
+function $3b7e5e7e49d7a367$export$d5b89b2d7b2338ea(treeRoot, pathNodesOrStr, includeRootNode = false, _ancestorNodes = []) {
     const descendantPathNodes = pathNodesOrStr instanceof Array ? pathNodesOrStr : pathNodesOrStr.split("/");
-    const childTreeNode = new $03640216a2ed2e09$export$2eba8ec3a333fdbb(_ancestorNodes, treeRoot, descendantPathNodes[0]);
+    const childTreeNode = new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb(_ancestorNodes, treeRoot, descendantPathNodes[0]);
     var result = [];
-    if (includeRootNode) result.push(new $03640216a2ed2e09$export$2eba8ec3a333fdbb([], {
+    if (includeRootNode) result.push(new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb([], {
         _root: treeRoot
     }, "_root"));
     result.push(childTreeNode);
-    if (descendantPathNodes.length > 1) result.push(...$03640216a2ed2e09$export$d5b89b2d7b2338ea(childTreeNode ? childTreeNode.Value : null, (0, $db86bae2e67ee359$exports.ArrayCE)(descendantPathNodes).Skip(1).join("/"), false, _ancestorNodes.concat(childTreeNode)));
+    if (descendantPathNodes.length > 1) result.push(...$3b7e5e7e49d7a367$export$d5b89b2d7b2338ea(childTreeNode ? childTreeNode.Value : null, (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(descendantPathNodes).Skip(1).join("/"), false, _ancestorNodes.concat(childTreeNode)));
     return result;
 }
-function $03640216a2ed2e09$export$3aadccf4518ef7f1(treeRoot, pathNodesOrStr, visitFunc, visitRootNode = false, _ancestorNodes = []) {
-    if (visitRootNode) visitFunc(new $03640216a2ed2e09$export$2eba8ec3a333fdbb([], {
+function $3b7e5e7e49d7a367$export$3aadccf4518ef7f1(treeRoot, pathNodesOrStr, visitFunc, visitRootNode = false, _ancestorNodes = []) {
+    if (visitRootNode) visitFunc(new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb([], {
         _root: treeRoot
     }, "_root"));
     const descendantPathNodes = pathNodesOrStr instanceof Array ? pathNodesOrStr : pathNodesOrStr.split("/");
-    const childTreeNode = new $03640216a2ed2e09$export$2eba8ec3a333fdbb(_ancestorNodes, treeRoot, descendantPathNodes[0]);
+    const childTreeNode = new $3b7e5e7e49d7a367$export$2eba8ec3a333fdbb(_ancestorNodes, treeRoot, descendantPathNodes[0]);
     visitFunc(childTreeNode);
-    if (descendantPathNodes.length > 1) $03640216a2ed2e09$export$3aadccf4518ef7f1(childTreeNode.Value, (0, $db86bae2e67ee359$exports.ArrayCE)(descendantPathNodes).Skip(1).join("/"), visitFunc, false, _ancestorNodes.concat(childTreeNode));
+    if (descendantPathNodes.length > 1) $3b7e5e7e49d7a367$export$3aadccf4518ef7f1(childTreeNode.Value, (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(descendantPathNodes).Skip(1).join("/"), visitFunc, false, _ancestorNodes.concat(childTreeNode));
     return treeRoot;
 }
-function $03640216a2ed2e09$export$bc4bf9529c6d1e83(pathGetterFunc) {
+function $3b7e5e7e49d7a367$export$bc4bf9529c6d1e83(pathGetterFunc) {
     const funcStr = pathGetterFunc.toString();
-    (0, $64e096969242e10d$export$14647bdf767968d3)(!funcStr.includes("["), "Path-getter-func cannot contain bracket-based property-access.");
+    (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!funcStr.includes("["), "Path-getter-func cannot contain bracket-based property-access.");
     /*const pathStr = funcStr.match(/return [^.]+\.(.+?);/)[1] as string;
     //let result = pathStr.replace(/\./g, "/");
     const result = pathStr.split(".");*/ const parts = funcStr.split(".").slice(1); // remove first segment, since it's just the "return xxx." part
     parts[parts.length - 1] = parts[parts.length - 1].match(/^([a-zA-Z0-9_$]+)/)[1]; // remove semicolon (or whatever else) at the end
     return parts;
 }
-function $03640216a2ed2e09$export$4f1af7ef810f3f84(obj, pathOrPathSegments, resultIfNull = null, sepChar = "/") {
+function $3b7e5e7e49d7a367$export$4f1af7ef810f3f84(obj, pathOrPathSegments, resultIfNull = null, sepChar = "/") {
     const pathSegments = pathOrPathSegments instanceof Array ? pathOrPathSegments : pathOrPathSegments.split(sepChar);
     let result = obj;
     for (const pathNode of pathSegments){
@@ -5014,28 +6497,28 @@ function $03640216a2ed2e09$export$4f1af7ef810f3f84(obj, pathOrPathSegments, resu
     if (result == null) return resultIfNull;
     return result;
 }
-function $03640216a2ed2e09$export$e2156189eac50a41(obj, pathOrPathSegments, newValue, sepChar = "/", createPathSegmentsIfMissing = true, deleteUndefined = false) {
+function $3b7e5e7e49d7a367$export$e2156189eac50a41(obj, pathOrPathSegments, newValue, sepChar = "/", createPathSegmentsIfMissing = true, deleteUndefined = false) {
     const pathSegments = pathOrPathSegments instanceof Array ? pathOrPathSegments : pathOrPathSegments.split(sepChar);
     let deepObj = obj;
     // tunnel down to the object holding the path-specified prop
     pathSegments.slice(0, -1).forEach((segment)=>{
         if (deepObj[segment] == null) {
             if (createPathSegmentsIfMissing) deepObj[segment] = {};
-            else (0, $64e096969242e10d$export$14647bdf767968d3)(false, `The given path (${pathSegments.join("/")}) had a missing segment (${segment}), so the deep-set failed.`);
+            else (0, $c538f9ab01794aaa$export$14647bdf767968d3)(false, `The given path (${pathSegments.join("/")}) had a missing segment (${segment}), so the deep-set failed.`);
         }
         deepObj = deepObj[segment];
     });
-    if (newValue === undefined && deleteUndefined) delete deepObj[(0, $db86bae2e67ee359$exports.ArrayCE)(pathSegments).Last()];
-    else deepObj[(0, $db86bae2e67ee359$exports.ArrayCE)(pathSegments).Last()] = newValue;
+    if (newValue === undefined && deleteUndefined) delete deepObj[(0, $2f6f692f1c2d9dfe$exports.ArrayCE)(pathSegments).Last()];
+    else deepObj[(0, $2f6f692f1c2d9dfe$exports.ArrayCE)(pathSegments).Last()] = newValue;
 }
-function $03640216a2ed2e09$export$bcf5b581c956b5fa(baseObj, pathOrPathSegments, newValue, sepChar = "/") {
+function $3b7e5e7e49d7a367$export$bcf5b581c956b5fa(baseObj, pathOrPathSegments, newValue, sepChar = "/") {
     const pathSegments = pathOrPathSegments instanceof Array ? pathOrPathSegments : pathOrPathSegments.split(sepChar);
     return Object.assign(Object.assign({}, baseObj), {
-        [pathSegments[0]]: pathSegments.length > 1 ? $03640216a2ed2e09$export$bcf5b581c956b5fa(baseObj[pathSegments[0]], pathSegments.slice(1), newValue) : newValue
+        [pathSegments[0]]: pathSegments.length > 1 ? $3b7e5e7e49d7a367$export$bcf5b581c956b5fa(baseObj[pathSegments[0]], pathSegments.slice(1), newValue) : newValue
     });
 }
-function $03640216a2ed2e09$export$30cc257513a4c1f9(opt) {
-    opt = $03640216a2ed2e09$export$a9c23c6ac3fc3eca({
+function $3b7e5e7e49d7a367$export$30cc257513a4c1f9(opt) {
+    opt = $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca({
         sourceStackTrace: true
     }, opt);
     //stackTrace = stackTrace || new Error()[sourceStackTrace ? "Stack" : "stack"];
@@ -5050,43 +6533,43 @@ function $03640216a2ed2e09$export$30cc257513a4c1f9(opt) {
         stackTrace_final = fakeError.stack;
         Error.stackTraceLimit = oldStackLimit;
     }
-    return stackTrace_final.substr((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(stackTrace_final).IndexOf_X("\n", 1)); // remove "Error" line and first stack-frame (that of this method)
+    return stackTrace_final.substr((0, $d465502d07abe1c6$export$29246bb2b9c16932)(stackTrace_final).IndexOf_X("\n", 1)); // remove "Error" line and first stack-frame (that of this method)
 }
-function $03640216a2ed2e09$export$533e6ca95c54a480(element) {
+function $3b7e5e7e49d7a367$export$533e6ca95c54a480(element) {
     //return element.querySelectorAll(":invalid").ToList().map(node=>node.validationMessage || `Invalid value.`);
     return Array.from(element.querySelectorAll(":invalid")).map((node)=>node.validationMessage || `Invalid value.`);
 }
-function $03640216a2ed2e09$export$411ccbe87c4513c2(name) {
+function $3b7e5e7e49d7a367$export$411ccbe87c4513c2(name) {
     if (typeof Symbol != "undefined") return Symbol(name);
     //return `FakeSymbol(${name})`;
     // match how real Symbols get stringified, so we can always do, eg. DEL.toString() to send over network, for end-points that accept it using: baseData.VSet(sentData, {allowStringOperators: true})
     return `Symbol(${name})`;
 }
-const $03640216a2ed2e09$export$1b08f5ea83f6211 = $03640216a2ed2e09$export$411ccbe87c4513c2("$JSVE_SYMBOL_OMIT");
-const $03640216a2ed2e09$export$9f9ab71c6638c203 = $03640216a2ed2e09$export$411ccbe87c4513c2("$JSVE_SYMBOL_DELETE");
-function $03640216a2ed2e09$export$fc3567b3039ba9df(value) {
-    if (!value) return $03640216a2ed2e09$export$1b08f5ea83f6211;
+const $3b7e5e7e49d7a367$export$1b08f5ea83f6211 = $3b7e5e7e49d7a367$export$411ccbe87c4513c2("$JSVE_SYMBOL_OMIT");
+const $3b7e5e7e49d7a367$export$9f9ab71c6638c203 = $3b7e5e7e49d7a367$export$411ccbe87c4513c2("$JSVE_SYMBOL_DELETE");
+function $3b7e5e7e49d7a367$export$fc3567b3039ba9df(value) {
+    if (!value) return $3b7e5e7e49d7a367$export$1b08f5ea83f6211;
     return value;
 }
-function $03640216a2ed2e09$export$8db297e935fdd042(value) {
-    if (value == null) return $03640216a2ed2e09$export$1b08f5ea83f6211;
+function $3b7e5e7e49d7a367$export$8db297e935fdd042(value) {
+    if (value == null) return $3b7e5e7e49d7a367$export$1b08f5ea83f6211;
     return value;
 }
-function $03640216a2ed2e09$export$68e92fc7ec844832(value) {
-    if (!value) return $03640216a2ed2e09$export$9f9ab71c6638c203;
+function $3b7e5e7e49d7a367$export$68e92fc7ec844832(value) {
+    if (!value) return $3b7e5e7e49d7a367$export$9f9ab71c6638c203;
     return value;
 }
-function $03640216a2ed2e09$export$3b8cbed979be143c(value) {
-    if (value == null) return $03640216a2ed2e09$export$9f9ab71c6638c203;
+function $3b7e5e7e49d7a367$export$3b8cbed979be143c(value) {
+    if (value == null) return $3b7e5e7e49d7a367$export$9f9ab71c6638c203;
     return value;
 }
-function $03640216a2ed2e09$export$e1ada73b308fc38c(selector) {
+function $3b7e5e7e49d7a367$export$e1ada73b308fc38c(selector) {
     return document.querySelector(selector);
 }
-function $03640216a2ed2e09$export$bb0e8bec5320aa32(selector) {
+function $3b7e5e7e49d7a367$export$bb0e8bec5320aa32(selector) {
     return Array.from(document.querySelectorAll(selector));
 }
-const $03640216a2ed2e09$export$e8d0214a5967392b = {
+const $3b7e5e7e49d7a367$export$e8d0214a5967392b = {
     // bi-directional
     // ==========
     // start letter, change case
@@ -5107,13 +6590,13 @@ const $03640216a2ed2e09$export$e8d0214a5967392b = {
     /** some prop Name -> somepropName */ removeSpaces: (str)=>str.replace(/ /g, (m, sub1)=>""),
     /** some-prop-Name -> somepropName */ removeHyphens: (str)=>str.replace(/-/g, (m, sub1)=>"")
 };
-function $03640216a2ed2e09$export$c35569273ccf4ab4(text, modifiersGetter) {
+function $3b7e5e7e49d7a367$export$c35569273ccf4ab4(text, modifiersGetter) {
     let result = text;
-    const chosenModifiers = modifiersGetter($03640216a2ed2e09$export$e8d0214a5967392b);
+    const chosenModifiers = modifiersGetter($3b7e5e7e49d7a367$export$e8d0214a5967392b);
     for (const mod of chosenModifiers)result = mod(result);
     return result;
 }
-function $03640216a2ed2e09$export$8a726c765cc5232c(content, filename, dataTypeStr = "data:application/octet-stream,", encodeContentAsURIComp = true) {
+function $3b7e5e7e49d7a367$export$8a726c765cc5232c(content, filename, dataTypeStr = "data:application/octet-stream,", encodeContentAsURIComp = true) {
     var link = document.createElement("a");
     Object.assign(link.style, {
         display: "none"
@@ -5127,7 +6610,7 @@ function $03640216a2ed2e09$export$8a726c765cc5232c(content, filename, dataTypeSt
     link.click();
     link.remove();
 }
-function $03640216a2ed2e09$export$1c6a98c9e3d60353() {
+function $3b7e5e7e49d7a367$export$1c6a98c9e3d60353() {
     return new Promise((resolve)=>{
         const fileInput = document.createElement("input");
         fileInput.type = "file";
@@ -5147,7 +6630,7 @@ function $03640216a2ed2e09$export$1c6a98c9e3d60353() {
         fileInput.click();
     });
 }
-function $03640216a2ed2e09$export$f72021c7be7f8b3f(target, source, descriptorBase, descriptorOverride) {
+function $3b7e5e7e49d7a367$export$f72021c7be7f8b3f(target, source, descriptorBase, descriptorOverride) {
     //for (let [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(source))) {
     for (const name of Object.getOwnPropertyNames(source)){
         if (name == "constructor") continue;
@@ -5155,7 +6638,7 @@ function $03640216a2ed2e09$export$f72021c7be7f8b3f(target, source, descriptorBas
         Object.defineProperty(target, name, Object.assign(Object.assign(Object.assign({}, descriptorBase), descriptor), descriptorOverride));
     }
 }
-function $03640216a2ed2e09$export$53cef6071e892014(source) {
+function $3b7e5e7e49d7a367$export$53cef6071e892014(source) {
     const result = {};
     for (const key of Object.getOwnPropertyNames(source)){
         if (key == "constructor") continue; // no reason to call the wrapper's constructor
@@ -5171,7 +6654,7 @@ function $03640216a2ed2e09$export$53cef6071e892014(source) {
     }
     return result;
 }
-function $03640216a2ed2e09$export$f763809ea8d02d39(sourceClass_prototype) {
+function $3b7e5e7e49d7a367$export$f763809ea8d02d39(sourceClass_prototype) {
     // proxy approach; nicer, but I don't like potential slowdown from creating new proxy each time a class-extension method is called!
     /*return (thisArg: any)=> {
         return new Proxy({}, {
@@ -5218,7 +6701,7 @@ function $03640216a2ed2e09$export$f763809ea8d02d39(sourceClass_prototype) {
         return proxy;
     };
 }
-const $03640216a2ed2e09$export$32231771d94c08dd = [
+const $3b7e5e7e49d7a367$export$32231771d94c08dd = [
     // Set and Map are included by default, since JSON.stringify tries (and fails) to serialize them by default
     {
         type: Set,
@@ -5233,7 +6716,7 @@ const $03640216a2ed2e09$export$32231771d94c08dd = [
         delete: (a, key)=>a.set(key, undefined)
     }, 
 ];
-function $03640216a2ed2e09$export$ddf2041d52180b99(node, specialTypeHandlers = $03640216a2ed2e09$export$32231771d94c08dd, nodeStack_set = new Set()) {
+function $3b7e5e7e49d7a367$export$ddf2041d52180b99(node, specialTypeHandlers = $3b7e5e7e49d7a367$export$32231771d94c08dd, nodeStack_set = new Set()) {
     nodeStack_set.add(node);
     const specialHandler = specialTypeHandlers.find((a)=>node instanceof a.type);
     for (const key of specialHandler ? specialHandler.keys(node) : Object.keys(node)){
@@ -5242,7 +6725,7 @@ function $03640216a2ed2e09$export$ddf2041d52180b99(node, specialTypeHandlers = $
         if (nodeStack_set.has(value)) {
             if (specialHandler) specialHandler.delete(node, key);
             else node[key] = undefined;
-        } else if (typeof value == "object" && value != null) $03640216a2ed2e09$export$ddf2041d52180b99(value, specialTypeHandlers, nodeStack_set);
+        } else if (typeof value == "object" && value != null) $3b7e5e7e49d7a367$export$ddf2041d52180b99(value, specialTypeHandlers, nodeStack_set);
     }
     nodeStack_set.delete(node);
 }
@@ -5250,7 +6733,7 @@ function $03640216a2ed2e09$export$ddf2041d52180b99(node, specialTypeHandlers = $
 
 
 
-var $db86bae2e67ee359$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $2f6f692f1c2d9dfe$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -5277,7 +6760,7 @@ var $db86bae2e67ee359$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const $db86bae2e67ee359$export$72a5a0cefa79407 = {
+const $2f6f692f1c2d9dfe$export$72a5a0cefa79407 = {
     ForEach (func) {
         for(let i = 0; i < this.length; i++){
             const controlOp = func(this[i], i, this);
@@ -5287,7 +6770,7 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         }
     },
     ForEachAsync (func) {
-        return $db86bae2e67ee359$var$__awaiter(this, void 0, void 0, function*() {
+        return $2f6f692f1c2d9dfe$var$__awaiter(this, void 0, void 0, function*() {
             for(let i = 0; i < this.length; i++){
                 const controlOp = yield func(this[i], i, this);
                 if (controlOp == "break") break;
@@ -5341,7 +6824,7 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         return true;
     },
     RemoveAll (items) {
-        for (let item of items)$db86bae2e67ee359$export$a13380f20101451f.Remove(this, item);
+        for (let item of items)$2f6f692f1c2d9dfe$export$a13380f20101451f.Remove(this, item);
     },
     RemoveAt (index) {
         return this.splice(index, 1)[0];
@@ -5386,7 +6869,7 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
     SelectMany (selectFunc) {
         //return [...this.entries()].reduce((acc, [index, item])=>acc.concat(selectFunc.call(item, item, index)), []);
         var result = [];
-        for (let [index, item] of this.entries())$db86bae2e67ee359$export$a13380f20101451f.AddRange(result, selectFunc.call(item, item, index));
+        for (let [index, item] of this.entries())$2f6f692f1c2d9dfe$export$a13380f20101451f.AddRange(result, selectFunc.call(item, item, index));
         return result;
     },
     //Count(matchFunc) { return this.Where(matchFunc).length; };
@@ -5396,7 +6879,7 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         return this.length;
     },
     VCount (matchFunc) {
-        return $db86bae2e67ee359$export$a13380f20101451f.Where(this, matchFunc).length;
+        return $2f6f692f1c2d9dfe$export$a13380f20101451f.Where(this, matchFunc).length;
     },
     Clear () {
         /*while (this.length > 0)
@@ -5404,7 +6887,7 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
     },
     First (matchFunc) {
         // todo: maybe change this to check matchFunc for each index, rather than checking "=== undefined"
-        var result = $db86bae2e67ee359$export$a13380f20101451f.FirstOrX(this, matchFunc);
+        var result = $2f6f692f1c2d9dfe$export$a13380f20101451f.FirstOrX(this, matchFunc);
         if (result == null) throw new Error("Matching item not found.");
         return result;
     },
@@ -5417,12 +6900,12 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
     },
     //FirstWithPropValue(propName, propValue) { return this.Where(function() { return this[propName] == propValue; })[0]; };
     FirstWith (propName, propValue) {
-        return $db86bae2e67ee359$export$a13380f20101451f.Where(this, function() {
+        return $2f6f692f1c2d9dfe$export$a13380f20101451f.Where(this, function() {
             return this[propName] == propValue;
         })[0];
     },
     Last (matchFunc) {
-        var result = $db86bae2e67ee359$export$a13380f20101451f.LastOrX(this, matchFunc);
+        var result = $2f6f692f1c2d9dfe$export$a13380f20101451f.LastOrX(this, matchFunc);
         if (result === undefined) throw new Error("Matching item not found.");
         return result;
     },
@@ -5447,13 +6930,13 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
             }
         }
         this.Insert(newIndex, item);*/ if (removeBeforeInsert) {
-            if (oldIndex != -1) $db86bae2e67ee359$export$a13380f20101451f.RemoveAt(this, oldIndex);
-            $db86bae2e67ee359$export$a13380f20101451f.Insert(this, newIndex, item);
+            if (oldIndex != -1) $2f6f692f1c2d9dfe$export$a13380f20101451f.RemoveAt(this, oldIndex);
+            $2f6f692f1c2d9dfe$export$a13380f20101451f.Insert(this, newIndex, item);
         } else {
-            $db86bae2e67ee359$export$a13380f20101451f.Insert(this, newIndex, item);
+            $2f6f692f1c2d9dfe$export$a13380f20101451f.Insert(this, newIndex, item);
             if (oldIndex != -1) {
                 let oldEntry_currentIndex = newIndex <= oldIndex ? oldIndex + 1 : oldIndex; // if we just inserted the new version before the old entry, fix the old-entry's index by adding 1
-                $db86bae2e67ee359$export$a13380f20101451f.RemoveAt(this, oldEntry_currentIndex);
+                $2f6f692f1c2d9dfe$export$a13380f20101451f.RemoveAt(this, oldEntry_currentIndex);
             }
         }
         return oldIndex;
@@ -5497,11 +6980,11 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
     };*/ OrderBy (valFunc = (item, index)=>item) {
         /*var temp = this.ToList();
         temp.sort((a, b)=>V.Compare(valFunc(a), valFunc(b)));
-        return temp;*/ return (0, $03640216a2ed2e09$export$76818b28a78bf127)(this, (a, b, aIndex, bIndex)=>(0, $03640216a2ed2e09$export$2c1d9c1fe3e6577a)(valFunc(a, aIndex), valFunc(b, bIndex)));
+        return temp;*/ return (0, $3b7e5e7e49d7a367$export$76818b28a78bf127)(this, (a, b, aIndex, bIndex)=>(0, $3b7e5e7e49d7a367$export$2c1d9c1fe3e6577a)(valFunc(a, aIndex), valFunc(b, bIndex)));
     },
     OrderByDescending (valFunc = (item, index)=>item) {
         //return ArrayCES.OrderBy(this, (item: T, index)=>-valFunc(item, index)) as T[];
-        return (0, $03640216a2ed2e09$export$76818b28a78bf127)(this, (a, b, aIndex, bIndex)=>-(0, $03640216a2ed2e09$export$2c1d9c1fe3e6577a)(valFunc(a, aIndex), valFunc(b, bIndex)));
+        return (0, $3b7e5e7e49d7a367$export$76818b28a78bf127)(this, (a, b, aIndex, bIndex)=>-(0, $3b7e5e7e49d7a367$export$2c1d9c1fe3e6577a)(valFunc(a, aIndex), valFunc(b, bIndex)));
     },
     Distinct () {
         /*const result: T[] = [];
@@ -5522,11 +7005,11 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
     },
     Exclude: function(...args) {
         let opt, excludeItems;
-        if ((0, $1090eee99c835ae1$export$e64f6626d4e96cfb)(args[0]) && "excludeEachOnlyOnce" in args[0]) [opt, ...excludeItems] = args;
+        if ((0, $834790ed5758562b$export$e64f6626d4e96cfb)(args[0]) && "excludeEachOnlyOnce" in args[0]) [opt, ...excludeItems] = args;
         else excludeItems = args;
         if (opt === null || opt === void 0 ? void 0 : opt.excludeEachOnlyOnce) {
             const result = this.slice();
-            for (const excludeItem of excludeItems)$db86bae2e67ee359$export$a13380f20101451f.Remove(result, excludeItem);
+            for (const excludeItem of excludeItems)$2f6f692f1c2d9dfe$export$a13380f20101451f.Remove(result, excludeItem);
             return result;
         }
         return this.filter((a)=>excludeItems.indexOf(a) == -1);
@@ -5539,19 +7022,19 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         // only set asNumbers to true if providing a number[] array
         if (asNumbers) {
             /*const values = valFunc ? this.map(valFunc) : this;
-            return Math.min(...values);*/ (0, $64e096969242e10d$export$14647bdf767968d3)(valFunc == null, "Cannot use valFunc if asNumbers is set to true.");
+            return Math.min(...values);*/ (0, $c538f9ab01794aaa$export$14647bdf767968d3)(valFunc == null, "Cannot use valFunc if asNumbers is set to true.");
             return Math.min(...this);
         }
-        return $db86bae2e67ee359$export$a13380f20101451f.OrderBy(this, valFunc)[0];
+        return $2f6f692f1c2d9dfe$export$a13380f20101451f.OrderBy(this, valFunc)[0];
     },
     Max (valFunc, asNumbers = false) {
         // only set asNumbers to true if providing a number[] array
         if (asNumbers) {
             /*const values = valFunc ? this.map(valFunc) : this;
-            return Math.max(...values);*/ (0, $64e096969242e10d$export$14647bdf767968d3)(valFunc == null, "Cannot use valFunc if asNumbers is set to true.");
+            return Math.max(...values);*/ (0, $c538f9ab01794aaa$export$14647bdf767968d3)(valFunc == null, "Cannot use valFunc if asNumbers is set to true.");
             return Math.max(...this);
         }
-        return $db86bae2e67ee359$export$a13380f20101451f.LastOrX($db86bae2e67ee359$export$a13380f20101451f.OrderBy(this, valFunc));
+        return $2f6f692f1c2d9dfe$export$a13380f20101451f.LastOrX($2f6f692f1c2d9dfe$export$a13380f20101451f.OrderBy(this, valFunc));
     },
     Sum () {
         let total = 0;
@@ -5559,11 +7042,11 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         return total;
     },
     Average () {
-        const total = $db86bae2e67ee359$export$a13380f20101451f.Sum(this);
+        const total = $2f6f692f1c2d9dfe$export$a13380f20101451f.Sum(this);
         return total / this.length;
     },
     Median () {
-        const ordered = $db86bae2e67ee359$export$a13380f20101451f.OrderBy(this, (a)=>a);
+        const ordered = $2f6f692f1c2d9dfe$export$a13380f20101451f.OrderBy(this, (a)=>a);
         if (this.length % 2 == 0) return ordered[this.length / 2 - 1] + ordered[this.length / 2];
         return ordered[this.length / 2]; // otherwise, return the exactly-middle one
     },
@@ -5584,8 +7067,8 @@ const $db86bae2e67ee359$export$72a5a0cefa79407 = {
         if (oldResult != result) debugger;*/ return result;
     }
 };
-const $db86bae2e67ee359$export$f35d492e63fcc0d6 = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($db86bae2e67ee359$export$72a5a0cefa79407);
-const $db86bae2e67ee359$export$a13380f20101451f = (0, $03640216a2ed2e09$export$53cef6071e892014)($db86bae2e67ee359$export$72a5a0cefa79407); /*var ArrayIterator = [].entries().constructor;
+const $2f6f692f1c2d9dfe$export$f35d492e63fcc0d6 = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($2f6f692f1c2d9dfe$export$72a5a0cefa79407);
+const $2f6f692f1c2d9dfe$export$a13380f20101451f = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($2f6f692f1c2d9dfe$export$72a5a0cefa79407); /*var ArrayIterator = [].entries().constructor;
 export class ArrayIteratorCEProxy {
     ToArray(this: ArrayIterator) {
         return Array.from(this);
@@ -5600,7 +7083,7 @@ export const NodeListCE = CreateProxyForClassExtensions(NodeListCEProxy);*/
 
 
 
-const $fa865378bc12e6a1$export$19a175b10b1c06c7 = {
+const $7199149bd5c58f58$export$19a175b10b1c06c7 = {
     GetParents (topDown = false) {
         const result = [];
         let currentParent = this.parentElement;
@@ -5612,7 +7095,7 @@ const $fa865378bc12e6a1$export$19a175b10b1c06c7 = {
         return result;
     },
     GetSelfAndParents (topDown = false) {
-        const result = $fa865378bc12e6a1$export$ea432ebb9d598fdf(this).GetParents(topDown);
+        const result = $7199149bd5c58f58$export$ea432ebb9d598fdf(this).GetParents(topDown);
         return topDown ? result.concat([
             this
         ]) : [
@@ -5643,21 +7126,21 @@ const $fa865378bc12e6a1$export$19a175b10b1c06c7 = {
         return Array.from(this.querySelectorAll(queryStr));
     }
 };
-const $fa865378bc12e6a1$export$ea432ebb9d598fdf = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($fa865378bc12e6a1$export$19a175b10b1c06c7);
-const $fa865378bc12e6a1$export$1b554c4d1e64c51 = (0, $03640216a2ed2e09$export$53cef6071e892014)($fa865378bc12e6a1$export$19a175b10b1c06c7);
+const $7199149bd5c58f58$export$ea432ebb9d598fdf = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($7199149bd5c58f58$export$19a175b10b1c06c7);
+const $7199149bd5c58f58$export$1b554c4d1e64c51 = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($7199149bd5c58f58$export$19a175b10b1c06c7);
 
 
 
 
-const $a18bb0fe6a04f70b$export$bb2eea53898a038 = {
+const $d465502d07abe1c6$export$bb2eea53898a038 = {
     TrimStart (...chars) {
         // fix for if called by VDF (which has a different signature)
         //if (arguments[0] instanceof Array) chars = arguments[0];
-        for(var iOfFirstToKeep = 0; iOfFirstToKeep < this.length && (0, $db86bae2e67ee359$exports.ArrayCE)(chars).Contains(this[iOfFirstToKeep]); iOfFirstToKeep++);
+        for(var iOfFirstToKeep = 0; iOfFirstToKeep < this.length && (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(chars).Contains(this[iOfFirstToKeep]); iOfFirstToKeep++);
         return this.slice(iOfFirstToKeep, this.length);
     },
     TrimEnd (...chars) {
-        for(var iOfLastToKeep = this.length - 1; iOfLastToKeep >= 0 && (0, $db86bae2e67ee359$exports.ArrayCE)(chars).Contains(this[iOfLastToKeep]); iOfLastToKeep--);
+        for(var iOfLastToKeep = this.length - 1; iOfLastToKeep >= 0 && (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(chars).Contains(this[iOfLastToKeep]); iOfLastToKeep--);
         return this.substr(0, iOfLastToKeep + 1);
     },
     Contains (str, startIndex) {
@@ -5749,13 +7232,13 @@ const $a18bb0fe6a04f70b$export$bb2eea53898a038 = {
         return highestIndex;
     },
     StartsWithAny (...strings) {
-        return (0, $db86bae2e67ee359$exports.ArrayCE)(strings).Any((str)=>this.startsWith(str));
+        return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(strings).Any((str)=>this.startsWith(str));
     },
     EndsWithAny (...strings) {
-        return (0, $db86bae2e67ee359$exports.ArrayCE)(strings).Any((str)=>this.endsWith(str));
+        return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(strings).Any((str)=>this.endsWith(str));
     },
     ContainsAny (...strings) {
-        return (0, $db86bae2e67ee359$exports.ArrayCE)(strings).Any((str)=>$a18bb0fe6a04f70b$export$29246bb2b9c16932(this).Contains(str));
+        return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(strings).Any((str)=>$d465502d07abe1c6$export$29246bb2b9c16932(this).Contains(str));
     },
     /** Separator-strings must be escaped. (they're passed into a regular-expression) */ SplitByAny (...separators) {
         /*var splitStr = "/";
@@ -5845,22 +7328,22 @@ const $a18bb0fe6a04f70b$export$bb2eea53898a038 = {
         return Number(this);
     }
 };
-const $a18bb0fe6a04f70b$export$29246bb2b9c16932 = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($a18bb0fe6a04f70b$export$bb2eea53898a038);
-const $a18bb0fe6a04f70b$export$ad49d0f74ed9c55d = (0, $03640216a2ed2e09$export$53cef6071e892014)($a18bb0fe6a04f70b$export$bb2eea53898a038);
+const $d465502d07abe1c6$export$29246bb2b9c16932 = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($d465502d07abe1c6$export$bb2eea53898a038);
+const $d465502d07abe1c6$export$ad49d0f74ed9c55d = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($d465502d07abe1c6$export$bb2eea53898a038);
 
 
 
 
-const $2c2a98921dc2b609$export$fcc2d19719f79415 = {
+const $905ba9565af7e357$export$fcc2d19719f79415 = {
     IfN1Then (valIfSelfIsNeg1) {
         return this == -1 ? valIfSelfIsNeg1 : this;
     },
     NaNTo (valIfSelfIsNaN) {
-        return (0, $1090eee99c835ae1$export$f375b07b95af9a54)(this) ? valIfSelfIsNaN : this;
+        return (0, $834790ed5758562b$export$f375b07b95af9a54)(this) ? valIfSelfIsNaN : this;
     },
     //RoundToMultipleOf(step) { return Math.round(new Number(this) / step) * step; }; //return this.lastIndexOf(str, 0) === 0; };
     ToPercent (roundTo_multiple = 1) {
-        return $2c2a98921dc2b609$export$533f863946f77204.RoundTo(this * 100, roundTo_multiple);
+        return $905ba9565af7e357$export$533f863946f77204.RoundTo(this * 100, roundTo_multiple);
     },
     FromPercent () {
         return this / 100;
@@ -5871,8 +7354,8 @@ const $2c2a98921dc2b609$export$fcc2d19719f79415 = {
         return `${number.toString()}%`;
     },
     IsMultipleOf (multipleOf, maxDistToBeMultiple) {
-        const valRoundedToMultiple = $2c2a98921dc2b609$export$caa4dfc7169288b7(this).RoundTo(multipleOf);
-        const distance = $2c2a98921dc2b609$export$caa4dfc7169288b7(valRoundedToMultiple).Distance(this);
+        const valRoundedToMultiple = $905ba9565af7e357$export$caa4dfc7169288b7(this).RoundTo(multipleOf);
+        const distance = $905ba9565af7e357$export$caa4dfc7169288b7(valRoundedToMultiple).Distance(this);
         return distance <= maxDistToBeMultiple;
     },
     RoundTo (multiple) {
@@ -5885,27 +7368,27 @@ const $2c2a98921dc2b609$export$fcc2d19719f79415 = {
         return Math.round(this * multiple_inverted) / multiple_inverted;
     },
     RoundTo_Str (multipleOf, fractionDigits, removeEmptyFraction = true) {
-        var resultValue = $2c2a98921dc2b609$export$caa4dfc7169288b7(this).RoundTo(multipleOf);
-        var result = resultValue.toFixed(fractionDigits != null ? fractionDigits : (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(multipleOf.toString()).TrimStart("0").length - 1); // - 0);
-        if (removeEmptyFraction && (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
+        var resultValue = $905ba9565af7e357$export$caa4dfc7169288b7(this).RoundTo(multipleOf);
+        var result = resultValue.toFixed(fractionDigits != null ? fractionDigits : (0, $d465502d07abe1c6$export$29246bb2b9c16932)(multipleOf.toString()).TrimStart("0").length - 1); // - 0);
+        if (removeEmptyFraction && (0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $d465502d07abe1c6$export$29246bb2b9c16932)((0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
         return result;
     },
     FloorTo (multipleOf) {
         return Math.floor(new Number(this) / multipleOf) * multipleOf;
     },
     FloorTo_Str (multipleOf) {
-        var resultValue = $2c2a98921dc2b609$export$caa4dfc7169288b7(this).FloorTo(multipleOf);
-        var result = resultValue.toFixed((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(multipleOf.toString()).TrimStart("0").length); // - 1);
-        if ((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
+        var resultValue = $905ba9565af7e357$export$caa4dfc7169288b7(this).FloorTo(multipleOf);
+        var result = resultValue.toFixed((0, $d465502d07abe1c6$export$29246bb2b9c16932)(multipleOf.toString()).TrimStart("0").length); // - 1);
+        if ((0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $d465502d07abe1c6$export$29246bb2b9c16932)((0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
         return result;
     },
     CeilingTo (multipleOf) {
         return Math.ceil(new Number(this) / multipleOf) * multipleOf;
     },
     CeilingTo_Str (multipleOf) {
-        var resultValue = $2c2a98921dc2b609$export$caa4dfc7169288b7(this).CeilingTo(multipleOf);
+        var resultValue = $905ba9565af7e357$export$caa4dfc7169288b7(this).CeilingTo(multipleOf);
         var result = resultValue.toFixed(multipleOf.toString().TrimStart("0").length); // - 1);
-        if ((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
+        if ((0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).Contains(".")) result = (0, $d465502d07abe1c6$export$29246bb2b9c16932)((0, $d465502d07abe1c6$export$29246bb2b9c16932)(result).TrimEnd("0")).TrimEnd(".");
         //result = TrimEnd(TrimEnd(result, "0"), ".");
         return result;
     },
@@ -5945,8 +7428,8 @@ const $2c2a98921dc2b609$export$fcc2d19719f79415 = {
         return Math.pow(this, power);
     }
 };
-const $2c2a98921dc2b609$export$caa4dfc7169288b7 = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($2c2a98921dc2b609$export$fcc2d19719f79415);
-const $2c2a98921dc2b609$export$533f863946f77204 = (0, $03640216a2ed2e09$export$53cef6071e892014)($2c2a98921dc2b609$export$fcc2d19719f79415);
+const $905ba9565af7e357$export$caa4dfc7169288b7 = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($905ba9565af7e357$export$fcc2d19719f79415);
+const $905ba9565af7e357$export$533f863946f77204 = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($905ba9565af7e357$export$fcc2d19719f79415);
 
 
 
@@ -5954,7 +7437,7 @@ const $2c2a98921dc2b609$export$533f863946f77204 = (0, $03640216a2ed2e09$export$5
 
 
 
-const $1c8db257f1eb15d4$export$73b75901a2e90ec3 = {
+const $19ebd2190868e7c4$export$73b75901a2e90ec3 = {
     GetName () {
         //return this.name_fake || this.name || this.toString().match(/^function\s*([^\s(]+)/)[1];
         //return this["name_fake"] || this.name || (this.toString().match(/^function\s*([^\s(]+)/) || [])[1];
@@ -5995,19 +7478,19 @@ const $1c8db257f1eb15d4$export$73b75901a2e90ec3 = {
     NN (...args) {
         const result = this.apply(this, args);
         const triggerDebugger = false; // in case called within Validate function
-        (0, $64e096969242e10d$export$14647bdf767968d3)(result != null, `Function "${this.name}" returned ${result}, which violates a non-null type-guard.`, triggerDebugger);
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(result != null, `Function "${this.name}" returned ${result}, which violates a non-null type-guard.`, triggerDebugger);
         return result;
     }
 };
-const $1c8db257f1eb15d4$export$34f086b67230ecfd = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($1c8db257f1eb15d4$export$73b75901a2e90ec3);
-const $1c8db257f1eb15d4$export$969e9a496a5296bc = (0, $03640216a2ed2e09$export$53cef6071e892014)($1c8db257f1eb15d4$export$73b75901a2e90ec3);
-function $1c8db257f1eb15d4$var$isLeapYear(year) {
+const $19ebd2190868e7c4$export$34f086b67230ecfd = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($19ebd2190868e7c4$export$73b75901a2e90ec3);
+const $19ebd2190868e7c4$export$969e9a496a5296bc = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($19ebd2190868e7c4$export$73b75901a2e90ec3);
+function $19ebd2190868e7c4$var$isLeapYear(year) {
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
 }
-function $1c8db257f1eb15d4$var$getDaysInMonth(year, month) {
+function $19ebd2190868e7c4$var$getDaysInMonth(year, month) {
     return [
         31,
-        $1c8db257f1eb15d4$var$isLeapYear(year) ? 29 : 28,
+        $19ebd2190868e7c4$var$isLeapYear(year) ? 29 : 28,
         31,
         30,
         31,
@@ -6020,29 +7503,29 @@ function $1c8db257f1eb15d4$var$getDaysInMonth(year, month) {
         31
     ][month];
 }
-const $1c8db257f1eb15d4$export$77884f034181fe36 = {
+const $19ebd2190868e7c4$export$77884f034181fe36 = {
     get MonthDate () {
         return new Date(this.getFullYear(), this.getMonth(), 1);
     },
     IsLeapYear () {
-        return $1c8db257f1eb15d4$var$isLeapYear(this.getFullYear());
+        return $19ebd2190868e7c4$var$isLeapYear(this.getFullYear());
     },
     GetDaysInMonth () {
-        return $1c8db257f1eb15d4$var$getDaysInMonth(this.getFullYear(), this.getMonth());
+        return $19ebd2190868e7c4$var$getDaysInMonth(this.getFullYear(), this.getMonth());
     },
     AddMonths (value) {
         var n = this.getDate();
         this.setDate(1);
         this.setMonth(this.getMonth() + value);
-        this.setDate(Math.min(n, $1c8db257f1eb15d4$export$9b0855eb8f38e9f4(this).GetDaysInMonth()));
+        this.setDate(Math.min(n, $19ebd2190868e7c4$export$9b0855eb8f38e9f4(this).GetDaysInMonth()));
         return this;
     },
     Clone () {
         return new Date(this.getTime());
     }
 };
-const $1c8db257f1eb15d4$export$9b0855eb8f38e9f4 = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($1c8db257f1eb15d4$export$77884f034181fe36);
-const $1c8db257f1eb15d4$export$6544e54d7e1b5756 = (0, $03640216a2ed2e09$export$53cef6071e892014)($1c8db257f1eb15d4$export$77884f034181fe36); /*export class ErrorCEProxy {
+const $19ebd2190868e7c4$export$9b0855eb8f38e9f4 = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($19ebd2190868e7c4$export$77884f034181fe36);
+const $19ebd2190868e7c4$export$6544e54d7e1b5756 = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($19ebd2190868e7c4$export$77884f034181fe36); /*export class ErrorCEProxy {
     get Stack() {
         // this causes the full stack-trace to be attached to the Error object (in Chrome)
         if ((Error as any).captureStackTrace) {
@@ -6055,7 +7538,7 @@ const $1c8db257f1eb15d4$export$6544e54d7e1b5756 = (0, $03640216a2ed2e09$export$5
 export const ErrorCE = CreateProxyForClassExtensions(ErrorCEProxy);*/ 
 
 
-const $c957b93c4c90c7ee$export$266a019e13902094 = {
+const $b3412bfae9d21412$export$266a019e13902094 = {
     // base
     // ==========
     /** Helps you do stuff like this:
@@ -6071,7 +7554,7 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
             throw new Error(`Failed to add property "${name}" to type "${this}".`);*/ },
     _AddFunction (name, func) {
         //this._AddItem(func.name || func.toString().match(/^function\s*([^\s(]+)/)[1], func);
-        $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc._AddItem(this, name, func);
+        $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc._AddItem(this, name, func);
     },
     // the below helps you do stuff like this:
     //		Array.prototype._AddGetterSetter("AddX", null, function(value) { this.push(value); }); [].AddX = "newItem";
@@ -6089,13 +7572,13 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
     // the below helps you do stuff like this:
     //		Array.prototype._AddFunction_Inline = function AddX(value) { this.push(value); }; [].AddX = "newItem";
     set _AddFunction_Inline (func){
-        $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc._AddFunction(this, (0, $1c8db257f1eb15d4$export$34f086b67230ecfd)(func).GetName(), func);
+        $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc._AddFunction(this, (0, $19ebd2190868e7c4$export$34f086b67230ecfd)(func).GetName(), func);
     },
     set _AddGetter_Inline (func){
-        $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc._AddGetterSetter(this, (0, $1c8db257f1eb15d4$export$34f086b67230ecfd)(func).GetName(), func, null);
+        $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc._AddGetterSetter(this, (0, $19ebd2190868e7c4$export$34f086b67230ecfd)(func).GetName(), func, null);
     },
     set _AddSetter_Inline (func){
-        $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc._AddGetterSetter(this, (0, $1c8db257f1eb15d4$export$34f086b67230ecfd)(func).GetName(), null, func);
+        $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc._AddGetterSetter(this, (0, $19ebd2190868e7c4$export$34f086b67230ecfd)(func).GetName(), null, func);
     },
     // normal
     // ==========
@@ -6124,8 +7607,8 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
         return func.call(this, this);
     },
     SafeGet: function(pathOrPathGetterFunc, resultIfNull) {
-        const pathSegments = typeof pathOrPathGetterFunc == "string" ? pathOrPathGetterFunc : (0, $03640216a2ed2e09$export$bc4bf9529c6d1e83)(pathOrPathGetterFunc);
-        return (0, $03640216a2ed2e09$export$4f1af7ef810f3f84)(this, pathSegments, resultIfNull);
+        const pathSegments = typeof pathOrPathGetterFunc == "string" ? pathOrPathGetterFunc : (0, $3b7e5e7e49d7a367$export$bc4bf9529c6d1e83)(pathOrPathGetterFunc);
+        return (0, $3b7e5e7e49d7a367$export$4f1af7ef810f3f84)(this, pathSegments, resultIfNull);
     },
     // todo: maybe remove/merge these
     Extend (x, copyNonEnumerable = false) {
@@ -6144,7 +7627,7 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
     // more advanced version of ObjectCE.Extend
     VSet: function(...args) {
         let props, propName, propValue, opt;
-        if ((0, $1090eee99c835ae1$export$fae01d74d6648c3f)(args[0]) || (0, $1090eee99c835ae1$export$9dc58581bb80d9a7)(args[0])) [propName, propValue, opt] = args;
+        if ((0, $834790ed5758562b$export$fae01d74d6648c3f)(args[0]) || (0, $834790ed5758562b$export$9dc58581bb80d9a7)(args[0])) [propName, propValue, opt] = args;
         else [props, opt] = args;
         opt = Object.assign(Object.assign({}, {
             copyNonEnumerable: true,
@@ -6154,9 +7637,9 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
         }), opt);
         const SetProp = (name, descriptor, value)=>{
             // only process operators if: 1) js-engine supports Symbols (for security), or 2) caller allows string-operators
-            if ((0, $1090eee99c835ae1$export$9dc58581bb80d9a7)((0, $03640216a2ed2e09$export$1b08f5ea83f6211)) || opt.allowStringOperators) {
-                if (value === (0, $03640216a2ed2e09$export$1b08f5ea83f6211) || opt.allowStringOperators && value == (0, $03640216a2ed2e09$export$1b08f5ea83f6211).toString()) return;
-                if (value === (0, $03640216a2ed2e09$export$9f9ab71c6638c203) || opt.allowStringOperators && value == (0, $03640216a2ed2e09$export$9f9ab71c6638c203).toString()) {
+            if ((0, $834790ed5758562b$export$9dc58581bb80d9a7)((0, $3b7e5e7e49d7a367$export$1b08f5ea83f6211)) || opt.allowStringOperators) {
+                if (value === (0, $3b7e5e7e49d7a367$export$1b08f5ea83f6211) || opt.allowStringOperators && value == (0, $3b7e5e7e49d7a367$export$1b08f5ea83f6211).toString()) return;
+                if (value === (0, $3b7e5e7e49d7a367$export$9f9ab71c6638c203) || opt.allowStringOperators && value == (0, $3b7e5e7e49d7a367$export$9f9ab71c6638c203).toString()) {
                     delete this[name];
                     return;
                 }
@@ -6215,7 +7698,7 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
             delete result[key];
         }*/ let result = this instanceof Array ? [] : {};
         for (const key of Object.keys(this)){
-            if ((0, $db86bae2e67ee359$exports.ArrayCE)(keys).Contains(key)) continue;
+            if ((0, $2f6f692f1c2d9dfe$exports.ArrayCE)(keys).Contains(key)) continue;
             result[key] = this[key];
         }
         return result;
@@ -6241,10 +7724,10 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
         return result;
     },
     IsOneOf (...values) {
-        if ((0, $db86bae2e67ee359$exports.ArrayCE)(values).Contains(this)) return true;
+        if ((0, $2f6f692f1c2d9dfe$exports.ArrayCE)(values).Contains(this)) return true;
         // if the value-list contains the primitive-version of self, consider it a match -- otherwise calling "test1".IsOneOf("test1", "test2") would fail
         const isObjectFormOfPrimitive = this instanceof Boolean || this instanceof Number || this instanceof String;
-        if (isObjectFormOfPrimitive && (0, $db86bae2e67ee359$exports.ArrayCE)(values).Contains(this.valueOf())) return true;
+        if (isObjectFormOfPrimitive && (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(values).Contains(this.valueOf())) return true;
         return false;
     },
     Pairs: function() {
@@ -6259,7 +7742,7 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
                 keyNum: Number(key),
                 value: this instanceof Map ? this.get(key) : this[key]
             };
-            if ((0, $1090eee99c835ae1$export$f375b07b95af9a54)(entry.keyNum)) delete entry["keyNum"];
+            if ((0, $834790ed5758562b$export$f375b07b95af9a54)(entry.keyNum)) delete entry["keyNum"];
             result.push(entry);
         }
         return result;
@@ -6272,7 +7755,7 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
     },
     VValues: function() {
         //if (excludeSpecialKeys) return this.Props(true).map(a=>a.value);
-        return $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc.VKeys(this).map((key)=>this instanceof Map ? this.get(key) : this[key]);
+        return $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc.VKeys(this).map((key)=>this instanceof Map ? this.get(key) : this[key]);
     },
     // for symbols
     /*Pairs_Sym() {
@@ -6282,8 +7765,8 @@ const $c957b93c4c90c7ee$export$266a019e13902094 = {
         return this[symbol];
     }
 };
-const $c957b93c4c90c7ee$export$982d7f197acc6f94 = (0, $03640216a2ed2e09$export$f763809ea8d02d39)($c957b93c4c90c7ee$export$266a019e13902094);
-const $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc = (0, $03640216a2ed2e09$export$53cef6071e892014)($c957b93c4c90c7ee$export$266a019e13902094);
+const $b3412bfae9d21412$export$982d7f197acc6f94 = (0, $3b7e5e7e49d7a367$export$f763809ea8d02d39)($b3412bfae9d21412$export$266a019e13902094);
+const $b3412bfae9d21412$export$fe4dfa6bc6a7ffcc = (0, $3b7e5e7e49d7a367$export$53cef6071e892014)($b3412bfae9d21412$export$266a019e13902094);
 
 
 
@@ -6304,42 +7787,42 @@ const $c957b93c4c90c7ee$export$fe4dfa6bc6a7ffcc = (0, $03640216a2ed2e09$export$5
 }
 
 export const CE_Auto = ((obj)=> {
-}) as CE_Auto_I;*/ const $e2a2cdbf4b40fe1c$var$classExtensionMap = {
-    Number: (0, $2c2a98921dc2b609$export$caa4dfc7169288b7),
-    String: (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932),
-    Date: (0, $1c8db257f1eb15d4$export$9b0855eb8f38e9f4),
-    Element: (0, $fa865378bc12e6a1$export$ea432ebb9d598fdf),
-    Function: (0, $1c8db257f1eb15d4$export$34f086b67230ecfd),
-    Array: (0, $db86bae2e67ee359$exports.ArrayCE),
-    Object: (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)
+}) as CE_Auto_I;*/ const $19c824e4bb140bed$var$classExtensionMap = {
+    Number: (0, $905ba9565af7e357$export$caa4dfc7169288b7),
+    String: (0, $d465502d07abe1c6$export$29246bb2b9c16932),
+    Date: (0, $19ebd2190868e7c4$export$9b0855eb8f38e9f4),
+    Element: (0, $7199149bd5c58f58$export$ea432ebb9d598fdf),
+    Function: (0, $19ebd2190868e7c4$export$34f086b67230ecfd),
+    Array: (0, $2f6f692f1c2d9dfe$exports.ArrayCE),
+    Object: (0, $b3412bfae9d21412$export$982d7f197acc6f94)
 };
-function $e2a2cdbf4b40fe1c$export$774b69789b3791fa(obj, checkForUncommonDerived = false) {
+function $19c824e4bb140bed$export$774b69789b3791fa(obj, checkForUncommonDerived = false) {
     // first, try to get class-extension func based on direct constructor name (most common case)
     const typeName = obj.constructor ? obj.constructor.name : null;
-    if (typeName && $e2a2cdbf4b40fe1c$var$classExtensionMap[typeName]) return $e2a2cdbf4b40fe1c$var$classExtensionMap[typeName](obj);
+    if (typeName && $19c824e4bb140bed$var$classExtensionMap[typeName]) return $19c824e4bb140bed$var$classExtensionMap[typeName](obj);
     // else, check each option using "instanceof" and such (needed for derived classes)
     if (checkForUncommonDerived) {
-        if ((0, $1090eee99c835ae1$export$bdf29e0acfffe6ef)(obj, true)) return (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(obj);
-        if ((0, $1090eee99c835ae1$export$fae01d74d6648c3f)(obj, true)) return (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(obj);
-        if (obj instanceof Date) return (0, $1c8db257f1eb15d4$export$9b0855eb8f38e9f4)(obj);
-        if ((0, $1090eee99c835ae1$export$426ce8831f60741b)(obj)) return (0, $1c8db257f1eb15d4$export$34f086b67230ecfd)(obj);
-        if ((0, $1090eee99c835ae1$export$e7d622d382907f22)(obj)) return (0, $db86bae2e67ee359$exports.ArrayCE)(obj);
+        if ((0, $834790ed5758562b$export$bdf29e0acfffe6ef)(obj, true)) return (0, $905ba9565af7e357$export$caa4dfc7169288b7)(obj);
+        if ((0, $834790ed5758562b$export$fae01d74d6648c3f)(obj, true)) return (0, $d465502d07abe1c6$export$29246bb2b9c16932)(obj);
+        if (obj instanceof Date) return (0, $19ebd2190868e7c4$export$9b0855eb8f38e9f4)(obj);
+        if ((0, $834790ed5758562b$export$426ce8831f60741b)(obj)) return (0, $19ebd2190868e7c4$export$34f086b67230ecfd)(obj);
+        if ((0, $834790ed5758562b$export$e7d622d382907f22)(obj)) return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(obj);
     }
-    if (typeof Element != "undefined" && obj instanceof Element) return (0, $fa865378bc12e6a1$export$ea432ebb9d598fdf)(obj);
+    if (typeof Element != "undefined" && obj instanceof Element) return (0, $7199149bd5c58f58$export$ea432ebb9d598fdf)(obj);
     /*if (IsObject(obj)) return ObjectCE(obj);
-    throw new Error(`Could not find class-extension helper for type "${obj.constructor ? obj.constructor.name : "n/a"}".`);*/ return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(obj);
+    throw new Error(`Could not find class-extension helper for type "${obj.constructor ? obj.constructor.name : "n/a"}".`);*/ return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(obj);
 }
 
 
-class $44b1c4d7572ccc0b$export$5a8fffd6d7047b8b {
+class $acdc494416111226$export$5a8fffd6d7047b8b {
 }
 
 
 
-var $c0eb4ff3bc1761fa$exports = {};
+var $5377385dd1d3033a$exports = {};
 
 
-class $b9809223a27aa025$export$402a550ad3c70e6b {
+class $57c7c854fff9a810$export$402a550ad3c70e6b {
     constructor(){
         this.timers = [];
     }
@@ -6353,9 +7836,9 @@ class $b9809223a27aa025$export$402a550ad3c70e6b {
         for (const timer of this.timers)if (timer.NextTickFuncOverdue) timer.nextTickFunc();
     }
 }
-$b9809223a27aa025$export$402a550ad3c70e6b.default = new $b9809223a27aa025$export$402a550ad3c70e6b();
-$b9809223a27aa025$export$402a550ad3c70e6b.default_autoAddAll = false;
-function $b9809223a27aa025$export$51b6a2397978cb6a(func, ...args) {
+$57c7c854fff9a810$export$402a550ad3c70e6b.default = new $57c7c854fff9a810$export$402a550ad3c70e6b();
+$57c7c854fff9a810$export$402a550ad3c70e6b.default_autoAddAll = false;
+function $57c7c854fff9a810$export$51b6a2397978cb6a(func, ...args) {
     //if (!(func instanceof Function)) return;
     if (typeof func != "function") return undefined; // ts should catch, so check is here for invalid data
     try {
@@ -6363,7 +7846,7 @@ function $b9809223a27aa025$export$51b6a2397978cb6a(func, ...args) {
     } catch (ex) {}
     return undefined;
 }
-function $b9809223a27aa025$export$2c8ba70267f14c54(obj, func, ...args) {
+function $57c7c854fff9a810$export$2c8ba70267f14c54(obj, func, ...args) {
     if (typeof func != "function") return;
     try {
         return func.apply(obj, args);
@@ -6379,56 +7862,56 @@ g.setTimeout = function(func: Function, delayInMS = 0, ...args) {
 }*/ /*export function Sleep(ms) {
     var startTime = new Date().getTime();
     while (new Date().getTime() - startTime < ms) {}
-}*/ const $b9809223a27aa025$var$maxTimeoutLength = 0x7FFFFFFF; // setTimeout limit is MAX_INT32=(2^31-1)
-function $b9809223a27aa025$export$e5ba3af335cd9693(delayInMS, func, ...args) {
-    (0, $64e096969242e10d$export$14647bdf767968d3)(delayInMS <= $b9809223a27aa025$var$maxTimeoutLength, `Cannot wait for longer than ${$b9809223a27aa025$var$maxTimeoutLength} ms. (use WaitUntilXThenRun, if a long-delay is needed)`);
+}*/ const $57c7c854fff9a810$var$maxTimeoutLength = 0x7FFFFFFF; // setTimeout limit is MAX_INT32=(2^31-1)
+function $57c7c854fff9a810$export$e5ba3af335cd9693(delayInMS, func, ...args) {
+    (0, $c538f9ab01794aaa$export$14647bdf767968d3)(delayInMS <= $57c7c854fff9a810$var$maxTimeoutLength, `Cannot wait for longer than ${$57c7c854fff9a810$var$maxTimeoutLength} ms. (use WaitUntilXThenRun, if a long-delay is needed)`);
     // setTimeout can take really long on Chrome mobile (eg. while scrolling), for some reason (like, 1.5 seconds)
     // on desktop, setImmediate is better as well, since it takes ~0ms instead of 1-15ms
-    if (delayInMS == 0 && (0, $5294bdd3472c4d43$export$39b482c5e57630a8).setImmediate) return (0, $5294bdd3472c4d43$export$39b482c5e57630a8).setImmediate(func, ...args); // same as below
+    if (delayInMS == 0 && (0, $34f7c9824214f6f8$export$39b482c5e57630a8).setImmediate) return (0, $34f7c9824214f6f8$export$39b482c5e57630a8).setImmediate(func, ...args); // same as below
     return setTimeout(func, delayInMS, ...args); // "as any": maybe temp; used to allow source-importing from NodeJS
 }
-function $b9809223a27aa025$export$d121bf8f3dc83405(targetDateTimeInMS, func, ...args) {
+function $57c7c854fff9a810$export$d121bf8f3dc83405(targetDateTimeInMS, func, ...args) {
     var now = Date.now();
-    var diff = (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(targetDateTimeInMS - now).KeepAtLeast(0);
-    if (diff > $b9809223a27aa025$var$maxTimeoutLength) $b9809223a27aa025$export$e5ba3af335cd9693($b9809223a27aa025$var$maxTimeoutLength, ()=>$b9809223a27aa025$export$d121bf8f3dc83405(targetDateTimeInMS, func));
-    else $b9809223a27aa025$export$e5ba3af335cd9693(diff, func);
+    var diff = (0, $905ba9565af7e357$export$caa4dfc7169288b7)(targetDateTimeInMS - now).KeepAtLeast(0);
+    if (diff > $57c7c854fff9a810$var$maxTimeoutLength) $57c7c854fff9a810$export$e5ba3af335cd9693($57c7c854fff9a810$var$maxTimeoutLength, ()=>$57c7c854fff9a810$export$d121bf8f3dc83405(targetDateTimeInMS, func));
+    else $57c7c854fff9a810$export$e5ba3af335cd9693(diff, func);
 }
-function $b9809223a27aa025$export$166ac52b35cdaa60(timeMS) {
+function $57c7c854fff9a810$export$166ac52b35cdaa60(timeMS) {
     return new Promise((resolve, reject)=>{
-        $b9809223a27aa025$export$e5ba3af335cd9693(timeMS, resolve);
+        $57c7c854fff9a810$export$e5ba3af335cd9693(timeMS, resolve);
     });
 }
-function $b9809223a27aa025$export$a352030fccfa5bc7(targetDateTimeInMS) {
+function $57c7c854fff9a810$export$a352030fccfa5bc7(targetDateTimeInMS) {
     return new Promise((resolve, reject)=>{
-        $b9809223a27aa025$export$d121bf8f3dc83405(targetDateTimeInMS, resolve);
+        $57c7c854fff9a810$export$d121bf8f3dc83405(targetDateTimeInMS, resolve);
     });
 }
-var $b9809223a27aa025$var$DoNothingXTimesThenDoY_counters = {};
-function $b9809223a27aa025$export$737316d4bdd21a0a(doNothingCount, func, key = "default") {
-    if ($b9809223a27aa025$var$DoNothingXTimesThenDoY_counters[key] == null) $b9809223a27aa025$var$DoNothingXTimesThenDoY_counters[key] = 0;
-    if ($b9809223a27aa025$var$DoNothingXTimesThenDoY_counters[key] >= doNothingCount) func();
-    $b9809223a27aa025$var$DoNothingXTimesThenDoY_counters[key]++;
+var $57c7c854fff9a810$var$DoNothingXTimesThenDoY_counters = {};
+function $57c7c854fff9a810$export$737316d4bdd21a0a(doNothingCount, func, key = "default") {
+    if ($57c7c854fff9a810$var$DoNothingXTimesThenDoY_counters[key] == null) $57c7c854fff9a810$var$DoNothingXTimesThenDoY_counters[key] = 0;
+    if ($57c7c854fff9a810$var$DoNothingXTimesThenDoY_counters[key] >= doNothingCount) func();
+    $57c7c854fff9a810$var$DoNothingXTimesThenDoY_counters[key]++;
 }
-class $b9809223a27aa025$export$c57e9b2d8b9e4de {
+class $57c7c854fff9a810$export$c57e9b2d8b9e4de {
     constructor(intervalInMS, func, maxCallCount = -1){
         this.timerID = -1;
         this.callCount_thisRun = 0;
         this.callCount_total = 0;
-        (0, $64e096969242e10d$export$14647bdf767968d3)((0, $1090eee99c835ae1$export$bdf29e0acfffe6ef)(intervalInMS), "Interval must be a number.");
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)((0, $834790ed5758562b$export$bdf29e0acfffe6ef)(intervalInMS), "Interval must be a number.");
         this.intervalInMS = intervalInMS;
         this.func = func;
         this.maxCallCount = maxCallCount;
-        if ($b9809223a27aa025$export$402a550ad3c70e6b.default_autoAddAll) $b9809223a27aa025$export$402a550ad3c70e6b.default.timers.push(this);
+        if ($57c7c854fff9a810$export$402a550ad3c70e6b.default_autoAddAll) $57c7c854fff9a810$export$402a550ad3c70e6b.default.timers.push(this);
     }
     SetContext(timerContext) {
-        (0, $64e096969242e10d$export$14647bdf767968d3)(timerContext, "TimerContext cannot be null.");
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(timerContext, "TimerContext cannot be null.");
         this.timerContexts = (this.timerContexts || []).concat(timerContext);
         timerContext.timers.push(this);
         return this;
     }
     RemoveFromContext(timerContext) {
-        (0, $db86bae2e67ee359$exports.ArrayCE)(this.timerContexts).Remove(timerContext);
-        (0, $db86bae2e67ee359$exports.ArrayCE)(timerContext.timers).Remove(this);
+        (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(this.timerContexts).Remove(timerContext);
+        (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(timerContext.timers).Remove(this);
     }
     ClearContexts() {
         for (const context of this.timerContexts)this.RemoveFromContext(context);
@@ -6480,30 +7963,30 @@ class $b9809223a27aa025$export$c57e9b2d8b9e4de {
         this.callCount_thisRun = 0;
     }
 }
-class $b9809223a27aa025$export$68d4005767aa2c7f extends $b9809223a27aa025$export$c57e9b2d8b9e4de {
+class $57c7c854fff9a810$export$68d4005767aa2c7f extends $57c7c854fff9a810$export$c57e9b2d8b9e4de {
     constructor(interval_decimal, func, maxCallCount = -1){
         super(interval_decimal * 1000, func, maxCallCount);
     }
 }
-var $b9809223a27aa025$var$funcLastScheduledRunTimes = {};
-function $b9809223a27aa025$export$1c304feb6b074c77(...args) {
+var $57c7c854fff9a810$var$funcLastScheduledRunTimes = {};
+function $57c7c854fff9a810$export$1c304feb6b074c77(...args) {
     var _a;
     var key = "[default]", minInterval, func;
     if (args.length == 2) [minInterval, func] = args;
     else /*if (args.length == 3)*/ [key, minInterval, func] = args;
-    var lastScheduledRunTime = (_a = $b9809223a27aa025$var$funcLastScheduledRunTimes[key]) !== null && _a !== void 0 ? _a : 0;
+    var lastScheduledRunTime = (_a = $57c7c854fff9a810$var$funcLastScheduledRunTimes[key]) !== null && _a !== void 0 ? _a : 0;
     var now = new Date().getTime();
     var timeSinceLast = now - lastScheduledRunTime;
     if (timeSinceLast >= minInterval) {
         func();
-        $b9809223a27aa025$var$funcLastScheduledRunTimes[key] = now;
+        $57c7c854fff9a810$var$funcLastScheduledRunTimes[key] = now;
     } else {
         const waitingForNextRunAlready = lastScheduledRunTime > now;
         if (!waitingForNextRunAlready) {
             var nextRunTime = lastScheduledRunTime + minInterval;
             var timeTillNextRun = nextRunTime - now;
-            $b9809223a27aa025$export$e5ba3af335cd9693(timeTillNextRun, func);
-            $b9809223a27aa025$var$funcLastScheduledRunTimes[key] = nextRunTime;
+            $57c7c854fff9a810$export$e5ba3af335cd9693(timeTillNextRun, func);
+            $57c7c854fff9a810$var$funcLastScheduledRunTimes[key] = nextRunTime;
         }
     }
 }
@@ -6511,7 +7994,7 @@ function $b9809223a27aa025$export$1c304feb6b074c77(...args) {
 
 
 
-var $c0eb4ff3bc1761fa$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $5377385dd1d3033a$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -6538,12 +8021,12 @@ var $c0eb4ff3bc1761fa$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $c0eb4ff3bc1761fa$export$4f9662e730105e4b {
+class $5377385dd1d3033a$export$4f9662e730105e4b {
     constructor(initialData){
-        (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this).Extend(initialData);
+        (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this).Extend(initialData);
     }
 }
-class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
+class $5377385dd1d3033a$export$68a44d00957434e6 {
     /** Don't worry about having to discard some calls before receiveTextFunc receives it. We automatically discard entries that aren't valid bridge-messages. */ constructor(options){
         /** Useful to ensure we ignore non-jsve-bridge messages. (the channel might be used by other systems as well) */ this.channel_wrapBridgeMessage = true;
         /** Needed if the channel only supports strings being sent/received. */ this.channel_stringifyChannelMessageObj = true;
@@ -6557,7 +8040,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         // ==========
         this.lastCallbackID = -1;
         this.callbacks = {};
-        (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this).Extend((0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(options).ExcludeKeys("receiveChannelMessageFunc_addImmediately"));
+        (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this).Extend((0, $b3412bfae9d21412$export$982d7f197acc6f94)(options).ExcludeKeys("receiveChannelMessageFunc_addImmediately"));
         if (options.receiveChannelMessageFunc_addImmediately != false) this.SetUpReceiver();
     }
     // low level data-transfer
@@ -6566,10 +8049,10 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         // add our own receive-text-func right now
         this.receiveChannelMessageFunc = (channelMessage)=>{
             let channelMessageObj;
-            if (this.channel_stringifyChannelMessageObj && (0, $1090eee99c835ae1$export$fae01d74d6648c3f)(channelMessage)) channelMessageObj = (0, $b9809223a27aa025$export$51b6a2397978cb6a)(()=>JSON.parse(channelMessage)) || {};
-            if (!this.channel_stringifyChannelMessageObj && (0, $1090eee99c835ae1$export$e64f6626d4e96cfb)(channelMessage)) channelMessageObj = channelMessage;
+            if (this.channel_stringifyChannelMessageObj && (0, $834790ed5758562b$export$fae01d74d6648c3f)(channelMessage)) channelMessageObj = (0, $57c7c854fff9a810$export$51b6a2397978cb6a)(()=>JSON.parse(channelMessage)) || {};
+            if (!this.channel_stringifyChannelMessageObj && (0, $834790ed5758562b$export$e64f6626d4e96cfb)(channelMessage)) channelMessageObj = channelMessage;
             const bridgeMessage = this.channel_wrapBridgeMessage ? channelMessageObj && channelMessageObj["JSVE_Bridge_message"] : channelMessageObj;
-            if (!(0, $1090eee99c835ae1$export$e64f6626d4e96cfb)(bridgeMessage)) return;
+            if (!(0, $834790ed5758562b$export$e64f6626d4e96cfb)(bridgeMessage)) return;
             this.DeserializeFuncsIn(bridgeMessage);
             if (bridgeMessage.callFunction_name) this.OnReceiveFunctionCall(bridgeMessage);
             if (bridgeMessage.callCallback_id != null) this.OnReceiveCallback(bridgeMessage);
@@ -6601,7 +8084,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
                 funcRemoved = true;
             }
             if (this.functionExtras[name]) {
-                (0, $db86bae2e67ee359$exports.ArrayCE)(this.functionExtras[name]).Remove(func);
+                (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(this.functionExtras[name]).Remove(func);
                 funcRemoved = true;
             }
         } else if (name in this.functionMains) {
@@ -6611,14 +8094,14 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         return funcRemoved;
     }
     OnReceiveFunctionCall(bridgeMessage) {
-        return $c0eb4ff3bc1761fa$var$__awaiter(this, void 0, void 0, function*() {
+        return $5377385dd1d3033a$var$__awaiter(this, void 0, void 0, function*() {
             const result = yield this.Local_CallFunc(bridgeMessage.callFunction_name, ...bridgeMessage.callFunction_args);
             this.CallCallback(bridgeMessage.callFunction_callbackID, result);
         });
     }
     // we use async/await here, to support waiting for the registered function if it happens to be async (if it isn't, that's fine -- the async/await doesn't hurt anything)
     Local_CallFunc(funcName, ...args) {
-        return $c0eb4ff3bc1761fa$var$__awaiter(this, void 0, void 0, function*() {
+        return $5377385dd1d3033a$var$__awaiter(this, void 0, void 0, function*() {
             const mainFunc = this.functionMains[funcName];
             let result;
             if (mainFunc) result = yield mainFunc(...args);
@@ -6636,7 +8119,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         const callback = this.callbacks[callbackID];
         if (callback == null) {
             if (this.channel_safeCallbacks) return;
-            (0, $64e096969242e10d$export$14647bdf767968d3)(false, `Cannot find callback with id ${callbackID}!`);
+            (0, $c538f9ab01794aaa$export$14647bdf767968d3)(false, `Cannot find callback with id ${callbackID}!`);
         }
         callback(...callbackArgs);
     }
@@ -6648,8 +8131,8 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
     }
     // technically, this just prepares the functions in the tree for serialization (by setting a toJSON key, which JSON.stringify uses)
     SerializeFuncsIn(argTree) {
-        const nodes = (0, $03640216a2ed2e09$export$af3391acba9fe505)(argTree);
-        for (const node of nodes)if ((0, $1090eee99c835ae1$export$426ce8831f60741b)(node.Value)) {
+        const nodes = (0, $3b7e5e7e49d7a367$export$af3391acba9fe505)(argTree);
+        for (const node of nodes)if ((0, $834790ed5758562b$export$426ce8831f60741b)(node.Value)) {
             const callbackID = this.RegisterCallback(node.Value);
             node.Value.toJSON = ()=>({
                     serializedFunc_callbackID: callbackID
@@ -6657,7 +8140,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         }
     }
     DeserializeFuncsIn(argTree) {
-        const nodes = (0, $03640216a2ed2e09$export$af3391acba9fe505)(argTree);
+        const nodes = (0, $3b7e5e7e49d7a367$export$af3391acba9fe505)(argTree);
         for (const node of nodes)if (node.Value != null && node.Value.serializedFunc_callbackID != null) {
             const callbackID = node.Value.serializedFunc_callbackID;
             const proxyFunc = (...args)=>{
@@ -6671,7 +8154,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
     Call(funcName, ...args) {
         return new Promise((resolve, reject)=>{
             const awaitReturn_callbackID = this.RegisterCallback(resolve);
-            const bridgeMessage = new $c0eb4ff3bc1761fa$export$4f9662e730105e4b({
+            const bridgeMessage = new $5377385dd1d3033a$export$4f9662e730105e4b({
                 callFunction_callbackID: awaitReturn_callbackID,
                 callFunction_name: funcName,
                 callFunction_args: args
@@ -6680,7 +8163,7 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
         });
     }
     CallCallback(callbackID, ...args) {
-        const bridgeMessage = new $c0eb4ff3bc1761fa$export$4f9662e730105e4b({
+        const bridgeMessage = new $5377385dd1d3033a$export$4f9662e730105e4b({
             callCallback_id: callbackID,
             callCallback_args: args
         });
@@ -6690,9 +8173,9 @@ class $c0eb4ff3bc1761fa$export$68a44d00957434e6 {
 
 
 
-function $bb797533ad4cfedf$export$31c8ff0fde2b0028(oldObj, newObj, returnNullIfSame = false, useJSONCompare = false) {
+function $3891bcc6f2726968$export$31c8ff0fde2b0028(oldObj, newObj, returnNullIfSame = false, useJSONCompare = false) {
     oldObj = oldObj || {}, newObj = newObj || {};
-    const keys = (0, $db86bae2e67ee359$exports.ArrayCE)(Object.keys(oldObj).concat(Object.keys(newObj))).Distinct();
+    const keys = (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(Object.keys(oldObj).concat(Object.keys(newObj))).Distinct();
     const result = [];
     for (const key of keys){
         const newVal_forComparison = useJSONCompare ? JSON.stringify(newObj[key]) : newObj[key];
@@ -6722,33 +8205,33 @@ function $bb797533ad4cfedf$export$31c8ff0fde2b0028(oldObj, newObj, returnNullIfS
 
 
 
-function $fe09123547c3a7bb$export$9a58ef0d7ad3278c(min, max, step = 1, includeMax = true, roundToStep = true) {
+function $1acdfb6e82aefa22$export$9a58ef0d7ad3278c(min, max, step = 1, includeMax = true, roundToStep = true) {
     var result = [];
-    for(let i = min; includeMax ? i <= max : i < max; i = roundToStep ? (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(i + step).RoundTo(step) : i + step)result.push(i);
+    for(let i = min; includeMax ? i <= max : i < max; i = roundToStep ? (0, $905ba9565af7e357$export$caa4dfc7169288b7)(i + step).RoundTo(step) : i + step)result.push(i);
     return result;
 }
-function $fe09123547c3a7bb$export$b72efc6b031781f8(minX, maxY, interval = 1) {
+function $1acdfb6e82aefa22$export$b72efc6b031781f8(minX, maxY, interval = 1) {
     var result = [];
     for(var val = minX; val <= maxY; val += interval)result.push(val);
     return result;
 }
-function $fe09123547c3a7bb$export$4205edff77aa1d4b(minX, maxOutY, interval = 1) {
+function $1acdfb6e82aefa22$export$4205edff77aa1d4b(minX, maxOutY, interval = 1) {
     var result = [];
     for(var val = minX; val < maxOutY; val += interval)result.push(val);
     return result;
 }
-function $fe09123547c3a7bb$export$30e52872ef59c897(from, to, percentFromXToY, keepResultInRange = true) {
+function $1acdfb6e82aefa22$export$30e52872ef59c897(from, to, percentFromXToY, keepResultInRange = true) {
     let result = from + (to - from) * percentFromXToY;
-    if (keepResultInRange) result = (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(result).KeepBetween(from, to);
+    if (keepResultInRange) result = (0, $905ba9565af7e357$export$caa4dfc7169288b7)(result).KeepBetween(from, to);
     return result;
 }
-function $fe09123547c3a7bb$export$542b3e141b803c3(start, end, val, keepResultInRange = true) {
+function $1acdfb6e82aefa22$export$542b3e141b803c3(start, end, val, keepResultInRange = true) {
     // distance-from-x / distance-from-x-required-for-result-'1'
     var result = (val - start) / (end - start);
-    if (keepResultInRange) result = (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(result).KeepBetween(0, 1);
+    if (keepResultInRange) result = (0, $905ba9565af7e357$export$caa4dfc7169288b7)(result).KeepBetween(0, 1);
     return result;
 }
-function $fe09123547c3a7bb$export$2fc3d4178b27a4ab(seed) {
+function $1acdfb6e82aefa22$export$2fc3d4178b27a4ab(seed) {
     return function() {
         var t = seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
@@ -6756,7 +8239,7 @@ function $fe09123547c3a7bb$export$2fc3d4178b27a4ab(seed) {
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
     };
 }
-function $fe09123547c3a7bb$export$adc7ca9248b2eaa2(options) {
+function $1acdfb6e82aefa22$export$adc7ca9248b2eaa2(options) {
     var _a;
     const { min: min , max: max , mustBeInteger: mustBeInteger  } = options;
     const randFunc = (_a = options.randFunc) !== null && _a !== void 0 ? _a : Math.random;
@@ -6767,9 +8250,9 @@ function $fe09123547c3a7bb$export$adc7ca9248b2eaa2(options) {
 }
 
 
-var $d07aaea2139548cf$exports = {};
+var $c733789ac9220551$exports = {};
 
-var $d07aaea2139548cf$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $c733789ac9220551$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -6796,29 +8279,29 @@ var $d07aaea2139548cf$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function $d07aaea2139548cf$export$2eb120a4321254df(rootObj, dataPath) {
-    return new Promise((resolve, reject)=>$d07aaea2139548cf$var$__awaiter(this, void 0, void 0, function*() {
+function $c733789ac9220551$export$2eb120a4321254df(rootObj, dataPath) {
+    return new Promise((resolve, reject)=>$c733789ac9220551$var$__awaiter(this, void 0, void 0, function*() {
             const dataPathParts = dataPath.split(".");
             let currentParent = rootObj;
             for (const part of dataPathParts){
-                while(currentParent[part] == null)yield $d07aaea2139548cf$export$512bfaadbc8af94a(currentParent, part);
+                while(currentParent[part] == null)yield $c733789ac9220551$export$512bfaadbc8af94a(currentParent, part);
                 currentParent = currentParent[part];
             }
             resolve();
         }));
 }
-function $d07aaea2139548cf$export$512bfaadbc8af94a(obj, prop) {
+function $c733789ac9220551$export$512bfaadbc8af94a(obj, prop) {
     return new Promise((resolve, reject)=>{
-        (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(obj)._AddGetterSetter(prop, ()=>{}, (value)=>{
+        (0, $b3412bfae9d21412$export$982d7f197acc6f94)(obj)._AddGetterSetter(prop, ()=>{}, (value)=>{
             delete obj[prop]; // remove this hook
             obj[prop] = value; // set to provided value
             resolve();
         });
     });
 }
-function $d07aaea2139548cf$export$92d86c3fcaa3bd8b(obj) {
-    return $d07aaea2139548cf$var$__awaiter(this, void 0, void 0, function*() {
-        const pairs = (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(obj).Pairs();
+function $c733789ac9220551$export$92d86c3fcaa3bd8b(obj) {
+    return $c733789ac9220551$var$__awaiter(this, void 0, void 0, function*() {
+        const pairs = (0, $b3412bfae9d21412$export$982d7f197acc6f94)(obj).Pairs();
         const awaitedResults = yield Promise.all(pairs.map((pair)=>{
             const valueAsPromise = pair.value instanceof Promise ? pair.value : Promise.resolve(pair.value);
             return valueAsPromise;
@@ -6833,21 +8316,21 @@ function $d07aaea2139548cf$export$92d86c3fcaa3bd8b(obj) {
 
 
 
-class $c60b426b8790e515$export$6b2f4f3cf41d451d {
+class $acdc41cd40fff511$export$6b2f4f3cf41d451d {
     constructor(){
         this.toJSON_autoIndent_minLength = 70; // NodeJS's console.log appears to use ~70 as the cutoff
         this.toJSON_autoIndent_indent = 2;
     }
 }
-function $c60b426b8790e515$export$36d6dce68c54ded5(options, ...parts) {
-    const opts = (0, $03640216a2ed2e09$export$a9c23c6ac3fc3eca)(new $c60b426b8790e515$export$6b2f4f3cf41d451d(), options);
+function $acdc41cd40fff511$export$36d6dce68c54ded5(options, ...parts) {
+    const opts = (0, $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca)(new $acdc41cd40fff511$export$6b2f4f3cf41d451d(), options);
     let result = "";
     for (const [i, part] of parts.entries()){
         if (i > 0) result += " ";
         if (typeof part == "string") result += part;
         else {
-            let json = $c60b426b8790e515$export$314c6567a4774e9d(part, opts.toJSON_opts);
-            if (opts.toJSON_autoIndent_minLength != null && json.length >= opts.toJSON_autoIndent_minLength) json = $c60b426b8790e515$export$314c6567a4774e9d(part, (0, $03640216a2ed2e09$export$a9c23c6ac3fc3eca)(opts.toJSON_opts, {
+            let json = $acdc41cd40fff511$export$314c6567a4774e9d(part, opts.toJSON_opts);
+            if (opts.toJSON_autoIndent_minLength != null && json.length >= opts.toJSON_autoIndent_minLength) json = $acdc41cd40fff511$export$314c6567a4774e9d(part, (0, $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca)(opts.toJSON_opts, {
                 indent: opts.toJSON_autoIndent_indent
             }));
             result += json;
@@ -6855,13 +8338,13 @@ function $c60b426b8790e515$export$36d6dce68c54ded5(options, ...parts) {
     }
     return result;
 }
-function $c60b426b8790e515$export$f09a452e01aef7c2(json) {
+function $acdc41cd40fff511$export$f09a452e01aef7c2(json) {
     return JSON.parse(json);
 }
-function $c60b426b8790e515$export$f3d8bbc2adf038a0(obj, replacerFunc, spacing) {
+function $acdc41cd40fff511$export$f3d8bbc2adf038a0(obj, replacerFunc, spacing) {
     return JSON.stringify(obj, replacerFunc, spacing);
 }
-class $c60b426b8790e515$export$ad4a9f249f6d94e1 {
+class $acdc41cd40fff511$export$ad4a9f249f6d94e1 {
     constructor(){
         this.keysToIgnore = [];
         this.stringifyUndefinedAs = null;
@@ -6872,7 +8355,7 @@ class $c60b426b8790e515$export$ad4a9f249f6d94e1 {
     //maxDepth = 4;
     }
 }
-class $c60b426b8790e515$export$9bca0215e92f0eeb {
+class $acdc41cd40fff511$export$9bca0215e92f0eeb {
     constructor(){
         this.insideObjectBraces = false;
         this.insideArrayBrackets = false;
@@ -6880,10 +8363,10 @@ class $c60b426b8790e515$export$9bca0215e92f0eeb {
         this.betweenPropNameAndValue = true;
     }
 }
-function $c60b426b8790e515$export$314c6567a4774e9d(obj, options) {
+function $acdc41cd40fff511$export$314c6567a4774e9d(obj, options) {
     var _a;
-    const opts = (0, $03640216a2ed2e09$export$a9c23c6ac3fc3eca)(new $c60b426b8790e515$export$ad4a9f249f6d94e1(), options);
-    (0, $64e096969242e10d$export$14647bdf767968d3)(!(opts.indent != null && opts.addSpacesAt), "Cannot enable indent and addSpaceAt simultaneously.");
+    const opts = (0, $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca)(new $acdc41cd40fff511$export$ad4a9f249f6d94e1(), options);
+    (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!(opts.indent != null && opts.addSpacesAt), "Cannot enable indent and addSpaceAt simultaneously.");
     const indent = (_a = opts.indent) !== null && _a !== void 0 ? _a : opts.addSpacesAt ? 1 : undefined;
     const cache = new Set();
     //let foundDuplicates = false;
@@ -6898,7 +8381,7 @@ function $c60b426b8790e515$export$314c6567a4774e9d(obj, options) {
                 return true;
             };
             if (opts.entryReplacer_pre && callReplacer(opts.entryReplacer_pre)) return replacer_lastResult;
-            if ((0, $db86bae2e67ee359$exports.ArrayCE)(opts.keysToIgnore).Contains(key)) return;
+            if ((0, $2f6f692f1c2d9dfe$exports.ArrayCE)(opts.keysToIgnore).Contains(key)) return;
             if (opts.trimDuplicates && typeof value == "object" && value != null) {
                 // if duplicate found, ignore key (for more advanced, see: flatted, json-stringify-safe, etc.)
                 if (cache.has(value)) //foundDuplicates = true;
@@ -6926,13 +8409,13 @@ function $c60b426b8790e515$export$314c6567a4774e9d(obj, options) {
         result = opt.trimCircular_replaceStr + result;
     }*/ return result;
 }
-function $c60b426b8790e515$export$b5d07669a5562b23(obj, keepPrototype = false) {
+function $acdc41cd40fff511$export$b5d07669a5562b23(obj, keepPrototype = false) {
     if (obj == null) return obj;
-    const result = $c60b426b8790e515$export$f09a452e01aef7c2($c60b426b8790e515$export$f3d8bbc2adf038a0(obj));
+    const result = $acdc41cd40fff511$export$f09a452e01aef7c2($acdc41cd40fff511$export$f3d8bbc2adf038a0(obj));
     if (keepPrototype == true) Object.setPrototypeOf(result, Object.getPrototypeOf(obj));
     return result;
 }
-function $c60b426b8790e515$export$7dabd091137966e0(originalObject, keepCircularLinks = false) {
+function $acdc41cd40fff511$export$7dabd091137966e0(originalObject, keepCircularLinks = false) {
     if (originalObject == null) return originalObject;
     const copies = [
         {
@@ -6985,7 +8468,7 @@ function $c60b426b8790e515$export$7dabd091137966e0(originalObject, keepCircularL
 
 
 
-function $79bd1841b7924362$export$b4976521df777783(url) {
+function $408dc628f2b1c691$export$b4976521df777783(url) {
     // Handle absolute URLs (with protocol-relative prefix)
     // Example: //domain.com/file.png
     if (url.search(/^\/\//) != -1) return window.location.protocol + url;
@@ -7000,24 +8483,24 @@ function $79bd1841b7924362$export$b4976521df777783(url) {
     var base = window.location.href.match(/(.*\/)/)[0];
     return base + url;
 }
-function $79bd1841b7924362$export$6838df4b0b4a976c(hashStr) {
+function $408dc628f2b1c691$export$6838df4b0b4a976c(hashStr) {
     var url = location.href; // Save down the URL without hash.
     location.href = "#" + hashStr; // Go to the target element.
     history.replaceState(null, null, url); // Don't like hashes. Changing it back.
 //document.getElementById(hashStr).scrollIntoView(); //Even IE6 supports this
 }
-function $79bd1841b7924362$export$d2206d2eb5d60ba6() {
+function $408dc628f2b1c691$export$d2206d2eb5d60ba6() {
     return window.location.href.replace(/%22/, '"');
 }
-function $79bd1841b7924362$export$fa935bb372d60240(url) {
-    url = url || $79bd1841b7924362$export$d2206d2eb5d60ba6();
+function $408dc628f2b1c691$export$fa935bb372d60240(url) {
+    url = url || $408dc628f2b1c691$export$d2206d2eb5d60ba6();
     let [domainStr, pathStr, varsStr, hashStr] = Array(4).fill(0).map((a)=>"");
     let urlToProcess = url;
-    if (urlToProcess.includes("#") && !varsStr.includes("runJS=")) [urlToProcess, hashStr] = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(urlToProcess).SplitAt(urlToProcess.indexOf("#"));
-    if (urlToProcess.includes("?")) [urlToProcess, varsStr] = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(urlToProcess).SplitAt(urlToProcess.indexOf("?"));
+    if (urlToProcess.includes("#") && !varsStr.includes("runJS=")) [urlToProcess, hashStr] = (0, $d465502d07abe1c6$export$29246bb2b9c16932)(urlToProcess).SplitAt(urlToProcess.indexOf("#"));
+    if (urlToProcess.includes("?")) [urlToProcess, varsStr] = (0, $d465502d07abe1c6$export$29246bb2b9c16932)(urlToProcess).SplitAt(urlToProcess.indexOf("?"));
     //if (urlToProcess.Matches("/").length == )
-    let splitAtSlash_pos = (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)((0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(urlToProcess).IndexOf_X("/", 2)).IfN1Then(urlToProcess.length);
-    [domainStr, pathStr] = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(urlToProcess).SplitAt(splitAtSlash_pos);
+    let splitAtSlash_pos = (0, $905ba9565af7e357$export$caa4dfc7169288b7)((0, $d465502d07abe1c6$export$29246bb2b9c16932)(urlToProcess).IndexOf_X("/", 2)).IfN1Then(urlToProcess.length);
+    [domainStr, pathStr] = (0, $d465502d07abe1c6$export$29246bb2b9c16932)(urlToProcess).SplitAt(splitAtSlash_pos);
     return [
         domainStr,
         pathStr,
@@ -7025,35 +8508,35 @@ function $79bd1841b7924362$export$fa935bb372d60240(url) {
         hashStr
     ];
 }
-function $79bd1841b7924362$var$GetUrlPath(url, fromDomain = true) {
+function $408dc628f2b1c691$var$GetUrlPath(url, fromDomain = true) {
     /*let [pathStr, varsStr, hashStr] = GetUrlParts(url);
     if (fromDomain)
         pathStr = pathStr.SplitAt(pathStr.IndexOf_X("/", 2).IfN1Then(pathStr.length))[1];
     if (pathStr.endsWith("/"))
-        pathStr = pathStr.substr(0, pathStr.length - 1);*/ let [_, pathStr] = $79bd1841b7924362$export$fa935bb372d60240(url);
+        pathStr = pathStr.substr(0, pathStr.length - 1);*/ let [_, pathStr] = $408dc628f2b1c691$export$fa935bb372d60240(url);
     if (pathStr.endsWith("/")) pathStr = pathStr.slice(0, -1);
     return pathStr;
 }
-function $79bd1841b7924362$var$GetUrlVars(url, allowQuestionMarkAsVarSep = true) {
+function $408dc628f2b1c691$var$GetUrlVars(url, allowQuestionMarkAsVarSep = true) {
     let varSeparators = allowQuestionMarkAsVarSep ? [
         "&",
         "?"
     ] : [
         "&"
     ];
-    let [_, __, varsStr] = $79bd1841b7924362$export$fa935bb372d60240(url);
+    let [_, __, varsStr] = $408dc628f2b1c691$export$fa935bb372d60240(url);
     var vars = {}; //{[key: string]: string};
-    var parts = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(varsStr).SplitByAny(...varSeparators).filter((a)=>a);
+    var parts = (0, $d465502d07abe1c6$export$29246bb2b9c16932)(varsStr).SplitByAny(...varSeparators).filter((a)=>a);
     for (let part of parts){
-        let [key, value] = (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(part).SplitAt(part.indexOf("="));
+        let [key, value] = (0, $d465502d07abe1c6$export$29246bb2b9c16932)(part).SplitAt(part.indexOf("="));
         vars[key] = value;
     }
     return vars;
 }
-class $79bd1841b7924362$export$e59598f920324e5b {
+class $408dc628f2b1c691$export$e59598f920324e5b {
     constructor(domain = "", pathNodes = [], queryVars = [], hash = ""){
         //AssertWarn(domain.match(/^[A-Za-z-:./]+$/) != null, "Domain seems to contain")
-        if (domain.includes("?") || domain.includes("#")) (0, $64e096969242e10d$export$14647bdf767968d3)(false, "Domain contains invalid characters. Did you mean to call VURL.Parse?");
+        if (domain.includes("?") || domain.includes("#")) (0, $c538f9ab01794aaa$export$14647bdf767968d3)(false, "Domain contains invalid characters. Did you mean to call VURL.Parse?");
         this.domain = domain;
         this.pathNodes = pathNodes;
         this.queryVars = queryVars;
@@ -7061,18 +8544,18 @@ class $79bd1841b7924362$export$e59598f920324e5b {
     }
     /** Note that this url-parser is not quite as robust as the native URL class, so some edge-cases may be misparsed. (using "VURL.Parse(new URL(urlStr).toString())" may improve reliability) */ static Parse(urlStr, useCurrentDomainIfMissing = true, allowQuestionMarkAsVarSep = true) {
         if (useCurrentDomainIfMissing && !urlStr.startsWith("http")) urlStr = window.location.origin + (urlStr.startsWith("/") ? "" : "/") + urlStr;
-        let [domainStr, pathStr, varsStr, hashStr] = $79bd1841b7924362$export$fa935bb372d60240(urlStr);
-        let queryVarsMap = $79bd1841b7924362$var$GetUrlVars(urlStr, allowQuestionMarkAsVarSep);
-        let result = new $79bd1841b7924362$export$e59598f920324e5b();
+        let [domainStr, pathStr, varsStr, hashStr] = $408dc628f2b1c691$export$fa935bb372d60240(urlStr);
+        let queryVarsMap = $408dc628f2b1c691$var$GetUrlVars(urlStr, allowQuestionMarkAsVarSep);
+        let result = new $408dc628f2b1c691$export$e59598f920324e5b();
         result.domain = domainStr;
         result.pathNodes = pathStr.length ? pathStr.split("/") : [];
-        for (let key of Object.keys(queryVarsMap))result.queryVars.push(new $79bd1841b7924362$export$a90c0bb0b625769b(key, queryVarsMap[key]));
+        for (let key of Object.keys(queryVarsMap))result.queryVars.push(new $408dc628f2b1c691$export$a90c0bb0b625769b(key, queryVarsMap[key]));
         result.hash = hashStr;
         return result;
     }
     static FromLocationObject(location) {
         // todo: have this support all Location properties, not just those used by connected-react-router
-        let result = $79bd1841b7924362$export$e59598f920324e5b.Parse(location ? (location.pathname || "") + (location.search || "") + (location.hash || "") : "");
+        let result = $408dc628f2b1c691$export$e59598f920324e5b.Parse(location ? (location.pathname || "") + (location.search || "") + (location.hash || "") : "");
         //if (normalize) result = result.Normalized();
         return result;
     }
@@ -7106,10 +8589,10 @@ class $79bd1841b7924362$export$e59598f920324e5b {
         return withProtocol ? this.domain : this.DomainWithoutProtocol;
     }
     get Protocol() {
-        return this.domain && (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(this.domain).Contains("://") ? this.domain.substr(0, this.domain.indexOf("://")) : null;
+        return this.domain && (0, $d465502d07abe1c6$export$29246bb2b9c16932)(this.domain).Contains("://") ? this.domain.substr(0, this.domain.indexOf("://")) : null;
     }
     get DomainWithoutProtocol() {
-        return this.domain && (0, $a18bb0fe6a04f70b$export$29246bb2b9c16932)(this.domain).Contains("://") ? this.domain.substr(this.domain.indexOf("://") + 3) : this.domain;
+        return this.domain && (0, $d465502d07abe1c6$export$29246bb2b9c16932)(this.domain).Contains("://") ? this.domain.substr(this.domain.indexOf("://") + 3) : this.domain;
     }
     PathStr(pathStartSlash) {
         let result = "";
@@ -7130,14 +8613,14 @@ class $79bd1841b7924362$export$e59598f920324e5b {
     SetQueryVar(name, value) {
         let existingEntry = this.queryVars.find((a)=>a.name == name);
         if (existingEntry) existingEntry.value = value;
-        else this.queryVars.push(new $79bd1841b7924362$export$a90c0bb0b625769b(name, value));
+        else this.queryVars.push(new $408dc628f2b1c691$export$a90c0bb0b625769b(name, value));
     }
     get HashStr() {
         if (!this.hash) return "";
         return "#" + this.hash;
     }
     Clone() {
-        return new $79bd1841b7924362$export$e59598f920324e5b(this.domain, this.pathNodes.slice(), this.queryVars.map((a)=>a.Clone()), this.hash);
+        return new $408dc628f2b1c691$export$e59598f920324e5b(this.domain, this.pathNodes.slice(), this.queryVars.map((a)=>a.Clone()), this.hash);
     }
     /*Normalized() {
         let result = this.Clone();
@@ -7149,7 +8632,7 @@ class $79bd1841b7924362$export$e59598f920324e5b {
         }
         return result;
     }*/ toString(options) {
-        options = (0, $03640216a2ed2e09$export$a9c23c6ac3fc3eca)({
+        options = (0, $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca)({
             domain: true,
             domain_protocol: true,
             pathStartSlash: "auto",
@@ -7167,11 +8650,11 @@ class $79bd1841b7924362$export$e59598f920324e5b {
         if (options.path) result += this.PathStr(false);
         if (options.queryVars) result += this.QueryStr;
         if (options.hash) result += this.HashStr;
-        (0, $64e096969242e10d$export$14647bdf767968d3)(!result.startsWith("//"), `URL toString() result cannot start with "//". (it's probably an error)`);
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!result.startsWith("//"), `URL toString() result cannot start with "//". (it's probably an error)`);
         return result;
     }
     toString_OptIn(options) {
-        options = (0, $03640216a2ed2e09$export$a9c23c6ac3fc3eca)({
+        options = (0, $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca)({
             domain: false,
             path: false,
             queryVars: false,
@@ -7180,16 +8663,16 @@ class $79bd1841b7924362$export$e59598f920324e5b {
         return this.toString(options);
     }
 }
-function $79bd1841b7924362$var$AsPartial(obj) {
+function $408dc628f2b1c691$var$AsPartial(obj) {
     return obj;
 }
-class $79bd1841b7924362$export$a90c0bb0b625769b {
+class $408dc628f2b1c691$export$a90c0bb0b625769b {
     constructor(name, value){
         this.name = name;
         this.value = value;
     }
     Clone() {
-        return new $79bd1841b7924362$export$a90c0bb0b625769b(this.name, this.value);
+        return new $408dc628f2b1c691$export$a90c0bb0b625769b(this.name, this.value);
     }
 } // todo: merge this functionality into the URL class
  /*export function GetPathNodes(path = GetUrlPath(), makeFull = true) {
@@ -7213,22 +8696,22 @@ export function GetPath(path = GetUrlPath(), makeFull = true) {
 
 
 
-class $cae5e9528cfbe66b$export$bf2a15d34f3c441c {
+class $a8d87905a5a84a7a$export$bf2a15d34f3c441c {
     constructor(){
         this.resultUpdateCount = 0;
     }
 }
-const $cae5e9528cfbe66b$export$88f527bbd74a5496 = {};
-function $cae5e9528cfbe66b$export$e88570d207afe5d2(transformType, staticProps) {
+const $a8d87905a5a84a7a$export$88f527bbd74a5496 = {};
+function $a8d87905a5a84a7a$export$e88570d207afe5d2(transformType, staticProps) {
     //let storageKey = transformType + "|" + JSON.stringify(staticProps);
     const storageKey = `${transformType}|${staticProps.join("|")}`;
-    const storage = $cae5e9528cfbe66b$export$88f527bbd74a5496[storageKey] || ($cae5e9528cfbe66b$export$88f527bbd74a5496[storageKey] = new $cae5e9528cfbe66b$export$bf2a15d34f3c441c());
+    const storage = $a8d87905a5a84a7a$export$88f527bbd74a5496[storageKey] || ($a8d87905a5a84a7a$export$88f527bbd74a5496[storageKey] = new $a8d87905a5a84a7a$export$bf2a15d34f3c441c());
     return storage;
 }
-function $cae5e9528cfbe66b$export$2a5badc52685bda1(transformType, staticProps, dynamicProps, transformFunc) {
+function $a8d87905a5a84a7a$export$2a5badc52685bda1(transformType, staticProps, dynamicProps, transformFunc) {
     //Assert(dynamicProps != null);
-    const storage = $cae5e9528cfbe66b$export$e88570d207afe5d2(transformType, staticProps);
-    if (!(0, $03640216a2ed2e09$export$ad886ff608f37420)(dynamicProps, storage.lastDynamicProps) || storage.resultUpdateCount == 0) {
+    const storage = $a8d87905a5a84a7a$export$e88570d207afe5d2(transformType, staticProps);
+    if (!(0, $3b7e5e7e49d7a367$export$ad886ff608f37420)(dynamicProps, storage.lastDynamicProps) || storage.resultUpdateCount == 0) {
         /*MaybeLog(a=>a.cacheUpdates,
             ()=>`Recalculating cache. @Type:${transformType} @StaticProps:${ToJSON(staticProps)} @DynamicProps:${ToJSON(dynamicProps)} @TransformFunc:${transformFunc}`);*/ storage.lastDynamicProps = dynamicProps;
         storage.lastDebugInfo = {};
@@ -7237,9 +8720,9 @@ function $cae5e9528cfbe66b$export$2a5badc52685bda1(transformType, staticProps, d
     }
     return storage.lastResult;
 }
-function $cae5e9528cfbe66b$export$acfb2464df086fdb(...maps) {
+function $a8d87905a5a84a7a$export$acfb2464df086fdb(...maps) {
     var result = {};
-    (0, $db86bae2e67ee359$exports.ArrayCE)(maps).ForEach((map, mapIndex)=>{
+    (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(maps).ForEach((map, mapIndex)=>{
         if (map == null) return "continue";
         Object.keys(map).forEach((key)=>{
             result[`${mapIndex}_${key}`] = map[key];
@@ -7249,26 +8732,26 @@ function $cae5e9528cfbe66b$export$acfb2464df086fdb(...maps) {
 }
 
 
-var $da6ebd2d48323dc2$exports = {};
+var $3029fe621e9d1dcf$exports = {};
 
-$parcel$export($da6ebd2d48323dc2$exports, "Vector2", () => $da6ebd2d48323dc2$export$c977b3e384af9ae1, (v) => $da6ebd2d48323dc2$export$c977b3e384af9ae1 = v);
-$parcel$export($da6ebd2d48323dc2$exports, "VRect", () => $da6ebd2d48323dc2$export$1b89232acc4de8b8, (v) => $da6ebd2d48323dc2$export$1b89232acc4de8b8 = v);
+$parcel$export($3029fe621e9d1dcf$exports, "Vector2", () => $3029fe621e9d1dcf$export$c977b3e384af9ae1, (v) => $3029fe621e9d1dcf$export$c977b3e384af9ae1 = v);
+$parcel$export($3029fe621e9d1dcf$exports, "VRect", () => $3029fe621e9d1dcf$export$1b89232acc4de8b8, (v) => $3029fe621e9d1dcf$export$1b89232acc4de8b8 = v);
 
 
-var $da6ebd2d48323dc2$var$__decorate = undefined && undefined.__decorate || function(decorators, target, key, desc) {
+var $3029fe621e9d1dcf$var$__decorate = undefined && undefined.__decorate || function(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var $da6ebd2d48323dc2$var$Vector2_1, $da6ebd2d48323dc2$var$Vector3_1, $da6ebd2d48323dc2$var$VRect_1;
-function $da6ebd2d48323dc2$var$IsNullOrNaN(value) {
-    return value === null || (0, $1090eee99c835ae1$export$f375b07b95af9a54)(value);
+var $3029fe621e9d1dcf$var$Vector2_1, $3029fe621e9d1dcf$var$Vector3_1, $3029fe621e9d1dcf$var$VRect_1;
+function $3029fe621e9d1dcf$var$IsNullOrNaN(value) {
+    return value === null || (0, $834790ed5758562b$export$f375b07b95af9a54)(value);
 }
-function $da6ebd2d48323dc2$export$2b280c8416a5e38d(obj) {
+function $3029fe621e9d1dcf$export$2b280c8416a5e38d(obj) {
     return obj.hasOwnProperty("x") && obj.hasOwnProperty("y");
 }
-let $da6ebd2d48323dc2$export$c977b3e384af9ae1 = $da6ebd2d48323dc2$var$Vector2_1 = class Vector2 {
+let $3029fe621e9d1dcf$export$c977b3e384af9ae1 = $3029fe621e9d1dcf$var$Vector2_1 = class Vector2 {
     constructor(...args){
         var x = 0, y = 0;
         if (typeof args[0] == "number") [x, y] = args;
@@ -7280,15 +8763,15 @@ let $da6ebd2d48323dc2$export$c977b3e384af9ae1 = $da6ebd2d48323dc2$var$Vector2_1 
             args[0].left,
             args[0].top
         ];
-        (0, $64e096969242e10d$export$14647bdf767968d3)(!$da6ebd2d48323dc2$var$IsNullOrNaN(x) && !$da6ebd2d48323dc2$var$IsNullOrNaN(y), "Cannot initialize Vector2i's x/y to null/NaN. (if needed, initialize to undefined)");
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!$3029fe621e9d1dcf$var$IsNullOrNaN(x) && !$3029fe621e9d1dcf$var$IsNullOrNaN(y), "Cannot initialize Vector2i's x/y to null/NaN. (if needed, initialize to undefined)");
         this.x = x;
         this.y = y;
     }
     static get zero() {
-        return new $da6ebd2d48323dc2$var$Vector2_1(0, 0);
+        return new $3029fe621e9d1dcf$var$Vector2_1(0, 0);
     }
     static get one() {
-        return new $da6ebd2d48323dc2$var$Vector2_1(1, 1);
+        return new $3029fe621e9d1dcf$var$Vector2_1(1, 1);
     }
     /*@_VDFDeserialize() Deserialize(node) {
         var strParts = node.primitiveValue.split(" ");
@@ -7302,67 +8785,67 @@ let $da6ebd2d48323dc2$export$c977b3e384af9ae1 = $da6ebd2d48323dc2$var$Vector2_1 
         return other && this.toString() == other.toString();
     }
     NewX(xOrFunc) {
-        return new $da6ebd2d48323dc2$var$Vector2_1(xOrFunc instanceof Function ? xOrFunc(this.x) : xOrFunc, this.y);
+        return new $3029fe621e9d1dcf$var$Vector2_1(xOrFunc instanceof Function ? xOrFunc(this.x) : xOrFunc, this.y);
     }
     NewY(yOrFunc) {
-        return new $da6ebd2d48323dc2$var$Vector2_1(this.x, yOrFunc instanceof Function ? yOrFunc(this.y) : yOrFunc);
+        return new $3029fe621e9d1dcf$var$Vector2_1(this.x, yOrFunc instanceof Function ? yOrFunc(this.y) : yOrFunc);
     }
     Plus(...args) {
-        const [x, y] = $da6ebd2d48323dc2$export$2b280c8416a5e38d(args[0]) ? [
+        const [x, y] = $3029fe621e9d1dcf$export$2b280c8416a5e38d(args[0]) ? [
             args[0].x,
             args[0].y
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector2_1(this.x + x, this.y + y);
+        return new $3029fe621e9d1dcf$var$Vector2_1(this.x + x, this.y + y);
     }
     Minus(...args) {
-        const [x, y] = $da6ebd2d48323dc2$export$2b280c8416a5e38d(args[0]) ? [
+        const [x, y] = $3029fe621e9d1dcf$export$2b280c8416a5e38d(args[0]) ? [
             args[0].x,
             args[0].y
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector2_1(this.x - x, this.y - y);
+        return new $3029fe621e9d1dcf$var$Vector2_1(this.x - x, this.y - y);
     }
     Times(...args) {
-        var [x, y] = $da6ebd2d48323dc2$export$2b280c8416a5e38d(args[0]) ? [
+        var [x, y] = $3029fe621e9d1dcf$export$2b280c8416a5e38d(args[0]) ? [
             args[0].x,
             args[0].y
         ] : args.length == 1 ? [
             args[0],
             args[0]
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector2_1(this.x * x, this.y * y);
+        return new $3029fe621e9d1dcf$var$Vector2_1(this.x * x, this.y * y);
     }
     DividedBy(...args) {
-        var [x, y] = $da6ebd2d48323dc2$export$2b280c8416a5e38d(args[0]) ? [
+        var [x, y] = $3029fe621e9d1dcf$export$2b280c8416a5e38d(args[0]) ? [
             args[0].x,
             args[0].y
         ] : args.length == 1 ? [
             args[0],
             args[0]
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector2_1(this.x / x, this.y / y);
+        return new $3029fe621e9d1dcf$var$Vector2_1(this.x / x, this.y / y);
     }
     DistanceTo(other) {
-        return Math.sqrt((0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(other.x - this.x).ToPower(2) + (0, $2c2a98921dc2b609$export$caa4dfc7169288b7)(other.y - this.y).ToPower(2));
+        return Math.sqrt((0, $905ba9565af7e357$export$caa4dfc7169288b7)(other.x - this.x).ToPower(2) + (0, $905ba9565af7e357$export$caa4dfc7169288b7)(other.y - this.y).ToPower(2));
     }
 };
-$da6ebd2d48323dc2$export$c977b3e384af9ae1 = $da6ebd2d48323dc2$var$Vector2_1 = $da6ebd2d48323dc2$var$__decorate([
-    (0, $03640216a2ed2e09$export$98f03c5d19621d70)
-], $da6ebd2d48323dc2$export$c977b3e384af9ae1);
-function $da6ebd2d48323dc2$export$e19da58fcd22f283(obj) {
+$3029fe621e9d1dcf$export$c977b3e384af9ae1 = $3029fe621e9d1dcf$var$Vector2_1 = $3029fe621e9d1dcf$var$__decorate([
+    (0, $3b7e5e7e49d7a367$export$98f03c5d19621d70)
+], $3029fe621e9d1dcf$export$c977b3e384af9ae1);
+function $3029fe621e9d1dcf$export$e19da58fcd22f283(obj) {
     return obj.hasOwnProperty("x") && obj.hasOwnProperty("y") && obj.hasOwnProperty("z");
 }
-let $da6ebd2d48323dc2$export$64b5c384219d3699 = $da6ebd2d48323dc2$var$Vector3_1 = class Vector3 {
+let $3029fe621e9d1dcf$export$64b5c384219d3699 = $3029fe621e9d1dcf$var$Vector3_1 = class Vector3 {
     constructor(x, y, z){
-        (0, $64e096969242e10d$export$14647bdf767968d3)(!$da6ebd2d48323dc2$var$IsNullOrNaN(x) && !$da6ebd2d48323dc2$var$IsNullOrNaN(y) && !$da6ebd2d48323dc2$var$IsNullOrNaN(z), "Cannot initialize Vector3i's x/y/z to null/NaN. (if needed, initialize to undefined)");
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!$3029fe621e9d1dcf$var$IsNullOrNaN(x) && !$3029fe621e9d1dcf$var$IsNullOrNaN(y) && !$3029fe621e9d1dcf$var$IsNullOrNaN(z), "Cannot initialize Vector3i's x/y/z to null/NaN. (if needed, initialize to undefined)");
         this.x = x != null ? x : 0;
         this.y = y != null ? y : 0;
         this.z = z != null ? z : 0;
     }
     static get zero() {
-        return new $da6ebd2d48323dc2$var$Vector3_1(0, 0, 0);
+        return new $3029fe621e9d1dcf$var$Vector3_1(0, 0, 0);
     }
     static get one() {
-        return new $da6ebd2d48323dc2$var$Vector3_1(1, 1, 1);
+        return new $3029fe621e9d1dcf$var$Vector3_1(1, 1, 1);
     }
     /*@_VDFDeserialize() Deserialize(node) {
         var strParts = node.primitiveValue.split(" ");
@@ -7375,32 +8858,32 @@ let $da6ebd2d48323dc2$export$64b5c384219d3699 = $da6ebd2d48323dc2$var$Vector3_1 
         return `${this.x} ${this.y} ${this.z}`;
     }
     NewX(xOrFunc) {
-        return new $da6ebd2d48323dc2$var$Vector3_1(xOrFunc instanceof Function ? xOrFunc(this.x) : xOrFunc, this.y, this.z);
+        return new $3029fe621e9d1dcf$var$Vector3_1(xOrFunc instanceof Function ? xOrFunc(this.x) : xOrFunc, this.y, this.z);
     }
     NewY(yOrFunc) {
-        return new $da6ebd2d48323dc2$var$Vector3_1(this.x, yOrFunc instanceof Function ? yOrFunc(this.y) : yOrFunc, this.z);
+        return new $3029fe621e9d1dcf$var$Vector3_1(this.x, yOrFunc instanceof Function ? yOrFunc(this.y) : yOrFunc, this.z);
     }
     NewZ(zOrFunc) {
-        return new $da6ebd2d48323dc2$var$Vector3_1(this.x, this.y, zOrFunc instanceof Function ? zOrFunc(this.z) : zOrFunc);
+        return new $3029fe621e9d1dcf$var$Vector3_1(this.x, this.y, zOrFunc instanceof Function ? zOrFunc(this.z) : zOrFunc);
     }
     Minus(...args) {
-        const [x, y, z] = $da6ebd2d48323dc2$export$e19da58fcd22f283(args[0]) ? [
+        const [x, y, z] = $3029fe621e9d1dcf$export$e19da58fcd22f283(args[0]) ? [
             args[0].x,
             args[0].y,
             args[0].z
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector3_1(this.x - x, this.y - y, this.z - z);
+        return new $3029fe621e9d1dcf$var$Vector3_1(this.x - x, this.y - y, this.z - z);
     }
     Plus(...args) {
-        const [x, y, z] = $da6ebd2d48323dc2$export$e19da58fcd22f283(args[0]) ? [
+        const [x, y, z] = $3029fe621e9d1dcf$export$e19da58fcd22f283(args[0]) ? [
             args[0].x,
             args[0].y,
             args[0].z
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector3_1(this.x + x, this.y + y, this.z + z);
+        return new $3029fe621e9d1dcf$var$Vector3_1(this.x + x, this.y + y, this.z + z);
     }
     Times(...args) {
-        var [x, y, z] = $da6ebd2d48323dc2$export$e19da58fcd22f283(args[0]) ? [
+        var [x, y, z] = $3029fe621e9d1dcf$export$e19da58fcd22f283(args[0]) ? [
             args[0].x,
             args[0].y,
             args[0].z
@@ -7409,16 +8892,16 @@ let $da6ebd2d48323dc2$export$64b5c384219d3699 = $da6ebd2d48323dc2$var$Vector3_1 
             args[0],
             args[0]
         ] : args;
-        return new $da6ebd2d48323dc2$var$Vector3_1(this.x * x, this.y * y, this.z * z);
+        return new $3029fe621e9d1dcf$var$Vector3_1(this.x * x, this.y * y, this.z * z);
     }
 };
-$da6ebd2d48323dc2$export$64b5c384219d3699 = $da6ebd2d48323dc2$var$Vector3_1 = $da6ebd2d48323dc2$var$__decorate([
-    (0, $03640216a2ed2e09$export$98f03c5d19621d70)
-], $da6ebd2d48323dc2$export$64b5c384219d3699);
-function $da6ebd2d48323dc2$export$8bf032f94d1da2ac(obj) {
+$3029fe621e9d1dcf$export$64b5c384219d3699 = $3029fe621e9d1dcf$var$Vector3_1 = $3029fe621e9d1dcf$var$__decorate([
+    (0, $3b7e5e7e49d7a367$export$98f03c5d19621d70)
+], $3029fe621e9d1dcf$export$64b5c384219d3699);
+function $3029fe621e9d1dcf$export$8bf032f94d1da2ac(obj) {
     return obj.hasOwnProperty("x") && obj.hasOwnProperty("y") && obj.hasOwnProperty("width") && obj.hasOwnProperty("height");
 }
-let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = class VRect {
+let $3029fe621e9d1dcf$export$1b89232acc4de8b8 = $3029fe621e9d1dcf$var$VRect_1 = class VRect {
     constructor(...args){
         let x, y, width, height, y0IsBottom;
         if (args.length == 2 || args.length == 3) [x, y, width, height, y0IsBottom] = [
@@ -7429,7 +8912,7 @@ let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = 
             args[2]
         ];
         else [x, y, width, height, y0IsBottom] = args;
-        (0, $64e096969242e10d$export$14647bdf767968d3)(!$da6ebd2d48323dc2$var$IsNullOrNaN(x) && !$da6ebd2d48323dc2$var$IsNullOrNaN(y) && !$da6ebd2d48323dc2$var$IsNullOrNaN(width) && !$da6ebd2d48323dc2$var$IsNullOrNaN(height), "Cannot initialize VRect's x/y/width/height to null/NaN. (if needed, initialize to undefined)");
+        (0, $c538f9ab01794aaa$export$14647bdf767968d3)(!$3029fe621e9d1dcf$var$IsNullOrNaN(x) && !$3029fe621e9d1dcf$var$IsNullOrNaN(y) && !$3029fe621e9d1dcf$var$IsNullOrNaN(width) && !$3029fe621e9d1dcf$var$IsNullOrNaN(height), "Cannot initialize VRect's x/y/width/height to null/NaN. (if needed, initialize to undefined)");
         this.x = x;
         this.y = y;
         this.width = width != null ? width : 0;
@@ -7438,7 +8921,7 @@ let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = 
         if (y0IsBottom) this.y0IsBottom = y0IsBottom;
     }
     static FromLTWH(rect, y0IsBottom = false) {
-        return new $da6ebd2d48323dc2$var$VRect_1(rect.left, rect.top, rect.width, rect.height, y0IsBottom);
+        return new $3029fe621e9d1dcf$var$VRect_1(rect.left, rect.top, rect.width, rect.height, y0IsBottom);
     }
     get Left() {
         return this.x;
@@ -7476,21 +8959,21 @@ let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = 
         }
     }
     get Position() {
-        return new $da6ebd2d48323dc2$export$c977b3e384af9ae1(this.x, this.y);
+        return new $3029fe621e9d1dcf$export$c977b3e384af9ae1(this.x, this.y);
     }
     set Position(val) {
         this.x = val.x;
         this.y = val.y;
     }
     get Size() {
-        return new $da6ebd2d48323dc2$export$c977b3e384af9ae1(this.width, this.height);
+        return new $3029fe621e9d1dcf$export$c977b3e384af9ae1(this.width, this.height);
     }
     set Size(val) {
         this.width = val.x;
         this.height = val.y;
     }
     get Center() {
-        return new $da6ebd2d48323dc2$export$c977b3e384af9ae1(this.x + this.width / 2, this.y + this.height / 2);
+        return new $3029fe621e9d1dcf$export$c977b3e384af9ae1(this.x + this.width / 2, this.y + this.height / 2);
     }
     set Center(val) {
         const offset = val.Minus(this.Center);
@@ -7507,66 +8990,66 @@ let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = 
         return `${this.x} ${this.y} ${this.width} ${this.height}`;
     }
     Equals(other) {
-        if (!(other instanceof $da6ebd2d48323dc2$var$VRect_1)) return false;
+        if (!(other instanceof $3029fe621e9d1dcf$var$VRect_1)) return false;
         return this.toString() == other.toString();
     }
     NewX(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             x: valOrFunc instanceof Function ? valOrFunc(this.x) : valOrFunc
         });
     }
     NewLeft(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Left: valOrFunc instanceof Function ? valOrFunc(this.Left) : valOrFunc
         });
     }
     NewRight(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Right: valOrFunc instanceof Function ? valOrFunc(this.Right) : valOrFunc
         });
     }
     NewY(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             y: valOrFunc instanceof Function ? valOrFunc(this.y) : valOrFunc
         });
     }
     NewBottom(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Bottom: valOrFunc instanceof Function ? valOrFunc(this.Bottom) : valOrFunc
         });
     }
     NewTop(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Top: valOrFunc instanceof Function ? valOrFunc(this.Top) : valOrFunc
         });
     }
     NewPosition(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Position: valOrFunc instanceof Function ? valOrFunc(this.Position) : valOrFunc
         });
     }
     NewWidth(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             width: valOrFunc instanceof Function ? valOrFunc(this.width) : valOrFunc
         });
     }
     NewHeight(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             height: valOrFunc instanceof Function ? valOrFunc(this.height) : valOrFunc
         });
     }
     NewSize(valOrFunc) {
-        return (0, $c957b93c4c90c7ee$export$982d7f197acc6f94)(this.Clone()).VSet({
+        return (0, $b3412bfae9d21412$export$982d7f197acc6f94)(this.Clone()).VSet({
             Size: valOrFunc instanceof Function ? valOrFunc(this.Size) : valOrFunc
         });
     }
     Grow(amountOnEachSide) {
-        return new $da6ebd2d48323dc2$var$VRect_1(this.x - amountOnEachSide, this.y - amountOnEachSide, this.width + amountOnEachSide * 2, this.height + amountOnEachSide * 2);
+        return new $3029fe621e9d1dcf$var$VRect_1(this.x - amountOnEachSide, this.y - amountOnEachSide, this.width + amountOnEachSide * 2, this.height + amountOnEachSide * 2);
     }
     Encapsulating(rect) {
         var posX = Math.min(this.x, rect.x);
         var posY = Math.min(this.y, rect.y);
-        return new $da6ebd2d48323dc2$var$VRect_1(posX, posY, Math.max(this.x + this.width, rect.x + rect.width) - posX, Math.max(this.y + this.height, rect.y + rect.height) - posY);
+        return new $3029fe621e9d1dcf$var$VRect_1(posX, posY, Math.max(this.x + this.width, rect.x + rect.width) - posX, Math.max(this.y + this.height, rect.y + rect.height) - posY);
     }
     Encapsulate(rect) {
         var oldRight = this.x + this.width;
@@ -7586,30 +9069,30 @@ let $da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = 
         const variantsToCompare = [
             this
         ];
-        if (options.xWrappedBy) variantsToCompare.push(...(0, $db86bae2e67ee359$exports.ArrayCE)(variantsToCompare).SelectMany((base)=>{
+        if (options.xWrappedBy) variantsToCompare.push(...(0, $2f6f692f1c2d9dfe$exports.ArrayCE)(variantsToCompare).SelectMany((base)=>{
             return [
                 base,
                 base.NewX((x)=>x - options.xWrappedBy),
                 base.NewX((x)=>x + options.xWrappedBy)
             ];
         }));
-        if (options.yWrappedBy) variantsToCompare.push(...(0, $db86bae2e67ee359$exports.ArrayCE)(variantsToCompare).SelectMany((base)=>{
+        if (options.yWrappedBy) variantsToCompare.push(...(0, $2f6f692f1c2d9dfe$exports.ArrayCE)(variantsToCompare).SelectMany((base)=>{
             return [
                 base,
                 base.NewY((y)=>y - options.yWrappedBy),
                 base.NewY((y)=>y + options.yWrappedBy)
             ];
         }));
-        return (0, $db86bae2e67ee359$exports.ArrayCE)(variantsToCompare).Any((a)=>a.Intersects(other));
+        return (0, $2f6f692f1c2d9dfe$exports.ArrayCE)(variantsToCompare).Any((a)=>a.Intersects(other));
     }
     Clone() {
-        return new $da6ebd2d48323dc2$var$VRect_1(this.x, this.y, this.width, this.height);
+        return new $3029fe621e9d1dcf$var$VRect_1(this.x, this.y, this.width, this.height);
     }
 };
-$da6ebd2d48323dc2$export$1b89232acc4de8b8 = $da6ebd2d48323dc2$var$VRect_1 = $da6ebd2d48323dc2$var$__decorate([
-    (0, $03640216a2ed2e09$export$98f03c5d19621d70)
-], $da6ebd2d48323dc2$export$1b89232acc4de8b8);
-let $da6ebd2d48323dc2$export$a7046acaf8c8bc5f = class VBounds {
+$3029fe621e9d1dcf$export$1b89232acc4de8b8 = $3029fe621e9d1dcf$var$VRect_1 = $3029fe621e9d1dcf$var$__decorate([
+    (0, $3b7e5e7e49d7a367$export$98f03c5d19621d70)
+], $3029fe621e9d1dcf$export$1b89232acc4de8b8);
+let $3029fe621e9d1dcf$export$a7046acaf8c8bc5f = class VBounds {
     constructor(position, size){
         this.position = position;
         this.size = size;
@@ -7625,46 +9108,46 @@ let $da6ebd2d48323dc2$export$a7046acaf8c8bc5f = class VBounds {
         return `${this.position.x} ${this.position.y} ${this.position.z}|${this.size.x} ${this.size.y} ${this.size.z}`;
     }
 };
-$da6ebd2d48323dc2$export$a7046acaf8c8bc5f = $da6ebd2d48323dc2$var$__decorate([
-    (0, $03640216a2ed2e09$export$98f03c5d19621d70)
-], $da6ebd2d48323dc2$export$a7046acaf8c8bc5f);
+$3029fe621e9d1dcf$export$a7046acaf8c8bc5f = $3029fe621e9d1dcf$var$__decorate([
+    (0, $3b7e5e7e49d7a367$export$98f03c5d19621d70)
+], $3029fe621e9d1dcf$export$a7046acaf8c8bc5f);
 
 
-$parcel$exportWildcard($eece88aeb15c56b2$exports, $db86bae2e67ee359$exports);
-$parcel$exportWildcard($eece88aeb15c56b2$exports, $c0eb4ff3bc1761fa$exports);
-$parcel$exportWildcard($eece88aeb15c56b2$exports, $d07aaea2139548cf$exports);
-$parcel$exportWildcard($eece88aeb15c56b2$exports, $da6ebd2d48323dc2$exports);
+$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $2f6f692f1c2d9dfe$exports);
+$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $5377385dd1d3033a$exports);
+$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $c733789ac9220551$exports);
+$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $3029fe621e9d1dcf$exports);
 
 
 
-let $5f06dc641e235296$export$4359ec6339fa2223 = {};
-function $5f06dc641e235296$export$9f6884debf09f9e(config) {
-    $5f06dc641e235296$export$4359ec6339fa2223 = config;
+let $5e32cf0a5e2342f6$export$4359ec6339fa2223 = {};
+function $5e32cf0a5e2342f6$export$9f6884debf09f9e(config) {
+    $5e32cf0a5e2342f6$export$4359ec6339fa2223 = config;
 }
 
 
-var $a724641c5feaa729$var$_a, $a724641c5feaa729$var$_b, $a724641c5feaa729$var$_c, $a724641c5feaa729$var$_d;
-const $a724641c5feaa729$var$require = (0, $j2o4Y$module.createRequire)("file:///node_modules/windows-ffi/Dist/Manager.js");
-let $a724641c5feaa729$export$f2502618a1e089ae = ($a724641c5feaa729$var$_a = (0, $5f06dc641e235296$export$4359ec6339fa2223).ffi) !== null && $a724641c5feaa729$var$_a !== void 0 ? $a724641c5feaa729$var$_a : $a724641c5feaa729$var$require("ffi-napi");
-let $a724641c5feaa729$export$eff4d24c3ff7876e = ($a724641c5feaa729$var$_b = (0, $5f06dc641e235296$export$4359ec6339fa2223).ref) !== null && $a724641c5feaa729$var$_b !== void 0 ? $a724641c5feaa729$var$_b : $a724641c5feaa729$var$require("ref-napi");
-let $a724641c5feaa729$export$b7e4ab1bff538f6f = ($a724641c5feaa729$var$_c = (0, $5f06dc641e235296$export$4359ec6339fa2223).refStructDI) !== null && $a724641c5feaa729$var$_c !== void 0 ? $a724641c5feaa729$var$_c : $a724641c5feaa729$var$require("ref-struct-di");
-let $a724641c5feaa729$export$9a6d0121cbf6fed1 = ($a724641c5feaa729$var$_d = (0, $5f06dc641e235296$export$4359ec6339fa2223).StructType) !== null && $a724641c5feaa729$var$_d !== void 0 ? $a724641c5feaa729$var$_d : $a724641c5feaa729$export$b7e4ab1bff538f6f($a724641c5feaa729$export$eff4d24c3ff7876e);
+var $5bdd27909a8c0a83$var$_a, $5bdd27909a8c0a83$var$_b, $5bdd27909a8c0a83$var$_c, $5bdd27909a8c0a83$var$_d;
+const $5bdd27909a8c0a83$var$require = (0, $3EevV$module.createRequire)("file:///node_modules/windows-ffi/Dist/Manager.js");
+let $5bdd27909a8c0a83$export$f2502618a1e089ae = ($5bdd27909a8c0a83$var$_a = (0, $5e32cf0a5e2342f6$export$4359ec6339fa2223).ffi) !== null && $5bdd27909a8c0a83$var$_a !== void 0 ? $5bdd27909a8c0a83$var$_a : $5bdd27909a8c0a83$var$require("ffi-napi");
+let $5bdd27909a8c0a83$export$eff4d24c3ff7876e = ($5bdd27909a8c0a83$var$_b = (0, $5e32cf0a5e2342f6$export$4359ec6339fa2223).ref) !== null && $5bdd27909a8c0a83$var$_b !== void 0 ? $5bdd27909a8c0a83$var$_b : $5bdd27909a8c0a83$var$require("ref-napi");
+let $5bdd27909a8c0a83$export$b7e4ab1bff538f6f = ($5bdd27909a8c0a83$var$_c = (0, $5e32cf0a5e2342f6$export$4359ec6339fa2223).refStructDI) !== null && $5bdd27909a8c0a83$var$_c !== void 0 ? $5bdd27909a8c0a83$var$_c : $5bdd27909a8c0a83$var$require("ref-struct-di");
+let $5bdd27909a8c0a83$export$9a6d0121cbf6fed1 = ($5bdd27909a8c0a83$var$_d = (0, $5e32cf0a5e2342f6$export$4359ec6339fa2223).StructType) !== null && $5bdd27909a8c0a83$var$_d !== void 0 ? $5bdd27909a8c0a83$var$_d : $5bdd27909a8c0a83$export$b7e4ab1bff538f6f($5bdd27909a8c0a83$export$eff4d24c3ff7876e);
 
 
 
-const $f4c4ec4b2534c24b$export$d5eaa87208781091 = (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType("int");
-const $f4c4ec4b2534c24b$export$d3151962760b0eac = (0, $a724641c5feaa729$export$9a6d0121cbf6fed1)({
-    x: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    y: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long
+const $d5e2b013f97b5d19$export$d5eaa87208781091 = (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType("int");
+const $d5e2b013f97b5d19$export$d3151962760b0eac = (0, $5bdd27909a8c0a83$export$9a6d0121cbf6fed1)({
+    x: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    y: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long
 });
-const $f4c4ec4b2534c24b$export$f9aa4097c3e2b1a9 = (0, $a724641c5feaa729$export$9a6d0121cbf6fed1)({
-    left: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    top: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    right: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    bottom: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long
+const $d5e2b013f97b5d19$export$f9aa4097c3e2b1a9 = (0, $5bdd27909a8c0a83$export$9a6d0121cbf6fed1)({
+    left: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    top: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    right: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    bottom: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long
 });
-const $f4c4ec4b2534c24b$export$f114762a085bdc3f = (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType($f4c4ec4b2534c24b$export$f9aa4097c3e2b1a9);
-var $f4c4ec4b2534c24b$export$8e38662e3e297ed0;
+const $d5e2b013f97b5d19$export$f114762a085bdc3f = (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType($d5e2b013f97b5d19$export$f9aa4097c3e2b1a9);
+var $d5e2b013f97b5d19$export$8e38662e3e297ed0;
 (function(BitmapCompressionMode) {
     BitmapCompressionMode[BitmapCompressionMode["BI_RGB"] = 0] = "BI_RGB";
     BitmapCompressionMode[BitmapCompressionMode["BI_RLE8"] = 1] = "BI_RLE8";
@@ -7672,108 +9155,108 @@ var $f4c4ec4b2534c24b$export$8e38662e3e297ed0;
     BitmapCompressionMode[BitmapCompressionMode["BI_BITFIELDS"] = 3] = "BI_BITFIELDS";
     BitmapCompressionMode[BitmapCompressionMode["BI_JPEG"] = 4] = "BI_JPEG";
     BitmapCompressionMode[BitmapCompressionMode["BI_PNG"] = 5] = "BI_PNG";
-})($f4c4ec4b2534c24b$export$8e38662e3e297ed0 || ($f4c4ec4b2534c24b$export$8e38662e3e297ed0 = {}));
-var $f4c4ec4b2534c24b$export$57e15596a4c7231f;
+})($d5e2b013f97b5d19$export$8e38662e3e297ed0 || ($d5e2b013f97b5d19$export$8e38662e3e297ed0 = {}));
+var $d5e2b013f97b5d19$export$57e15596a4c7231f;
 (function(DIB_Color_Mode) {
     DIB_Color_Mode[DIB_Color_Mode["DIB_RGB_COLORS"] = 0] = "DIB_RGB_COLORS";
     DIB_Color_Mode[DIB_Color_Mode["DIB_PAL_COLORS"] = 1] = "DIB_PAL_COLORS";
-})($f4c4ec4b2534c24b$export$57e15596a4c7231f || ($f4c4ec4b2534c24b$export$57e15596a4c7231f = {}));
-const $f4c4ec4b2534c24b$export$45e15731b33a8131 = (0, $a724641c5feaa729$export$9a6d0121cbf6fed1)({
-    bmType: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    bmWidth: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    bmHeight: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    bmWidthBytes: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.long,
-    bmPlanes: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint16,
-    bmBitsPixel: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint16,
+})($d5e2b013f97b5d19$export$57e15596a4c7231f || ($d5e2b013f97b5d19$export$57e15596a4c7231f = {}));
+const $d5e2b013f97b5d19$export$45e15731b33a8131 = (0, $5bdd27909a8c0a83$export$9a6d0121cbf6fed1)({
+    bmType: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    bmWidth: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    bmHeight: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    bmWidthBytes: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.long,
+    bmPlanes: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint16,
+    bmBitsPixel: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint16,
     //pointerPadding: ffi.types.long, // added from SO answer below, but shouldn't be necessary I think
     //bmBits: ffi.types.void,
     //bmBits: "pointer",
     bmBits: "ulonglong"
 });
-const $f4c4ec4b2534c24b$export$462becd5fad16474 = (0, $a724641c5feaa729$export$9a6d0121cbf6fed1)({
+const $d5e2b013f97b5d19$export$462becd5fad16474 = (0, $5bdd27909a8c0a83$export$9a6d0121cbf6fed1)({
     // from docs (linked above)
-    biSize: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint32,
-    biWidth: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.int32,
-    biHeight: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.int32,
-    biPlanes: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.ushort,
-    biBitCount: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.ushort,
-    biCompression: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint32,
-    biSizeImage: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint32,
-    biXPelsPerMeter: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.int32,
-    biYPelsPerMeter: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.int32,
-    biClrUsed: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint32,
-    biClrImportant: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.uint32
+    biSize: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint32,
+    biWidth: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.int32,
+    biHeight: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.int32,
+    biPlanes: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.ushort,
+    biBitCount: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.ushort,
+    biCompression: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint32,
+    biSizeImage: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint32,
+    biXPelsPerMeter: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.int32,
+    biYPelsPerMeter: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.int32,
+    biClrUsed: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint32,
+    biClrImportant: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.uint32
 });
-const $f4c4ec4b2534c24b$export$cd15b4e17d65648c = (0, $a724641c5feaa729$export$9a6d0121cbf6fed1)({
-    red: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.byte,
-    green: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.byte,
-    blue: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.byte,
-    alpha: (0, $a724641c5feaa729$export$f2502618a1e089ae).types.byte
+const $d5e2b013f97b5d19$export$cd15b4e17d65648c = (0, $5bdd27909a8c0a83$export$9a6d0121cbf6fed1)({
+    red: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.byte,
+    green: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.byte,
+    blue: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.byte,
+    alpha: (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).types.byte
 });
 
 
 
 
 
-function $95722bea06757bd4$export$64a509f3808d08a0(dll, shape) {
-    return (0, $a724641c5feaa729$export$f2502618a1e089ae).Library(dll, shape);
+function $14be51a39057cbbf$export$64a509f3808d08a0(dll, shape) {
+    return (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).Library(dll, shape);
 }
 
 
-const $5cd5b8204ef2f58b$var$handle = "uint32";
-const $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c = (0, $95722bea06757bd4$export$64a509f3808d08a0)("gdi32", {
+const $904dd323eb88c0e2$var$handle = "uint32";
+const $904dd323eb88c0e2$export$79b32ae2b7bd7c6c = (0, $14be51a39057cbbf$export$64a509f3808d08a0)("gdi32", {
     "CreateCompatibleDC": [
-        $5cd5b8204ef2f58b$var$handle,
+        $904dd323eb88c0e2$var$handle,
         [
-            $5cd5b8204ef2f58b$var$handle
+            $904dd323eb88c0e2$var$handle
         ]
     ],
     "CreateCompatibleBitmap": [
-        $5cd5b8204ef2f58b$var$handle,
+        $904dd323eb88c0e2$var$handle,
         [
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "int32",
             "int32"
         ]
     ],
     "GetPixel": [
-        (0, $f4c4ec4b2534c24b$export$cd15b4e17d65648c),
+        (0, $d5e2b013f97b5d19$export$cd15b4e17d65648c),
         [
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "int32",
             "int32"
         ]
     ],
     "SelectObject": [
-        $5cd5b8204ef2f58b$var$handle,
+        $904dd323eb88c0e2$var$handle,
         [
-            $5cd5b8204ef2f58b$var$handle,
-            $5cd5b8204ef2f58b$var$handle
+            $904dd323eb88c0e2$var$handle,
+            $904dd323eb88c0e2$var$handle
         ]
     ],
     "GetObjectA": [
         "int32",
         [
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "int32",
-            (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType((0, $f4c4ec4b2534c24b$export$45e15731b33a8131))
+            (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType((0, $d5e2b013f97b5d19$export$45e15731b33a8131))
         ]
     ],
     "DeleteObject": [
         "bool",
         [
-            $5cd5b8204ef2f58b$var$handle
+            $904dd323eb88c0e2$var$handle
         ]
     ],
     "BitBlt": [
         "bool",
         [
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "int32",
             "int32",
             "int32",
             "int32",
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "int32",
             "int32",
             "int32"
@@ -7782,12 +9265,12 @@ const $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c = (0, $95722bea06757bd4$export$6
     "GetDIBits": [
         "int32",
         [
-            $5cd5b8204ef2f58b$var$handle,
-            $5cd5b8204ef2f58b$var$handle,
+            $904dd323eb88c0e2$var$handle,
+            $904dd323eb88c0e2$var$handle,
             "uint32",
             "uint32",
-            (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType((0, $f4c4ec4b2534c24b$export$45e15731b33a8131)),
-            (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType((0, $f4c4ec4b2534c24b$export$462becd5fad16474)),
+            (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType((0, $d5e2b013f97b5d19$export$45e15731b33a8131)),
+            (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType((0, $d5e2b013f97b5d19$export$462becd5fad16474)),
             "int32"
         ]
     ]
@@ -7795,7 +9278,7 @@ const $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c = (0, $95722bea06757bd4$export$6
 
 
 
-const $1a98de17ca27ca24$export$d2f41e5ea97da1d5 = (0, $95722bea06757bd4$export$64a509f3808d08a0)("kernel32", {
+const $0d4023310494d2f8$export$d2f41e5ea97da1d5 = (0, $14be51a39057cbbf$export$64a509f3808d08a0)("kernel32", {
     "GlobalUnlock": [
         "bool",
         [
@@ -7812,11 +9295,11 @@ const $1a98de17ca27ca24$export$d2f41e5ea97da1d5 = (0, $95722bea06757bd4$export$6
 
 
 
-var $ef13c897f0969860$export$221d6b1ca14f04a3;
+var $7cd692b452be94e1$export$221d6b1ca14f04a3;
 (function(SuspendState) {
     SuspendState[SuspendState["Sleep"] = 0] = "Sleep";
-})($ef13c897f0969860$export$221d6b1ca14f04a3 || ($ef13c897f0969860$export$221d6b1ca14f04a3 = {}));
-var $ef13c897f0969860$var$powrprof = (0, $a724641c5feaa729$export$f2502618a1e089ae).Library("powrprof.dll", {
+})($7cd692b452be94e1$export$221d6b1ca14f04a3 || ($7cd692b452be94e1$export$221d6b1ca14f04a3 = {}));
+var $7cd692b452be94e1$var$powrprof = (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).Library("powrprof.dll", {
     SetSuspendState: [
         "int",
         [
@@ -7826,19 +9309,19 @@ var $ef13c897f0969860$var$powrprof = (0, $a724641c5feaa729$export$f2502618a1e089
         ]
     ]
 });
-function $ef13c897f0969860$export$731fac7eb53fb74f(state) {
-    if (state == $ef13c897f0969860$export$221d6b1ca14f04a3.Sleep) $ef13c897f0969860$var$powrprof.SetSuspendState(0, 0, 0);
+function $7cd692b452be94e1$export$731fac7eb53fb74f(state) {
+    if (state == $7cd692b452be94e1$export$221d6b1ca14f04a3.Sleep) $7cd692b452be94e1$var$powrprof.SetSuspendState(0, 0, 0);
 }
 
 
 
 
 
-const $fca92534820f4339$export$4b754a7d794e4e0d = (0, $95722bea06757bd4$export$64a509f3808d08a0)("user32", {
+const $3183e5f5a1b8169e$export$4b754a7d794e4e0d = (0, $14be51a39057cbbf$export$64a509f3808d08a0)("user32", {
     ClipCursor: [
         "bool",
         [
-            (0, $f4c4ec4b2534c24b$export$f9aa4097c3e2b1a9)
+            (0, $d5e2b013f97b5d19$export$f9aa4097c3e2b1a9)
         ]
     ],
     //ClipCursor: ["bool", [RectPtr]],
@@ -7856,7 +9339,7 @@ const $fca92534820f4339$export$4b754a7d794e4e0d = (0, $95722bea06757bd4$export$6
     GetCursorPos: [
         "bool",
         [
-            (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType((0, $f4c4ec4b2534c24b$export$d3151962760b0eac))
+            (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType((0, $d5e2b013f97b5d19$export$d3151962760b0eac))
         ]
     ],
     SetCursorPos: [
@@ -7916,7 +9399,7 @@ const $fca92534820f4339$export$4b754a7d794e4e0d = (0, $95722bea06757bd4$export$6
         "int32",
         [
             "int32",
-            (0, $a724641c5feaa729$export$eff4d24c3ff7876e).refType((0, $f4c4ec4b2534c24b$export$f9aa4097c3e2b1a9))
+            (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).refType((0, $d5e2b013f97b5d19$export$f9aa4097c3e2b1a9))
         ]
     ]
 });
@@ -7924,8 +9407,8 @@ const $fca92534820f4339$export$4b754a7d794e4e0d = (0, $95722bea06757bd4$export$6
 
 
 
-var $0d8f193937e98584$require$Buffer = $j2o4Y$buffer.Buffer;
-var $0d8f193937e98584$var$user32 = new (0, $a724641c5feaa729$export$f2502618a1e089ae).Library("user32", {
+var $e9d012836bbf0898$require$Buffer = $3EevV$buffer.Buffer;
+var $e9d012836bbf0898$var$user32 = new (0, $5bdd27909a8c0a83$export$f2502618a1e089ae).Library("user32", {
     "GetForegroundWindow": [
         "int32",
         []
@@ -7939,38 +9422,38 @@ var $0d8f193937e98584$var$user32 = new (0, $a724641c5feaa729$export$f2502618a1e0
         ]
     ]
 });
-var $0d8f193937e98584$var$GetForegroundWindowHandle_cache = {};
-function $0d8f193937e98584$export$efab28f78343218c(allowCacheWithin = 100) {
-    if (Date.now() - $0d8f193937e98584$var$GetForegroundWindowHandle_cache.time <= allowCacheWithin) return $0d8f193937e98584$var$GetForegroundWindowHandle_cache.value;
-    const result = $0d8f193937e98584$var$user32.GetForegroundWindow();
-    Object.assign($0d8f193937e98584$var$GetForegroundWindowHandle_cache, {
+var $e9d012836bbf0898$var$GetForegroundWindowHandle_cache = {};
+function $e9d012836bbf0898$export$efab28f78343218c(allowCacheWithin = 100) {
+    if (Date.now() - $e9d012836bbf0898$var$GetForegroundWindowHandle_cache.time <= allowCacheWithin) return $e9d012836bbf0898$var$GetForegroundWindowHandle_cache.value;
+    const result = $e9d012836bbf0898$var$user32.GetForegroundWindow();
+    Object.assign($e9d012836bbf0898$var$GetForegroundWindowHandle_cache, {
         value: result,
         time: Date.now()
     });
     return result;
 }
-const $0d8f193937e98584$var$GetForegroundWindowText_buffer = new $0d8f193937e98584$require$Buffer(8192); // 8192 is first pow-of-2 which works for max-title-length Chrome tabs
-$0d8f193937e98584$var$GetForegroundWindowText_buffer["type"] = (0, $a724641c5feaa729$export$eff4d24c3ff7876e).types.CString; // when commented, apparently works fine anyway! (still keeping though, jic)
-var $0d8f193937e98584$var$GetForegroundWindowText_cache = {};
-function $0d8f193937e98584$export$fd6419c3b040d306(allowCacheWithin = 100) {
-    if (Date.now() - $0d8f193937e98584$var$GetForegroundWindowText_cache.time <= allowCacheWithin) return $0d8f193937e98584$var$GetForegroundWindowText_cache.value;
+const $e9d012836bbf0898$var$GetForegroundWindowText_buffer = new $e9d012836bbf0898$require$Buffer(8192); // 8192 is first pow-of-2 which works for max-title-length Chrome tabs
+$e9d012836bbf0898$var$GetForegroundWindowText_buffer["type"] = (0, $5bdd27909a8c0a83$export$eff4d24c3ff7876e).types.CString; // when commented, apparently works fine anyway! (still keeping though, jic)
+var $e9d012836bbf0898$var$GetForegroundWindowText_cache = {};
+function $e9d012836bbf0898$export$fd6419c3b040d306(allowCacheWithin = 100) {
+    if (Date.now() - $e9d012836bbf0898$var$GetForegroundWindowText_cache.time <= allowCacheWithin) return $e9d012836bbf0898$var$GetForegroundWindowText_cache.value;
     //buffer.type = ref.types.CString;
-    var handle = $0d8f193937e98584$export$efab28f78343218c();
-    const result = $0d8f193937e98584$export$b4b0b1c16ea6105(handle);
-    Object.assign($0d8f193937e98584$var$GetForegroundWindowText_cache, {
+    var handle = $e9d012836bbf0898$export$efab28f78343218c();
+    const result = $e9d012836bbf0898$export$b4b0b1c16ea6105(handle);
+    Object.assign($e9d012836bbf0898$var$GetForegroundWindowText_cache, {
         value: result,
         time: Date.now()
     });
     return result;
 }
-const $0d8f193937e98584$export$accd02e2062da761 = new Map();
-function $0d8f193937e98584$export$b4b0b1c16ea6105(windowHandle, allowCacheWithin = 100) {
+const $e9d012836bbf0898$export$accd02e2062da761 = new Map();
+function $e9d012836bbf0898$export$b4b0b1c16ea6105(windowHandle, allowCacheWithin = 100) {
     var _a, _b;
-    if (Date.now() - ((_b = (_a = $0d8f193937e98584$export$accd02e2062da761.get(windowHandle)) === null || _a === void 0 ? void 0 : _a.time) !== null && _b !== void 0 ? _b : 0) <= allowCacheWithin) return $0d8f193937e98584$export$accd02e2062da761.get(windowHandle).value;
+    if (Date.now() - ((_b = (_a = $e9d012836bbf0898$export$accd02e2062da761.get(windowHandle)) === null || _a === void 0 ? void 0 : _a.time) !== null && _b !== void 0 ? _b : 0) <= allowCacheWithin) return $e9d012836bbf0898$export$accd02e2062da761.get(windowHandle).value;
     //buffer.type = ref.types.CString;
-    let length = $0d8f193937e98584$var$user32.GetWindowTextA(windowHandle, $0d8f193937e98584$var$GetForegroundWindowText_buffer, $0d8f193937e98584$var$GetForegroundWindowText_buffer.length);
-    const result = $0d8f193937e98584$var$GetForegroundWindowText_buffer.toString().substr(0, length);
-    $0d8f193937e98584$export$accd02e2062da761.set(windowHandle, {
+    let length = $e9d012836bbf0898$var$user32.GetWindowTextA(windowHandle, $e9d012836bbf0898$var$GetForegroundWindowText_buffer, $e9d012836bbf0898$var$GetForegroundWindowText_buffer.length);
+    const result = $e9d012836bbf0898$var$GetForegroundWindowText_buffer.toString().substr(0, length);
+    $e9d012836bbf0898$export$accd02e2062da761.set(windowHandle, {
         value: result,
         time: Date.now()
     });
@@ -7978,7 +9461,7 @@ function $0d8f193937e98584$export$b4b0b1c16ea6105(windowHandle, allowCacheWithin
 }
 
 
-var $f2ac903effb4ffdd$exports = {};
+var $be6cadb0b12858b9$exports = {};
 /**
  * chroma.js - JavaScript library for color conversions
  *
@@ -8035,8 +9518,8 @@ var $f2ac903effb4ffdd$exports = {};
  *
  * @preserve
  */ (function(global, factory) {
-    $f2ac903effb4ffdd$exports = factory();
-})($f2ac903effb4ffdd$exports, function() {
+    $be6cadb0b12858b9$exports = factory();
+})($be6cadb0b12858b9$exports, function() {
     "use strict";
     var limit$2 = function(x, min, max) {
         if (min === void 0) min = 0;
@@ -11608,7 +13091,7 @@ var $f2ac903effb4ffdd$exports = {};
 
 
 
-class $d757ecf7964bd450$export$7c0591b22419cdd3 {
+class $b55e78527fa192d7$export$7c0591b22419cdd3 {
     constructor(red, green, blue, alpha = 0){
         this.red = red;
         this.green = green;
@@ -11617,22 +13100,22 @@ class $d757ecf7964bd450$export$7c0591b22419cdd3 {
     }
     static From(source) {
         var _a;
-        const chromaColor = typeof source == "string" ? (0, (/*@__PURE__*/$parcel$interopDefault($f2ac903effb4ffdd$exports)))(source) : source;
+        const chromaColor = typeof source == "string" ? (0, (/*@__PURE__*/$parcel$interopDefault($be6cadb0b12858b9$exports)))(source) : source;
         const rgba = chromaColor.rgba();
         //return new VColor(...rgba);
-        return new $d757ecf7964bd450$export$7c0591b22419cdd3(rgba[0], rgba[1], rgba[2], (_a = rgba[3]) !== null && _a !== void 0 ? _a : 0);
+        return new $b55e78527fa192d7$export$7c0591b22419cdd3(rgba[0], rgba[1], rgba[2], (_a = rgba[3]) !== null && _a !== void 0 ? _a : 0);
     }
     /** Returns a value between 0 and 1. Reference: 0 = identical, 0.01 = 1% different, 1 = exact opposites */ static Diff(colorA, colorB) {
         //let maxColorDistance = 442; // = sqrt(255^2 + 255^2 + 255^2)
-        let maxColorDistance = (0, (/*@__PURE__*/$parcel$interopDefault($f2ac903effb4ffdd$exports))).distance("white", "black");
-        return (0, (/*@__PURE__*/$parcel$interopDefault($f2ac903effb4ffdd$exports))).distance(colorA.ToChromaJS(), colorB.ToChromaJS()) / maxColorDistance;
+        let maxColorDistance = (0, (/*@__PURE__*/$parcel$interopDefault($be6cadb0b12858b9$exports))).distance("white", "black");
+        return (0, (/*@__PURE__*/$parcel$interopDefault($be6cadb0b12858b9$exports))).distance(colorA.ToChromaJS(), colorB.ToChromaJS()) / maxColorDistance;
     }
     ToChromaJS() {
         //console.log(JSON.stringify(this));
         //return chroma([this.red, this.green, this.blue, this.alpha], "rgba");
         //return chroma({r: this.red, g: this.green, b: this.blue, a: this.alpha});
         // this is the only way I've found so far that works (chromajs lib maybe outdated)
-        const result = (0, (/*@__PURE__*/$parcel$interopDefault($f2ac903effb4ffdd$exports))).rgb(this.red, this.green, this.blue);
+        const result = (0, (/*@__PURE__*/$parcel$interopDefault($be6cadb0b12858b9$exports))).rgb(this.red, this.green, this.blue);
         result.alpha(this.alpha);
         return result;
     }
@@ -11647,24 +13130,24 @@ class $d757ecf7964bd450$export$7c0591b22419cdd3 {
         return result;
     }
     Diff(otherColor) {
-        return $d757ecf7964bd450$export$7c0591b22419cdd3.Diff(this, otherColor);
+        return $b55e78527fa192d7$export$7c0591b22419cdd3.Diff(this, otherColor);
     }
 }
-function $d757ecf7964bd450$export$8d515b39f64b57bc(x, y) {
-    return $d757ecf7964bd450$export$7cebcc457dbd84a2([
-        new (0, $da6ebd2d48323dc2$exports.Vector2)(x, y)
+function $b55e78527fa192d7$export$8d515b39f64b57bc(x, y) {
+    return $b55e78527fa192d7$export$7cebcc457dbd84a2([
+        new (0, $3029fe621e9d1dcf$exports.Vector2)(x, y)
     ])[0];
 }
-function $d757ecf7964bd450$export$7cebcc457dbd84a2(positions) {
-    let hdc = (0, $fca92534820f4339$export$4b754a7d794e4e0d).GetDC(0);
+function $b55e78527fa192d7$export$7cebcc457dbd84a2(positions) {
+    let hdc = (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).GetDC(0);
     let results = positions.map((pos)=>{
-        let pixel = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).GetPixel(hdc, pos.x, pos.y);
+        let pixel = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).GetPixel(hdc, pos.x, pos.y);
         //let color = chroma(pixel & 0x000000FF, (pixel & 0x0000FF00) >> 8, (pixel & 0x00FF0000) >> 16);
         /*let color_chroma = chroma(pixel.red, pixel.green, pixel.blue);
         //Log(`Pos: ${pos} Color: ${color.hex().substr(1)}`);
-        return color_chroma.hex().substr(1); // to match with robotjs.getPixelColor() returns*/ return new $d757ecf7964bd450$export$7c0591b22419cdd3(pixel.red, pixel.green, pixel.blue, pixel.alpha);
+        return color_chroma.hex().substr(1); // to match with robotjs.getPixelColor() returns*/ return new $b55e78527fa192d7$export$7c0591b22419cdd3(pixel.red, pixel.green, pixel.blue, pixel.alpha);
     });
-    (0, $fca92534820f4339$export$4b754a7d794e4e0d).ReleaseDC(0, hdc);
+    (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).ReleaseDC(0, hdc);
     return results;
 } //let timer = new Timer(1000, ()=>Log(GetPixelColor(0, 0))).Start();
 
@@ -11675,23 +13158,23 @@ function $d757ecf7964bd450$export$7cebcc457dbd84a2(positions) {
 
 
 
-var $b4f574bb49f416f2$require$Buffer = $j2o4Y$buffer.Buffer;
-function $b4f574bb49f416f2$export$71f7c309e540ad97(x, y) {
-    return $b4f574bb49f416f2$export$4faaefd4d727d63a([
-        new (0, $da6ebd2d48323dc2$exports.Vector2)(x, y)
+var $2b18be31bda393a2$require$Buffer = $3EevV$buffer.Buffer;
+function $2b18be31bda393a2$export$71f7c309e540ad97(x, y) {
+    return $2b18be31bda393a2$export$4faaefd4d727d63a([
+        new (0, $3029fe621e9d1dcf$exports.Vector2)(x, y)
     ])[0];
 }
-function $b4f574bb49f416f2$export$4faaefd4d727d63a(positions) {
-    const { rect: rect , screenshot: screenshot  } = $b4f574bb49f416f2$export$4cab9749c02a5984(positions);
+function $2b18be31bda393a2$export$4faaefd4d727d63a(positions) {
+    const { rect: rect , screenshot: screenshot  } = $2b18be31bda393a2$export$4cab9749c02a5984(positions);
     return positions.map((pos)=>{
         return screenshot.GetPixel(pos.x - rect.x, pos.y - rect.y);
     });
 }
-function $b4f574bb49f416f2$export$4cab9749c02a5984(positions) {
-    const rectContainingAllPositions = new (0, $da6ebd2d48323dc2$exports.VRect)(positions[0], new (0, $da6ebd2d48323dc2$exports.Vector2)(1, 1));
-    for (const pos of positions)rectContainingAllPositions.Encapsulate(new (0, $da6ebd2d48323dc2$exports.VRect)(pos, new (0, $da6ebd2d48323dc2$exports.Vector2)(1, 1)));
-    const screenshot = $b4f574bb49f416f2$export$cdfb9a6a4ec4454d({
-        windowHandle: (0, $0d8f193937e98584$export$efab28f78343218c)(),
+function $2b18be31bda393a2$export$4cab9749c02a5984(positions) {
+    const rectContainingAllPositions = new (0, $3029fe621e9d1dcf$exports.VRect)(positions[0], new (0, $3029fe621e9d1dcf$exports.Vector2)(1, 1));
+    for (const pos of positions)rectContainingAllPositions.Encapsulate(new (0, $3029fe621e9d1dcf$exports.VRect)(pos, new (0, $3029fe621e9d1dcf$exports.Vector2)(1, 1)));
+    const screenshot = $2b18be31bda393a2$export$cdfb9a6a4ec4454d({
+        windowHandle: (0, $e9d012836bbf0898$export$efab28f78343218c)(),
         rectToCapture: rectContainingAllPositions
     });
     return {
@@ -11699,22 +13182,22 @@ function $b4f574bb49f416f2$export$4cab9749c02a5984(positions) {
         screenshot: screenshot
     };
 }
-class $b4f574bb49f416f2$export$f3a5c5340646c35d {
+class $2b18be31bda393a2$export$f3a5c5340646c35d {
     constructor(data){
         Object.assign(this, data);
     }
     GetPixel(...args) {
-        const pos = args.length == 1 ? args[0] : new (0, $da6ebd2d48323dc2$exports.Vector2)(args[0], args[1]);
+        const pos = args.length == 1 ? args[0] : new (0, $3029fe621e9d1dcf$exports.Vector2)(args[0], args[1]);
         const pixelsInPreviousRows = this.width * pos.y;
         const pixelIndex = pixelsInPreviousRows + pos.x;
-        return new (0, $d757ecf7964bd450$export$7c0591b22419cdd3)(// yeah, the order is a bit odd
+        return new (0, $b55e78527fa192d7$export$7c0591b22419cdd3)(// yeah, the order is a bit odd
         this.buffer[pixelIndex * 4 + 2], this.buffer[pixelIndex * 4 + 1], this.buffer[pixelIndex * 4 + 0], this.buffer[pixelIndex * 4 + 3]);
     }
 }
-const $b4f574bb49f416f2$var$apiConstants = {
+const $2b18be31bda393a2$var$apiConstants = {
     SRCCOPY: 0xCC0020
 };
-function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
+function $2b18be31bda393a2$export$cdfb9a6a4ec4454d(opt) {
     var _a;
     let hdcWindow = null;
     let hdcMemDC = null;
@@ -11734,28 +13217,28 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
         return console.log(args[0], "<time log only>", ...args.slice(-2));
     };
     try {
-        if (opt.windowHandle == null) opt.windowHandle = (0, $fca92534820f4339$export$4b754a7d794e4e0d).GetDesktopWindow();
+        if (opt.windowHandle == null) opt.windowHandle = (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).GetDesktopWindow();
         log("hWnd", opt.windowHandle);
         // Retrieve the handle to a display device context for the client area of the window.
-        hdcWindow = (0, $fca92534820f4339$export$4b754a7d794e4e0d).GetDC(opt.windowHandle);
+        hdcWindow = (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).GetDC(opt.windowHandle);
         log("hdcWindow", hdcWindow);
-        const rcClient = new (0, $f4c4ec4b2534c24b$export$f9aa4097c3e2b1a9)();
+        const rcClient = new (0, $d5e2b013f97b5d19$export$f9aa4097c3e2b1a9)();
         /*const rcClient_buf = ref.alloc(RectStruct) as any;
         user32.GetClientRect(hWnd, rcClient_buf);
-        const rcClient = rcClient_buf.deref();*/ (0, $fca92534820f4339$export$4b754a7d794e4e0d).GetClientRect(opt.windowHandle, rcClient.ref());
+        const rcClient = rcClient_buf.deref();*/ (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).GetClientRect(opt.windowHandle, rcClient.ref());
         log("rcClient", JSON.stringify(rcClient));
-        opt.rectToCapture = (_a = opt.rectToCapture) !== null && _a !== void 0 ? _a : new (0, $da6ebd2d48323dc2$exports.VRect)(0, 0, rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
+        opt.rectToCapture = (_a = opt.rectToCapture) !== null && _a !== void 0 ? _a : new (0, $3029fe621e9d1dcf$exports.VRect)(0, 0, rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
         // Create a compatible DC and bitmap
-        hdcMemDC = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).CreateCompatibleDC(hdcWindow);
+        hdcMemDC = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).CreateCompatibleDC(hdcWindow);
         log("hdcMemDC", hdcMemDC);
-        hbmScreen = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).CreateCompatibleBitmap(hdcWindow, opt.rectToCapture.width, opt.rectToCapture.height);
+        hbmScreen = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).CreateCompatibleBitmap(hdcWindow, opt.rectToCapture.width, opt.rectToCapture.height);
         log("hbmScreen", hbmScreen);
-        const hPrevDC = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).SelectObject(hdcMemDC, hbmScreen);
+        const hPrevDC = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).SelectObject(hdcMemDC, hbmScreen);
         log("hPrevDC", hPrevDC);
         // Bit block transfer into our compatible memory DC.
-        const bitBlt_result = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).BitBlt(hdcMemDC, 0, 0, opt.rectToCapture.width, opt.rectToCapture.height, hdcWindow, opt.rectToCapture.x, opt.rectToCapture.y, $b4f574bb49f416f2$var$apiConstants.SRCCOPY);
-        const pixelWnd = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).GetPixel(hdcWindow, 0, 0);
-        const pixelMem = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).GetPixel(hdcMemDC, 0, 0);
+        const bitBlt_result = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).BitBlt(hdcMemDC, 0, 0, opt.rectToCapture.width, opt.rectToCapture.height, hdcWindow, opt.rectToCapture.x, opt.rectToCapture.y, $2b18be31bda393a2$var$apiConstants.SRCCOPY);
+        const pixelWnd = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).GetPixel(hdcWindow, 0, 0);
+        const pixelMem = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).GetPixel(hdcMemDC, 0, 0);
         log("pixelWnd", JSON.stringify(pixelWnd));
         log("pixelMem", JSON.stringify(pixelMem));
         log("bitBlt_result", JSON.stringify(bitBlt_result));
@@ -11765,24 +13248,24 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
         //const getBufferLength = buffer=>32; // can"t get this working; hard-coding for now
         //const getBufferLength = buffer=>buffer.type.size; // correct
         // Get the BITMAP from the HBITMAP
-        const bmpScreen = new (0, $f4c4ec4b2534c24b$export$45e15731b33a8131)();
+        const bmpScreen = new (0, $d5e2b013f97b5d19$export$45e15731b33a8131)();
         //const getObjectRes = gdi32.GetObjectA(hbmScreen, getBufferLength(bmpScreen), bmpScreen);
-        const getObject_result = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).GetObjectA(hbmScreen, 32, bmpScreen.ref());
+        const getObject_result = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).GetObjectA(hbmScreen, 32, bmpScreen.ref());
         log("getObject_result", getObject_result);
-        log("bmpScreen.size", (0, $f4c4ec4b2534c24b$export$45e15731b33a8131).size);
+        log("bmpScreen.size", (0, $d5e2b013f97b5d19$export$45e15731b33a8131).size);
         log("bmpScreen", JSON.stringify(bmpScreen));
         // bmpScreen isn"t having its data loaded properly fsr; anyway, we only actually use bmWidth and bmHeight, so just hard-code those for now
         /*bmpScreen.bmWidth = rcClient.right - rcClient.left;
-        bmpScreen.bmHeight = rcClient.bottom - rcClient.top;*/ const bi = new (0, $f4c4ec4b2534c24b$export$462becd5fad16474)();
+        bmpScreen.bmHeight = rcClient.bottom - rcClient.top;*/ const bi = new (0, $d5e2b013f97b5d19$export$462becd5fad16474)();
         //bi.biSize = bi.type.size;
-        bi.biSize = (0, $f4c4ec4b2534c24b$export$462becd5fad16474).size;
+        bi.biSize = (0, $d5e2b013f97b5d19$export$462becd5fad16474).size;
         bi.biWidth = bmpScreen.bmWidth;
         //bi.biHeight = bmpScreen.bmHeight;
         bi.biHeight = -bmpScreen.bmHeight; // by making this negative, we indicate that we want buffer's data to start at top-left pixel, rather than bottom-left
         //bi.biHeight = 3;
         bi.biPlanes = 1;
         bi.biBitCount = 32;
-        bi.biCompression = (0, $f4c4ec4b2534c24b$export$8e38662e3e297ed0).BI_RGB;
+        bi.biCompression = (0, $d5e2b013f97b5d19$export$8e38662e3e297ed0).BI_RGB;
         bi.biSizeImage = 0;
         bi.biXPelsPerMeter = 0;
         bi.biYPelsPerMeter = 0;
@@ -11798,10 +13281,10 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
         // hDIB = kernel32.GlobalAlloc(apiConstants.GHND, dwBmpSize);
         // const lpBitmap = kernel32.GlobalLock(hDIB);
         //const lpBitmap = new (Buffer.alloc as any)(dwBmpSize);
-        const lpBitmap = $b4f574bb49f416f2$require$Buffer.alloc(dwBmpSize);
+        const lpBitmap = $2b18be31bda393a2$require$Buffer.alloc(dwBmpSize);
         // Gets the "bits" from the bitmap and copies them into buffer lpbitmap
         //const getDIBitsRes = gdi32.GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.bmHeight, (lpBitmap as any).ref(), bi.ref(), DIB_Color_Mode.DIB_RGB_COLORS);
-        const getDIBitsRes = (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.bmHeight, lpBitmap, bi.ref(), (0, $f4c4ec4b2534c24b$export$57e15596a4c7231f).DIB_RGB_COLORS);
+        const getDIBitsRes = (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.bmHeight, lpBitmap, bi.ref(), (0, $d5e2b013f97b5d19$export$57e15596a4c7231f).DIB_RGB_COLORS);
         //const getDIBitsRes = gdi32.GetDIBits(hdcWindow, hbmScreen, 0, 3, ref.ref(lpBitmap), bi.ref(), DIB_Color_Mode.DIB_RGB_COLORS);
         log("getDIBitsRes", getDIBitsRes);
         log("lpBitmap", lpBitmap);
@@ -11812,13 +13295,13 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
         }
         log("Test done");*/ // clean up
         if (hDIB != null) {
-            (0, $1a98de17ca27ca24$export$d2f41e5ea97da1d5).GlobalUnlock(hDIB);
-            (0, $1a98de17ca27ca24$export$d2f41e5ea97da1d5).GlobalFree(hDIB);
+            (0, $0d4023310494d2f8$export$d2f41e5ea97da1d5).GlobalUnlock(hDIB);
+            (0, $0d4023310494d2f8$export$d2f41e5ea97da1d5).GlobalFree(hDIB);
         }
-        if (hbmScreen != null) (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).DeleteObject(hbmScreen);
-        if (hdcMemDC != null) (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).DeleteObject(hdcMemDC);
-        if (hdcWindow != null) (0, $fca92534820f4339$export$4b754a7d794e4e0d).ReleaseDC(opt.windowHandle, hdcWindow);
-        const result = new $b4f574bb49f416f2$export$f3a5c5340646c35d({
+        if (hbmScreen != null) (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).DeleteObject(hbmScreen);
+        if (hdcMemDC != null) (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).DeleteObject(hdcMemDC);
+        if (hdcWindow != null) (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).ReleaseDC(opt.windowHandle, hdcWindow);
+        const result = new $2b18be31bda393a2$export$f3a5c5340646c35d({
             buffer: lpBitmap,
             width: bmpScreen.bmWidth,
             height: bmpScreen.bmHeight
@@ -11829,12 +13312,12 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
     } catch (err) {
         // clean up memory on errors
         if (hDIB != null) {
-            (0, $1a98de17ca27ca24$export$d2f41e5ea97da1d5).GlobalUnlock(hDIB);
-            (0, $1a98de17ca27ca24$export$d2f41e5ea97da1d5).GlobalFree(hDIB);
+            (0, $0d4023310494d2f8$export$d2f41e5ea97da1d5).GlobalUnlock(hDIB);
+            (0, $0d4023310494d2f8$export$d2f41e5ea97da1d5).GlobalFree(hDIB);
         }
-        if (hbmScreen != null) (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).DeleteObject(hbmScreen);
-        if (hdcMemDC != null) (0, $5cd5b8204ef2f58b$export$79b32ae2b7bd7c6c).DeleteObject(hdcMemDC);
-        if (hdcWindow != null) (0, $fca92534820f4339$export$4b754a7d794e4e0d).ReleaseDC(opt.windowHandle, hdcWindow);
+        if (hbmScreen != null) (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).DeleteObject(hbmScreen);
+        if (hdcMemDC != null) (0, $904dd323eb88c0e2$export$79b32ae2b7bd7c6c).DeleteObject(hdcMemDC);
+        if (hdcWindow != null) (0, $3183e5f5a1b8169e$export$4b754a7d794e4e0d).ReleaseDC(opt.windowHandle, hdcWindow);
         throw err;
     }
 }
@@ -11843,118 +13326,118 @@ function $b4f574bb49f416f2$export$cdfb9a6a4ec4454d(opt) {
 
 
 
-var $0c2037986a980ef8$require$Buffer = $j2o4Y$buffer.Buffer;
-let $0c2037986a980ef8$export$1fbf6ae150f5289f;
+var $63fad289b9cc9c40$require$Buffer = $3EevV$buffer.Buffer;
+let $63fad289b9cc9c40$export$1fbf6ae150f5289f;
 (function(IgtState) {
     IgtState[IgtState["UNKNOWN"] = 0] = "UNKNOWN";
     IgtState[IgtState["NO_GAME"] = 1] = "NO_GAME";
     IgtState[IgtState["PLAYING"] = 2] = "PLAYING";
     IgtState[IgtState["LOADING"] = 3] = "LOADING";
-})($0c2037986a980ef8$export$1fbf6ae150f5289f || ($0c2037986a980ef8$export$1fbf6ae150f5289f = {}));
-(0, $9d2ef8b96d59cae4$exports).apiDef["SetProcessDPIAware"] = [
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
+})($63fad289b9cc9c40$export$1fbf6ae150f5289f || ($63fad289b9cc9c40$export$1fbf6ae150f5289f = {}));
+(0, $e15eb399ace1ba96$exports).apiDef["SetProcessDPIAware"] = [
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
     []
 ];
-(0, $9d2ef8b96d59cae4$exports).apiDef["GetClientRect"] = [
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
+(0, $e15eb399ace1ba96$exports).apiDef["GetClientRect"] = [
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
     [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).RECT
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).RECT
     ]
 ];
-(0, $9d2ef8b96d59cae4$exports).apiDef["ClientToScreen"] = [
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL,
+(0, $e15eb399ace1ba96$exports).apiDef["ClientToScreen"] = [
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL,
     [
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-        (0, $c6df17042468a6b3$export$be44eba04df286d7).LPPOINT
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+        (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPPOINT
     ]
 ];
-const $0c2037986a980ef8$var$user32 = (0, $9d2ef8b96d59cae4$exports).load();
-const $0c2037986a980ef8$var$Struct = (0, (/*@__PURE__*/$parcel$interopDefault($36c954ea1c6f71fe$exports)))($lbL5x);
-let $0c2037986a980ef8$var$igtState = $0c2037986a980ef8$export$1fbf6ae150f5289f.UNKNOWN;
-let $0c2037986a980ef8$var$hwnd = 0;
-let $0c2037986a980ef8$var$tickTime = 500;
-let $0c2037986a980ef8$var$timer;
-let $0c2037986a980ef8$var$callback = (state)=>{};
-$0c2037986a980ef8$var$user32.SetProcessDPIAware();
-const $0c2037986a980ef8$export$5801d716674e6bb6 = (igtCallback)=>{
-    $0c2037986a980ef8$var$callback = igtCallback;
+const $63fad289b9cc9c40$var$user32 = (0, $e15eb399ace1ba96$exports).load();
+const $63fad289b9cc9c40$var$Struct = (0, (/*@__PURE__*/$parcel$interopDefault($kZbZk)))($1a7VL);
+let $63fad289b9cc9c40$var$igtState = $63fad289b9cc9c40$export$1fbf6ae150f5289f.UNKNOWN;
+let $63fad289b9cc9c40$var$hwnd = 0;
+let $63fad289b9cc9c40$var$tickTime = 500;
+let $63fad289b9cc9c40$var$timer;
+let $63fad289b9cc9c40$var$callback = (state)=>{};
+$63fad289b9cc9c40$var$user32.SetProcessDPIAware();
+const $63fad289b9cc9c40$export$5801d716674e6bb6 = (igtCallback)=>{
+    $63fad289b9cc9c40$var$callback = igtCallback;
 };
-const $0c2037986a980ef8$export$a679630bf91eb455 = ()=>{
-    $0c2037986a980ef8$var$igtState = $0c2037986a980ef8$export$1fbf6ae150f5289f.UNKNOWN;
-    $0c2037986a980ef8$var$hwnd = 0;
-    $0c2037986a980ef8$var$timer = setTimeout($0c2037986a980ef8$var$tickProcessIgt, $0c2037986a980ef8$var$tickTime);
+const $63fad289b9cc9c40$export$a679630bf91eb455 = ()=>{
+    $63fad289b9cc9c40$var$igtState = $63fad289b9cc9c40$export$1fbf6ae150f5289f.UNKNOWN;
+    $63fad289b9cc9c40$var$hwnd = 0;
+    $63fad289b9cc9c40$var$timer = setTimeout($63fad289b9cc9c40$var$tickProcessIgt, $63fad289b9cc9c40$var$tickTime);
 };
-const $0c2037986a980ef8$export$cb0b9fb431e2932b = ()=>{
-    clearInterval($0c2037986a980ef8$var$timer);
+const $63fad289b9cc9c40$export$cb0b9fb431e2932b = ()=>{
+    clearInterval($63fad289b9cc9c40$var$timer);
 };
-const $0c2037986a980ef8$var$runCallbackIfChanged = (state)=>{
-    if (state != $0c2037986a980ef8$var$igtState) {
-        $0c2037986a980ef8$var$igtState = state;
-        $0c2037986a980ef8$var$callback($0c2037986a980ef8$var$igtState);
+const $63fad289b9cc9c40$var$runCallbackIfChanged = (state)=>{
+    if (state != $63fad289b9cc9c40$var$igtState) {
+        $63fad289b9cc9c40$var$igtState = state;
+        $63fad289b9cc9c40$var$callback($63fad289b9cc9c40$var$igtState);
     }
 };
-const $0c2037986a980ef8$var$tickProcessIgt = ()=>{
-    $0c2037986a980ef8$var$timer = setTimeout(()=>{
-        $0c2037986a980ef8$var$processIgt();
-        $0c2037986a980ef8$var$tickProcessIgt();
-    }, $0c2037986a980ef8$var$tickTime);
+const $63fad289b9cc9c40$var$tickProcessIgt = ()=>{
+    $63fad289b9cc9c40$var$timer = setTimeout(()=>{
+        $63fad289b9cc9c40$var$processIgt();
+        $63fad289b9cc9c40$var$tickProcessIgt();
+    }, $63fad289b9cc9c40$var$tickTime);
 };
-const $0c2037986a980ef8$var$enumWindowsProc = $j2o4Y$ffinapi.Callback((0, $c6df17042468a6b3$export$be44eba04df286d7).BOOL, [
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).HWND,
-    (0, $c6df17042468a6b3$export$be44eba04df286d7).LPARAM
+const $63fad289b9cc9c40$var$enumWindowsProc = $b57364a102eb7ad6$exports.Callback((0, $2721d3b199bacfe8$export$be44eba04df286d7).BOOL, [
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).HWND,
+    (0, $2721d3b199bacfe8$export$be44eba04df286d7).LPARAM
 ], (window, lParam)=>{
-    const buf = $0c2037986a980ef8$require$Buffer.alloc(254);
-    $0c2037986a980ef8$var$user32.GetWindowTextW(window, buf, buf.byteLength);
+    const buf = $63fad289b9cc9c40$require$Buffer.alloc(254);
+    $63fad289b9cc9c40$var$user32.GetWindowTextW(window, buf, buf.byteLength);
     if (buf.toString("ucs2").replace(/\0+$/, "") == "Diablo II: Resurrected") {
-        $0c2037986a980ef8$var$hwnd = window;
+        $63fad289b9cc9c40$var$hwnd = window;
         return false;
     }
     return true;
 });
-const $0c2037986a980ef8$var$noGame = ()=>{
-    $0c2037986a980ef8$var$runCallbackIfChanged($0c2037986a980ef8$export$1fbf6ae150f5289f.NO_GAME);
-    $0c2037986a980ef8$var$hwnd = 0;
-    $0c2037986a980ef8$var$tickTime = 500;
+const $63fad289b9cc9c40$var$noGame = ()=>{
+    $63fad289b9cc9c40$var$runCallbackIfChanged($63fad289b9cc9c40$export$1fbf6ae150f5289f.NO_GAME);
+    $63fad289b9cc9c40$var$hwnd = 0;
+    $63fad289b9cc9c40$var$tickTime = 500;
 };
-const $0c2037986a980ef8$var$gameLoading = ()=>{
-    $0c2037986a980ef8$var$runCallbackIfChanged($0c2037986a980ef8$export$1fbf6ae150f5289f.LOADING);
-    $0c2037986a980ef8$var$tickTime = 10;
+const $63fad289b9cc9c40$var$gameLoading = ()=>{
+    $63fad289b9cc9c40$var$runCallbackIfChanged($63fad289b9cc9c40$export$1fbf6ae150f5289f.LOADING);
+    $63fad289b9cc9c40$var$tickTime = 10;
 };
-const $0c2037986a980ef8$var$gamePlaying = ()=>{
-    $0c2037986a980ef8$var$runCallbackIfChanged($0c2037986a980ef8$export$1fbf6ae150f5289f.PLAYING);
-    $0c2037986a980ef8$var$tickTime = 10;
+const $63fad289b9cc9c40$var$gamePlaying = ()=>{
+    $63fad289b9cc9c40$var$runCallbackIfChanged($63fad289b9cc9c40$export$1fbf6ae150f5289f.PLAYING);
+    $63fad289b9cc9c40$var$tickTime = 10;
 };
-const $0c2037986a980ef8$var$processIgt = ()=>{
-    if ($0c2037986a980ef8$var$hwnd === 0) {
-        $0c2037986a980ef8$var$user32.EnumWindows($0c2037986a980ef8$var$enumWindowsProc, 0);
-        if ($0c2037986a980ef8$var$hwnd === 0) {
-            $0c2037986a980ef8$var$noGame();
+const $63fad289b9cc9c40$var$processIgt = ()=>{
+    if ($63fad289b9cc9c40$var$hwnd === 0) {
+        $63fad289b9cc9c40$var$user32.EnumWindows($63fad289b9cc9c40$var$enumWindowsProc, 0);
+        if ($63fad289b9cc9c40$var$hwnd === 0) {
+            $63fad289b9cc9c40$var$noGame();
             return;
         }
     }
-    /** @ts-ignore */ const origin = new $0c2037986a980ef8$var$Struct((0, $c3a656112b314b00$exports).POINT)();
-    const retw = $0c2037986a980ef8$var$user32.ClientToScreen($0c2037986a980ef8$var$hwnd, origin.ref());
+    /** @ts-ignore */ const origin = new $63fad289b9cc9c40$var$Struct((0, $10095d0141f037de$exports).POINT)();
+    const retw = $63fad289b9cc9c40$var$user32.ClientToScreen($63fad289b9cc9c40$var$hwnd, origin.ref());
     if (retw == 0) {
-        $0c2037986a980ef8$var$noGame();
+        $63fad289b9cc9c40$var$noGame();
         return;
     }
-    /** @ts-ignore */ const rectClient = new $0c2037986a980ef8$var$Struct((0, $c3a656112b314b00$exports).RECT)();
-    const ret = $0c2037986a980ef8$var$user32.GetClientRect($0c2037986a980ef8$var$hwnd, rectClient.ref());
+    /** @ts-ignore */ const rectClient = new $63fad289b9cc9c40$var$Struct((0, $10095d0141f037de$exports).RECT)();
+    const ret = $63fad289b9cc9c40$var$user32.GetClientRect($63fad289b9cc9c40$var$hwnd, rectClient.ref());
     if (ret == 0) {
-        $0c2037986a980ef8$var$noGame();
+        $63fad289b9cc9c40$var$noGame();
         return;
     }
     const w = rectClient.right;
     const h = rectClient.bottom;
     const x = origin.x;
     const y = origin.y;
-    const screenshot = (0, $b4f574bb49f416f2$export$cdfb9a6a4ec4454d)({
-        rectToCapture: new (0, $da6ebd2d48323dc2$exports.VRect)(x + Math.round(w / 2) - 100, y + h - 1, 200, 1)
+    const screenshot = (0, $2b18be31bda393a2$export$cdfb9a6a4ec4454d)({
+        rectToCapture: new (0, $3029fe621e9d1dcf$exports.VRect)(x + Math.round(w / 2) - 100, y + h - 1, 200, 1)
     });
     const isLoading = screenshot.GetPixel(0, 0).ToHex_RGB() == "000000" && screenshot.GetPixel(100, 0).ToHex_RGB() == "000000" && screenshot.GetPixel(199, 0).ToHex_RGB() == "000000";
-    if (isLoading) $0c2037986a980ef8$var$gameLoading();
-    else $0c2037986a980ef8$var$gamePlaying();
+    if (isLoading) $63fad289b9cc9c40$var$gameLoading();
+    else $63fad289b9cc9c40$var$gamePlaying();
 };
 
 
