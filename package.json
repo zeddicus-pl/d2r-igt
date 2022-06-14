@@ -1,7 +1,7 @@
 {
   "name": "d2r-igt",
   "version": "1.0.0",
-  "main": "dist/igt.js",
+  "main": "dist/igt.cjs",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "type": "module",
@@ -34,6 +34,8 @@
     "util": "^0.12.4",
     "zedd-win32-api": "https://github.com/zeddicus-pl/zedd-win32-api.git"
   },
+  "cli": "dist/cli.cjs",
+  "worker": "dist/worker.cjs",
   "targets": {
     "main": {
       "engines": {
