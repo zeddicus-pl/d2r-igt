@@ -42,21 +42,24 @@
         "node": ">= 16"
       },
       "includeNodeModules": true,
-      "optimize": false
+      "optimize": false,
+      "outputFormat": "commonjs"
     },
     "worker": {
       "engines": {
         "node": ">= 16"
       },
       "includeNodeModules": true,
-      "optimize": false
+      "optimize": false,
+      "outputFormat": "commonjs"
     },
     "cli": {
       "engines": {
         "node": ">= 16"
       },
       "includeNodeModules": true,
-      "optimize": false
+      "optimize": false,
+      "outputFormat": "commonjs"
     }
   }
 }

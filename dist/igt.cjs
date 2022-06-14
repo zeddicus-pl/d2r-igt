@@ -13,22 +13,6 @@ function $parcel$interopDefault(a) {
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
-function $parcel$exportWildcard(dest, source) {
-  Object.keys(source).forEach(function(key) {
-    if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) {
-      return;
-    }
-
-    Object.defineProperty(dest, key, {
-      enumerable: true,
-      get: function get() {
-        return source[key];
-      }
-    });
-  });
-
-  return dest;
-}
 var $parcel$global =
 typeof globalThis !== 'undefined'
   ? globalThis
@@ -68,9 +52,9 @@ if (parcelRequire == null) {
   $parcel$global["parcelRequire97c3"] = parcelRequire;
 }
 parcelRequire.register("1a7VL", function(module, exports) {
+var __dirname = "node_modules/ref-napi/lib";
 
 var Buffer = $3EevV$buffer.Buffer;
-var __dirname = "node_modules/ref-napi/lib";
 "use strict";
 
 
@@ -6055,18 +6039,6 @@ var $kZbZk = parcelRequire("kZbZk");
 
 var $1a7VL = parcelRequire("1a7VL");
 
-var $7e1f2f4e79b15fd0$exports = {};
-$parcel$export($7e1f2f4e79b15fd0$exports, "ElementCE", () => $7199149bd5c58f58$export$ea432ebb9d598fdf);
-$parcel$export($7e1f2f4e79b15fd0$exports, "NumberCE", () => $905ba9565af7e357$export$caa4dfc7169288b7);
-$parcel$export($7e1f2f4e79b15fd0$exports, "ObjectCE", () => $b3412bfae9d21412$export$982d7f197acc6f94);
-$parcel$export($7e1f2f4e79b15fd0$exports, "StringCE", () => $d465502d07abe1c6$export$29246bb2b9c16932);
-$parcel$export($7e1f2f4e79b15fd0$exports, "Assert", () => $c538f9ab01794aaa$export$14647bdf767968d3);
-$parcel$export($7e1f2f4e79b15fd0$exports, "E", () => $3b7e5e7e49d7a367$export$a9c23c6ac3fc3eca);
-$parcel$export($7e1f2f4e79b15fd0$exports, "IsString", () => $834790ed5758562b$export$fae01d74d6648c3f);
-$parcel$export($7e1f2f4e79b15fd0$exports, "IsObject", () => $834790ed5758562b$export$e64f6626d4e96cfb);
-$parcel$export($7e1f2f4e79b15fd0$exports, "IsFunction", () => $834790ed5758562b$export$426ce8831f60741b);
-$parcel$export($7e1f2f4e79b15fd0$exports, "IsNumber", () => $834790ed5758562b$export$bdf29e0acfffe6ef);
-$parcel$export($7e1f2f4e79b15fd0$exports, "IsNaN", () => $834790ed5758562b$export$f375b07b95af9a54);
 var $2f6f692f1c2d9dfe$exports = {};
 
 $parcel$export($2f6f692f1c2d9dfe$exports, "ArrayCE", () => $2f6f692f1c2d9dfe$export$f35d492e63fcc0d6, (v) => $2f6f692f1c2d9dfe$export$f35d492e63fcc0d6 = v);
@@ -9113,10 +9085,6 @@ $3029fe621e9d1dcf$export$a7046acaf8c8bc5f = $3029fe621e9d1dcf$var$__decorate([
 ], $3029fe621e9d1dcf$export$a7046acaf8c8bc5f);
 
 
-$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $2f6f692f1c2d9dfe$exports);
-$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $5377385dd1d3033a$exports);
-$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $c733789ac9220551$exports);
-$parcel$exportWildcard($7e1f2f4e79b15fd0$exports, $3029fe621e9d1dcf$exports);
 
 
 
