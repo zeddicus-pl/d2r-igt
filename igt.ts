@@ -2,13 +2,7 @@ import StructDi from 'ref-struct-di';
 import * as ffi from 'ffi-napi';
 import * as ref from 'ref-napi';
 import { DModel as M, DStruct as DS, DTypes as W } from 'win32-def';
-
-export enum IgtState {
-  UNKNOWN,
-  NO_GAME,
-  PLAYING,
-  LOADING
-}
+import { IgtState } from './enums';
 
 const Struct = StructDi(ref);
 
@@ -67,9 +61,11 @@ const gdi32 = ffi.Library("GDI32", {
   GetDIBits: [W.INT32, [W.HWND, W.HWND, W.UINT32, W.UINT32, ref.refType(BitmapStruct), ref.refType(BitmapInfoHeaderStruct), W.INT32]],
 });
 
-let igtState = IgtState.UNKNOWN;
+const GAME_LOOKUP_TICKTIME = 500;
+
+let igtState: IgtState = IgtState.UNKNOWN;
 let hwnd: M.HWND = 0;
-let tickTime = 500;
+let tickTime = 100;
 let timer: NodeJS.Timer;
 
 type IgtCallback = (state: IgtState) => void;
@@ -81,10 +77,15 @@ export const setIgtCallback = (igtCallback: IgtCallback) => {
   callback = igtCallback;
 }
 
+export const setTickTime = (timeInMs: number) => {
+  tickTime = timeInMs;
+}
+
 export const startIgt = () => {
   igtState = IgtState.UNKNOWN;
   hwnd = 0;
-  timer = setTimeout(tickProcessIgt, tickTime)
+  processIgt();
+  tickProcessIgt();
 }
 
 export const stopIgt = () => {
@@ -102,7 +103,7 @@ const tickProcessIgt = () => {
   timer = setTimeout(() => {
     processIgt();
     tickProcessIgt();
-  }, tickTime);
+  }, (igtState === IgtState.NO_GAME || igtState === IgtState.UNKNOWN) ? GAME_LOOKUP_TICKTIME : tickTime);
 }
 
 const enumWindowsProc = ffi.Callback(
@@ -122,17 +123,14 @@ const enumWindowsProc = ffi.Callback(
 const noGame = () => {
   runCallbackIfChanged(IgtState.NO_GAME);
   hwnd = 0;
-  tickTime = 500;
 }
 
 const gameLoading = () => {
   runCallbackIfChanged(IgtState.LOADING);
-  tickTime = 10;
 }
 
 const gamePlaying = () => {
   runCallbackIfChanged(IgtState.PLAYING);
-  tickTime = 10;
 }
 
 const processIgt = () => {

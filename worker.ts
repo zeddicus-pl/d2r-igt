@@ -1,5 +1,6 @@
-import { startIgt, stopIgt, setIgtCallback, IgtState } from "./igt";
+import { startIgt, stopIgt, setIgtCallback, setTickTime } from "./igt";
 import { parentPort } from 'worker_threads';
+import { IgtState } from './enums';
 
 if (parentPort) {
     parentPort.once('message', (message) => {
@@ -9,6 +10,9 @@ if (parentPort) {
         }
         if (message.action == 'stopIgt') {
             stopIgt();
+        }
+        if (message.action == 'setTickTime') {
+            setTickTime(message.value);
         }
     });
     setIgtCallback((state: IgtState) => {

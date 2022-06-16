@@ -3878,10 +3878,10 @@ module.exports = $4320202ed320f141$var$errno;
 });
 
 
-$parcel$export(module.exports, "IgtState", () => $33b0c58e3ab924e9$export$1fbf6ae150f5289f);
 $parcel$export(module.exports, "BitmapInfoHeaderStruct", () => $33b0c58e3ab924e9$export$462becd5fad16474);
 $parcel$export(module.exports, "ColorRefStruct", () => $33b0c58e3ab924e9$export$cd15b4e17d65648c);
 $parcel$export(module.exports, "setIgtCallback", () => $33b0c58e3ab924e9$export$5801d716674e6bb6);
+$parcel$export(module.exports, "setTickTime", () => $33b0c58e3ab924e9$export$11819f9fff450d9b);
 $parcel$export(module.exports, "startIgt", () => $33b0c58e3ab924e9$export$a679630bf91eb455);
 $parcel$export(module.exports, "stopIgt", () => $33b0c58e3ab924e9$export$cb0b9fb431e2932b);
 $parcel$export(module.exports, "CaptureScreenshot", () => $33b0c58e3ab924e9$export$cdfb9a6a4ec4454d);
@@ -4926,15 +4926,17 @@ const $4c0d9f82f4272fb1$export$ff2835eca4f38b4e = {
 const $d3b484cc58a449ee$export$be44eba04df286d7 = (0, $c3321bfd9f7edb7e$export$828a2cfb74eb348c)($8b4b58e694c3b67b$exports, (0, $f65e1a8161a93d3e$export$65dedbc9f072ffcc));
 
 
-
-var $33b0c58e3ab924e9$require$Buffer = $chspj$buffer.Buffer;
-let $33b0c58e3ab924e9$export$1fbf6ae150f5289f;
+let $4917142111539077$export$1fbf6ae150f5289f;
 (function(IgtState) {
     IgtState[IgtState["UNKNOWN"] = 0] = "UNKNOWN";
     IgtState[IgtState["NO_GAME"] = 1] = "NO_GAME";
     IgtState[IgtState["PLAYING"] = 2] = "PLAYING";
     IgtState[IgtState["LOADING"] = 3] = "LOADING";
-})($33b0c58e3ab924e9$export$1fbf6ae150f5289f || ($33b0c58e3ab924e9$export$1fbf6ae150f5289f = {}));
+})($4917142111539077$export$1fbf6ae150f5289f || ($4917142111539077$export$1fbf6ae150f5289f = {}));
+
+
+
+var $33b0c58e3ab924e9$require$Buffer = $chspj$buffer.Buffer;
 const $33b0c58e3ab924e9$var$Struct = (0, (/*@__PURE__*/$parcel$interopDefault($5IhKb)))($gxkm2);
 const $33b0c58e3ab924e9$var$BitmapStruct = $33b0c58e3ab924e9$var$Struct({
     bmType: $4555387f06897097$exports.types.long,
@@ -5089,19 +5091,24 @@ const $33b0c58e3ab924e9$var$gdi32 = $4555387f06897097$exports.Library("GDI32", {
         ]
     ]
 });
-let $33b0c58e3ab924e9$var$igtState = $33b0c58e3ab924e9$export$1fbf6ae150f5289f.UNKNOWN;
+const $33b0c58e3ab924e9$var$GAME_LOOKUP_TICKTIME = 500;
+let $33b0c58e3ab924e9$var$igtState = (0, $4917142111539077$export$1fbf6ae150f5289f).UNKNOWN;
 let $33b0c58e3ab924e9$var$hwnd = 0;
-let $33b0c58e3ab924e9$var$tickTime = 500;
+let $33b0c58e3ab924e9$var$tickTime = 100;
 let $33b0c58e3ab924e9$var$timer;
 let $33b0c58e3ab924e9$var$callback = (state)=>{};
 $33b0c58e3ab924e9$var$user32.SetProcessDPIAware();
 const $33b0c58e3ab924e9$export$5801d716674e6bb6 = (igtCallback)=>{
     $33b0c58e3ab924e9$var$callback = igtCallback;
 };
+const $33b0c58e3ab924e9$export$11819f9fff450d9b = (timeInMs)=>{
+    $33b0c58e3ab924e9$var$tickTime = timeInMs;
+};
 const $33b0c58e3ab924e9$export$a679630bf91eb455 = ()=>{
-    $33b0c58e3ab924e9$var$igtState = $33b0c58e3ab924e9$export$1fbf6ae150f5289f.UNKNOWN;
+    $33b0c58e3ab924e9$var$igtState = (0, $4917142111539077$export$1fbf6ae150f5289f).UNKNOWN;
     $33b0c58e3ab924e9$var$hwnd = 0;
-    $33b0c58e3ab924e9$var$timer = setTimeout($33b0c58e3ab924e9$var$tickProcessIgt, $33b0c58e3ab924e9$var$tickTime);
+    $33b0c58e3ab924e9$var$processIgt();
+    $33b0c58e3ab924e9$var$tickProcessIgt();
 };
 const $33b0c58e3ab924e9$export$cb0b9fb431e2932b = ()=>{
     clearInterval($33b0c58e3ab924e9$var$timer);
@@ -5116,7 +5123,7 @@ const $33b0c58e3ab924e9$var$tickProcessIgt = ()=>{
     $33b0c58e3ab924e9$var$timer = setTimeout(()=>{
         $33b0c58e3ab924e9$var$processIgt();
         $33b0c58e3ab924e9$var$tickProcessIgt();
-    }, $33b0c58e3ab924e9$var$tickTime);
+    }, $33b0c58e3ab924e9$var$igtState === (0, $4917142111539077$export$1fbf6ae150f5289f).NO_GAME || $33b0c58e3ab924e9$var$igtState === (0, $4917142111539077$export$1fbf6ae150f5289f).UNKNOWN ? $33b0c58e3ab924e9$var$GAME_LOOKUP_TICKTIME : $33b0c58e3ab924e9$var$tickTime);
 };
 const $33b0c58e3ab924e9$var$enumWindowsProc = $4555387f06897097$exports.Callback((0, $d3b484cc58a449ee$export$be44eba04df286d7).BOOL, [
     (0, $d3b484cc58a449ee$export$be44eba04df286d7).HWND,
@@ -5131,17 +5138,14 @@ const $33b0c58e3ab924e9$var$enumWindowsProc = $4555387f06897097$exports.Callback
     return true;
 });
 const $33b0c58e3ab924e9$var$noGame = ()=>{
-    $33b0c58e3ab924e9$var$runCallbackIfChanged($33b0c58e3ab924e9$export$1fbf6ae150f5289f.NO_GAME);
+    $33b0c58e3ab924e9$var$runCallbackIfChanged((0, $4917142111539077$export$1fbf6ae150f5289f).NO_GAME);
     $33b0c58e3ab924e9$var$hwnd = 0;
-    $33b0c58e3ab924e9$var$tickTime = 500;
 };
 const $33b0c58e3ab924e9$var$gameLoading = ()=>{
-    $33b0c58e3ab924e9$var$runCallbackIfChanged($33b0c58e3ab924e9$export$1fbf6ae150f5289f.LOADING);
-    $33b0c58e3ab924e9$var$tickTime = 10;
+    $33b0c58e3ab924e9$var$runCallbackIfChanged((0, $4917142111539077$export$1fbf6ae150f5289f).LOADING);
 };
 const $33b0c58e3ab924e9$var$gamePlaying = ()=>{
-    $33b0c58e3ab924e9$var$runCallbackIfChanged($33b0c58e3ab924e9$export$1fbf6ae150f5289f.PLAYING);
-    $33b0c58e3ab924e9$var$tickTime = 10;
+    $33b0c58e3ab924e9$var$runCallbackIfChanged((0, $4917142111539077$export$1fbf6ae150f5289f).PLAYING);
 };
 const $33b0c58e3ab924e9$var$processIgt = ()=>{
     if ($33b0c58e3ab924e9$var$hwnd === 0) {

@@ -1,4 +1,5 @@
-import { setIgtCallback, startIgt, IgtState } from './igt';
+import { setIgtCallback, startIgt } from './igt';
+import { IgtState } from './enums';
 
 setIgtCallback((state) => {
     let stateStr = '';
