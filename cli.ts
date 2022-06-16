@@ -20,5 +20,4 @@ setIgtCallback((state) => {
 
 startIgt();
 
-console.log('test');
 setInterval(() => {}, 1000);
